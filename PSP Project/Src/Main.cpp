@@ -4,7 +4,6 @@
 //**************************************************************************
 
 #include "../Include/Main.h"
-//#include "../Include/Sound.h"
 #include "../Include/SaveLoad.h"
 
 PSP_MODULE_INFO("Gods Defense", 0, 1, 1);
@@ -53,9 +52,10 @@ int main()
 	oslSetFont(gFont);
 
 	ScreenManager *mScreenManager = new ScreenManager();
-	//Sound	*mSoundManager	= new Sound();
 	SaveLoad	*mSaveLoadManager	= new SaveLoad();
 	loadState = mSaveLoadManager->load();
+
+	SceCtrlData pad;
 
     while(!osl_quit){
         if (!skip){
@@ -79,8 +79,9 @@ int main()
 				mScreenManager->activate(ScreenManager::SCREEN_TITLE);
 				if(mScreenManager->isActive())
 					mScreenManager->mCurrentScreen->draw();
-				//keys
-				if(oslKbhit())
+				//Get any key pressed
+				sceCtrlReadBufferPositive(&pad, 1);
+				if(pad.Buttons != 0)
 				{
 					mScreenManager->deactivate();
 					Screen = ScreenManager::SCREEN_MAIN_MENU;

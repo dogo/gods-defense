@@ -10,7 +10,6 @@
 
 #include <oslib/oslib.h>
 #include "../Include/IScreen.h"
-//#include "../Include/Sound.h"
 #include "../Include/Resource.h"
 
 extern OSL_FONT *gFont;
