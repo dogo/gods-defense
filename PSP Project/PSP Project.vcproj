@@ -115,10 +115,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Src\Sound.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Src\TitleScreen.cpp"
 				>
 			</File>
@@ -184,10 +180,6 @@
 			</File>
 			<File
 				RelativePath=".\Include\ScreenManager.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Include\Sound.h"
 				>
 			</File>
 			<File
