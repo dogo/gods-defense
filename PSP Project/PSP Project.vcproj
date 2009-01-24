@@ -71,6 +71,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Src\ExitScreen.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Src\GameOptionsScreen.cpp"
 				>
 			</File>
@@ -128,6 +132,10 @@
 			</File>
 			<File
 				RelativePath=".\Include\AnykeyScreen.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\ExitScreen.h"
 				>
 			</File>
 			<File

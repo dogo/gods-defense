@@ -8,7 +8,7 @@
 
 char const Resource::BACK_SK[] = "Back";
 char const Resource::OPTIONS_CHANGE[] = ": to change";
-char const Resource::SETTINGS_FILENAME[] =  "ms0:\\PSP\\GAME\\GodsDefense\\GD.dat"; //future save
+char const Resource::SETTINGS_FILENAME[] =  "ms0:\\PSP\\GAME\\GodsDefense\\GD.dat"; //save
 char const Resource::ABOUT_CAPTION[] = "About";
 char const Resource::OPTIONS_CAPTION[] = "Options";
 char const Resource::OPTIONS_SOUND[] = "Sound : ";
@@ -16,6 +16,9 @@ char const Resource::OPTIONS_ON[] = "On";
 char const Resource::OPTIONS_OFF[] = "Off";
 char const Resource::PRESS_ANYKEY[] = "Press Any Key";
 char const Resource::GAME_TITLE[] = "Gods Defense";
+char const Resource::CONFIRM_QUIT[] = "Do you really wanna quit?";
+char const Resource::YES[] = "Yes";
+char const Resource::NO[] = "No";
 
 char const Resource::ABOUT_TEXT[] =
 	"Gods Defense\n"

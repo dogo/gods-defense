@@ -14,6 +14,7 @@
 #include "../Include/AboutScreen.h"
 #include "../Include/MultiplayerScreen.h"
 #include "../Include/PauseScreen.h"
+#include "../Include/ExitScreen.h"
 
 ScreenManager::ScreenManager()
 {
@@ -63,6 +64,7 @@ IScreen * ScreenManager::createScreen(int aIndex)
 	case SCREEN_MULTIPLAYER:		return new MultiplayerScreen();
 	case SCREEN_ABOUT: 				return new AboutScreen();
 	case SCREEN_PAUSE:				return new PauseScreen();
+	case SCREEN_CONFIRM_EXIT:		return new ExitScreen();
 	default: 						return NULL;
 	}
 }

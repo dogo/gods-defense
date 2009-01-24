@@ -139,12 +139,45 @@ int main()
 					if(gMenu == 5)
 					{
 						oslFlushKey();
-						if (loadState == 1)
-							oslStopSound(menuBg);
-						mScreenManager->deactivate();					
-						Screen = endOSLib(); //quit game
+						mScreenManager->deactivate();
+						Screen = ScreenManager::SCREEN_CONFIRM_EXIT;
 					}
 				}
+			}
+			if(Screen == ScreenManager::SCREEN_CONFIRM_EXIT){
+				mScreenManager->activate(ScreenManager::SCREEN_CONFIRM_EXIT);
+				if(mScreenManager->isActive())
+					mScreenManager->mCurrentScreen->draw();
+				if(osl_keys->pressed.up){
+					gMenu--;
+					if (gMenu < 0)
+					{
+						gMenu = 1;
+					}
+				}
+				if(osl_keys->pressed.down){
+					gMenu++;
+					gMenu%=2;
+				}
+				if(osl_keys->pressed.cross){
+					if(gMenu == 0)
+					{
+						oslStopSound(menuBg);
+						Screen = endOSLib(); //quit game
+					}
+					if(gMenu == 1)
+					{
+						oslFlushKey();
+						mScreenManager->deactivate();
+						gMenu = 0;
+						Screen = ScreenManager::SCREEN_MAIN_MENU;
+					}
+				}
+					if(osl_keys->pressed.circle)
+					{
+						mScreenManager->deactivate();
+						Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+					}
 			}
 			if(Screen == ScreenManager::SCREEN_GAME_OPTIONS){
 				mScreenManager->activate(ScreenManager::SCREEN_GAME_OPTIONS);

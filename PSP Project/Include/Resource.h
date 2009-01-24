@@ -18,7 +18,7 @@ public:
 	/**
 	 * Strings.
 	 */
-	static char const SETTINGS_FILENAME[]; //future save
+	static char const SETTINGS_FILENAME[]; //save
 	static char const ABOUT_CAPTION[];
 	static char const OPTIONS_CAPTION[];
 	static char const ABOUT_TEXT[];
@@ -29,6 +29,9 @@ public:
 	static char const OPTIONS_CHANGE[];
 	static char const PRESS_ANYKEY[];
 	static char const GAME_TITLE[];
+	static char const CONFIRM_QUIT[];
+	static char const YES[];
+	static char const NO[];
 };
 
 
