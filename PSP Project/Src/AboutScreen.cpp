@@ -9,7 +9,7 @@
 
 AboutScreen::AboutScreen()
 {
-	back = oslLoadImageFilePNG("/Res/back.png", OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	back = oslLoadImageFilePNG("/Res/circle.png", OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 }
 
 AboutScreen::~AboutScreen()
@@ -23,9 +23,9 @@ void AboutScreen::draw()
 	oslDrawString(240,15,Resource::ABOUT_CAPTION);
 	oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,35,Resource::ABOUT_TEXT);
-	oslDrawImageXY(back, (410) - (back->stretchX), (272) - (back->stretchY));
+	oslDrawImageXY(back, (430) - (back->stretchX), (272) - (back->stretchY));
 	oslIntraFontSetStyle(gFont, 1.5f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
-	oslDrawString((480) - back->stretchX,(272) - (back->stretchY/2),Resource::BACK_SK);
+	oslDrawString((510) - back->stretchX,(272) - (back->stretchY/2),Resource::BACK_SK);
 }
 
 void AboutScreen::update()
