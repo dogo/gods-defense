@@ -32,6 +32,7 @@ public:
 	static char const CONFIRM_QUIT[];
 	static char const YES[];
 	static char const NO[];
+	static char ANYKEY_SPLASH[];
 };
 
 

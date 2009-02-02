@@ -9,6 +9,7 @@
 char const Resource::BACK_SK[] = "Back";
 char const Resource::OPTIONS_CHANGE[] = ": to change";
 char const Resource::SETTINGS_FILENAME[] =  "ms0:\\PSP\\GAME\\GodsDefense\\GD.dat"; //save
+char Resource::ANYKEY_SPLASH[] = "/Res/anykeylogo.png";
 char const Resource::ABOUT_CAPTION[] = "About";
 char const Resource::OPTIONS_CAPTION[] = "Options";
 char const Resource::OPTIONS_SOUND[] = "Sound : ";

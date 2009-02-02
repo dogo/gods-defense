@@ -26,7 +26,7 @@
 				BuildCommandLine="make"
 				ReBuildCommandLine=""
 				CleanCommandLine="make clean"
-				Output="binary\PSP Project.elf"
+				Output="PSP Project.elf"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""

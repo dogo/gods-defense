@@ -9,7 +9,7 @@
 
 AnykeyScreen::AnykeyScreen()
 {
-	Splash = oslLoadImageFilePNG("/Res/splash.png", OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	Splash = oslLoadImageFilePNG(Resource::ANYKEY_SPLASH, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 }
 
 AnykeyScreen::~AnykeyScreen()
