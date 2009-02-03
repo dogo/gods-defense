@@ -1,7 +1,7 @@
 TARGET = GodsDefense
 OBJS = Src/Main.o Src/AnykeyScreen.o Src/ScreenManager.o Src/TitleScreen.o Src/MainMenuScreen.o Src/GameOptionsScreen.o \
 Src/GameScreen.o Src/OptionsScreen.o Src/HelpScreen.o Src/AboutScreen.o Src/MultiplayerScreen.o Src/PauseScreen.o \
-Src/Resource.o Src/SaveLoad.o Src/ExitScreen.o
+Src/Resource.o Src/SaveLoad.o Src/ExitScreen.o Src/GodLibrary.o
 
 CFLAGS = -O2 -g -G0 -Wall
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti

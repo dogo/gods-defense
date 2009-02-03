@@ -16,13 +16,7 @@ extern OSL_FONT *gFont;
 extern int gMenu;
 extern bool bSound;
 extern int loadState;
-
-
-/** Draws a formatted string literal at the specified x and y positions.
-
-\code
-oslDrawStringf(0, 0, "Test string %i", 1);
-\endcode */
-#define oslDrawStringf(x, y, ...)               { char __str[1000]; sprintf(__str , __VA_ARGS__); oslDrawString(x, y, __str); }
+extern short state;
+extern int fade;
 
 #endif

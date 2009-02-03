@@ -6,21 +6,22 @@
 #include "../Include/AnykeyScreen.h"
 #include "../Include/ScreenManager.h"
 
-
 AnykeyScreen::AnykeyScreen()
 {
-	Splash = oslLoadImageFilePNG(Resource::ANYKEY_SPLASH, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	AnykeySplash = oslLoadImageFilePNG(Resource::ANYKEY_SPLASH, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	mySplash = new GodLibrary;
 }
 
 AnykeyScreen::~AnykeyScreen()
 {
-	oslDeleteImage(Splash);
+	oslDeleteImage(AnykeySplash);
+	delete(mySplash);
 }
 
 void AnykeyScreen::draw()
 {
 	//draw logo image
-	oslDrawImageXY(Splash, (480/2) - (Splash->stretchX/2), (272/2) - (Splash->stretchY/2));
+	mySplash->drawSplash(200,AnykeySplash);
 }
 
 void AnykeyScreen::update()

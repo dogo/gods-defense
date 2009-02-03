@@ -68,7 +68,7 @@ int main()
 					mScreenManager->mCurrentScreen->draw();
 					wait++;
 				}
-				if(wait == 200) //wait 200 frames until this screen is over
+				if(wait == 250) //wait 250 frames until this screen is over
 				{	
 					mScreenManager->deactivate();
 					Screen = ScreenManager::SCREEN_TITLE;		
