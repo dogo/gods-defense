@@ -82,6 +82,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Src\GodLibrary.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Src\HelpScreen.cpp"
 				>
 			</File>
@@ -143,6 +147,10 @@
 			</File>
 			<File
 				RelativePath=".\Include\GameScreen.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\GodLibrary.h"
 				>
 			</File>
 			<File
