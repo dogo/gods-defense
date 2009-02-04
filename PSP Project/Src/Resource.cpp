@@ -6,10 +6,11 @@
 
 #include "../Include/Resource.h"
 
+char Resource::ANYKEY_SPLASH[] = "/Res/anykeylogo.png";
+
 char const Resource::BACK_SK[] = "Back";
 char const Resource::OPTIONS_CHANGE[] = ": to change";
 char const Resource::SETTINGS_FILENAME[] =  "ms0:\\PSP\\GAME\\GodsDefense\\GD.dat"; //save
-char Resource::ANYKEY_SPLASH[] = "/Res/anykeylogo.png";
 char const Resource::ABOUT_CAPTION[] = "About";
 char const Resource::OPTIONS_CAPTION[] = "Options";
 char const Resource::OPTIONS_SOUND[] = "Sound : ";
@@ -26,11 +27,8 @@ char const Resource::ABOUT_TEXT[] =
 	"Version 1.0.0\n"
 	"Licensed by the GNU Public License v3(GPL)\n"
 	"\n"
-	"Published by\n"
-	"AnyKey Entertainment\n"
-	"www.anykey.com.br\n"
-	"Support:\n"
-	"support@anykey.com.br\n"
+	"Art & Design\n"
+	"Hideaki Morohashi\n"
 	"\n"
 	"Developed by AnyKey Entertainment\n"
 	"\n"
