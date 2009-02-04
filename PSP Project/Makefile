@@ -17,6 +17,7 @@ PSP_FW_VERSION=390
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Gods Defense
 PSP_EBOOT_ICON = ICON0.png
+PSP_EBOOT_PIC1 = PIC1.png
 
 PSPSDK=$(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
