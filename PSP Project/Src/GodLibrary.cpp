@@ -8,6 +8,7 @@
 short state = 0;
 int fade = 255;
 
+//Dogo : This is a cpu-killer wait function.
 void GodLibrary::Wait(unsigned long iTime) {
 	unsigned long lastTime = clock() / ((long) CLK_TCK/100);
 	unsigned diffTime = lastTime + iTime;
@@ -29,7 +30,7 @@ void GodLibrary::drawSplash(int iTime, OSL_IMAGE *Splash) {
 			state = 1;
 		}
 	} else if (state == 1) {
-		Wait(iTime);
+		sceKernelDelayThread(iTime);
 		state = 2;
 	} else if (state == 2) {
 		fade = fade + 2;		 
