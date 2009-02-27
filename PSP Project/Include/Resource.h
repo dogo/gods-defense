@@ -28,10 +28,10 @@ public:
 	static char const BACK_SK[];
 	static char const OPTIONS_CHANGE[];
 	static char const PRESS_ANYKEY[];
-	static char const GAME_TITLE[];
 	static char const CONFIRM_QUIT[];
 	static char const YES[];
 	static char const NO[];
+	static char GAME_TITLE[];
 	static char ANYKEY_SPLASH[];
 };
 

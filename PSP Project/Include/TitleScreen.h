@@ -11,9 +11,12 @@
 class TitleScreen : public IScreen
 {
 private:
+	OSL_IMAGE *GDSplash;
 
 public:
 	TitleScreen();
+
+	virtual ~TitleScreen();
 
 	virtual void draw();
 

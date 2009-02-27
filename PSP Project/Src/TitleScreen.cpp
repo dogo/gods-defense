@@ -9,12 +9,18 @@
 
 TitleScreen::TitleScreen()
 {
+	GDSplash = oslLoadImageFilePNG(Resource::GAME_TITLE, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+}
+
+TitleScreen::~TitleScreen()
+{
+	oslDeleteImage(GDSplash);
 }
 
 void TitleScreen::draw()
 {
-	oslIntraFontSetStyle(gFont, 3.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER); //Tells the PSP what size and shape the text is
-	oslDrawString(240,120,Resource::GAME_TITLE);
+	//draw logo image
+	oslDrawImageXY(GDSplash, (480/2) - (GDSplash->stretchX/2), (272/2) - (GDSplash->stretchY/2));
 	
 	//Flashing
 	float t = ((float)(clock() % CLOCKS_PER_SEC)) / ((float)CLOCKS_PER_SEC);

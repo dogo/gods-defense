@@ -7,6 +7,7 @@
 #include "../Include/Resource.h"
 
 char Resource::ANYKEY_SPLASH[] = "/Res/anykeylogo.png";
+char Resource::GAME_TITLE[] = "/Res/GDSplash.png";
 
 char const Resource::BACK_SK[] = "Back";
 char const Resource::OPTIONS_CHANGE[] = ": to change";
@@ -17,7 +18,6 @@ char const Resource::OPTIONS_SOUND[] = "Sound : ";
 char const Resource::OPTIONS_ON[] = "On";
 char const Resource::OPTIONS_OFF[] = "Off";
 char const Resource::PRESS_ANYKEY[] = "Press Any Key";
-char const Resource::GAME_TITLE[] = "Gods Defense";
 char const Resource::CONFIRM_QUIT[] = "Do you really wanna quit?";
 char const Resource::YES[] = "Yes";
 char const Resource::NO[] = "No";
