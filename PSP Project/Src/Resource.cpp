@@ -8,12 +8,20 @@
 
 char Resource::ANYKEY_SPLASH[] = "/Res/anykeylogo.png";
 char Resource::GAME_TITLE[] = "/Res/GDSplash.png";
+char Resource::MAIN_MENU_BG[] = "/Res/background.png";
 
 char const Resource::BACK_SK[] = "Back";
+char const Resource::MULTIPLAYER_CAPTION[] = "Multiplayer";
+char const Resource::HELP_CAPTION[] = "Help";
+char const Resource::START_GAME[] = "Start Game";
+char const Resource::EXIT_CAPTION[] = "Exit";
 char const Resource::OPTIONS_CHANGE[] = ": to change";
 char const Resource::SETTINGS_FILENAME[] =  "ms0:\\PSP\\GAME\\GodsDefense\\GD.dat"; //save
 char const Resource::ABOUT_CAPTION[] = "About";
 char const Resource::OPTIONS_CAPTION[] = "Options";
+char const Resource::PAUSE_RESUME[] = "Resume";
+char const Resource::PAUSE_MENU[] = "Main Menu";
+char const Resource::PAUSE_CAPTION[] = "Game Paused";
 char const Resource::OPTIONS_SOUND[] = "Sound : ";
 char const Resource::OPTIONS_ON[] = "On";
 char const Resource::OPTIONS_OFF[] = "Off";

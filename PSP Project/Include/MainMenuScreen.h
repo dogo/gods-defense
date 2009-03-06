@@ -11,7 +11,7 @@
 class MainMenuScreen : public IScreen
 {
 private:
-	OSL_IMAGE *menubg;
+	//OSL_IMAGE *menubg;
 public:
 	MainMenuScreen();
 

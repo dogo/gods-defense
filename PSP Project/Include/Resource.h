@@ -20,7 +20,14 @@ public:
 	 */
 	static char const SETTINGS_FILENAME[]; //save
 	static char const ABOUT_CAPTION[];
+	static char const MULTIPLAYER_CAPTION[];
+	static char const HELP_CAPTION[];
+	static char const START_GAME[];
+	static char const EXIT_CAPTION[];
 	static char const OPTIONS_CAPTION[];
+	static char const PAUSE_RESUME[];
+	static char const PAUSE_MENU[];
+	static char const PAUSE_CAPTION[];
 	static char const ABOUT_TEXT[];
 	static char const OPTIONS_SOUND[];
 	static char const OPTIONS_ON[];
@@ -33,6 +40,7 @@ public:
 	static char const NO[];
 	static char GAME_TITLE[];
 	static char ANYKEY_SPLASH[];
+	static char MAIN_MENU_BG[];
 };
 
 
