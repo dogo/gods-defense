@@ -18,5 +18,6 @@ extern bool bSound;
 extern int loadState;
 extern short state;
 extern int fade;
+extern int Screen;
 
 #endif

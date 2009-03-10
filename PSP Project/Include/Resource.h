@@ -34,7 +34,7 @@ public:
 	static char const OPTIONS_OFF[];
 	static char const BACK_SK[];
 	static char const OPTIONS_CHANGE[];
-	static char const PRESS_ANYKEY[];
+	static char const PRESS_START[];
 	static char const CONFIRM_QUIT[];
 	static char const YES[];
 	static char const NO[];

@@ -43,8 +43,7 @@ int main()
     initOSLib();
     oslIntraFontInit(INTRAFONT_CACHE_MED);
 
-
-	OSL_SOUND *menuBg = oslLoadSoundFileMP3 ("/Res/bgm.mp3", OSL_FMT_STREAM); //Loads the MP3s
+	OSL_SOUND *menuTheme = oslLoadSoundFileMP3 ("/Res/bgm.mp3", OSL_FMT_STREAM); //Loads the MP3s
 
 	OSL_IMAGE *menubg = oslLoadImageFilePNG(Resource::MAIN_MENU_BG, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
@@ -56,8 +55,6 @@ int main()
 	ScreenManager *mScreenManager = new ScreenManager();
 	SaveLoad	*mSaveLoadManager	= new SaveLoad();
 	loadState = mSaveLoadManager->load();
-
-	SceCtrlData pad;
 
     while(!osl_quit){
         if (!skip){
@@ -81,71 +78,23 @@ int main()
 				mScreenManager->activate(ScreenManager::SCREEN_TITLE);
 				if(mScreenManager->isActive())
 					mScreenManager->mCurrentScreen->draw();
-				//Get any key pressed
-				sceCtrlReadBufferPositive(&pad, 1);
-				if(pad.Buttons != 0)
+				if(osl_keys->pressed.start)
 				{
 					mScreenManager->deactivate();
 					Screen = ScreenManager::SCREEN_MAIN_MENU;
-					oslPlaySound(menuBg, 1); //Plays the sound in the menu
+					oslPlaySound(menuTheme, 1); //Plays the sound in the menu
 				}
 			}
 			
 			if(Screen == ScreenManager::SCREEN_MAIN_MENU){
 				mScreenManager->activate(ScreenManager::SCREEN_MAIN_MENU);
 				if(mScreenManager->isActive())
+				{
 					oslDrawImageXY(menubg, (480/2) - (menubg->stretchX/2), (272/2) - (menubg->stretchY/2));
 					mScreenManager->mCurrentScreen->draw();
-				//menu keys
-				if(osl_keys->pressed.up){
-					gMenu--;
-					if (gMenu < 0)
-					{
-						gMenu = 5;
-					}
+					mScreenManager->mCurrentScreen->update();
 				}
-				if(osl_keys->pressed.down){
-					gMenu++;
-					gMenu%=6;
-				}
-				if(osl_keys->pressed.cross){
-					if(gMenu == 0)
-					{
-						oslFlushKey();
-						mScreenManager->deactivate();
-						Screen = ScreenManager::SCREEN_GAME_OPTIONS; // start game options!
-					}
-					if(gMenu == 1)
-					{
-						oslFlushKey();
-						mScreenManager->deactivate();
-						Screen = ScreenManager::SCREEN_MULTIPLAYER;
-					}
-					if(gMenu == 2)
-					{
-						oslFlushKey();
-						mScreenManager->deactivate();
-						Screen = ScreenManager::SCREEN_OPTIONS;
-					}
-					if(gMenu == 3)
-					{
-						oslFlushKey();
-						mScreenManager->deactivate();
-						Screen = ScreenManager::SCREEN_HELP;
-					}
-					if(gMenu == 4)
-					{
-						oslFlushKey();
-						mScreenManager->deactivate();
-						Screen = ScreenManager::SCREEN_ABOUT;
-					}
-					if(gMenu == 5)
-					{
-						oslFlushKey();
-						mScreenManager->deactivate();
-						Screen = ScreenManager::SCREEN_CONFIRM_EXIT;
-					}
-				}
+				mScreenManager->deactivate();
 			}
 			if(Screen == ScreenManager::SCREEN_CONFIRM_EXIT){
 				mScreenManager->activate(ScreenManager::SCREEN_CONFIRM_EXIT);
@@ -165,7 +114,7 @@ int main()
 				if(osl_keys->pressed.cross){
 					if(gMenu == 0)
 					{
-						oslStopSound(menuBg);
+						oslStopSound(menuTheme);
 						Screen = endOSLib(); //quit game
 					}
 					if(gMenu == 1)
@@ -244,13 +193,13 @@ int main()
 					{				
 						bSound = false;
 						mSaveLoadManager->save("1");
-						oslStopSound(menuBg);
+						oslStopSound(menuTheme);
 					}
 					if(loadState == 1)
 					{
 						bSound = true;
 						mSaveLoadManager->save("0");
-						oslPlaySound(menuBg,1);
+						oslPlaySound(menuTheme,1);
 					}
 				}
 				if(osl_keys->pressed.circle)

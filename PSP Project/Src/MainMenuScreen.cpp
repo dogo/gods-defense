@@ -36,4 +36,48 @@ void MainMenuScreen::draw()
 
 void MainMenuScreen::update()
 {
+	//menu keys
+	if(osl_keys->pressed.up){
+		gMenu--;
+		if (gMenu < 0)
+		{
+			gMenu = 5;
+		}
+	}
+	if(osl_keys->pressed.down){
+		gMenu++;
+		gMenu%=6;
+	}
+	if(osl_keys->pressed.cross){
+		if(gMenu == 0)
+		{
+			oslFlushKey();
+			Screen = ScreenManager::SCREEN_GAME_OPTIONS; // start game options!
+		}
+		if(gMenu == 1)
+		{
+			oslFlushKey();
+			Screen = ScreenManager::SCREEN_MULTIPLAYER;
+		}
+		if(gMenu == 2)
+		{
+			oslFlushKey();
+			Screen = ScreenManager::SCREEN_OPTIONS;
+		}
+		if(gMenu == 3)
+		{
+			oslFlushKey();
+			Screen = ScreenManager::SCREEN_HELP;
+		}
+		if(gMenu == 4)
+		{
+			oslFlushKey();
+			Screen = ScreenManager::SCREEN_ABOUT;
+		}
+		if(gMenu == 5)
+		{
+			oslFlushKey();
+			Screen = ScreenManager::SCREEN_CONFIRM_EXIT;
+		}
+	}
 }
