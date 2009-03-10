@@ -30,4 +30,8 @@ void AboutScreen::draw()
 
 void AboutScreen::update()
 {
+	if(osl_keys->pressed.circle)
+	{
+		Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+	}
 }

@@ -19,4 +19,20 @@ void GameScreen::draw()
 
 void GameScreen::update()
 {
+	if(osl_keys->pressed.start)
+	{	
+	/*
+	*	Dogo : Vai buga futuramente, o pause nao pode deletar a tela anterior ou seja a tela do jogo,
+	*	pois quando voltar do pause nao vai mais ter referencia do jogo.
+	*   TODO : Pensar como pausar!
+	*   Dogo 10/03/09 -> Congelar o jogo, pintar a tela de pause por cima, quando voltar ao jogo repintar e voltar o
+	*   estado do jogo.
+	*/
+		Screen = ScreenManager::SCREEN_PAUSE; //Start game!
+	}
+	if(osl_keys->pressed.circle)
+	{
+		oslFlushKey();
+		Screen = ScreenManager::SCREEN_GAME_OPTIONS; //go back CLR
+	}
 }

@@ -24,4 +24,34 @@ void ExitScreen::draw()
 
 void ExitScreen::update()
 {
+	if(osl_keys->pressed.up){
+		gMenu--;
+		if (gMenu < 0)
+		{
+			gMenu = 1;
+		}
+	}
+	if(osl_keys->pressed.down){
+		gMenu++;
+		gMenu%=2;
+	}
+	if(osl_keys->pressed.cross){
+		if(gMenu == 0)
+		{
+			oslStopSound(menuTheme);
+			oslEndGfx();
+			osl_quit = 1; //Quit Game
+		}
+		if(gMenu == 1)
+		{
+			oslFlushKey();
+			gMenu = 0;
+			Screen = ScreenManager::SCREEN_MAIN_MENU;
+		}
+	}
+	if(osl_keys->pressed.circle)
+	{
+		gMenu = 0;
+		Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+	}
 }

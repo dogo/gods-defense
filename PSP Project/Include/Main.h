@@ -8,16 +8,10 @@
 #include <oslib/oslib.h>
 #include "../Include/ScreenManager.h"
 
-class Main
-{
-
-private :
-
-public:
 	int main();
 
 	int initOSLib();
 
 	int endOSLib();
-};
+
 #endif

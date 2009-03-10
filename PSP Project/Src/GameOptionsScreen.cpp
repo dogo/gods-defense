@@ -20,4 +20,12 @@ void GameOptionsScreen::draw()
 
 void GameOptionsScreen::update()
 {
+	if(osl_keys->pressed.cross)
+	{				
+		Screen = ScreenManager::SCREEN_GAME; //Start game!
+	}
+	if(osl_keys->pressed.circle)
+	{
+		Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+	}
 }

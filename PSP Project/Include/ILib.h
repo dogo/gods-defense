@@ -13,6 +13,7 @@
 #include "../Include/Resource.h"
 
 extern OSL_FONT *gFont;
+extern OSL_SOUND *menuTheme;
 extern int gMenu;
 extern bool bSound;
 extern int loadState;

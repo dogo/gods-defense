@@ -15,6 +15,7 @@ int	Screen = 0;
 int	wait = 0;
 int	gMenu = 0;
 OSL_FONT *gFont;
+OSL_SOUND *menuTheme;
 int loadState = -1;
 bool bSound = true;
 
@@ -43,7 +44,7 @@ int main()
     initOSLib();
     oslIntraFontInit(INTRAFONT_CACHE_MED);
 
-	OSL_SOUND *menuTheme = oslLoadSoundFileMP3 ("/Res/bgm.mp3", OSL_FMT_STREAM); //Loads the MP3s
+	menuTheme = oslLoadSoundFileMP3 ("/Res/bgm.mp3", OSL_FMT_STREAM); //Loads the MP3s
 
 	OSL_IMAGE *menubg = oslLoadImageFilePNG(Resource::MAIN_MENU_BG, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
@@ -96,95 +97,51 @@ int main()
 				}
 				mScreenManager->deactivate();
 			}
+
 			if(Screen == ScreenManager::SCREEN_CONFIRM_EXIT){
 				mScreenManager->activate(ScreenManager::SCREEN_CONFIRM_EXIT);
 				if(mScreenManager->isActive())
+				{
 					mScreenManager->mCurrentScreen->draw();
-				if(osl_keys->pressed.up){
-					gMenu--;
-					if (gMenu < 0)
-					{
-						gMenu = 1;
-					}
+					mScreenManager->mCurrentScreen->update();
 				}
-				if(osl_keys->pressed.down){
-					gMenu++;
-					gMenu%=2;
-				}
-				if(osl_keys->pressed.cross){
-					if(gMenu == 0)
-					{
-						oslStopSound(menuTheme);
-						Screen = endOSLib(); //quit game
-					}
-					if(gMenu == 1)
-					{
-						oslFlushKey();
-						mScreenManager->deactivate();
-						gMenu = 0;
-						Screen = ScreenManager::SCREEN_MAIN_MENU;
-					}
-				}
-					if(osl_keys->pressed.circle)
-					{
-						mScreenManager->deactivate();
-						Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
-					}
+				//mScreenManager->deactivate();
 			}
+
 			if(Screen == ScreenManager::SCREEN_GAME_OPTIONS){
 				mScreenManager->activate(ScreenManager::SCREEN_GAME_OPTIONS);
 				if(mScreenManager->isActive())
-					mScreenManager->mCurrentScreen->draw();
-				if(osl_keys->pressed.cross)
-				{				
-					mScreenManager->deactivate();
-					Screen = ScreenManager::SCREEN_GAME; //Start game!
-
-				}
-				if(osl_keys->pressed.circle)
 				{
-					mScreenManager->deactivate();
-					Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+					mScreenManager->mCurrentScreen->draw();
+					mScreenManager->mCurrentScreen->update();
 				}
+				mScreenManager->deactivate();
 			}
+
 			if(Screen == ScreenManager::SCREEN_PAUSE){
 				mScreenManager->activate(ScreenManager::SCREEN_PAUSE);
 				if(mScreenManager->isActive())
-					mScreenManager->mCurrentScreen->draw();
-				if(osl_keys->pressed.circle || osl_keys->pressed.start)
 				{
-					oslFlushKey();
-					mScreenManager->deactivate();
-					Screen = ScreenManager::SCREEN_GAME; //go back CLR
+					mScreenManager->mCurrentScreen->draw();
+					mScreenManager->mCurrentScreen->update();
 				}
+				mScreenManager->deactivate();
 			}
 
 			if(Screen == ScreenManager::SCREEN_GAME){
 				mScreenManager->activate(ScreenManager::SCREEN_GAME);
 				if(mScreenManager->isActive())
-					mScreenManager->mCurrentScreen->draw();
-				if(osl_keys->pressed.start)
-				{	
-					/*
-					*	Dogo : Vai buga futuramente, o pause nao pode deletar a tela anterior ou seja a tela do jogo,
-					*	pois quando voltar do pause nao vai mais ter referencia do jogo.
-					*   TODO : Pensar como pausar!
-					*/
-					mScreenManager->deactivate(); 
-					Screen = ScreenManager::SCREEN_PAUSE; //Start game!
-
-				}
-				if(osl_keys->pressed.circle)
 				{
-					oslFlushKey();
-					mScreenManager->deactivate();
-					Screen = ScreenManager::SCREEN_GAME_OPTIONS; //go back CLR
+					mScreenManager->mCurrentScreen->draw();
+					mScreenManager->mCurrentScreen->update();
 				}
+				mScreenManager->deactivate();
 			}
 			
 			if(Screen == ScreenManager::SCREEN_OPTIONS){
 				mScreenManager->activate(ScreenManager::SCREEN_OPTIONS);
 				if(mScreenManager->isActive())
+				{
 					mScreenManager->mCurrentScreen->draw();
 				if(osl_keys->pressed.cross)
 				{	
@@ -202,43 +159,37 @@ int main()
 						oslPlaySound(menuTheme,1);
 					}
 				}
-				if(osl_keys->pressed.circle)
-				{
-					mScreenManager->deactivate();
-					Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+					mScreenManager->mCurrentScreen->update();
 				}
+				mScreenManager->deactivate();
 			}
 			if(Screen == ScreenManager::SCREEN_HELP){
 				mScreenManager->activate(ScreenManager::SCREEN_HELP);
 				if(mScreenManager->isActive())
-					mScreenManager->mCurrentScreen->draw();
-				if(osl_keys->pressed.circle)
 				{
-					mScreenManager->deactivate();
-					Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+					mScreenManager->mCurrentScreen->draw();
+					mScreenManager->mCurrentScreen->update();
 				}
+				mScreenManager->deactivate();
 			}
 			if(Screen == ScreenManager::SCREEN_ABOUT){
 				mScreenManager->activate(ScreenManager::SCREEN_ABOUT);
 				if(mScreenManager->isActive())
-					mScreenManager->mCurrentScreen->draw();
-				if(osl_keys->pressed.circle)
 				{
-					mScreenManager->deactivate();
-					Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+					mScreenManager->mCurrentScreen->draw();
+					mScreenManager->mCurrentScreen->update();
 				}
-
+				mScreenManager->deactivate();
 			}
 
 			if(Screen == ScreenManager::SCREEN_MULTIPLAYER){
 				mScreenManager->activate(ScreenManager::SCREEN_MULTIPLAYER);
 				if(mScreenManager->isActive())
+				{
 					mScreenManager->mCurrentScreen->draw();
-				if(osl_keys->pressed.circle)
-				{	
-					mScreenManager->deactivate();
-					Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+					mScreenManager->mCurrentScreen->update();
 				}
+				mScreenManager->deactivate();
 			}
 			oslEndDrawing();
 		}
@@ -247,6 +198,9 @@ int main()
         oslEndFrame();
     	skip = oslSyncFrame();
     }
+
+	oslDeleteImage(menubg);
+	oslDeleteSound(menuTheme);
 	oslDeleteFont(gFont);
     oslIntraFontShutdown();
     endOSLib();
