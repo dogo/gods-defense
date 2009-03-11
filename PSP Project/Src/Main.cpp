@@ -141,7 +141,6 @@ int main()
 			if(Screen == ScreenManager::SCREEN_OPTIONS){
 				mScreenManager->activate(ScreenManager::SCREEN_OPTIONS);
 				if(mScreenManager->isActive())
-				{
 					mScreenManager->mCurrentScreen->draw();
 				if(osl_keys->pressed.cross)
 				{	
@@ -159,9 +158,11 @@ int main()
 						oslPlaySound(menuTheme,1);
 					}
 				}
-					mScreenManager->mCurrentScreen->update();
+				if(osl_keys->pressed.circle)
+				{
+					mScreenManager->deactivate();
+					Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
 				}
-				mScreenManager->deactivate();
 			}
 			if(Screen == ScreenManager::SCREEN_HELP){
 				mScreenManager->activate(ScreenManager::SCREEN_HELP);
