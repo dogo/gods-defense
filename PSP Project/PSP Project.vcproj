@@ -24,9 +24,9 @@
 			<Tool
 				Name="VCNMakeTool"
 				BuildCommandLine="make"
-				ReBuildCommandLine=""
+				ReBuildCommandLine="rebuild.bat"
 				CleanCommandLine="make clean"
-				Output="PSP Project.elf"
+				Output="GodsDefense.elf"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""
@@ -43,10 +43,10 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="msvc-cygwin-make.bat make kxploit"
-				ReBuildCommandLine="msvc-cygwin-make.bat make clean kxploit"
-				CleanCommandLine="msvc-cygwin-make.bat make clean"
-				Output="PSP Project.elf"
+				BuildCommandLine="make"
+				ReBuildCommandLine="rebuild.bat"
+				CleanCommandLine="make clean"
+				Output="GodsDefense.elf"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""
