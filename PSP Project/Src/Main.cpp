@@ -180,17 +180,30 @@ int main()
 					mScreenManager->mCurrentScreen->draw();
 					mScreenManager->mCurrentScreen->update();
 				}
-				mScreenManager->deactivate();
+				//mScreenManager->deactivate();
 			}
 
 			if(Screen == ScreenManager::SCREEN_MULTIPLAYER){
-				mScreenManager->activate(ScreenManager::SCREEN_MULTIPLAYER);
-				if(mScreenManager->isActive())
+				if(sceWlanDevIsPowerOn())
 				{
-					mScreenManager->mCurrentScreen->draw();
-					mScreenManager->mCurrentScreen->update();
+					mScreenManager->activate(ScreenManager::SCREEN_MULTIPLAYER);
+					if(mScreenManager->isActive())
+					{
+						mScreenManager->mCurrentScreen->draw();
+						mScreenManager->mCurrentScreen->update();
+					}
+					mScreenManager->deactivate();
 				}
-				mScreenManager->deactivate();
+				else
+				{
+					mScreenManager->activate(ScreenManager::SCREEN_WARNING);
+					if(mScreenManager->isActive())
+					{
+						mScreenManager->mCurrentScreen->draw();
+						mScreenManager->mCurrentScreen->update();
+					}
+					//mScreenManager->deactivate();
+				}
 			}
 			oslEndDrawing();
 		}

@@ -38,6 +38,8 @@ public:
 	static char const CONFIRM_QUIT[];
 	static char const YES[];
 	static char const NO[];
+	static char const WARNING_CAPTION[];
+	static char const WARNING_TEXT[];
 	static char GAME_TITLE[];
 	static char ANYKEY_SPLASH[];
 	static char MAIN_MENU_BG[];

@@ -7,6 +7,7 @@
 
 #include <oslib/oslib.h>
 #include "../Include/ScreenManager.h"
+#include <pspwlan.h>
 
 	int main();
 

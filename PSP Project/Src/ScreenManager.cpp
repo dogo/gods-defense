@@ -15,6 +15,7 @@
 #include "../Include/MultiplayerScreen.h"
 #include "../Include/PauseScreen.h"
 #include "../Include/ExitScreen.h"
+#include "../Include/WarningScreen.h"
 
 ScreenManager::ScreenManager()
 {
@@ -53,7 +54,7 @@ IScreen * ScreenManager::createScreen(int aIndex)
 	switch(aIndex)
 	{
 	case SCREEN_ANYKEY:				return new AnykeyScreen();
-	case SCREEN_WARNING: 			return 0;//new WarningScreen(mLibrary, mContext);
+	case SCREEN_WARNING: 			return new WarningScreen();
 	case SCREEN_TITLE: 				return new TitleScreen();
 	case SCREEN_MAIN_MENU: 			return new MainMenuScreen();
 	case SCREEN_GAME: 				return new GameScreen();

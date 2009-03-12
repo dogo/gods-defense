@@ -126,6 +126,10 @@
 				RelativePath=".\Src\TitleScreen.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\Src\WarningScreen.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header"
@@ -200,6 +204,10 @@
 			</File>
 			<File
 				RelativePath=".\Include\TitleScreen.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\WarningScreen.h"
 				>
 			</File>
 		</Filter>

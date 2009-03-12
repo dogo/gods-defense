@@ -13,7 +13,7 @@ char Resource::MAIN_MENU_BG[] = "/Res/background.png";
 char const Resource::BACK_SK[] = "Back";
 char const Resource::MULTIPLAYER_CAPTION[] = "Multiplayer";
 char const Resource::HELP_CAPTION[] = "Help";
-char const Resource::START_GAME[] = "Start Game";
+char const Resource::START_GAME[] = "Single Player";
 char const Resource::EXIT_CAPTION[] = "Exit";
 char const Resource::OPTIONS_CHANGE[] = ": to change";
 char const Resource::SETTINGS_FILENAME[] =  "ms0:\\PSP\\GAME\\GodsDefense\\GD.dat"; //save
@@ -29,6 +29,11 @@ char const Resource::PRESS_START[] = "Press Start";
 char const Resource::CONFIRM_QUIT[] = "Do you really wanna quit?";
 char const Resource::YES[] = "Yes";
 char const Resource::NO[] = "No";
+char const Resource::WARNING_CAPTION[] = "Warning";
+
+char const Resource::WARNING_TEXT[] =
+	"WLAN switch is off.\n\n"
+	"Turn on the WLAN switch";
 
 char const Resource::ABOUT_TEXT[] =
 	"Gods Defense\n"

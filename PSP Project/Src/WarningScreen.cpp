@@ -1,37 +1,38 @@
 //**************************************************************************
-//		PSP Project: 'Gods Defense' - AboutScreen.cpp
+//		PSP Project: 'Gods Defense' - WarningScreen.cpp
 //		@author Diogo Autilio <A.K.A Dogo - diautilio@gmail.com>
 //**************************************************************************
 
-#include "../Include/AboutScreen.h"
+#include "../Include/WarningScreen.h"
 #include "../Include/ScreenManager.h"
 
 
-AboutScreen::AboutScreen()
+WarningScreen::WarningScreen()
 {
 	back = oslLoadImageFilePNG("/Res/circle.png", OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 }
 
-AboutScreen::~AboutScreen()
+WarningScreen::~WarningScreen()
 {
 	oslDeleteImage(back);
 }
 
-void AboutScreen::draw()
+void WarningScreen::draw()
 {
+	oslIntraFontSetStyle(gFont, 2.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslDrawString(240,20,Resource::WARNING_CAPTION);
 	oslIntraFontSetStyle(gFont, 1.5f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(240,20,Resource::ABOUT_CAPTION);
-	oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(240,35,Resource::ABOUT_TEXT);
+	oslDrawString(240,100,Resource::WARNING_TEXT);
 	oslDrawImageXY(back, (430) - (back->stretchX), (272) - (back->stretchY));
-	oslIntraFontSetStyle(gFont, 1.5f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 1.3f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
 	oslDrawString((510) - back->stretchX,(272) - (back->stretchY/2),Resource::BACK_SK);
 }
 
-void AboutScreen::update()
+void WarningScreen::update()
 {
 	if(osl_keys->pressed.circle)
 	{
+		oslFlushKey();
 		Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
 	}
 }
