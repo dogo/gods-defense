@@ -25,7 +25,7 @@
 				BuildCommandLine="make"
 				ReBuildCommandLine="rebuild.bat"
 				CleanCommandLine="make clean"
-				Output="PSP Project.elf"
+				Output="GodsDefense.elf"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""
@@ -42,10 +42,10 @@
 			>
 			<Tool
 				Name="VCNMakeTool"
-				BuildCommandLine="msvc-cygwin-make.bat make kxploit"
-				ReBuildCommandLine="msvc-cygwin-make.bat make clean kxploit"
-				CleanCommandLine="msvc-cygwin-make.bat make clean"
-				Output="PSP Project.elf"
+				BuildCommandLine="make"
+				ReBuildCommandLine="rebuild.bat"
+				CleanCommandLine="make clean"
+				Output="GodsDefense.elf"
 				PreprocessorDefinitions=""
 				IncludeSearchPath=""
 				ForcedIncludes=""
@@ -125,6 +125,10 @@
 				RelativePath=".\Src\TitleScreen.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\Src\WarningScreen.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header"
@@ -199,6 +203,10 @@
 			</File>
 			<File
 				RelativePath=".\Include\TitleScreen.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\WarningScreen.h"
 				>
 			</File>
 		</Filter>
