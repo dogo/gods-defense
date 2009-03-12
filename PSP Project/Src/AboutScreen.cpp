@@ -22,7 +22,7 @@ void AboutScreen::draw()
 	oslIntraFontSetStyle(gFont, 1.5f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,20,Resource::ABOUT_CAPTION);
 	oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(240,35,Resource::ABOUT_TEXT);
+	oslDrawString(240,40,Resource::ABOUT_TEXT);
 	oslDrawImageXY(back, (430) - (back->stretchX), (272) - (back->stretchY));
 	oslIntraFontSetStyle(gFont, 1.5f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
 	oslDrawString((510) - back->stretchX,(272) - (back->stretchY/2),Resource::BACK_SK);

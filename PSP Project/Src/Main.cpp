@@ -125,7 +125,7 @@ int main()
 					mScreenManager->mCurrentScreen->draw();
 					mScreenManager->mCurrentScreen->update();
 				}
-				mScreenManager->deactivate();
+				//mScreenManager->deactivate();
 			}
 
 			if(Screen == ScreenManager::SCREEN_GAME){
@@ -184,7 +184,7 @@ int main()
 			}
 
 			if(Screen == ScreenManager::SCREEN_MULTIPLAYER){
-				if(sceWlanDevIsPowerOn())
+				if(oslIsWlanPowerOn())
 				{
 					mScreenManager->activate(ScreenManager::SCREEN_MULTIPLAYER);
 					if(mScreenManager->isActive())

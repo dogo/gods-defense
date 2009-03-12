@@ -10,7 +10,7 @@ ASFLAGS = $(CFLAGS)
 LIBDIR =
 LDFLAGS =
 LIBS =  -losl -lpng -lz -lpsphprm -lpspaudiolib -lpspaudio -lpspsdk -lpspctrl -lpspumd -lpsprtc \
-		-lpsppower -lpspgum -lpspgu -lm -lpspaudiolib -lpspaudiocodec -lstdc++ -lpspwlan -lpspnet
+		-lpsppower -lpspgum -lpspgu -lm -lpspaudiolib -lpspaudiocodec -lstdc++ -lpspwlan -lpsphttp -lpspssl
 
 BUILD_PRX = 1
 PSP_FW_VERSION=390
