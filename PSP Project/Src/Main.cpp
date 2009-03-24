@@ -198,7 +198,6 @@ int main()
 						mScreenManager->mCurrentScreen->draw();
 						mScreenManager->mCurrentScreen->update();
 					}
-					else
 						mScreenManager->deactivate();
 				}
 				else
