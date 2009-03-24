@@ -105,7 +105,8 @@ int main()
 					mScreenManager->mCurrentScreen->draw();
 					mScreenManager->mCurrentScreen->update();
 				}
-				//mScreenManager->deactivate();
+				else
+					mScreenManager->deactivate();
 			}
 
 			if(Screen == ScreenManager::SCREEN_GAME_OPTIONS){
@@ -115,7 +116,8 @@ int main()
 					mScreenManager->mCurrentScreen->draw();
 					mScreenManager->mCurrentScreen->update();
 				}
-				mScreenManager->deactivate();
+				else
+					mScreenManager->deactivate();
 			}
 
 			if(Screen == ScreenManager::SCREEN_PAUSE){
@@ -125,7 +127,8 @@ int main()
 					mScreenManager->mCurrentScreen->draw();
 					mScreenManager->mCurrentScreen->update();
 				}
-				//mScreenManager->deactivate();
+				else
+					mScreenManager->deactivate();
 			}
 
 			if(Screen == ScreenManager::SCREEN_GAME){
@@ -135,7 +138,8 @@ int main()
 					mScreenManager->mCurrentScreen->draw();
 					mScreenManager->mCurrentScreen->update();
 				}
-				mScreenManager->deactivate();
+				else
+					mScreenManager->deactivate();
 			}
 			
 			if(Screen == ScreenManager::SCREEN_OPTIONS){
@@ -171,7 +175,8 @@ int main()
 					mScreenManager->mCurrentScreen->draw();
 					mScreenManager->mCurrentScreen->update();
 				}
-				mScreenManager->deactivate();
+				else
+					mScreenManager->deactivate();
 			}
 			if(Screen == ScreenManager::SCREEN_ABOUT){
 				mScreenManager->activate(ScreenManager::SCREEN_ABOUT);
@@ -180,7 +185,8 @@ int main()
 					mScreenManager->mCurrentScreen->draw();
 					mScreenManager->mCurrentScreen->update();
 				}
-				//mScreenManager->deactivate();
+				else 
+					mScreenManager->deactivate();
 			}
 
 			if(Screen == ScreenManager::SCREEN_MULTIPLAYER){
@@ -192,7 +198,8 @@ int main()
 						mScreenManager->mCurrentScreen->draw();
 						mScreenManager->mCurrentScreen->update();
 					}
-					mScreenManager->deactivate();
+					else
+						mScreenManager->deactivate();
 				}
 				else
 				{
@@ -202,7 +209,8 @@ int main()
 						mScreenManager->mCurrentScreen->draw();
 						mScreenManager->mCurrentScreen->update();
 					}
-					//mScreenManager->deactivate();
+					else
+						mScreenManager->deactivate();
 				}
 			}
 			oslEndDrawing();
