@@ -39,7 +39,6 @@ void ExitScreen::update()
 		if(gMenu == 0)
 		{
 			oslStopSound(menuTheme);
-			oslEndGfx();
 			osl_quit = 1; //Quit Game
 		}
 		if(gMenu == 1)
