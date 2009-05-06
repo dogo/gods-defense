@@ -30,6 +30,7 @@ char const Resource::CONFIRM_QUIT[] = "Do you really wanna quit?";
 char const Resource::YES[] = "Yes";
 char const Resource::NO[] = "No";
 char const Resource::WARNING_CAPTION[] = "Warning";
+char const Resource::MAPSELECTION_CAPTION[] = "Map Selection";
 
 char const Resource::WARNING_TEXT[] =
 	"WLAN switch is off.\n\n"
