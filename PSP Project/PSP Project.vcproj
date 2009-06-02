@@ -103,19 +103,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Src\OptionsScreen.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Src\PauseScreen.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\Src\Resource.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Src\SaveLoad.cpp"
 				>
 			</File>
 			<File
@@ -183,19 +175,11 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Include\OptionsScreen.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Include\PauseScreen.h"
 				>
 			</File>
 			<File
 				RelativePath=".\Include\Resource.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Include\SaveLoad.h"
 				>
 			</File>
 			<File
@@ -211,6 +195,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\ClassDiagram1.cd"
+			>
+		</File>
 		<File
 			RelativePath=".\Makefile"
 			>
