@@ -102,10 +102,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Src\OptionsScreen.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Src\PauseScreen.cpp"
 				>
 			</File>
@@ -114,15 +110,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Src\SaveLoad.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Src\ScreenManager.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\Src\TitleScreen.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Tower.cpp"
 				>
 			</File>
 			<File
@@ -182,10 +178,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Include\OptionsScreen.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Include\PauseScreen.h"
 				>
 			</File>
@@ -194,15 +186,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Include\SaveLoad.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Include\ScreenManager.h"
 				>
 			</File>
 			<File
 				RelativePath=".\Include\TitleScreen.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\Tower.h"
 				>
 			</File>
 			<File
