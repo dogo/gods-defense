@@ -22,9 +22,7 @@ void PauseScreen::draw()
 	(gMenu == 0) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240, 100,Resource::PAUSE_RESUME);
 	(gMenu == 1) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(240, 120,Resource::OPTIONS_CAPTION);
-	(gMenu == 2) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(240, 140,Resource::PAUSE_MENU);
+	oslDrawString(240, 120,Resource::PAUSE_MENU);
 }
 
 void PauseScreen::update()
@@ -33,12 +31,12 @@ void PauseScreen::update()
 		gMenu--;
 		if (gMenu < 0)
 		{
-			gMenu = 2;
+			gMenu = 1;
 		}
 	}
 	if(osl_keys->pressed.down){
 		gMenu++;
-		gMenu%=3;
+		gMenu%=2;
 	}
 	if(osl_keys->pressed.circle || osl_keys->pressed.start)
 	{

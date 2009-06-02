@@ -41,4 +41,15 @@ drawSplash(unsigned long iTime, OSL_IMAGE *Splash);
 \endcode */
 void drawSplash(int iTime, OSL_IMAGE *Splash);
 };
+
+//coordinates in pixels
+class Point2D
+{
+public:
+	Point2D(); //x=0,y=0 
+	Point2D(float x, float y);
+	
+	float X;
+	float Y;
+};
 #endif

@@ -18,22 +18,16 @@ public:
 	/**
 	 * Strings.
 	 */
-	static char const SETTINGS_FILENAME[]; //save
 	static char const ABOUT_CAPTION[];
 	static char const MULTIPLAYER_CAPTION[];
 	static char const HELP_CAPTION[];
 	static char const START_GAME[];
 	static char const EXIT_CAPTION[];
-	static char const OPTIONS_CAPTION[];
 	static char const PAUSE_RESUME[];
 	static char const PAUSE_MENU[];
 	static char const PAUSE_CAPTION[];
 	static char const ABOUT_TEXT[];
-	static char const OPTIONS_SOUND[];
-	static char const OPTIONS_ON[];
-	static char const OPTIONS_OFF[];
 	static char const BACK_SK[];
-	static char const OPTIONS_CHANGE[];
 	static char const PRESS_START[];
 	static char const CONFIRM_QUIT[];
 	static char const YES[];

@@ -9,7 +9,6 @@
 #include "../Include/MainMenuScreen.h"
 #include "../Include/GameOptionsScreen.h"
 #include "../Include/GameScreen.h"
-#include "../Include/OptionsScreen.h"
 #include "../Include/HelpScreen.h"
 #include "../Include/AboutScreen.h"
 #include "../Include/MultiplayerScreen.h"
@@ -60,7 +59,6 @@ IScreen * ScreenManager::createScreen(int aIndex)
 	case SCREEN_GAME: 				return new GameScreen();
 	case SCREEN_GAME_OPTIONS:		return new GameOptionsScreen();
 	case SCREEN_ENDING:				return 0;//new EndingScreen(mLibrary, mContext);
-	case SCREEN_OPTIONS: 			return new OptionsScreen();
 	case SCREEN_HELP: 				return new HelpScreen();
 	case SCREEN_MULTIPLAYER:		return new MultiplayerScreen();
 	case SCREEN_ABOUT: 				return new AboutScreen();

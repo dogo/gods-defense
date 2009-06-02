@@ -4,7 +4,6 @@
 //**************************************************************************
 
 #include "../Include/Main.h"
-#include "../Include/SaveLoad.h"
 
 PSP_MODULE_INFO("Gods Defense", 0, 1, 1);
 PSP_MAIN_THREAD_ATTR(PSP_THREAD_ATTR_USER | PSP_THREAD_ATTR_VFPU);
@@ -16,8 +15,6 @@ int	wait = 0;
 int	gMenu = 0;
 OSL_FONT *gFont;
 OSL_SOUND *menuTheme;
-int loadState = -1;
-bool bSound = true;
 
 //Initialization
 int initOSLib(){
@@ -54,8 +51,6 @@ int main()
 	oslSetFont(gFont);
 
 	ScreenManager *mScreenManager = new ScreenManager();
-	SaveLoad	*mSaveLoadManager	= new SaveLoad();
-	loadState = mSaveLoadManager->load();
 
     while(!osl_quit){
         if (!skip){
@@ -141,32 +136,6 @@ int main()
 					mScreenManager->deactivate();
 			}
 			
-			if(Screen == ScreenManager::SCREEN_OPTIONS){
-				mScreenManager->activate(ScreenManager::SCREEN_OPTIONS);
-				if(mScreenManager->isActive())
-					mScreenManager->mCurrentScreen->draw();
-				if(osl_keys->pressed.cross)
-				{	
-					loadState = mSaveLoadManager->load();
-					if(loadState == 0)
-					{				
-						bSound = false;
-						mSaveLoadManager->save("1");
-						oslStopSound(menuTheme);
-					}
-					if(loadState == 1)
-					{
-						bSound = true;
-						mSaveLoadManager->save("0");
-						oslPlaySound(menuTheme,1);
-					}
-				}
-				if(osl_keys->pressed.circle)
-				{
-					mScreenManager->deactivate();
-					Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
-				}
-			}
 			if(Screen == ScreenManager::SCREEN_HELP){
 				mScreenManager->activate(ScreenManager::SCREEN_HELP);
 				if(mScreenManager->isActive())
@@ -226,5 +195,5 @@ int main()
     endOSLib();
 	
 	sceKernelExitGame();
-	return 0;
+	return (0);
 }
