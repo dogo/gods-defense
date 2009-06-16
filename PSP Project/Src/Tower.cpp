@@ -1,3 +1,8 @@
+//**************************************************************************
+//		PSP Project: 'Gods Defense' - Tower.cpp
+//		@author Diogo Autilio <A.K.A Dogo - diautilio@gmail.com>
+//**************************************************************************
+
 #include <fstream>
 #include <math.h>
 

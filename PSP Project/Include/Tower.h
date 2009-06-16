@@ -1,3 +1,8 @@
+//**************************************************************************
+//		PSP Project: 'Gods Defense' - Tower.h
+//		@author Diogo Autilio <A.K.A Dogo - diautilio@gmail.com>
+//**************************************************************************
+
 #ifndef INCLUDED_TOWER_H
 #define INCLUDED_TOWER_H
 
