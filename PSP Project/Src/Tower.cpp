@@ -1,7 +1,7 @@
 #include <fstream>
 #include <math.h>
 
-#include "Tower.h"
+#include "../Include/Tower.h"
 
 
 TowerInfo::TowerInfo(TiXmlElement* infoNode)
@@ -25,4 +25,31 @@ TowerInfo::TowerInfo(TiXmlElement* infoNode)
 	infoNode->QueryIntAttribute("Speed", &mSpeed);
 	infoNode->QueryFloatAttribute("SlowAmount", &mSlowAmount);
 	infoNode->QueryIntAttribute("SlowLength", &mSlowLength);
+}
+
+Tower::Tower(const string &mapName, const string &towerName)
+{
+	//Default Initialisers
+	mTowerDirName = towerName;
+	mIsBuildable = true;
+	mTowerName = NULL;
+	mTowerDescription = NULL;
+	mShotType = ARROW;
+	mHitsLand = false;
+	mHitsFlyer = false;
+	mTowerLength = 0;
+	mMenuIcon = NULL;
+	mTowerImg = NULL;
+	mShotImg = NULL;
+
+}
+
+Tower::~Tower()
+{
+	if (mMenuIcon != NULL)
+		delete mMenuIcon;
+	if (mTowerImg != NULL)
+		delete mTowerImg;
+	if (mShotImg != NULL)
+		delete mShotImg;
 }

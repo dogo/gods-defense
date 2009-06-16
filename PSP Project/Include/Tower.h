@@ -7,6 +7,11 @@ class TowerInstance;
 
 #include "tinyxml/tinyxml.h"
 #include "../Include/GodLibrary.h"
+#include <string>
+
+using namespace std;
+
+#define ARROW 1;
 
 /*
 * C++ provides the friend keyword to do just this. Inside a class, you can indicate that other classes (or simply functions)
@@ -41,4 +46,37 @@ public:
 	float mSlowAmount;
 	int mSlowLength;
 };
+
+class Tower
+{
+public:
+	Tower(const string &mapName, const string &towerName);
+	~Tower();
+
+/*
+*	mIsBuildable - Player can Build ?.
+*	mTowerDirName - Tower Directory name.
+*	mTowerName - Tower Name.
+*	mTowerDescription - Tower Description.
+*	mShotType - Shot Type.
+*	mHitsLand - Can Hits land ?
+*	mHitsFlyer - Can Hits Flyer ?
+*	mTowerLength - The potential distance of the Tower.
+*	mMenuIcon - Tower Menu Icon
+*	mTowerImg - Tower Image
+*	mShotImg - Shot Image
+*/
+	bool mIsBuildable;
+	string mTowerDirName;
+	char *mTowerName;
+	char *mTowerDescription;
+	int mShotType; //TODO: Create Shot Class
+	bool mHitsLand;
+	bool mHitsFlyer;
+	int mTowerLength;
+	OSL_IMAGE *mMenuIcon;
+	OSL_IMAGE *mTowerImg;
+	OSL_IMAGE *mShotImg;
+};
+
 #endif
