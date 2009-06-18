@@ -39,7 +39,7 @@ int main()
 {
 	int skip = 0;
     initOSLib();
-    oslIntraFontInit(INTRAFONT_CACHE_MED);
+    oslIntraFontInit(INTRAFONT_CACHE_ALL | INTRAFONT_STRING_CP1252);
 
 	menuTheme = oslLoadSoundFileMP3 ("/Res/bgm.mp3", OSL_FMT_STREAM); //Loads the MP3s
 
