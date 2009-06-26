@@ -7,6 +7,9 @@
 #define GODLIBRARY_H_INCLUDED
 
 #include "../Include/ILib.h"
+#include <math.h>
+
+//#define PI 3.14159
 
 class GodLibrary
 {
@@ -40,6 +43,22 @@ oslDrawStringf(0, 0, "Test string %i", 1);
 drawSplash(unsigned long iTime, OSL_IMAGE *Splash);
 \endcode */
 void drawSplash(int iTime, OSL_IMAGE *Splash);
+
+
+/** Draws an formatted pixel at the specified x and y positions.
+
+\code
+drawPixel(float x, float y, osl_color color);
+\endcode */
+void drawPixel(float x, float y, OSL_COLOR color);
+
+/** Draws an circle pixel at the specified x and y positions.
+
+\code
+drawCircle(int x, int y, int radius, osl_color);
+\endcode */
+void drawCircle(int x, int y, int radius, OSL_COLOR color);
+
 };
 
 //coordinates in pixels

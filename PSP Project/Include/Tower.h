@@ -13,6 +13,7 @@ class TowerInstance;
 #include "tinyxml/tinyxml.h"
 #include "../Include/GodLibrary.h"
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -58,6 +59,7 @@ public:
 	Tower(const string &mapName, const string &towerName);
 	~Tower();
 
+	void RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color);
 /*
 *	mIsBuildable - Player can Build ?.
 *	mTowerDirName - Tower Directory name.
@@ -82,6 +84,8 @@ public:
 	OSL_IMAGE *mMenuIcon;
 	OSL_IMAGE *mTowerImg;
 	OSL_IMAGE *mShotImg;
+
+	vector<TowerInfo> mLevels;
 };
 
 #endif

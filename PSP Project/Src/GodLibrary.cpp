@@ -36,3 +36,18 @@ void GodLibrary::drawSplash(int iTime, OSL_IMAGE *Splash) {
 		fade = fade + 2;		 
 	}
 }
+
+void GodLibrary::drawPixel(float x, float y, OSL_COLOR color)
+{
+	oslDrawFillRect(x, y , x+1, y+1, color);
+}
+
+void GodLibrary::drawCircle(int x, int y, int radius, OSL_COLOR color)
+{
+	for(int i=0;i<360;i+=30)
+	{
+		float tx = x + sinf((i*(M_PI/180))*radius);
+		float ty = y - cosf((i*(M_PI/180))*radius);
+		drawPixel(tx, ty, color);
+	}
+}
