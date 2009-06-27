@@ -50,7 +50,7 @@ void drawSplash(int iTime, OSL_IMAGE *Splash);
 \code
 drawPixel(float x, float y, osl_color color);
 \endcode */
-void drawPixel(float x, float y, OSL_COLOR color);
+void static drawPixel(float x, float y, OSL_COLOR color);
 
 /** Draws an circle pixel at the specified x and y positions.
 
