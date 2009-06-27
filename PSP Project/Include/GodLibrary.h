@@ -57,7 +57,7 @@ void drawPixel(float x, float y, OSL_COLOR color);
 \code
 drawCircle(int x, int y, int radius, osl_color);
 \endcode */
-void drawCircle(int x, int y, int radius, OSL_COLOR color);
+void static drawCircle(int x, int y, int radius, OSL_COLOR color);
 
 };
 

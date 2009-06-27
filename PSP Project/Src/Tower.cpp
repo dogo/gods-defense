@@ -61,11 +61,5 @@ Tower::~Tower()
 
 void Tower::RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color)
 {
-/*
-	dogo : TODO : Fix this 
-	(Error	1	error: cannot call member function 'void GodLibrary::drawCircle(int, int, int, OSL_COLOR)' 
-	without object	Src/Tower.cpp:64)
-	
 	GodLibrary::drawCircle(position.X, position.Y, mLevels[TowerInfo].mRange, color);
-*/
 }
