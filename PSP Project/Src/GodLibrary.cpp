@@ -51,3 +51,15 @@ void GodLibrary::drawCircle(int x, int y, int radius, OSL_COLOR color)
 		drawPixel(tx, ty, color);
 	}
 }
+
+Point2D::Point2D()
+{
+	X = 0;
+	Y = 0;
+}
+
+Point2D::Point2D(float x, float y)
+{
+	X = x;
+	Y = y;
+}

@@ -59,6 +59,7 @@ public:
 	Tower(const string &mapName, const string &towerName);
 	~Tower();
 
+	void RenderTower(const Point2D &position);
 	void RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color);
 /*
 *	mIsBuildable - Player can Build ?.
@@ -88,4 +89,17 @@ public:
 	vector<TowerInfo> mLevels;
 };
 
+class TowerInstance
+{
+public:
+	TowerInstance(Tower *tower, const Point2D &position);
+	
+	//void Update(/*ARGS*/);	
+	void RenderTower();
+	void RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color);
+private:
+	unsigned int mRange;
+	Tower *mTower;
+	Point2D mPosition; //Tower Center
+};
 #endif

@@ -47,6 +47,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 	mTowerImg = NULL;
 	mShotImg = NULL;
 
+	mTowerImg->centerX = (mTowerImg->sizeX/2); //hotspot
 }
 
 Tower::~Tower()
@@ -59,7 +60,29 @@ Tower::~Tower()
 		oslDeleteImage(mShotImg);
 }
 
+void Tower::RenderTower(const Point2D &position)
+{
+	oslDrawImageXY(mTowerImg, position.X, position.Y);
+}
+
 void Tower::RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color)
 {
 	GodLibrary::drawCircle(position.X, position.Y, mLevels[TowerInfo].mRange, color);
+}
+
+TowerInstance::TowerInstance(Tower *tower, const Point2D &position)
+{
+	mRange = 0;
+	mTower = tower;
+	mPosition = position;
+}
+
+void TowerInstance::RenderTower()
+{
+	oslDrawImageXY(mTower->mTowerImg, mPosition.X, mPosition.Y);
+}
+
+void TowerInstance::RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color)
+{
+	GodLibrary::drawCircle(position.X, position.Y, mRange, color);
 }

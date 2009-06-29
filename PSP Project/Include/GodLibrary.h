@@ -9,8 +9,6 @@
 #include "../Include/ILib.h"
 #include <math.h>
 
-//#define PI 3.14159
-
 class GodLibrary
 {
 private:
