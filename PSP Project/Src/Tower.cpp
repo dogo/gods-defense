@@ -39,7 +39,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 	mIsBuildable = true;
 	mTowerName = NULL;
 	mTowerDescription = NULL;
-	mShotType = ARROW;
+	mShotType = PT_Arrow;
 	mHitsLand = false;
 	mHitsFlyer = false;
 	mTowerLength = 0;

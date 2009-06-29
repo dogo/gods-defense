@@ -12,12 +12,11 @@ class TowerInstance;
 
 #include "tinyxml/tinyxml.h"
 #include "../Include/GodLibrary.h"
+#include "../Include/Projectile.h"
 #include <string>
 #include <vector>
 
 using namespace std;
-
-#define ARROW 1;
 
 /*
 * C++ provides the friend keyword to do just this. Inside a class, you can indicate that other classes (or simply functions)
