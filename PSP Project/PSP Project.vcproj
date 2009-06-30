@@ -107,6 +107,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Src\Projectile.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Src\Resource.cpp"
 				>
 			</File>
@@ -180,6 +184,10 @@
 			</File>
 			<File
 				RelativePath=".\Include\PauseScreen.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\Projectile.h"
 				>
 			</File>
 			<File
