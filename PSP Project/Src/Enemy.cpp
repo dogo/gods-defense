@@ -2,3 +2,5 @@
 //		PSP Project: 'Gods Defense' - Enemy.cpp
 //		@author Diogo Autilio <A.K.A Dogo - diautilio@gmail.com>
 //**************************************************************************
+
+#include "../Include/Enemy.h"

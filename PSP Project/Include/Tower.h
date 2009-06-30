@@ -77,7 +77,7 @@ public:
 	string mTowerDirName;
 	char *mTowerName;
 	char *mTowerDescription;
-	int mShotType; //TODO: Create Shot Class
+	int mShotType;
 	bool mHitsLand;
 	bool mHitsFlyer;
 	int mTowerLength;

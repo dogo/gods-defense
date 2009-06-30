@@ -7,6 +7,9 @@
 #define GAMESCREEN_H_INCLUDED
 
 #include "../Include/ILib.h"
+#include "../Include/Projectile.h"
+#include "../Include/Tower.h"
+#include "../Include/Enemy.h"
 
 class GameScreen : public IScreen
 {
