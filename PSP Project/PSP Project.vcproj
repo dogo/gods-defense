@@ -71,6 +71,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Src\Enemy.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Src\ExitScreen.cpp"
 				>
 			</File>
@@ -96,6 +100,10 @@
 			</File>
 			<File
 				RelativePath=".\Src\MainMenuScreen.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\Map.cpp"
 				>
 			</File>
 			<File
@@ -143,6 +151,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Include\Enemy.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Include\ExitScreen.h"
 				>
 			</File>
@@ -176,6 +188,10 @@
 			</File>
 			<File
 				RelativePath=".\Include\MainMenuScreen.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\Map.h"
 				>
 			</File>
 			<File
