@@ -77,6 +77,20 @@ TowerInstance::TowerInstance(Tower *tower, const Point2D &position)
 	mRange = 0;
 	mTower = tower;
 	mPosition = position;
+	mTowerTarget = NULL;
+}
+
+void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enemies)
+{
+	if (!mTowerTarget)
+	{
+		//TODO :  Seek for an enemy.
+	}
+	else if (mTowerTarget)
+	{
+		//mTowerAngle = TODO : get the enemy angle
+		ProjectileInstance::CreateProjectile(this, mTowerTarget);
+	}
 }
 
 void TowerInstance::RenderTower()

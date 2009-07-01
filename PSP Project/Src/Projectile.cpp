@@ -5,6 +5,24 @@
 
 #include "../Include/Projectile.h"
 
+
+void ProjectileInstance::CreateProjectile(TowerInstance *shooter, EnemyInstance *target)
+{
+	ProjectileInstance *mKindOfProjectile = NULL;
+
+	switch(shooter->mTower->mShotType)
+	{
+	case PT_Arrow:
+		//TODO : kind of Projectile Instance
+		break;
+	case PT_Ice:
+		//TODO : kind of Projectile Instance
+		break;
+	default:
+		return;
+	}
+}
+
 OSL_IMAGE *ProjectileInstance::LoadProjectileImage(const char &projectileType)
 {
 	switch(projectileType)

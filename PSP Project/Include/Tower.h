@@ -13,8 +13,11 @@ class TowerInstance;
 #include "tinyxml/tinyxml.h"
 #include "../Include/GodLibrary.h"
 #include "../Include/Projectile.h"
+#include "../Include/Enemy.h"
+#include "../Include/GameScreen.h"
 #include <string>
 #include <vector>
+#include <list> // list class-template definition
 
 using namespace std;
 
@@ -92,14 +95,18 @@ public:
 class TowerInstance
 {
 public:
-	TowerInstance(Tower *tower, const Point2D &position);
-	
-	//void Update(/*ARGS*/);	
+	Tower *mTower;
+
+	TowerInstance(Tower *tower, const Point2D &position);	
+	void Update(unsigned timePassed, const list<EnemyInstance*> &enemies);
+
 	void RenderTower();
 	void RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color);
 private:
 	unsigned int mRange;
-	Tower *mTower;
 	Point2D mPosition; //Tower Center
+	float mTowerAngle;
+
+	EnemyInstance *mTowerTarget;
 };
 #endif
