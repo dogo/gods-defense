@@ -1,0 +1,43 @@
+<!ELEMENT Name ( #PCDATA ) >
+
+<!ELEMENT Description ( #PCDATA ) >
+
+<!ELEMENT TowerLength ( #PCDATA ) >
+
+<!ELEMENT Capability EMPTY >
+<!ATTLIST Capability HitsFlyers (True|False) #REQUIRED >
+<!ATTLIST Capability HitsGround (True|False) #REQUIRED >
+
+<!ELEMENT Projectile EMPTY >
+<!ATTLIST Projectile Sprite NMTOKEN #REQUIRED >
+<!ATTLIST Projectile Type NMTOKEN #REQUIRED >
+
+<!ELEMENT Map EMPTY >
+<!ATTLIST Map Cost NMTOKEN #REQUIRED >
+<!ATTLIST Map SellAmount NMTOKEN #REQUIRED >
+<!ATTLIST Map Damage NMTOKEN #REQUIRED >
+<!ATTLIST Map ROF NMTOKEN #REQUIRED >
+<!ATTLIST Map Range NMTOKEN #REQUIRED >
+<!ATTLIST Map Splash NMTOKEN #REQUIRED >
+<!ATTLIST Map Speed NMTOKEN #REQUIRED >
+<!ATTLIST Map SlowAmount NMTOKEN #IMPLIED >
+<!ATTLIST Map SlowLength NMTOKEN #IMPLIED >
+<!ATTLIST Map CriticalPlus NMTOKEN #REQUIRED >
+
+<!ELEMENT Maps ( Map+ ) >
+
+<!ELEMENT TowerImg EMPTY >
+<!ATTLIST TowerImg File NMTOKEN #REQUIRED >
+<!ATTLIST TowerImg Height NMTOKEN #REQUIRED >
+<!ATTLIST TowerImg Width NMTOKEN #REQUIRED >
+
+<!ELEMENT MenuIcon EMPTY >
+<!ATTLIST MenuIcon File NMTOKEN #REQUIRED >
+
+<!ELEMENT FireSound EMPTY >
+<!ATTLIST FireSound File NMTOKEN #IMPLIED >
+
+<!ELEMENT HitSound EMPTY >
+<!ATTLIST HitSound File NMTOKEN #IMPLIED >
+
+<!ELEMENT Tower ( Name, Description, TowerLength?, Capability, Projectile, Maps, TowerImg, MenuIcon?, FireSound?, HitSound? ) >
