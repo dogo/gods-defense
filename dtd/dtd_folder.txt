@@ -1,0 +1,2 @@
+Aqui ficam os arquivos DTD, que são os validatores do XML das torres, mapas ou inimigos.
+Ele checa se a estrutura do XML que o desenvolvedor fez esta certa, baseada nas regras do DTD.
