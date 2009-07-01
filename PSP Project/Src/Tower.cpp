@@ -20,6 +20,7 @@ TowerInfo::TowerInfo(TiXmlElement* infoNode)
 	mSpeed = 0;
 	mSlowAmount = 0;
 	mSlowLength = 0;
+	mCriticalPlus = 0;
 
 	infoNode->QueryIntAttribute("Cost", &mCost);
 	infoNode->QueryIntAttribute("SellAmount", &mSellAmount);
@@ -30,6 +31,7 @@ TowerInfo::TowerInfo(TiXmlElement* infoNode)
 	infoNode->QueryIntAttribute("Speed", &mSpeed);
 	infoNode->QueryFloatAttribute("SlowAmount", &mSlowAmount);
 	infoNode->QueryIntAttribute("SlowLength", &mSlowLength);
+	infoNode->QueryIntAttribute("CriticalPlus", &mCriticalPlus);
 }
 
 Tower::Tower(const string &mapName, const string &towerName)
