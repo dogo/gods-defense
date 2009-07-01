@@ -3,11 +3,9 @@
 //		@author Diogo Autilio <A.K.A Dogo - diautilio@gmail.com>
 //**************************************************************************
 
-// Quero aprender esta porra onde vc me recomenda e oque vc recomenda q eu implemente????? ROMULO e onde eu pego egs de carinhas andando... bjunda
-
 #include "../Include/Enemy.h"
 
-
+/*
 EnemyInfo::EnemyInfo(EnXmlElement* infoNode)
 {
 	mHP = 0;
@@ -56,4 +54,4 @@ Enemy::~Enemy()
 		oslDeleteImage(mTowerImg);
 	if (mShotImg != NULL)
 		oslDeleteImage(mShotImg);
-}
+}*/

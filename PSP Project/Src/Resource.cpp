@@ -6,31 +6,31 @@
 
 #include "../Include/Resource.h"
 
-char Resource::ANYKEY_SPLASH[] = "/Res/anykeylogo.png";
-char Resource::GAME_TITLE[] = "/Res/GDSplash.png";
-char Resource::MAIN_MENU_BG[] = "/Res/background.png";
+char Resource::IMG_ANYKEY_SPLASH[] = "/Res/anykeylogo.png";
+char Resource::IMG_GAME_TITLE[] = "/Res/GDSplash.png";
+char Resource::IMG_MAIN_MENU_BG[] = "/Res/background.png";
 
-char const Resource::BACK_SK[] = "Back";
-char const Resource::MULTIPLAYER_CAPTION[] = "Multiplayer";
-char const Resource::HELP_CAPTION[] = "Help";
-char const Resource::START_GAME[] = "Single Player";
-char const Resource::EXIT_CAPTION[] = "Exit";
-char const Resource::ABOUT_CAPTION[] = "About";
-char const Resource::PAUSE_RESUME[] = "Resume";
-char const Resource::PAUSE_MENU[] = "Main Menu";
-char const Resource::PAUSE_CAPTION[] = "Game Paused";
-char const Resource::PRESS_START[] = "Press Start";
-char const Resource::CONFIRM_QUIT[] = "Do you really wanna quit?";
-char const Resource::YES[] = "Yes";
-char const Resource::NO[] = "No";
-char const Resource::WARNING_CAPTION[] = "Warning";
-char const Resource::MAPSELECTION_CAPTION[] = "Map Selection";
+char const Resource::STR_BACK_SK[] = "Back";
+char const Resource::STR_MULTIPLAYER_CAPTION[] = "Multiplayer";
+char const Resource::STR_HELP_CAPTION[] = "Help";
+char const Resource::STR_START_GAME[] = "Single Player";
+char const Resource::STR_EXIT_CAPTION[] = "Exit";
+char const Resource::STR_ABOUT_CAPTION[] = "About";
+char const Resource::STR_PAUSE_RESUME[] = "Resume";
+char const Resource::STR_PAUSE_MENU[] = "Main Menu";
+char const Resource::STR_PAUSE_CAPTION[] = "Game Paused";
+char const Resource::STR_PRESS_START[] = "Press Start";
+char const Resource::STR_CONFIRM_QUIT[] = "Do you really wanna quit?";
+char const Resource::STR_YES[] = "Yes";
+char const Resource::STR_NO[] = "No";
+char const Resource::STR_WARNING_CAPTION[] = "Warning";
+char const Resource::STR_MAPSELECTION_CAPTION[] = "Map Selection";
 
-char const Resource::WARNING_TEXT[] =
+char const Resource::STR_WARNING_TEXT[] =
 	"WLAN switch is off.\n\n"
 	"Turn on the WLAN switch";
 
-char const Resource::ABOUT_TEXT[] =
+char const Resource::STR_ABOUT_TEXT[] =
 	"Gods Defense\n"
 	"Version 0.0.1\n"
 	"Licensed by the GNU Public License v3(GPL)\n"

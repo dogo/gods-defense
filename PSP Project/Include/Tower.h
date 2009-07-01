@@ -50,6 +50,7 @@ public:
 	int mSpeed;
 	float mSlowAmount;
 	int mSlowLength;
+	int mCriticalPlus;
 };
 
 class Tower

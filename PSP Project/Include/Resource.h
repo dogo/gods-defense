@@ -18,26 +18,27 @@ public:
 	/**
 	 * Strings.
 	 */
-	static char const ABOUT_CAPTION[];
-	static char const MULTIPLAYER_CAPTION[];
-	static char const HELP_CAPTION[];
-	static char const START_GAME[];
-	static char const EXIT_CAPTION[];
-	static char const PAUSE_RESUME[];
-	static char const PAUSE_MENU[];
-	static char const PAUSE_CAPTION[];
-	static char const ABOUT_TEXT[];
-	static char const BACK_SK[];
-	static char const PRESS_START[];
-	static char const CONFIRM_QUIT[];
-	static char const YES[];
-	static char const NO[];
-	static char const WARNING_CAPTION[];
-	static char const WARNING_TEXT[];
-	static char const MAPSELECTION_CAPTION[];
-	static char GAME_TITLE[];
-	static char ANYKEY_SPLASH[];
-	static char MAIN_MENU_BG[];
+	static char const STR_ABOUT_CAPTION[];
+	static char const STR_MULTIPLAYER_CAPTION[];
+	static char const STR_HELP_CAPTION[];
+	static char const STR_START_GAME[];
+	static char const STR_EXIT_CAPTION[];
+	static char const STR_PAUSE_RESUME[];
+	static char const STR_PAUSE_MENU[];
+	static char const STR_PAUSE_CAPTION[];
+	static char const STR_ABOUT_TEXT[];
+	static char const STR_BACK_SK[];
+	static char const STR_PRESS_START[];
+	static char const STR_CONFIRM_QUIT[];
+	static char const STR_YES[];
+	static char const STR_NO[];
+	static char const STR_WARNING_CAPTION[];
+	static char const STR_WARNING_TEXT[];
+	static char const STR_MAPSELECTION_CAPTION[];
+	
+	static char IMG_GAME_TITLE[];
+	static char IMG_ANYKEY_SPLASH[];
+	static char IMG_MAIN_MENU_BG[];
 };
 
 

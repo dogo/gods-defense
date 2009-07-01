@@ -21,15 +21,15 @@ void MainMenuScreen::draw()
 {
 	//oslDrawImageXY(menubg, (480/2) - (menubg->stretchX/2), (272/2) - (menubg->stretchY/2));
 	(gMenu == 0) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(340, 100,Resource::START_GAME);
+	oslDrawString(340, 100,Resource::STR_START_GAME);
 	(gMenu == 1) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(340, 120,Resource::MULTIPLAYER_CAPTION);
+	oslDrawString(340, 120,Resource::STR_MULTIPLAYER_CAPTION);
 	(gMenu == 2) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(340, 140,Resource::HELP_CAPTION);
+	oslDrawString(340, 140,Resource::STR_HELP_CAPTION);
 	(gMenu == 3) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(340, 160,Resource::ABOUT_CAPTION);
+	oslDrawString(340, 160,Resource::STR_ABOUT_CAPTION);
 	(gMenu == 4) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(340, 180,Resource::EXIT_CAPTION);
+	oslDrawString(340, 180,Resource::STR_EXIT_CAPTION);
 }
 
 void MainMenuScreen::update()

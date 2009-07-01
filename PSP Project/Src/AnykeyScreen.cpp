@@ -8,7 +8,7 @@
 
 AnykeyScreen::AnykeyScreen()
 {
-	AnykeySplash = oslLoadImageFilePNG(Resource::ANYKEY_SPLASH, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	AnykeySplash = oslLoadImageFilePNG(Resource::IMG_ANYKEY_SPLASH, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	mySplash = new GodLibrary;
 }
 

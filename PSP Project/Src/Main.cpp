@@ -43,7 +43,7 @@ int main()
 
 	menuTheme = oslLoadSoundFileMP3 ("/Res/bgm.mp3", OSL_FMT_STREAM); //Loads the MP3s
 
-	OSL_IMAGE *menubg = oslLoadImageFilePNG(Resource::MAIN_MENU_BG, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	OSL_IMAGE *menubg = oslLoadImageFilePNG(Resource::IMG_MAIN_MENU_BG, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
     // Load fonts
 	gFont = oslLoadFontFile("flash0:/font/ltn8.pgf");

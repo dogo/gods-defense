@@ -15,11 +15,11 @@ ExitScreen::ExitScreen()
 void ExitScreen::draw()
 {
 	oslIntraFontSetStyle(gFont, 2.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(240,120,Resource::CONFIRM_QUIT);
+	oslDrawString(240,120,Resource::STR_CONFIRM_QUIT);
 	(gMenu == 0) ? oslIntraFontSetStyle(gFont, 1.4f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(240,160,Resource::YES);
+	oslDrawString(240,160,Resource::STR_YES);
 	(gMenu == 1) ? oslIntraFontSetStyle(gFont, 1.4f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(240,180,Resource::NO);
+	oslDrawString(240,180,Resource::STR_NO);
 }
 
 void ExitScreen::update()
