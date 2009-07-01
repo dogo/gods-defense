@@ -88,6 +88,8 @@ public:
 	OSL_IMAGE *mMenuIcon;
 	OSL_IMAGE *mTowerImg;
 	OSL_IMAGE *mShotImg;
+	OSL_SOUND *mFireSound;
+	OSL_SOUND *mHitSound;
 
 	vector<TowerInfo> mLevels;
 };

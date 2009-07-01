@@ -63,3 +63,10 @@ Point2D::Point2D(float x, float y)
 	X = x;
 	Y = y;
 }
+
+float const Point2D::AimTo(const Point2D &enemy)
+{
+	float dy = enemy.Y - this->Y; //dy = enemy.Y - Tower->y
+	float dx = enemy.X - this->X; //dx = enemy.x - Tower->x
+	return atan2(dy,dx); // atan2 from math.h, arco tangente :D, owww geometria.
+}

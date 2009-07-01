@@ -36,7 +36,7 @@ TowerInfo::TowerInfo(TiXmlElement* infoNode)
 
 Tower::Tower(const string &mapName, const string &towerName)
 {
-	//Default Initialisers
+	//Default Initializers
 	mTowerDirName = towerName;
 	mIsBuildable = true;
 	mTowerName = NULL;
@@ -48,6 +48,8 @@ Tower::Tower(const string &mapName, const string &towerName)
 	mMenuIcon = NULL;
 	mTowerImg = NULL;
 	mShotImg = NULL;
+	mFireSound = NULL;
+	mHitSound = NULL;
 
 	mTowerImg->centerX = (mTowerImg->sizeX/2); //hotspot
 }
@@ -60,6 +62,10 @@ Tower::~Tower()
 		oslDeleteImage(mTowerImg);
 	if (mShotImg != NULL)
 		oslDeleteImage(mShotImg);
+	if (mFireSound != NULL)
+		oslDeleteSound(mFireSound);
+	if (mHitSound != NULL)	
+		oslDeleteSound(mHitSound);
 }
 
 void Tower::RenderTower(const Point2D &position)
@@ -88,7 +94,7 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 	}
 	else if (mTowerTarget)
 	{
-		//mTowerAngle = TODO : get the enemy angle
+		mTowerAngle = mPosition.AimTo(mTowerTarget->mEnemyPosition);
 		ProjectileInstance::CreateProjectile(this, mTowerTarget);
 	}
 }
