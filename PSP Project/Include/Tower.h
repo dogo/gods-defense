@@ -105,9 +105,10 @@ public:
 	void RenderTower();
 	void RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color);
 private:
-	unsigned int mRange;
+	unsigned int mCurrentMap;
 	Point2D mPosition; //Tower Center
 	float mTowerAngle;
+	int mProjectileInterval;
 
 	EnemyInstance *mTowerTarget;
 };

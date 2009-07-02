@@ -80,14 +80,17 @@ void Tower::RenderRangeCircle(const Point2D &position, const int &TowerInfo, con
 
 TowerInstance::TowerInstance(Tower *tower, const Point2D &position)
 {
-	mRange = 0;
+	mCurrentMap = 0;
 	mTower = tower;
 	mPosition = position;
 	mTowerTarget = NULL;
+	mProjectileInterval = 0;
 }
 
 void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enemies)
 {
+	mProjectileInterval -= timePassed;
+
 	if (!mTowerTarget)
 	{
 		//TODO :  Seek for an enemy.
@@ -95,7 +98,15 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 	else if (mTowerTarget)
 	{
 		mTowerAngle = mPosition.AimTo(mTowerTarget->mEnemyPosition);
-		ProjectileInstance::CreateProjectile(this, mTowerTarget);
+
+		/*
+		* Tower can shoot when the Projectile Interval is < 0. (is a gun shot delay, like shooters games)
+		*/
+		if (mProjectileInterval <= 0)
+		{
+			mProjectileInterval = mTower->mLevels[mCurrentMap].mRateOfFire;		
+			ProjectileInstance::CreateProjectile(this, mTowerTarget);
+		}
 	}
 }
 
@@ -106,5 +117,5 @@ void TowerInstance::RenderTower()
 
 void TowerInstance::RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color)
 {
-	GodLibrary::drawCircle(position.X, position.Y, mRange, color);
+	GodLibrary::drawCircle(position.X, position.Y, mCurrentMap, color);
 }
