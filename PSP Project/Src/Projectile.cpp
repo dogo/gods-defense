@@ -10,7 +10,7 @@ void ProjectileInstance::CreateProjectile(TowerInstance *shooter, EnemyInstance 
 {
 	ProjectileInstance *mKindOfProjectile = NULL;
 
-	switch(shooter->mTower->mShotType)
+	switch(shooter->mTower->mProjectileType)
 	{
 	case PT_Arrow:
 		//TODO : kind of Projectile Instance
@@ -23,15 +23,15 @@ void ProjectileInstance::CreateProjectile(TowerInstance *shooter, EnemyInstance 
 	}
 }
 
-OSL_IMAGE *ProjectileInstance::LoadProjectileImage(const char &projectileType)
+OSL_IMAGE *ProjectileInstance::LoadProjectileImage(const char &projectileType, char *filename)
 {
 	switch(projectileType)
 	{
 	case PT_Arrow:
-		return m_ProjectileSprite = oslLoadImageFilePNG("/Res/ST_Arrow.png", OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+		return m_ProjectileSprite = oslLoadImageFilePNG(filename, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	
 	case PT_Ice:
-		return m_ProjectileSprite = oslLoadImageFilePNG("/Res/ST_Ice.png", OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+		return m_ProjectileSprite = oslLoadImageFilePNG(filename, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	/*case :
 		return nm_ProjectileSprite = oslLoadImageFilePNG("/Res/circle.png", OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	*/

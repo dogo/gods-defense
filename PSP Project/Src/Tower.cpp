@@ -41,17 +41,149 @@ Tower::Tower(const string &mapName, const string &towerName)
 	mIsBuildable = true;
 	mTowerName = NULL;
 	mTowerDescription = NULL;
-	mShotType = PT_Arrow;
+	mProjectileType = PT_Arrow;
 	mHitsLand = false;
 	mHitsFlyer = false;
 	mTowerLength = 0;
 	mMenuIcon = NULL;
 	mTowerImg = NULL;
-	mShotImg = NULL;
+	mProjectileImg = NULL;
 	mFireSound = NULL;
 	mHitSound = NULL;
 
 	mTowerImg->centerX = (mTowerImg->sizeX/2); //hotspot
+
+	char temp[256];
+	sprintf(temp, "Res/maps/%s/towers/%s/tower.xml", mapName.c_str(), mTowerDirName.c_str());
+
+	TiXmlDocument TowerXMLInput;
+	TowerXMLInput.LoadFile(temp);
+
+	if (TowerXMLInput.Error())
+	{
+		oslDrawStringf(0, 0, "Cannot open: %i", TowerXMLInput.ErrorDesc());
+		return;
+	}
+
+	TiXmlElement *node = NULL;
+	node = TowerXMLInput.FirstChildElement(); //head
+
+	if (!node)
+	{
+		oslDrawStringf(0, 0, "No head not in: %i", temp);
+		return;
+	}
+
+	node = node->FirstChildElement();
+
+	while (node != NULL) //Read all XML file
+	{
+		string mCurrentLine = node->ValueStr();
+		/*
+		A função strdup() é usada em situações onde temos que alocar um espaço na memória para copiar determinada string.
+		Sem utiliza-lá, teríamos que alocar o espaço antes com malloc(), para em seguida usar strncpy(), por exemplo, para copiar a string.
+		A função retorna um ponteiro com a string já alocada (podendo ser liberado com free() depois de seu uso) em caso de sucesso,
+		ou ENOMEM como erro caso a memória não tenha sida alocada por insuficiência.		
+		*/
+		if (mCurrentLine == "Name")
+		{
+			mTowerName = strdup(node->GetText());
+		}
+		else if (mCurrentLine == "Description")
+		{
+			mTowerDescription = strdup(node->GetText());
+		}
+		/*
+		A função atoi() é usada para converter strings em números inteiros.
+		*/
+		else if (mCurrentLine == "TowerLength")
+		{
+			mTowerLength = atoi(node->GetText());
+		}
+		else if (mCurrentLine == "Capability")
+		{
+			const char* mAttributeText;
+
+			mAttributeText = node->Attribute("HitsGround");
+			if (mAttributeText != NULL && !strcmp(mAttributeText,"True")) //strcmp() return 0 if both string be the same.
+			{
+				mHitsLand = true;
+			}
+
+			mAttributeText = node->Attribute("HitsFlyers");
+			if (mAttributeText != NULL && !strcmp(mAttributeText,"True")) //strcmp() return 0 if both string be the same.
+			{
+				mHitsFlyer = true;
+			}
+		}
+		else if (mCurrentLine == "Projectile")
+		{
+			const char* ProjectileType = node->Attribute("Type");
+			if (ProjectileType == NULL)
+			{
+				oslDrawStringf(0, 0, "No ProjectileType.");
+				return;
+			}
+
+			if (!strcmp(ProjectileType, "Arrow"))
+			{
+				mProjectileType = PT_Arrow;
+			}
+			else if (!strcmp(ProjectileType, "Ice"))
+			{
+				mProjectileType = PT_Ice;
+			}
+			
+			//More Projectile Types goes here.
+
+			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("Sprite"));
+			//TODO : LOAD PROJECTILE IMG mProjectileImg = ProjectileInstance::LoadProjectileImage(mProjectileType, temp);
+		}
+		else if (mCurrentLine == "TowersLevels")
+		{
+			TiXmlElement* TowerLevelNode = node->FirstChildElement();
+			while (TowerLevelNode != NULL) //read all Towers Levels
+			{
+				if (TowerLevelNode->ValueStr() != "TowersLevel")
+				{
+					oslDrawStringf(0, 0, "TowersLevel Error: %i",TowerLevelNode->Value());
+					return;
+				}
+				mLevels.push_back(TowerInfo(TowerLevelNode)); //Insert a element in the end
+
+				TowerLevelNode = TowerLevelNode->NextSiblingElement();
+			}
+		}
+		else if (mCurrentLine == "TowerImg")
+		{
+			sprintf(temp, "res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
+			//TODO: LOAD TOWER IMG mTowerImg = ;
+
+			node->QueryIntAttribute("Width", &mTowerWidth);
+			node->QueryIntAttribute("Height", &mTowerHeight);
+		}
+		else if (mCurrentLine == "MenuIcon")
+		{
+			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
+			//TODO: LOAD MENU ICON mMenuIcon = ;
+		}
+		else if (mCurrentLine == "FireSound")
+		{
+			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
+			//TODO: LOAD FIRE SOUND mFireSound = ;
+		}
+		else if (mCurrentLine == "HitSound")
+		{
+			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
+			//LOAD HIT SOUND mHitSound = ;
+		}
+		else
+		{
+			oslDrawStringf(0, 0, "Bad node, not donout for you: %i",mCurrentLine);
+			return;
+		}
+		node = node->NextSiblingElement();
+	}
 }
 
 Tower::~Tower()
@@ -60,8 +192,8 @@ Tower::~Tower()
 		oslDeleteImage(mMenuIcon);
 	if (mTowerImg != NULL)
 		oslDeleteImage(mTowerImg);
-	if (mShotImg != NULL)
-		oslDeleteImage(mShotImg);
+	if (mProjectileImg != NULL)
+		oslDeleteImage(mProjectileImg);
 	if (mFireSound != NULL)
 		oslDeleteSound(mFireSound);
 	if (mHitSound != NULL)	

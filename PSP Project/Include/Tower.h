@@ -69,27 +69,29 @@ public:
 *	mTowerDirName - Tower Directory name.
 *	mTowerName - Tower Name.
 *	mTowerDescription - Tower Description.
-*	mShotType - Shot Type.
+*	mProjectileType - Projectile Type.
 *	mHitsLand - Can Hits land ?
 *	mHitsFlyer - Can Hits Flyer ?
 *	mTowerLength - The potential distance of the Tower.
 *	mMenuIcon - Tower Menu Icon
 *	mTowerImg - Tower Image
-*	mShotImg - Shot Image
+*	mProjectileImg - Projectile Image
 */
 	bool mIsBuildable;
 	string mTowerDirName;
 	char *mTowerName;
 	char *mTowerDescription;
-	int mShotType;
+	int mProjectileType;
 	bool mHitsLand;
 	bool mHitsFlyer;
 	int mTowerLength;
 	OSL_IMAGE *mMenuIcon;
 	OSL_IMAGE *mTowerImg;
-	OSL_IMAGE *mShotImg;
+	OSL_IMAGE *mProjectileImg;
 	OSL_SOUND *mFireSound;
 	OSL_SOUND *mHitSound;
+	int mTowerWidth;
+	int mTowerHeight;
 
 	vector<TowerInfo> mLevels;
 };

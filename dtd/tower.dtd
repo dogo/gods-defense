@@ -6,25 +6,25 @@
 
 <!ELEMENT Capability EMPTY >
 <!ATTLIST Capability HitsFlyers (True|False) #REQUIRED >
-<!ATTLIST Capability HitsGround (True|False) #REQUIRED >
+<!ATTLIST Capability HitsLand (True|False) #REQUIRED >
 
 <!ELEMENT Projectile EMPTY >
 <!ATTLIST Projectile Sprite NMTOKEN #REQUIRED >
 <!ATTLIST Projectile Type NMTOKEN #REQUIRED >
 
-<!ELEMENT Map EMPTY >
-<!ATTLIST Map Cost NMTOKEN #REQUIRED >
-<!ATTLIST Map SellAmount NMTOKEN #REQUIRED >
-<!ATTLIST Map Damage NMTOKEN #REQUIRED >
-<!ATTLIST Map ROF NMTOKEN #REQUIRED >
-<!ATTLIST Map Range NMTOKEN #REQUIRED >
-<!ATTLIST Map Splash NMTOKEN #REQUIRED >
-<!ATTLIST Map Speed NMTOKEN #REQUIRED >
-<!ATTLIST Map SlowAmount NMTOKEN #IMPLIED >
-<!ATTLIST Map SlowLength NMTOKEN #IMPLIED >
-<!ATTLIST Map CriticalPlus NMTOKEN #REQUIRED >
+<!ELEMENT TowersLevel EMPTY >
+<!ATTLIST TowersLevel Cost NMTOKEN #REQUIRED >
+<!ATTLIST TowersLevel SellAmount NMTOKEN #REQUIRED >
+<!ATTLIST TowersLevel Damage NMTOKEN #REQUIRED >
+<!ATTLIST TowersLevel ROF NMTOKEN #REQUIRED >
+<!ATTLIST TowersLevel Range NMTOKEN #REQUIRED >
+<!ATTLIST TowersLevel Splash NMTOKEN #REQUIRED >
+<!ATTLIST TowersLevel Speed NMTOKEN #REQUIRED >
+<!ATTLIST TowersLevel SlowAmount NMTOKEN #IMPLIED >
+<!ATTLIST TowersLevel SlowLength NMTOKEN #IMPLIED >
+<!ATTLIST TowersLevel CriticalPlus NMTOKEN #REQUIRED >
 
-<!ELEMENT Maps ( Map+ ) >
+<!ELEMENT TowersLevels ( TowersLevel+ ) >
 
 <!ELEMENT TowerImg EMPTY >
 <!ATTLIST TowerImg File NMTOKEN #REQUIRED >
@@ -40,4 +40,4 @@
 <!ELEMENT HitSound EMPTY >
 <!ATTLIST HitSound File NMTOKEN #IMPLIED >
 
-<!ELEMENT Tower ( Name, Description, TowerLength?, Capability, Projectile, Maps, TowerImg, MenuIcon?, FireSound?, HitSound? ) >
+<!ELEMENT Tower ( Name, Description, TowerLength?, Capability, Projectile, TowersLevels, TowerImg, MenuIcon?, FireSound?, HitSound? ) >

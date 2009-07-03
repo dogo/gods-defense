@@ -26,7 +26,11 @@ public:
 	static void CreateProjectile(TowerInstance *shooter, EnemyInstance *target);
 	virtual ~ProjectileInstance();
 
-	OSL_IMAGE *LoadProjectileImage(const char &projectileType);
+	//TODO : :D write this functions
+	//virtual void Update(unsigned timePassed) = 0;
+	//virtual void ProjectileRender() = 0;
+
+	OSL_IMAGE *LoadProjectileImage(const char &projectileType, char *filename);
 
 private:
 	OSL_IMAGE *m_ProjectileSprite;
