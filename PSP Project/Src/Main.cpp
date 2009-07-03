@@ -41,7 +41,7 @@ int main()
     initOSLib();
     oslIntraFontInit(INTRAFONT_CACHE_ALL | INTRAFONT_STRING_CP1252);
 
-	menuTheme = oslLoadSoundFileMP3 ("/Res/bgm.mp3", OSL_FMT_STREAM); //Loads the MP3s
+	menuTheme = oslLoadSoundFileBGM("/Res/menuTheme.bgm", OSL_FMT_STREAM); //Loads the Main menu theme music
 
 	OSL_IMAGE *menubg = oslLoadImageFilePNG(Resource::IMG_MAIN_MENU_BG, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
@@ -49,6 +49,9 @@ int main()
 	gFont = oslLoadFontFile("flash0:/font/ltn8.pgf");
     oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT); //Tells the psp what font to use in intrafont
 	oslSetFont(gFont);
+
+	if (!menuTheme || !menubg || !gFont)
+		oslFatalError("At least one file is missing. Please copy all the file in the game directory.");
 
 	ScreenManager *mScreenManager = new ScreenManager();
 

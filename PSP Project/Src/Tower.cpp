@@ -61,7 +61,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 
 	if (TowerXMLInput.Error())
 	{
-		oslDrawStringf(0, 0, "Cannot open: %i", TowerXMLInput.ErrorDesc());
+		oslFatalError("Cannot open: %i", TowerXMLInput.ErrorDesc());
 		return;
 	}
 
@@ -70,7 +70,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 
 	if (!node)
 	{
-		oslDrawStringf(0, 0, "No head not in: %i", temp);
+		oslFatalError("No head not in: %i", temp);
 		return;
 	}
 
@@ -121,7 +121,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 			const char* ProjectileType = node->Attribute("Type");
 			if (ProjectileType == NULL)
 			{
-				oslDrawStringf(0, 0, "No ProjectileType.");
+				oslFatalError("No ProjectileType.");
 				return;
 			}
 
@@ -146,7 +146,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 			{
 				if (TowerLevelNode->ValueStr() != "TowersLevel")
 				{
-					oslDrawStringf(0, 0, "TowersLevel Error: %i",TowerLevelNode->Value());
+					oslFatalError("TowersLevel Error: %i",TowerLevelNode->Value());
 					return;
 				}
 				mLevels.push_back(TowerInfo(TowerLevelNode)); //Insert a element in the end
@@ -157,7 +157,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 		else if (mCurrentLine == "TowerImg")
 		{
 			sprintf(temp, "res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
-			//TODO: LOAD TOWER IMG mTowerImg = ;
+			mTowerImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 			node->QueryIntAttribute("Width", &mTowerWidth);
 			node->QueryIntAttribute("Height", &mTowerHeight);
@@ -165,21 +165,21 @@ Tower::Tower(const string &mapName, const string &towerName)
 		else if (mCurrentLine == "MenuIcon")
 		{
 			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
-			//TODO: LOAD MENU ICON mMenuIcon = ;
+			mMenuIcon = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 		}
 		else if (mCurrentLine == "FireSound")
 		{
 			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
-			//TODO: LOAD FIRE SOUND mFireSound = ;
+			mFireSound = oslLoadSoundFileWAV (temp, OSL_FMT_NONE);
 		}
 		else if (mCurrentLine == "HitSound")
 		{
 			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
-			//LOAD HIT SOUND mHitSound = ;
+			mHitSound = oslLoadSoundFileWAV (temp, OSL_FMT_NONE);
 		}
 		else
 		{
-			oslDrawStringf(0, 0, "Bad node, not donout for you: %i",mCurrentLine);
+			oslFatalError("Bad node, not donout for you: %i",mCurrentLine);
 			return;
 		}
 		node = node->NextSiblingElement();
@@ -188,6 +188,10 @@ Tower::Tower(const string &mapName, const string &towerName)
 
 Tower::~Tower()
 {
+	if (mTowerName != NULL) //We have to be free :)
+		free(mTowerName);
+	if (mTowerDescription != NULL) //We have to be free :)
+		free(mTowerDescription);
 	if (mMenuIcon != NULL)
 		oslDeleteImage(mMenuIcon);
 	if (mTowerImg != NULL)
@@ -223,7 +227,7 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 {
 	mProjectileInterval -= timePassed;
 
-	if (!mTowerTarget)
+	if (!mTowerTarget) //we don't have a target, seek for an enemy.
 	{
 		//TODO :  Seek for an enemy.
 	}
