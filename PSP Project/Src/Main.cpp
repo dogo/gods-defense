@@ -21,7 +21,6 @@ int initOSLib(){
     oslInit(0);
     oslInitGfx(OSL_PF_8888, 1);
     oslInitAudio();
-    oslInitAudioME (OSL_FMT_MP3);
     oslSetQuitOnLoadFailure(1);
     oslSetKeyAutorepeatInit(40);
     oslSetKeyAutorepeatInterval(10);
