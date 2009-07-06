@@ -18,12 +18,23 @@ class EnemyInstance;
 
 using namespace std;
 
+class EnemyInfo
+{
+	public:
+		EnemyInfo();
+		EnemyInfo(TiXmlElement* levelNode);
+		unsigned int mHealth;
+		unsigned int mGoldValue;
+		unsigned int mPointValue;
+		unsigned int mSpeed;
+		bool mCanSlow;
+};
+
 class Enemy
 {
-	private:	
+	private:
 	public:
 };
-	
 
 class EnemyInstance
 {

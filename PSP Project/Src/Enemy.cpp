@@ -5,53 +5,42 @@
 
 #include "../Include/Enemy.h"
 
-/*
-EnemyInfo::EnemyInfo(EnXmlElement* infoNode)
+EnemyInfo::EnemyInfo()
 {
-	mHP = 0;
+	//Default Initializers
+	mHealth = 0;
+	mGoldValue = 0;
+	mPointValue = 0;
 	mSpeed = 0;
-	mGold  = 0;
-	mPoisonDmg = 0;
-	mSlowLength = 0;
-	mSlowAmount = 0;
-	mColor = 0;
-
-	// que que é isso???
-	infoNode->QueryIntAttribute("HP", &mHP);
-	infoNode->QueryIntAttribute("Speed", &mSpeed);
-	infoNode->QueryIntAttribute("HP", &mHP);	
-	infoNode->QueryIntAttribute("Gold", &mGold);
-	infoNode->QueryIntAttribute("Gold", &mGold);
-	infoNode->QueryIntAttribute("Speed", &mSpeed);
-	infoNode->QueryFloatAttribute("SlowAmount", &mSlowAmount);
-	infoNode->QueryIntAttribute("Color", &mColor);
+	mCanSlow = true;
 }
 
-Enemy::Enemy(const string &mapName, const string &towerName)
+EnemyInfo::EnemyInfo(TiXmlElement* infoNode)
 {
-	//Default Initialisers
-	mEnemyDirName = enemyName;
-	mIsAlive = true;
-	mEnemyName = NULL;
-	mEnemyDescription = NULL;
-	mShotType = PT_Arrow;
-	//What the hell is this teach me plz DOGO
-	mHitsLand = false;
-	mHitsFlyer = false;
-	mTowerLength = 0;
-	mMenuIcon = NULL;
-	mTowerImg = NULL;
-	mShotImg = NULL;
+	//Default Initializers
+	mHealth = 0;
+	mGoldValue = 0;
+	mPointValue = 0;
+	mSpeed = 0;
+	mCanSlow = true;
 
-	mTowerImg->centerX = (mTowerImg->sizeX/2); //hotspot
+	int temp;
+
+	infoNode->QueryIntAttribute("Health", &temp);
+	mHealth = temp;
+
+	infoNode->QueryIntAttribute("GoldValue", &temp);
+	mGoldValue = temp;
+
+	infoNode->QueryIntAttribute("PointValue", &temp);
+	mPointValue = temp;
+
+	infoNode->QueryIntAttribute("Speed", &temp);
+	mSpeed = temp;
+
+	const char* mCanSlow = infoNode->Attribute("CanSlow");
+	if (mCanSlow != NULL && !strcmp(mCanSlow,"False")) //strcmp() return 0 if both string be the same.
+	{
+		mCanSlow = false;
+	}
 }
-
-Enemy::~Enemy()
-{
-	if (mMenuIcon != NULL)
-		oslDeleteImage(mMenuIcon);
-	if (mEnemyImg != NULL)
-		oslDeleteImage(mTowerImg);
-	if (mShotImg != NULL)
-		oslDeleteImage(mShotImg);
-}*/
