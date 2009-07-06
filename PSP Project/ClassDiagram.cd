@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AboutScreen" Collapsed="true">
+    <Position X="1.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAEAAAAAAAAAAAIAAAAIAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Include\AboutScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnykeyScreen" Collapsed="true">
+    <Position X="8.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAgIAAAgAAAAAAAAQAAAAAAAEAAA=</HashCode>
+      <FileName>Include\AnykeyScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyInfo" Collapsed="true">
+    <Position X="28.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAACAAAAAAQAAAAgAAAAAAQAAAACAAAAAAAAA=</HashCode>
+      <FileName>Include\Enemy.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemy" Collapsed="true">
+    <Position X="26.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Include\Enemy.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyInstance" Collapsed="true">
+    <Position X="30" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Include\Enemy.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExitScreen" Collapsed="true">
+    <Position X="15" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAIEAAA=</HashCode>
+      <FileName>Include\ExitScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameOptionsScreen" Collapsed="true">
+    <Position X="21.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAEAAA=</HashCode>
+      <FileName>Include\GameOptionsScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameScreen" Collapsed="true">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Include\GameScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GodLibrary" Collapsed="true">
+    <Position X="31.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAQAAABIAA=</HashCode>
+      <FileName>Include\GodLibrary.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Point2D" Collapsed="true">
+    <Position X="26.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Include\GodLibrary.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HelpScreen" Collapsed="true">
+    <Position X="12.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAIAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Include\HelpScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IScreen" Collapsed="true">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Include\IScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MainMenuScreen" Collapsed="true">
+    <Position X="17.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAACAAAAAAEAAAAAEAAA=</HashCode>
+      <FileName>Include\MainMenuScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MultiplayerScreen" Collapsed="true">
+    <Position X="24" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAAAACAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Include\MultiplayerScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PauseScreen" Collapsed="true">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Include\PauseScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ProjectileInstance" Collapsed="true">
+    <Position X="28.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAEAAIAAAQACAACIAAAAEAAAAABBAAgDI=</HashCode>
+      <FileName>Include\Projectile.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Resource" Collapsed="true">
+    <Position X="30" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIQAkBAAAqAEAAQAAABABBAAAAAgAAAAAYgBBA=</HashCode>
+      <FileName>Include\Resource.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ScreenManager" Collapsed="true">
+    <Position X="31.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAEACAABAAAAABAAAQBAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Include\ScreenManager.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TitleScreen" Collapsed="true">
+    <Position X="19.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAIAAAEAAAAAAAAEAAAAAAAEAAA=</HashCode>
+      <FileName>Include\TitleScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerInfo" Collapsed="true">
+    <Position X="26.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAQAgAAAAAAAAAAAAABAAAAIAAAABAAABAANAAEAAA=</HashCode>
+      <FileName>Include\Tower.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Tower" Collapsed="true">
+    <Position X="31.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAEAAgAICIEAAAAgAACAAIAAEUgGAAAACAAQI=</HashCode>
+      <FileName>Include\Tower.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TowerInstance" Collapsed="true">
+    <Position X="28.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAACAIAAAAAAAAAgEAAAQEACAAgg=</HashCode>
+      <FileName>Include\Tower.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WarningScreen" Collapsed="true">
+    <Position X="10.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAIAABAAAAAAAAAAAAAEAAAEAAA=</HashCode>
+      <FileName>Include\WarningScreen.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlString" Collapsed="true">
+    <Position X="3.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CEAAAAIAAAAEAAAlAsICAQACAAAAAIoAiQERCAABAAA=</HashCode>
+      <FileName>tinyxml\tinystr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlOutStream" Collapsed="true">
+    <Position X="3.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>tinyxml\tinystr.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlVisitor" Collapsed="true">
+    <Position X="0.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAAAAAAQAAAAAAAAAAAAAIAAAAAAAAAAAgAA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlBase" Collapsed="true">
+    <Position X="7.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAgggBQAEAgEAAAQAgBhARASADAQAiAIAAAgAAAkAAA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlNode" Collapsed="true">
+    <Position X="6.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AKAgAAAIAEAECiBAhEAAYQAEAAqBgCACAYtgAAtAIDA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlAttribute" Collapsed="true">
+    <Position X="14.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQggAAAgAAQAgAEAADAAwQAAAIEAGQAAABgQAIEEgA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlAttributeSet" Collapsed="true">
+    <Position X="26.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAQAAQAAABQAAAAAJAAAAACACAAAAAAA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlElement" Collapsed="true">
+    <Position X="12.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAgAAAAACACAAAJAAAAIYAAgQCAAAwBCBAAAAAEIFE=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlComment" Collapsed="true">
+    <Position X="1" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAgAIAAAAAAAAAAAAAAAQAAAAAAAAAIAAAAAAAEIBA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlText" Collapsed="true">
+    <Position X="3.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AKAgAAAABAAAAAAAAEAAAQBAAAABgAAAAAAAAAAEIBQ=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlDeclaration" Collapsed="true">
+    <Position X="5.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IIAgACCAAAQAAAAAAAAAAQAAgAAAAIAAAAIIAAAEKBA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlUnknown" Collapsed="true">
+    <Position X="7.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAgAAAAAEAAAAAAAAAAAQACAAAAAAAAAAAAAIAEIBA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlDocument" Collapsed="true">
+    <Position X="10" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAgAAAABBAQAQABAgEICQAAAAEQBAABFAAAAEgUJBA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlHandle" Collapsed="true">
+    <Position X="28.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAEAAAAEAAAIAAAEgAIQABAAAAAAAAAIEICAEAABA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlPrinter" Collapsed="true">
+    <Position X="0.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAEABEhAQgBAAQAAAAEAAAAAAAAABQIBQAwAA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TiXmlParsingData" Collapsed="true">
+    <Position X="30" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAQABAAEAAAAAAAAAAEEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>tinyxml\tinyxmlparser.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="TiXmlCursor" Collapsed="true">
+    <Position X="26.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQACAAAAAAAAAAAABABAAAA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="ProjectileType" Collapsed="true">
+    <Position X="28.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Include\Projectile.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_00bd_1" Collapsed="true">
+    <Position X="26.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAACABAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="TiXmlEncoding" Collapsed="true">
+    <Position X="30" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAAAAAAAAAAAAABAAAAAAAABAAAA=</HashCode>
+      <FileName>tinyxml\tinyxml.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
