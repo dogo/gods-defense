@@ -156,7 +156,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 		}
 		else if (mCurrentLine == "TowerImg")
 		{
-			sprintf(temp, "res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
+			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
 			mTowerImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 			node->QueryIntAttribute("Width", &mTowerWidth);
