@@ -1,0 +1,22 @@
+<!ELEMENT Name ( #PCDATA ) >
+
+<!ELEMENT Size ( #PCDATA ) >
+
+<!ELEMENT Stat EMPTY >
+<!ATTLIST Stat GoldValue NMTOKEN #REQUIRED >
+<!ATTLIST Stat Health NMTOKEN #REQUIRED >
+<!ATTLIST Stat PointValue NMTOKEN #REQUIRED >
+<!ATTLIST Stat CanSlow (True|False) #REQUIRED >
+<!ATTLIST Stat Speed NMTOKEN #REQUIRED >
+
+<!ELEMENT Stats ( Stat+ ) >
+
+<!ELEMENT EnemyImg EMPTY >
+<!ATTLIST EnemyImg File NMTOKEN #REQUIRED >
+<!ATTLIST EnemyImg Height NMTOKEN #REQUIRED >
+<!ATTLIST EnemyImg Width NMTOKEN #REQUIRED >
+
+<!ELEMENT DeathSound EMPTY >
+<!ATTLIST DeathSound File NMTOKEN #REQUIRED >
+
+<!ELEMENT Enemy ( Name, Size, Stats, EnemyImg?, DeathSound? ) >
