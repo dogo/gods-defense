@@ -11,6 +11,7 @@ class ProjectileInstance;
 
 #include "../Include/Tower.h"
 #include "../Include/Enemy.h"
+#include "../Include/GameScreen.h"
 #include "../Include/GodLibrary.h"
 
 enum ProjectileType
@@ -23,8 +24,9 @@ enum ProjectileType
 class ProjectileInstance
 {
 public:
-	static void CreateProjectile(TowerInstance *shooter, EnemyInstance *target);
+	ProjectileInstance(TowerInstance *shooter, EnemyInstance *target);
 	virtual ~ProjectileInstance();
+	static void CreateProjectile(TowerInstance *shooter, EnemyInstance *target);
 
 	//TODO : :D write this functions
 	//virtual void Update(unsigned timePassed) = 0;
@@ -33,7 +35,17 @@ public:
 	static OSL_IMAGE *LoadProjectileImage(const char &projectileType, char *filename);
 
 private:
-
+	bool mEnemyIsDead;
+	Point2D mProjectilePosition;
+	EnemyInstance *mTarget;
+	OSL_IMAGE *mProjectileSprite;
+	OSL_SOUND *mFireSound;
+	OSL_SOUND *mHitSound;
+	int mTowerDamage;
+	float mSlowAmount;
+	int mSlowLength;
+	bool mHitsFlyer;
+	bool mHitsLand;
 };
 
 #endif

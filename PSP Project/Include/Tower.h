@@ -113,5 +113,7 @@ private:
 	int mProjectileInterval;
 
 	EnemyInstance *mTowerTarget;
+
+	friend class ProjectileInstance;
 };
 #endif

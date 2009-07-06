@@ -39,3 +39,22 @@ OSL_IMAGE *ProjectileInstance::LoadProjectileImage(const char &projectileType, c
 		return NULL;
 	}
 }
+
+ProjectileInstance::ProjectileInstance(TowerInstance *shooter, EnemyInstance *target)
+{
+	mEnemyIsDead = false;
+	mProjectilePosition = shooter->mPosition;
+	mProjectileSprite = shooter->mTower->mProjectileImg;
+	mFireSound = shooter->mTower->mFireSound;
+	mHitSound = shooter->mTower->mHitSound;
+	mTarget = target;
+	mHitsFlyer = shooter->mTower->mHitsFlyer;
+	mHitsLand = shooter->mTower->mHitsLand;
+	mSlowAmount = shooter->mTower->mLevels[shooter->mCurrentMap].mSlowAmount;
+	mSlowLength = shooter->mTower->mLevels[shooter->mCurrentMap].mSlowLength;
+	mTowerDamage = shooter->mTower->mLevels[shooter->mCurrentMap].mDamage;
+}
+
+ProjectileInstance::~ProjectileInstance()
+{
+}
