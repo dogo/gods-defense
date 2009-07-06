@@ -30,10 +30,10 @@ public:
 	//virtual void Update(unsigned timePassed) = 0;
 	//virtual void ProjectileRender() = 0;
 
-	OSL_IMAGE *LoadProjectileImage(const char &projectileType, char *filename);
+	static OSL_IMAGE *LoadProjectileImage(const char &projectileType, char *filename);
 
 private:
-	OSL_IMAGE *m_ProjectileSprite;
+
 };
 
 #endif

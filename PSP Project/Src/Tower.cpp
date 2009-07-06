@@ -137,7 +137,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 			//More Projectile Types goes here.
 
 			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("Sprite"));
-			//TODO : LOAD PROJECTILE IMG mProjectileImg = ProjectileInstance::LoadProjectileImage(mProjectileType, temp);
+			mProjectileImg = ProjectileInstance::LoadProjectileImage(mProjectileType, temp);
 		}
 		else if (mCurrentLine == "TowersLevels")
 		{
