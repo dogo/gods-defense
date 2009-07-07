@@ -43,7 +43,7 @@ OSL_IMAGE *ProjectileInstance::LoadProjectileImage(const char &projectileType, c
 ProjectileInstance::ProjectileInstance(TowerInstance *shooter, EnemyInstance *target)
 {
 	mEnemyIsDead = false;
-	mProjectilePosition = shooter->mPosition;
+	mProjectilePosition = shooter->mTowerPosition;
 	mProjectileSprite = shooter->mTower->mProjectileImg;
 	mFireSound = shooter->mTower->mFireSound;
 	mHitSound = shooter->mTower->mHitSound;
