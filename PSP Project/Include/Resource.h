@@ -35,6 +35,7 @@ public:
 	static char const STR_WARNING_CAPTION[];
 	static char const STR_WARNING_TEXT[];
 	static char const STR_MAPSELECTION_CAPTION[];
+	static char const STR_HELP_TEXT[];
 	
 	static char IMG_GAME_TITLE[];
 	static char IMG_ANYKEY_SPLASH[];

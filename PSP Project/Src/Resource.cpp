@@ -49,3 +49,19 @@ char const Resource::STR_ABOUT_TEXT[] =
 	"Diogo Autilio - A.K.A (Dogo)\n"
 	"Guilherme Pimentel - A.k.A (06)\n"
 	"Romulo Abrão - A.k.A (Guerreiro)\n";
+
+char const Resource::STR_HELP_TEXT[] =
+	"The idea of the game is to build towers to\n"
+	"protect your points of life from the enemies.\n"
+	"You can spend the money to construct more\n"
+	"towers or upgrade the existing ones.\n"
+	"\n"
+	"Controls:\n"
+	"\n"
+	"Analogic pad - Move selector.\n"
+	"Digital pad - Move map.\n"
+	"Cross - Select/Confirm.\n"
+	"Circle - Cancel/Back.\n"
+	"Triangle - Next Wave.\n"
+	"Square - Build Menu(Show/Hide).\n"
+	"Start - Pause menu.\n";

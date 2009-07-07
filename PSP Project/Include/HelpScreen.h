@@ -11,9 +11,12 @@
 class HelpScreen : public IScreen
 {
 private:
+	OSL_IMAGE *back;
 
 public:
 	HelpScreen();
+
+	~HelpScreen();
 
 	virtual void draw();
 

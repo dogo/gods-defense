@@ -92,7 +92,7 @@ int main()
 					mScreenManager->mCurrentScreen->draw();
 					mScreenManager->mCurrentScreen->update();
 				}
-				mScreenManager->deactivate();
+					mScreenManager->deactivate();
 			}
 
 			if(Screen == ScreenManager::SCREEN_CONFIRM_EXIT){
