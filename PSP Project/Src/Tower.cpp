@@ -218,7 +218,7 @@ TowerInstance::TowerInstance(Tower *tower, const Point2D &position)
 {
 	mCurrentMap = 0;
 	mTower = tower;
-	mPosition = position;
+	mTowerPosition = position;
 	mTowerTarget = NULL;
 	mProjectileInterval = 0;
 }
@@ -226,6 +226,13 @@ TowerInstance::TowerInstance(Tower *tower, const Point2D &position)
 void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enemies)
 {
 	mProjectileInterval -= timePassed;
+	float mTowerSquareRange = mTower->mLevels[mCurrentMap].mRange * mTower->mLevels[mCurrentMap].mRange; //Range²
+
+	if(mTowerPosition.SquareDistance(mTowerTarget->mEnemyPosition) > mTowerSquareRange)
+	{
+		//The target its out of range
+		mTowerTarget = NULL;
+	}
 
 	if (!mTowerTarget) //we don't have a target, seek for an enemy.
 	{
@@ -233,7 +240,7 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 	}
 	else if (mTowerTarget)
 	{
-		mTowerAngle = mPosition.AimTo(mTowerTarget->mEnemyPosition);
+		mTowerAngle = mTowerPosition.AimTo(mTowerTarget->mEnemyPosition);
 
 		/*
 		* Tower can shoot when the Projectile Interval is < 0. (is a gun shot delay, like shooters games)
@@ -248,7 +255,7 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 
 void TowerInstance::RenderTower()
 {
-	oslDrawImageXY(mTower->mTowerImg, mPosition.X, mPosition.Y);
+	oslDrawImageXY(mTower->mTowerImg, mTowerPosition.X, mTowerPosition.Y);
 }
 
 void TowerInstance::RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color)

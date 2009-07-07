@@ -66,6 +66,7 @@ public:
 	Point2D(); //x=0,y=0 
 	Point2D(float x, float y);
 	float const AimTo(const Point2D &enemy);
+	float const SquareDistance(const Point2D &enemy);
 	
 	float X;
 	float Y;

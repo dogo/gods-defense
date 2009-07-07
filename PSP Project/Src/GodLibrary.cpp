@@ -68,5 +68,12 @@ float const Point2D::AimTo(const Point2D &enemy)
 {
 	float dy = enemy.Y - this->Y; //dy = enemy.Y - Tower->y
 	float dx = enemy.X - this->X; //dx = enemy.x - Tower->x
-	return atan2(dy,dx); // atan2 from math.h, arco tangente :D, owww geometria.
+	return atan2(dy,dx); // atan2 from math.h, arco tangente :D, owww trigonometria.
+}
+
+float const Point2D::SquareDistance(const Point2D &enemy)
+{   
+	float dx = enemy.X - this->X; //dy = enemy.Y - Tower->y 	
+	float dy = enemy.Y - this->Y; //dx = enemy.x - Tower->x
+	return sqrt((dy*dy)+(dx*dx)); //Pythagoras distance is D(A,B) = sqrt( (xA-xB)² + (yA-yB)²)
 }
