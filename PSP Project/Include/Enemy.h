@@ -20,6 +20,15 @@ using namespace std;
 
 class EnemyInfo
 {
+/*
+*	Health - How much health de enemy has.
+*	GoldValue - Specifies the amount of gold is added into the player's Cash when this unit dies.
+*	PointValue - How much points is added into the player's Score when this unit dies.
+*	Speed - Specifies normal speed of the unit, when try to reach (without modificators).
+*	HasImunity - Specifies if the enemy is has imunity Against bad attributes (Poison,IceSlow).
+*	CanFly - Specifies if the enemy walks or fly.
+*/
+
 	public:
 		EnemyInfo();
 		EnemyInfo(TiXmlElement* levelNode);
@@ -27,8 +36,10 @@ class EnemyInfo
 		unsigned int mGoldValue;
 		unsigned int mPointValue;
 		unsigned int mSpeed;
-		bool mCanSlow;
+		bool mHasImunity;
+		bool mCanFly;
 };
+
 
 class Enemy
 {

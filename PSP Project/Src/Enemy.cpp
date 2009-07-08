@@ -15,6 +15,7 @@ EnemyInfo::EnemyInfo()
 	mCanSlow = true;
 }
 
+
 EnemyInfo::EnemyInfo(TiXmlElement* infoNode)
 {
 	//Default Initializers
@@ -22,14 +23,14 @@ EnemyInfo::EnemyInfo(TiXmlElement* infoNode)
 	mGoldValue = 0;
 	mPointValue = 0;
 	mSpeed = 0;
-	mCanSlow = true;
+	mHasImunity = true;
 
 	int temp;
 
 	infoNode->QueryIntAttribute("Health", &temp);
 	mHealth = temp;
 
-	infoNode->QueryIntAttribute("GoldValue", &temp);
+	infoNode->QueryIntAttribute("GoldAmouth", &temp);
 	mGoldValue = temp;
 
 	infoNode->QueryIntAttribute("PointValue", &temp);
@@ -38,9 +39,9 @@ EnemyInfo::EnemyInfo(TiXmlElement* infoNode)
 	infoNode->QueryIntAttribute("Speed", &temp);
 	mSpeed = temp;
 
-	const char* mCanSlow = infoNode->Attribute("CanSlow");
-	if (mCanSlow != NULL && !strcmp(mCanSlow,"False")) //strcmp() return 0 if both string be the same.
+	const char* mCanSlow = infoNode->Attribute("HasImunity");
+	if (mCanSlow != NULL && !strcmp(mHasImunity,"False")) //strcmp() return 0 if both string be the same.
 	{
-		mCanSlow = false;
+		mHasImunity = false;
 	}
 }

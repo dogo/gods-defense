@@ -1,22 +1,31 @@
 <!ELEMENT Name ( #PCDATA ) >
 
-<!ELEMENT Size ( #PCDATA ) >
+<!ELEMENT Description ( #PCDATA ) >
 
-<!ELEMENT Stat EMPTY >
-<!ATTLIST Stat GoldValue NMTOKEN #REQUIRED >
-<!ATTLIST Stat Health NMTOKEN #REQUIRED >
-<!ATTLIST Stat PointValue NMTOKEN #REQUIRED >
-<!ATTLIST Stat CanSlow (True|False) #REQUIRED >
-<!ATTLIST Stat Speed NMTOKEN #REQUIRED >
+	
+<!ELEMENT Capability EMPTY >
+<!ATTLIST Capability CanFly (True|False) #REQUIRED >
+<!ATTLIST Capability HasImunity (True|False) #REQUIRED >
 
-<!ELEMENT Stats ( Stat+ ) >
+<!ELEMENT Atributes EMPTY >
+<!ATTLIST Atributes HealthPower NMTOKEN #REQUIRED >
+<!ATTLIST Atributes GoldAmounth NMTOKEN #REQUIRED >
+<!ATTLIST Atributes PointValue NMTOKEN #REQUIRED >
+<!ATTLIST Atributes Speed NMTOKEN #REQUIRED >
+
 
 <!ELEMENT EnemyImg EMPTY >
 <!ATTLIST EnemyImg File NMTOKEN #REQUIRED >
 <!ATTLIST EnemyImg Height NMTOKEN #REQUIRED >
 <!ATTLIST EnemyImg Width NMTOKEN #REQUIRED >
 
-<!ELEMENT DeathSound EMPTY >
-<!ATTLIST DeathSound File NMTOKEN #REQUIRED >
+<!ELEMENT EnemyMusic EMPTY >
+<!ATTLIST EnemyMusic File NMTOKEN #IMPLIED >
 
-<!ELEMENT Enemy ( Name, Size, Stats, EnemyImg?, DeathSound? ) >
+<!ELEMENT WalkingSound EMPTY >
+<!ATTLIST WalkingSound File NMTOKEN #IMPLIED >
+
+<!ELEMENT DeathSound EMPTY >
+<!ATTLIST DeathSound File NMTOKEN #IMPLIED >
+
+<!ELEMENT Enemy ( Name, Description, Capability, Atributes, Maps, EnemyImg, EnemyMusic?, WalkingSound?, DeathSound? ) >
