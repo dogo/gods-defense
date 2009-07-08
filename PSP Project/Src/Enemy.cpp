@@ -12,7 +12,8 @@ EnemyInfo::EnemyInfo()
 	mGoldValue = 0;
 	mPointValue = 0;
 	mSpeed = 0;
-	mCanSlow = true;
+	mHasImunity = true;
+	mCanFly = true;
 }
 
 
@@ -24,13 +25,14 @@ EnemyInfo::EnemyInfo(TiXmlElement* infoNode)
 	mPointValue = 0;
 	mSpeed = 0;
 	mHasImunity = true;
+	mCanFly = true;
 
 	int temp;
 
 	infoNode->QueryIntAttribute("Health", &temp);
 	mHealth = temp;
 
-	infoNode->QueryIntAttribute("GoldAmouth", &temp);
+	infoNode->QueryIntAttribute("GoldValue", &temp);
 	mGoldValue = temp;
 
 	infoNode->QueryIntAttribute("PointValue", &temp);
@@ -39,9 +41,14 @@ EnemyInfo::EnemyInfo(TiXmlElement* infoNode)
 	infoNode->QueryIntAttribute("Speed", &temp);
 	mSpeed = temp;
 
-	const char* mCanSlow = infoNode->Attribute("HasImunity");
-	if (mCanSlow != NULL && !strcmp(mHasImunity,"False")) //strcmp() return 0 if both string be the same.
+	const char* HasImunity = infoNode->Attribute("HasImunity");
+	if (HasImunity != NULL && !strcmp(HasImunity,"False")) //strcmp() return 0 if both string be the same.
 	{
 		mHasImunity = false;
+	}
+	const char* CanFly = infoNode->Attribute("CanFly");
+	if (CanFly != NULL && !strcmp(CanFly,"False")) //strcmp() return 0 if both string be the same.
+	{
+		mCanFly = false;
 	}
 }

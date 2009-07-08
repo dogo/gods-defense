@@ -2,30 +2,24 @@
 
 <!ELEMENT Description ( #PCDATA ) >
 
-	
-<!ELEMENT Capability EMPTY >
-<!ATTLIST Capability CanFly (True|False) #REQUIRED >
-<!ATTLIST Capability HasImunity (True|False) #REQUIRED >
+<!ELEMENT Size ( #PCDATA ) >
 
-<!ELEMENT Atributes EMPTY >
-<!ATTLIST Atributes HealthPower NMTOKEN #REQUIRED >
-<!ATTLIST Atributes GoldAmounth NMTOKEN #REQUIRED >
-<!ATTLIST Atributes PointValue NMTOKEN #REQUIRED >
-<!ATTLIST Atributes Speed NMTOKEN #REQUIRED >
+<!ELEMENT Stat EMPTY >
+<!ATTLIST Stat GoldValue NMTOKEN #REQUIRED >
+<!ATTLIST Stat Health NMTOKEN #REQUIRED >
+<!ATTLIST Stat PointValue NMTOKEN #REQUIRED >
+<!ATTLIST Stat CanFly (True|False) #REQUIRED >
+<!ATTLIST Stat HasImunity (True|False) #REQUIRED >
+<!ATTLIST Stat Speed NMTOKEN #REQUIRED >
 
+<!ELEMENT Stats ( Stat+ ) >
 
 <!ELEMENT EnemyImg EMPTY >
 <!ATTLIST EnemyImg File NMTOKEN #REQUIRED >
 <!ATTLIST EnemyImg Height NMTOKEN #REQUIRED >
 <!ATTLIST EnemyImg Width NMTOKEN #REQUIRED >
 
-<!ELEMENT EnemyMusic EMPTY >
-<!ATTLIST EnemyMusic File NMTOKEN #IMPLIED >
-
-<!ELEMENT WalkingSound EMPTY >
-<!ATTLIST WalkingSound File NMTOKEN #IMPLIED >
-
 <!ELEMENT DeathSound EMPTY >
 <!ATTLIST DeathSound File NMTOKEN #IMPLIED >
 
-<!ELEMENT Enemy ( Name, Description, Capability, Atributes, Maps, EnemyImg, EnemyMusic?, WalkingSound?, DeathSound? ) >
+<!ELEMENT Enemy ( Name, Description, Size, Stats, EnemyImg?, DeathSound? ) >

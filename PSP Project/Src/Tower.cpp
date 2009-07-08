@@ -104,7 +104,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 		{
 			const char* mAttributeText;
 
-			mAttributeText = node->Attribute("HitsGround");
+			mAttributeText = node->Attribute("HitsLand");
 			if (mAttributeText != NULL && !strcmp(mAttributeText,"True")) //strcmp() return 0 if both string be the same.
 			{
 				mHitsLand = true;

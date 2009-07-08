@@ -1,12 +1,14 @@
 <!DOCTYPE Tower SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/enemy.dtd">
 <Enemy>
 	<Name>Test Enemy</Name>
+	<Description>Simple Ground Enemy</Description>
 	<Size>8</Size>
 	<Stats>
-		<Stat Health="20" GoldValue="10" PointValue="30" Speed="70" CanSlow="True"/>
+		<Stat Health="10" GoldValue="10" PointValue="30" Speed="10" CanFly="False" HasImunity="False"/>
 	</Stats>
 	
 	<EnemyImg File="testenemy.png" Width="2" Height="2" />
+	<EnemyDeath File="DefaultEnemyDeath.png" Width="2" Height="2" />
 	
 	<DeathSound File="death.wav"/>
 </Enemy>
