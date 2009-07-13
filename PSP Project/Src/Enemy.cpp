@@ -52,3 +52,110 @@ EnemyInfo::EnemyInfo(TiXmlElement* infoNode)
 		mCanFly = false;
 	}
 }
+
+Enemy::Enemy(const string &mapName, const string &enemyName)
+{
+	//Default Initializers
+	mEnemyDirName = enemyName;
+	mEnemyName = "";
+	mSize = 0;
+	mCanFly = false;
+	mEnemyImg = NULL;
+	mEnemyDeath = NULL;
+	mDeathSound = NULL;
+
+	mEnemyImg->centerX = (mEnemyImg->sizeX/2); //hotspot
+
+	char temp[256];
+	sprintf(temp, "Res/enemies/%s/enemy.xml", mEnemyDirName.c_str());
+
+	TiXmlDocument EnemyXMLInput;
+	EnemyXMLInput.LoadFile(temp);
+
+	if (EnemyXMLInput.Error())
+	{
+		oslFatalError("Cannot open: %i", EnemyXMLInput.ErrorDesc());
+		return;
+	}
+
+	TiXmlElement *node = NULL;
+	node = EnemyXMLInput.FirstChildElement(); //head
+
+	if (!node)
+	{
+		oslFatalError("No head not in: %i", temp);
+		return;
+	}
+
+	node = node->FirstChildElement();
+
+	while (node != NULL) //Read all XML file
+	{
+		string mCurrentLine = node->ValueStr();
+		if (mCurrentLine == "Name")
+		{
+			mEnemyName = string(node->GetText());
+		}
+		else if (mCurrentLine == "Description")
+		{
+			mEnemyDescription = string(node->GetText());
+		}		
+		else if (mCurrentLine == "Size")
+		{
+			mSize = atoi(node->GetText());
+		}
+		else if (mCurrentLine == "Stats")
+		{
+			TiXmlElement *EnemylevelNode = node->FirstChildElement();
+			while (EnemylevelNode != NULL) //read all enemy Stats
+			{
+				if (EnemylevelNode->ValueStr() != "Stat")
+				{
+					oslFatalError("TowersLevel Error: %i",EnemylevelNode->Value());
+					return;
+				}
+				mLevels.push_back(EnemyInfo(EnemylevelNode));
+
+				EnemylevelNode = EnemylevelNode->NextSiblingElement();
+			}
+		}
+		else if (mCurrentLine == "EnemyImg")
+		{
+			sprintf(temp, "Res/enemies/%s/%s", mEnemyDirName.c_str(), node->Attribute("File"));
+			mEnemyImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+
+			node->QueryIntAttribute("Width", &mEnemyWidth);
+			node->QueryIntAttribute("Height", &mEnemyHeight);
+		}
+		else if (mCurrentLine == "EnemyDeath")
+		{
+			sprintf(temp, "Res/enemies/%s/%s", mEnemyDirName.c_str(), node->Attribute("File"));
+			mEnemyDeath = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+
+			node->QueryIntAttribute("Width", &mEnemyDeathWidth);
+			node->QueryIntAttribute("Height", &mEnemyDeathHeight);
+		}
+		else if (mCurrentLine == "DeathSound")
+		{
+			sprintf(temp, "Res/enemies/%s/%s", mEnemyDirName.c_str(), node->Attribute("File"));
+			mDeathSound = oslLoadSoundFileWAV (temp, OSL_FMT_NONE);
+		}
+		else
+		{
+			oslFatalError("Bad node, not donout for you: %i",mCurrentLine);
+			return;
+		}
+		node = node->NextSiblingElement();
+	}
+}
+
+
+Enemy::~Enemy()
+{
+	if (mEnemyImg != NULL)
+		oslDeleteImage(mEnemyImg);
+	if (mEnemyDeath != NULL)
+		oslDeleteImage(mEnemyDeath);
+	if (mDeathSound != NULL)
+		oslDeleteSound(mDeathSound);
+}

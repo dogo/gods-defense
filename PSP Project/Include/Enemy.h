@@ -15,6 +15,7 @@ class EnemyInstance;
 #include "../Include/GameScreen.h"
 #include <vector>
 #include <string>
+#include <list> // list class-template definition
 
 using namespace std;
 
@@ -29,29 +30,44 @@ class EnemyInfo
 *	CanFly - Specifies if the enemy walks or fly.
 */
 
-	public:
-		EnemyInfo();
-		EnemyInfo(TiXmlElement* levelNode);
-		unsigned int mHealth;
-		unsigned int mGoldValue;
-		unsigned int mPointValue;
-		unsigned int mSpeed;
-		bool mHasImunity;
-		bool mCanFly;
+public:
+	EnemyInfo();
+	EnemyInfo(TiXmlElement* levelNode);
+	unsigned int mHealth;
+	unsigned int mGoldValue;
+	unsigned int mPointValue;
+	unsigned int mSpeed;
+	bool mHasImunity;
+	bool mCanFly;
 };
 
 
 class Enemy
 {
-	private:
-	public:
+public:
+	Enemy(const string &mapName, const string &enemyName);
+	~Enemy();
+
+	string mEnemyDirName;
+	string mEnemyName;
+	string mEnemyDescription;
+	int mSize;
+	bool mCanFly;
+	OSL_IMAGE *mEnemyImg;
+	OSL_IMAGE *mEnemyDeath;
+	OSL_SOUND *mDeathSound;
+	int mEnemyWidth;
+	int mEnemyHeight;
+	int mEnemyDeathWidth;
+	int mEnemyDeathHeight;
+
+	vector<EnemyInfo> mLevels;
 };
 
 class EnemyInstance
 {
-	private:
-	public:
-		Point2D mEnemyPosition;
+public:
+	Point2D mEnemyPosition;
 };
 
 

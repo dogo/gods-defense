@@ -141,7 +141,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 		}
 		else if (mCurrentLine == "TowersLevels")
 		{
-			TiXmlElement* TowerLevelNode = node->FirstChildElement();
+			TiXmlElement *TowerLevelNode = node->FirstChildElement();
 			while (TowerLevelNode != NULL) //read all Towers Levels
 			{
 				if (TowerLevelNode->ValueStr() != "TowersLevel")
