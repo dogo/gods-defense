@@ -13,6 +13,8 @@ class GodLibrary
 {
 private:
 	OSL_IMAGE *Splash;
+	int mTempAnimation;
+	int mAnimation;
 
 public:
 
@@ -57,6 +59,16 @@ drawCircle(int x, int y, int radius, osl_color);
 \endcode */
 void static drawCircle(int x, int y, int radius, OSL_COLOR color);
 
+/** Animate an generic sprite.
+	mAnimateImg - Image to animate.
+	mMAXFRAMES - Max image frames.
+	mSpritePosition - Sprite Position (LEFT, DOWN, RIGHT, UP).
+	mImageWidth - Image Width.
+	mImageHeight - Image Height.
+\code
+Animation(OSL_IMAGE *mAnimateImg, int mMAXFRAMES, int mSpritePosition, int mImageWidth, int mImageHeight);
+\endcode */
+void Animation(OSL_IMAGE *mAnimateImg, int mMAXFRAMES, int mSpritePosition, int mImageWidth, int mImageHeight);
 };
 
 //coordinates in pixels

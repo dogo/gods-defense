@@ -52,6 +52,29 @@ void GodLibrary::drawCircle(int x, int y, int radius, OSL_COLOR color)
 	}
 }
 
+void GodLibrary::Animation(OSL_IMAGE *mAnimateImg, int mMAXFRAMES, int mSpritePosition, int mImageWidth, int mImageHeight)
+{
+	//time of the animation
+	mTempAnimation++;
+	if (mTempAnimation == mMAXFRAMES)
+	{
+		//relaunch the time
+		mTempAnimation = 0;
+
+		//next step of the animation
+		mAnimation++;
+
+		//display the right position
+		//oslSetImageTileSize (image, x, y, width, height); 
+		oslSetImageTileSize(mAnimateImg,(mAnimation * mImageWidth), mSpritePosition, mImageWidth, mImageHeight);
+		mAnimateImg->centerX = (mAnimation * mImageWidth) >> 1;		//Sprite hotspot
+
+		//relaunch animation
+		if (mAnimation == mMAXFRAMES)
+			mAnimation = 0;
+	}
+}
+
 Point2D::Point2D()
 {
 	X = 0;
