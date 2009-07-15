@@ -67,7 +67,13 @@ public:
 class EnemyInstance
 {
 public:
+	EnemyInstance(/*Wave*/int *wave, Enemy *enemy, const string &path, const unsigned int &level);
 	Point2D mEnemyPosition;
+	//TODO : Wave *mWave; //Wave :)
+	Enemy *mEnemy;
+	int mHealth; //Enemy health, <= 0 dead
+	unsigned int mStat;
+	//TODO : Path *mPath; //Path to travel
 };
 
 

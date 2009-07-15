@@ -149,7 +149,6 @@ Enemy::Enemy(const string &mapName, const string &enemyName)
 	}
 }
 
-
 Enemy::~Enemy()
 {
 	if (mEnemyImg != NULL)
@@ -158,4 +157,11 @@ Enemy::~Enemy()
 		oslDeleteImage(mEnemyDeath);
 	if (mDeathSound != NULL)
 		oslDeleteSound(mDeathSound);
+}
+
+EnemyInstance::EnemyInstance(/*Wave*/int *wave, Enemy *enemy, const string &path, const unsigned int &level)
+{
+	//mWave = wave;
+	mEnemy = enemy;
+	mHealth = mEnemy->mLevels[mStat].mHealth;
 }
