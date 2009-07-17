@@ -149,7 +149,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 					oslFatalError("TowersLevel Error: %i",TowerLevelNode->Value());
 					return;
 				}
-				mLevels.push_back(TowerInfo(TowerLevelNode)); //Insert a element in the end
+				mTowerVector.push_back(TowerInfo(TowerLevelNode)); //Insert a element in the end
 
 				TowerLevelNode = TowerLevelNode->NextSiblingElement();
 			}
@@ -211,7 +211,7 @@ void Tower::RenderTower(const Point2D &position)
 
 void Tower::RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color)
 {
-	GodLibrary::drawCircle(position.X, position.Y, mLevels[TowerInfo].mRange, color);
+	GodLibrary::drawCircle(position.X, position.Y, mTowerVector[TowerInfo].mRange, color);
 }
 
 TowerInstance::TowerInstance(Tower *tower, const Point2D &position)
@@ -226,7 +226,7 @@ TowerInstance::TowerInstance(Tower *tower, const Point2D &position)
 void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enemies)
 {
 	mProjectileInterval -= timePassed;
-	float mTowerSquareRange = mTower->mLevels[mCurrentMap].mRange * mTower->mLevels[mCurrentMap].mRange; //Range²
+	float mTowerSquareRange = mTower->mTowerVector[mCurrentMap].mRange * mTower->mTowerVector[mCurrentMap].mRange; //Range²
 
 	if(mTowerPosition.SquareDistance(mTowerTarget->mEnemyPosition) > mTowerSquareRange)
 	{
@@ -247,7 +247,7 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 		*/
 		if (mProjectileInterval <= 0)
 		{
-			mProjectileInterval = mTower->mLevels[mCurrentMap].mRateOfFire;		
+			mProjectileInterval = mTower->mTowerVector[mCurrentMap].mRateOfFire;		
 			ProjectileInstance::CreateProjectile(this, mTowerTarget);
 		}
 	}

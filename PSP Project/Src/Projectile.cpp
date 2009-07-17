@@ -50,9 +50,9 @@ ProjectileInstance::ProjectileInstance(TowerInstance *shooter, EnemyInstance *ta
 	mTarget = target;
 	mHitsFlyer = shooter->mTower->mHitsFlyer;
 	mHitsLand = shooter->mTower->mHitsLand;
-	mSlowAmount = shooter->mTower->mLevels[shooter->mCurrentMap].mSlowAmount;
-	mSlowLength = shooter->mTower->mLevels[shooter->mCurrentMap].mSlowLength;
-	mTowerDamage = shooter->mTower->mLevels[shooter->mCurrentMap].mDamage;
+	mSlowAmount = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSlowAmount;
+	mSlowLength = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSlowLength;
+	mTowerDamage = shooter->mTower->mTowerVector[shooter->mCurrentMap].mDamage;
 }
 
 ProjectileInstance::~ProjectileInstance()

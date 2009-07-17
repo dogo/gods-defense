@@ -61,7 +61,7 @@ public:
 	int mEnemyDeathWidth;
 	int mEnemyDeathHeight;
 
-	vector<EnemyInfo> mLevels;
+	vector<EnemyInfo> mEnemyVector;
 };
 
 class EnemyInstance

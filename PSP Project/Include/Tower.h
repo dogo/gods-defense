@@ -93,7 +93,7 @@ public:
 	int mTowerWidth;
 	int mTowerHeight;
 
-	vector<TowerInfo> mLevels;
+	vector<TowerInfo> mTowerVector;
 };
 
 class TowerInstance

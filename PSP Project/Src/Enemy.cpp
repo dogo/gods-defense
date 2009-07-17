@@ -115,7 +115,7 @@ Enemy::Enemy(const string &mapName, const string &enemyName)
 					oslFatalError("TowersLevel Error: %i",EnemylevelNode->Value());
 					return;
 				}
-				mLevels.push_back(EnemyInfo(EnemylevelNode));
+				mEnemyVector.push_back(EnemyInfo(EnemylevelNode));
 
 				EnemylevelNode = EnemylevelNode->NextSiblingElement();
 			}
@@ -164,12 +164,12 @@ EnemyInstance::EnemyInstance(/*Wave*/int *wave, Enemy *enemy, const string &path
 {
 	//mWave = wave;
 	mEnemy = enemy;
-	mHealth = mEnemy->mLevels[mStat].mHealth;
+	mHealth = mEnemy->mEnemyVector[mStat].mHealth;
 }
 
 const int EnemyInstance::GetGoldValue() 
 {
-	return mEnemy->mLevels[mStat].mGoldValue;
+	return mEnemy->mEnemyVector[mStat].mGoldValue;
 }
 
 void EnemyInstance::RenderEnemy()
