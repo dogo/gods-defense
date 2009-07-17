@@ -61,10 +61,11 @@ Enemy::Enemy(const string &mapName, const string &enemyName)
 	mSize = 0;
 	mCanFly = false;
 	mEnemyImg = NULL;
-	mEnemyDeath = NULL;
+	mEnemyImgDeath = NULL;
 	mDeathSound = NULL;
 
 	mEnemyImg->centerX = (mEnemyImg->sizeX/2); //hotspot
+	mEnemyImgDeath->centerX = (mEnemyImgDeath->sizeX/2);
 
 	char temp[256];
 	sprintf(temp, "Res/enemies/%s/enemy.xml", mEnemyDirName.c_str());
@@ -130,7 +131,7 @@ Enemy::Enemy(const string &mapName, const string &enemyName)
 		else if (mCurrentLine == "EnemyDeath")
 		{
 			sprintf(temp, "Res/enemies/%s/%s", mEnemyDirName.c_str(), node->Attribute("File"));
-			mEnemyDeath = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+			mEnemyImgDeath = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 			node->QueryIntAttribute("Width", &mEnemyDeathWidth);
 			node->QueryIntAttribute("Height", &mEnemyDeathHeight);
@@ -153,8 +154,8 @@ Enemy::~Enemy()
 {
 	if (mEnemyImg != NULL)
 		oslDeleteImage(mEnemyImg);
-	if (mEnemyDeath != NULL)
-		oslDeleteImage(mEnemyDeath);
+	if (mEnemyImgDeath != NULL)
+		oslDeleteImage(mEnemyImgDeath);
 	if (mDeathSound != NULL)
 		oslDeleteSound(mDeathSound);
 }
@@ -164,4 +165,19 @@ EnemyInstance::EnemyInstance(/*Wave*/int *wave, Enemy *enemy, const string &path
 	//mWave = wave;
 	mEnemy = enemy;
 	mHealth = mEnemy->mLevels[mStat].mHealth;
+}
+
+const int EnemyInstance::GetGoldValue() 
+{
+	return mEnemy->mLevels[mStat].mGoldValue;
+}
+
+void EnemyInstance::RenderEnemy()
+{
+	if (true)//TODO : check if the enemy is dead. if (isFuckingDead) 
+	{
+		oslDrawImageXY(mEnemy->mEnemyImgDeath, mEnemyPosition.X, mEnemyPosition.Y);
+		return;
+	}
+	oslDrawImageXY(mEnemy->mEnemyImg, mEnemyPosition.X, mEnemyPosition.Y);
 }

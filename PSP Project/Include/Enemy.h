@@ -54,7 +54,7 @@ public:
 	int mSize;
 	bool mCanFly;
 	OSL_IMAGE *mEnemyImg;
-	OSL_IMAGE *mEnemyDeath;
+	OSL_IMAGE *mEnemyImgDeath;
 	OSL_SOUND *mDeathSound;
 	int mEnemyWidth;
 	int mEnemyHeight;
@@ -74,6 +74,9 @@ public:
 	int mHealth; //Enemy health, <= 0 dead
 	unsigned int mStat;
 	//TODO : Path *mPath; //Path to travel
+	const int GetGoldValue();
+	void RenderEnemy();
+	void Update(unsigned timePassed);
 };
 
 
