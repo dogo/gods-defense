@@ -160,14 +160,14 @@ Enemy::~Enemy()
 		oslDeleteSound(mDeathSound);
 }
 
-EnemyInstance::EnemyInstance(/*Wave*/int *wave, Enemy *enemy, const string &path, const unsigned int &level)
+EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const unsigned int &level)
 {
-	//mWave = wave;
+	mWave = wave;
 	mEnemy = enemy;
 	mHealth = mEnemy->mEnemyVector[mStat].mHealth;
 }
 
-const int EnemyInstance::GetGoldValue() 
+const int EnemyInstance::GetGold() 
 {
 	return mEnemy->mEnemyVector[mStat].mGoldValue;
 }

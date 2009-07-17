@@ -13,6 +13,7 @@ class EnemyInstance;
 #include "tinyxml/tinyxml.h"
 #include "../Include/GodLibrary.h"
 #include "../Include/GameScreen.h"
+#include "../Include/Map.h"
 #include <vector>
 #include <string>
 #include <list> // list class-template definition
@@ -67,14 +68,14 @@ public:
 class EnemyInstance
 {
 public:
-	EnemyInstance(/*Wave*/int *wave, Enemy *enemy, const string &path, const unsigned int &level);
+	EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const unsigned int &level);
 	Point2D mEnemyPosition;
-	//TODO : Wave *mWave; //Wave :)
+	Wave *mWave; //Wave :)
 	Enemy *mEnemy;
 	int mHealth; //Enemy health, <= 0 dead
 	unsigned int mStat;
-	//TODO : Path *mPath; //Path to travel
-	const int GetGoldValue();
+	Path *mPath; //Path to travel
+	const int GetGold();
 	void RenderEnemy();
 	void Update(unsigned timePassed);
 };

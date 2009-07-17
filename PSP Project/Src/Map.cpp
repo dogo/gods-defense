@@ -4,3 +4,27 @@
 //**************************************************************************
 
 #include "../Include/Map.h"
+
+Wave::Wave()
+{
+}
+
+Wave::Wave(TiXmlElement *waveNode)
+{
+}
+
+Wave::~Wave()
+{
+}
+
+Path::Path()
+{
+}
+
+Path::Path(TiXmlElement *pathNode)
+{
+}
+
+void Map::LoadMap(const string &mapName)
+{
+}
