@@ -36,7 +36,7 @@ public:
 
 private:
 	bool mEnemyIsDead;
-	Point2D mProjectilePosition;
+	Coordinates2D mProjectilePosition;
 	EnemyInstance *mTarget;
 	OSL_IMAGE *mProjectileSprite;
 	OSL_SOUND *mFireSound;

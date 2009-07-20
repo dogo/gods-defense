@@ -191,3 +191,15 @@ bool const EnemyInstance::EnemyCanFly()
 {
 	return mEnemy->mCanFly;
 }
+
+bool const EnemyInstance::EnemyStillOnMap()
+{	
+	/*
+mEnemyPosition.X < 0 |---------------------------| mEnemyPosition.X >= 480
+					 |							 |
+					 |		  PSP Screen		 |
+					 |						     |
+mEnemyPosition.Y < 0 |---------------------------| mEnemyPosition.Y >= 480
+	*/
+	return !(mEnemyPosition.X < 0 || mEnemyPosition.X >= 480 || mEnemyPosition.Y < 0 || mEnemyPosition.Y >= 480);
+}

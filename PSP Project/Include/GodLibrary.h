@@ -72,13 +72,13 @@ void Animation(OSL_IMAGE *mAnimateImg, int mMAXFRAMES, int mSpritePosition, int 
 };
 
 //coordinates in pixels
-class Point2D
+class Coordinates2D
 {
 public:
-	Point2D(); //x=0,y=0 
-	Point2D(float x, float y);
-	float const AimTo(const Point2D &enemy);
-	float const SquareDistance(const Point2D &enemy);
+	Coordinates2D(); //x=0,y=0 
+	Coordinates2D(float x, float y);
+	float const AimTo(const Coordinates2D &enemy);
+	float const SquareDistance(const Coordinates2D &enemy);
 	
 	float X;
 	float Y;

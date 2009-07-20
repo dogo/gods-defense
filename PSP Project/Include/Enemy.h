@@ -69,7 +69,7 @@ class EnemyInstance
 {
 public:
 	EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const unsigned int &level);
-	Point2D mEnemyPosition;
+	Coordinates2D mEnemyPosition;
 	Wave *mWave; //Wave :)
 	Enemy *mEnemy;
 	int mHealth; //Enemy health, <= 0 dead
@@ -78,8 +78,9 @@ public:
 	const int GetGold();
 	void RenderEnemy();
 	void Update(unsigned timePassed);
-	bool const EnemyIsDead();
-	bool const EnemyCanFly();
+	bool const EnemyIsDead(); // check if the enemy is dead.
+	bool const EnemyCanFly(); // check if the enemy can fly.
+	bool const EnemyStillOnMap(); //check if the enemy still on the map.
 };
 
 

@@ -204,17 +204,17 @@ Tower::~Tower()
 		oslDeleteSound(mHitSound);
 }
 
-void Tower::RenderTower(const Point2D &position)
+void Tower::RenderTower(const Coordinates2D &position)
 {
 	oslDrawImageXY(mTowerImg, position.X, position.Y);
 }
 
-void Tower::RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color)
+void Tower::RenderRangeCircle(const Coordinates2D &position, const int &TowerInfo, const OSL_COLOR color)
 {
 	GodLibrary::drawCircle(position.X, position.Y, mTowerVector[TowerInfo].mRange, color);
 }
 
-TowerInstance::TowerInstance(Tower *tower, const Point2D &position)
+TowerInstance::TowerInstance(Tower *tower, const Coordinates2D &position)
 {
 	mCurrentMap = 0;
 	mTower = tower;
@@ -258,7 +258,7 @@ void TowerInstance::RenderTower()
 	oslDrawImageXY(mTower->mTowerImg, mTowerPosition.X, mTowerPosition.Y);
 }
 
-void TowerInstance::RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color)
+void TowerInstance::RenderRangeCircle(const Coordinates2D &position, const int &TowerInfo, const OSL_COLOR color)
 {
 	GodLibrary::drawCircle(position.X, position.Y, mCurrentMap, color);
 }

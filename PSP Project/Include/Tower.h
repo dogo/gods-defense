@@ -62,8 +62,8 @@ public:
 	Tower(const string &mapName, const string &towerName);
 	~Tower();
 
-	void RenderTower(const Point2D &position);
-	void RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color);
+	void RenderTower(const Coordinates2D &position);
+	void RenderRangeCircle(const Coordinates2D &position, const int &TowerInfo, const OSL_COLOR color);
 /*
 *	mIsBuildable - Player can Build ?.
 *	mTowerDirName - Tower Directory name.
@@ -101,14 +101,14 @@ class TowerInstance
 public:
 	Tower *mTower;
 
-	TowerInstance(Tower *tower, const Point2D &position);	
+	TowerInstance(Tower *tower, const Coordinates2D &position);	
 	void Update(unsigned timePassed, const list<EnemyInstance*> &enemies);
 
 	void RenderTower();
-	void RenderRangeCircle(const Point2D &position, const int &TowerInfo, const OSL_COLOR color);
+	void RenderRangeCircle(const Coordinates2D &position, const int &TowerInfo, const OSL_COLOR color);
 private:
 	unsigned int mCurrentMap;
-	Point2D mTowerPosition; //Tower Center
+	Coordinates2D mTowerPosition; //Tower Center
 	float mTowerAngle;
 	int mProjectileInterval;
 

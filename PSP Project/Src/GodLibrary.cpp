@@ -75,26 +75,26 @@ void GodLibrary::Animation(OSL_IMAGE *mAnimateImg, int mMAXFRAMES, int mSpritePo
 	}
 }
 
-Point2D::Point2D()
+Coordinates2D::Coordinates2D()
 {
 	X = 0;
 	Y = 0;
 }
 
-Point2D::Point2D(float x, float y)
+Coordinates2D::Coordinates2D(float x, float y)
 {
 	X = x;
 	Y = y;
 }
 
-float const Point2D::AimTo(const Point2D &enemy)
+float const Coordinates2D::AimTo(const Coordinates2D &enemy)
 {
 	float dy = enemy.Y - this->Y; //dy = enemy.Y - Tower->y
 	float dx = enemy.X - this->X; //dx = enemy.x - Tower->x
 	return atan2(dy,dx); // atan2 from math.h, arco tangente :D, owww trigonometria.
 }
 
-float const Point2D::SquareDistance(const Point2D &enemy)
+float const Coordinates2D::SquareDistance(const Coordinates2D &enemy)
 {   
 	float dx = enemy.X - this->X; //dy = enemy.Y - Tower->y 	
 	float dy = enemy.Y - this->Y; //dx = enemy.x - Tower->x
