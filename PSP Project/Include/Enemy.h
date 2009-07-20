@@ -78,6 +78,8 @@ public:
 	const int GetGold();
 	void RenderEnemy();
 	void Update(unsigned timePassed);
+	bool const EnemyIsDead();
+	bool const EnemyCanFly();
 };
 
 

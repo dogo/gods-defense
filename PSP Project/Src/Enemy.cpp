@@ -174,10 +174,20 @@ const int EnemyInstance::GetGold()
 
 void EnemyInstance::RenderEnemy()
 {
-	if (true)//TODO : check if the enemy is dead. if (isFuckingDead) 
+	if (EnemyIsDead()) 
 	{
 		oslDrawImageXY(mEnemy->mEnemyImgDeath, mEnemyPosition.X, mEnemyPosition.Y);
 		return;
 	}
 	oslDrawImageXY(mEnemy->mEnemyImg, mEnemyPosition.X, mEnemyPosition.Y);
+}
+
+bool const EnemyInstance::EnemyIsDead()
+{
+	return (mHealth <= 0);
+}
+
+bool const EnemyInstance::EnemyCanFly()
+{
+	return mEnemy->mCanFly;
 }
