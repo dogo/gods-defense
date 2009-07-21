@@ -75,6 +75,7 @@ public:
 	int mHealth; //Enemy health, <= 0 dead
 	unsigned int mStat;
 	Path *mPath; //Path to travel
+	const static int MAPSIZE = 480;
 	const int GetGold();
 	void RenderEnemy();
 	void Update(unsigned timePassed);

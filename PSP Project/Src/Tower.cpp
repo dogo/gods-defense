@@ -236,7 +236,21 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 
 	if (!mTowerTarget) //we don't have a target, seek for an enemy.
 	{
-		//TODO :  Seek for an enemy.
+		//Seek for an enemy.
+		//we use an iterator to walk on the enemy list.
+		list<EnemyInstance*>::const_iterator enemyIteratorList;
+		for (enemyIteratorList = enemies.begin(); enemyIteratorList != enemies.end(); enemyIteratorList++)
+		{  //Dogo says : evil IF no donut for you !!
+			/*if (
+				!(*enemyIteratorList)->EnemyIsDead() && 
+				(*enemyIteratorList)->EnemyStillOnMap() &&
+				mTowerPosition->SquareDistance((*enemyIteratorList)->mEnemyPosition) <= mTowerSquareRange &&
+				(
+					(mTower->mHitsFlyer && (*enemyIteratorList)->EnemyCanFly() || 
+					(mTower->mHitsLand && !(*enemyIteratorList)->EnemyCanFly())
+				)
+			)*/
+		}
 	}
 	else if (mTowerTarget)
 	{
