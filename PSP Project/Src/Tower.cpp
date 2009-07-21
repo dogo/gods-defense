@@ -241,15 +241,14 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 		list<EnemyInstance*>::const_iterator enemyIteratorList;
 		for (enemyIteratorList = enemies.begin(); enemyIteratorList != enemies.end(); enemyIteratorList++)
 		{  //Dogo says : evil IF no donut for you !!
-			/*if (
-				!(*enemyIteratorList)->EnemyIsDead() && 
-				(*enemyIteratorList)->EnemyStillOnMap() &&
-				mTowerPosition->SquareDistance((*enemyIteratorList)->mEnemyPosition) <= mTowerSquareRange &&
-				(
-					(mTower->mHitsFlyer && (*enemyIteratorList)->EnemyCanFly() || 
-					(mTower->mHitsLand && !(*enemyIteratorList)->EnemyCanFly())
-				)
-			)*/
+			if (!(*enemyIteratorList)->EnemyIsDead() && (*enemyIteratorList)->EnemyStillOnMap() &&
+				mTowerPosition.SquareDistance((*enemyIteratorList)->mEnemyPosition) <= mTowerSquareRange &&
+				((mTower->mHitsFlyer && (*enemyIteratorList)->EnemyCanFly()) || (mTower->mHitsLand && !(*enemyIteratorList)->EnemyCanFly()))
+			)
+			{
+				mTowerTarget = (*enemyIteratorList);
+				break;
+			}
 		}
 	}
 	else if (mTowerTarget)
