@@ -228,7 +228,7 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 	mProjectileInterval -= timePassed;
 	float mTowerSquareRange = mTower->mTowerVector[mCurrentMap].mRange * mTower->mTowerVector[mCurrentMap].mRange; //Range²
 
-	if(mTowerPosition.SquareDistance(mTowerTarget->mEnemyPosition) > mTowerSquareRange || mTowerTarget->EnemyIsDead())
+	if(mTowerPosition.SquareDistance(mTowerTarget->mEnemyPosition) > mTowerSquareRange || mTowerTarget->EnemyIsDead() || mTowerTarget->EnemyStillOnMap())
 	{
 		//The target its out of range or dead
 		mTowerTarget = NULL;

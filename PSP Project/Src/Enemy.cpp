@@ -165,6 +165,30 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 	mWave = wave;
 	mEnemy = enemy;
 	mHealth = mEnemy->mEnemyVector[mStat].mHealth;
+	mSlowAmount = 0.0;
+	mSlowLength = 0;
+}
+
+void EnemyInstance::Update(unsigned int timePassed)
+{
+	//Enemy is dead so we return
+	if (EnemyIsDead())
+		return;
+}
+
+EnemyState EnemyInstance::GetEnemyState()
+{
+	if (mEnemyState == ENEMY_DIED)
+	{
+		if (mEnemy->mDeathSound != NULL)
+			oslPlaySound(mEnemy->mDeathSound, 1); //Plays the die sound on channel 1
+		return ENEMY_DIED;
+	}
+	else if (mEnemyState == ENEMY_HIT_THE_END)
+	{
+		return ENEMY_HIT_THE_END;
+	}
+	return mEnemyState;
 }
 
 const int EnemyInstance::GetGold() 
@@ -202,4 +226,23 @@ mEnemyPosition.X < 0 |---------------------------| mEnemyPosition.X >= 480
 mEnemyPosition.Y < 0 |---------------------------| mEnemyPosition.Y >= 480
 	*/
 	return !(mEnemyPosition.X < 0 || mEnemyPosition.X >= MAPSIZE || mEnemyPosition.Y < 0 || mEnemyPosition.Y >= MAPSIZE);
+}
+
+void EnemyInstance::EnemyReciveDamage(const int &damage, const float &slowAmount, const int &slowLength)
+{
+	float currentSlow = (mSlowLength / mSlowAmount);
+	float tempSlow = (slowLength / slowAmount);
+
+	if (tempSlow > currentSlow)
+	{
+		mSlowAmount = slowAmount;
+		mSlowLength = slowLength;
+	}
+
+	bool enemyIsAlive = (!EnemyIsDead());
+	mHealth -= damage;
+	if (enemyIsAlive && EnemyIsDead())
+	{
+		mEnemyState = ENEMY_DIED;
+	}
 }

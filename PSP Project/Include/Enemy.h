@@ -20,6 +20,13 @@ class EnemyInstance;
 
 using namespace std;
 
+enum EnemyState
+{
+	NOTHING_HAPPENING, //Nothing is happening with the enemy
+	ENEMY_DIED, //Enemy died
+	ENEMY_HIT_THE_END //Enemy hit the end of the path	
+};
+
 class EnemyInfo
 {
 /*
@@ -76,12 +83,19 @@ public:
 	unsigned int mStat;
 	Path *mPath; //Path to travel
 	const static int MAPSIZE = 480;
+	float mSlowAmount;
+	int mSlowLength;
+	EnemyState mEnemyState;
+
+	EnemyState GetEnemyState();
+
 	const int GetGold();
 	void RenderEnemy();
 	void Update(unsigned timePassed);
 	bool const EnemyIsDead(); // check if the enemy is dead.
 	bool const EnemyCanFly(); // check if the enemy can fly.
 	bool const EnemyStillOnMap(); //check if the enemy still on the map.
+	void EnemyReciveDamage(const int &damage, const float &slowAmount, const int &slowLength); // the enemy recive damage
 };
 
 
