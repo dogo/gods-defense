@@ -5,12 +5,24 @@
 
 #include "../Include/Map.h"
 
+EnemyWave::EnemyWave(string mapDirName, int waveLevel)
+{
+	mMapDirName = mapDirName;
+	mWaveLevel = waveLevel;
+}
+
 Wave::Wave()
 {
 }
 
 Wave::Wave(TiXmlElement *waveNode)
 {
+}
+
+void Wave::EnemySpawn()
+{
+	mCurrentEnemySpawn = 0;
+	mEnemySpawnTimer = mTempSpawnTimer;
 }
 
 Wave::~Wave()

@@ -18,12 +18,25 @@ class Map;
 
 using namespace std;
 
+class EnemyWave
+{
+public:
+	EnemyWave(string MapDirName, int waveLevel);
+	string mMapDirName;
+	int mWaveLevel;
+};
+
 class Wave
 {
 public:
 	Wave();
 	Wave(TiXmlElement *waveNode);
+	void EnemySpawn();
 	~Wave();
+private:
+	unsigned int mCurrentEnemySpawn; // Array watcher
+	int mEnemySpawnTimer; // Controls the time of the last enemy spawned
+	int mTempSpawnTimer;
 };
 
 class Path

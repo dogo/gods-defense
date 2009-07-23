@@ -17,21 +17,21 @@
   <Class Name="EnemyInfo" Collapsed="true">
     <Position X="28.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAQAAAAACAAAAAAQAAAAgAAAAAAQAAAACAAAAAAAAA=</HashCode>
+      <HashCode>AAAQAIAAACAAAAAAQAAAAgIAAAAAQAAAAAAAAAAAAAA=</HashCode>
       <FileName>Include\Enemy.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Enemy" Collapsed="true">
     <Position X="26.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>BowAAgAAAAgAAAEAAAAkAAIAAMAAAEAQAAAAAAAAAAA=</HashCode>
       <FileName>Include\Enemy.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="EnemyInstance" Collapsed="true">
     <Position X="30" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>gAwCgAAADAAAAAAAQBAIAAAgAAICAAQAAAAAAAAAAAA=</HashCode>
       <FileName>Include\Enemy.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -59,21 +59,21 @@
   <Class Name="GodLibrary" Collapsed="true">
     <Position X="31.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAQAAAAAAAAQAAABIAA=</HashCode>
+      <HashCode>AAAAAAAAIAAAAAAAgAAAACAAAAQAAAAAAgAQAAABIAA=</HashCode>
       <FileName>Include\GodLibrary.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Coordinates2D" Collapsed="true">
     <Position X="26.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AgAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <HashCode>AgAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAI=</HashCode>
       <FileName>Include\GodLibrary.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="HelpScreen" Collapsed="true">
     <Position X="12.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAgAAAAAAAAIAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <HashCode>AAAAAAEAQgAAAAAAAAIAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>Include\HelpScreen.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -115,7 +115,7 @@
   <Class Name="Resource" Collapsed="true">
     <Position X="30" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAIQAkBAAAqAEAAQAAABABBAAAAAgAAAAAYgBBA=</HashCode>
+      <HashCode>AAQAAAIQAkBAAAqAEAAQAAABABBAAACAgAAAAAYgBBA=</HashCode>
       <FileName>Include\Resource.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -143,14 +143,14 @@
   <Class Name="Tower" Collapsed="true">
     <Position X="31.75" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ACAAAAAAEAAgAICIEAAAAgAACAAIAAEUgGAAAACAAQI=</HashCode>
+      <HashCode>ACAAAAAAGAAgAACIEAAAAgAACAAIAAEUgGAAAACAAQI=</HashCode>
       <FileName>Include\Tower.h</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TowerInstance" Collapsed="true">
     <Position X="28.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAAAACAIAAAAAAAAAgEAAAQEACAAgg=</HashCode>
+      <HashCode>AAQAAAAAAAAAAAAAAACAIAAAAAAAAAwEAAAQEACAAAg=</HashCode>
       <FileName>Include\Tower.h</FileName>
     </TypeIdentifier>
   </Class>
@@ -287,7 +287,7 @@
       <FileName>Include\Projectile.h</FileName>
     </TypeIdentifier>
   </Enum>
-  <Enum Name="__unnamed_00bd_1" Collapsed="true">
+  <Enum Name="__unnamed_00be_1" Collapsed="true">
     <Position X="26.5" Y="6" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAABAAAAAAAAAAAAAAAAAACABAAAAAAAAAAAAAAAAAA=</HashCode>
