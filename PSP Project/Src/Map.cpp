@@ -11,12 +11,17 @@ EnemyWave::EnemyWave(string mapDirName, int waveLevel)
 	mWaveLevel = waveLevel;
 }
 
-Wave::Wave()
-{
-}
-
 Wave::Wave(TiXmlElement *waveNode)
 {
+	//Default Initializers
+	mWaveDescription = NULL;
+	mSpawnTime = 1;
+	mUpgradePoint = 0;
+	mIsBoss = false;
+	mPointOfInterest = false;
+	mCurrentEnemySpawn = 0;
+	mEnemySpawnTimer = 0;
+	mEnemiesLeftAlive = 0;
 }
 
 void Wave::EnemySpawn()
