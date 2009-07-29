@@ -15,8 +15,7 @@ Wave::Wave(TiXmlElement *waveNode)
 {
 	//Default Initializers
 	mWaveDescription = NULL;
-	mSpawnTime = 1;
-	mUpgradePoint = 0;
+	mIntervalSpawnTime = 1;
 	mIsBoss = false;
 	mPointOfInterest = false;
 	mCurrentEnemySpawn = 0;

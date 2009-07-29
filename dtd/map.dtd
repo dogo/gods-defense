@@ -1,0 +1,35 @@
+<!ELEMENT Name ( #PCDATA ) >
+
+<!ELEMENT Description ( #PCDATA ) >
+
+<!ELEMENT Initializers EMPTY >
+<!ATTLIST Initializers Gold NMTOKEN #REQUIRED >
+<!ATTLIST Initializers Lives NMTOKEN #REQUIRED >
+
+<!ELEMENT BuildTowerMenu EMPTY >
+<!ATTLIST BuildTowerMenu Folder NMTOKEN #REQUIRED >
+<!ATTLIST BuildTowerMenu X NMTOKEN #REQUIRED >
+<!ATTLIST BuildTowerMenu Y NMTOKEN #REQUIRED >
+
+<!ELEMENT MapImg EMPTY >
+<!ATTLIST MapImg File NMTOKEN #IMPLIED >
+<!ATTLIST MapImg Height NMTOKEN #REQUIRED >
+<!ATTLIST MapImg Width NMTOKEN #REQUIRED >
+
+<!ELEMENT ColisionMap ( #PCDATA ) >
+
+<!ELEMENT Wave ( Enemy+ ) >
+<!ATTLIST Wave Boss NMTOKEN #IMPLIED >
+<!ATTLIST Wave Description CDATA #REQUIRED >
+<!ATTLIST Wave Path NMTOKEN #REQUIRED >
+<!ATTLIST Wave IntervalSpawnTime NMTOKEN #REQUIRED >
+<!ATTLIST Wave BossSound NMTOKEN #IMPLIED >
+
+<!ELEMENT Waves ( Wave+ ) >
+
+<!ELEMENT Enemy EMPTY >
+<!ATTLIST Enemy NumberOfEnemies NMTOKEN #IMPLIED >
+<!ATTLIST Enemy Folder NMTOKEN #REQUIRED >
+<!ATTLIST Enemy Map NMTOKEN #IMPLIED >
+
+<!ELEMENT Map ( Name, Description, Initializers, BuildTowerMenu, MapImg, ColisionMap, Path+, Waves) >
