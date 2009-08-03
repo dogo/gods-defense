@@ -15,6 +15,7 @@ class Map;
 #include "../Include/Tower.h"
 #include "../Include/GodLibrary.h"
 #include "tinyxml/tinyxml.h"
+#include <vector>
 
 using namespace std;
 
@@ -30,7 +31,9 @@ class Wave
 {
 public:
 	Wave(TiXmlElement *waveNode);
-	void EnemySpawn();
+	void StartEnemySpawn();
+	bool EndOfWave(); //Check if is the end of wave
+	void EnemyKilled(); // Every time when an dies or reaches the end of the path.
 	~Wave();
 private:
 	unsigned int mCurrentEnemySpawn; // Array watcher
@@ -41,6 +44,8 @@ private:
 	bool mPointOfInterest; //The enemy reached the point of interest, the player loses points for life
 	int mEnemiesLeftAlive; //how many enemies left in the current wave
 	int mIntervalSpawnTime; //Interval spawn time between enemies in the wave
+	string mCurrentPath;
+	vector<EnemyWave> mEnemySpawns;
 };
 
 class Path

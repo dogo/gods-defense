@@ -18,10 +18,22 @@
 
 <!ELEMENT ColisionMap ( #PCDATA ) >
 
+<!ELEMENT Checkpoint EMPTY >
+<!ATTLIST Checkpoint Radius NMTOKEN #IMPLIED >
+<!ATTLIST Checkpoint X NMTOKEN #REQUIRED >
+<!ATTLIST Checkpoint Y NMTOKEN #REQUIRED >
+
+<!ELEMENT Start ( Checkpoint+ ) >
+<!ELEMENT End ( Checkpoint+ ) >
+
+<!ELEMENT Path ( Checkpoint+ | (Start, End) ) >
+<!ATTLIST Path Name NMTOKEN #REQUIRED >
+
 <!ELEMENT Wave ( Enemy+ ) >
 <!ATTLIST Wave Boss NMTOKEN #IMPLIED >
 <!ATTLIST Wave Description CDATA #REQUIRED >
 <!ATTLIST Wave Path NMTOKEN #REQUIRED >
+<!ATTLIST Wave PointOfInterest (True|False) #IMPLIED >
 <!ATTLIST Wave IntervalSpawnTime NMTOKEN #REQUIRED >
 <!ATTLIST Wave BossSound NMTOKEN #IMPLIED >
 
