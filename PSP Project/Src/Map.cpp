@@ -46,7 +46,7 @@ Wave::Wave(TiXmlElement *waveNode)
 	{
 		if (WaveEnemyNode->ValueStr() != "Enemy")
 		{
-			oslFatalError("TowersLevel Error: %i",WaveEnemyNode->ValueStr());
+			oslFatalError("Bad node, not donout for you: %i",WaveEnemyNode->ValueStr());
 			return;
 		}
 
@@ -72,6 +72,13 @@ void Wave::StartEnemySpawn()
 	mEnemySpawnTimer = mTempSpawnTimer;
 }
 
+void Wave::GetCurrenteWaveEnemy(string &enemyName, int &WaveLevel)
+{
+	enemyName = mEnemySpawns[mCurrentEnemySpawn].mMapDirName;
+	WaveLevel = mEnemySpawns[mCurrentEnemySpawn].mWaveLevel;
+	mCurrentEnemySpawn++;
+}
+
 bool Wave::EndOfWave()
 {
 	return (mEnemiesLeftAlive == 0);
@@ -88,12 +95,41 @@ Wave::~Wave()
 		free(mWaveDescription);
 }
 
+PathCoords::PathCoords(TiXmlElement *checkPointNode)
+{
+	int x=0, y=0;
+	checkPointNode->QueryIntAttribute("X", &x);
+	checkPointNode->QueryIntAttribute("Y", &y);
+
+	mCoords.X = x;
+	mCoords.Y = y;
+
+	mRadius = 0;
+	checkPointNode->QueryIntAttribute("Radius", &mRadius);
+}
+
 Path::Path()
 {
 }
 
 Path::Path(TiXmlElement *pathNode)
 {
+	TiXmlElement *node = pathNode->FirstChildElement();
+	while (node != NULL) //process all the checkpoints
+	{
+		if (node->ValueStr() == "Checkpoint")
+		{
+			mCheckpoint.push_back(PathCoords(node));
+
+			//TODO : Calculate path length
+		}
+		else
+		{
+			oslFatalError("Bad node, not donout for you: %i",node->Value());
+			return;
+		}
+		node = node->NextSiblingElement();
+	}
 }
 
 void Map::LoadMap(const string &mapName)

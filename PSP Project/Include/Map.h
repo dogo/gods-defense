@@ -34,6 +34,7 @@ public:
 	void StartEnemySpawn();
 	bool EndOfWave(); //Check if is the end of wave
 	void EnemyKilled(); // Every time when an dies or reaches the end of the path.
+	void GetCurrenteWaveEnemy(string &enemyName, int &WaveLevel);
 	~Wave();
 private:
 	unsigned int mCurrentEnemySpawn; // Array watcher
@@ -48,11 +49,23 @@ private:
 	vector<EnemyWave> mEnemySpawns;
 };
 
+class PathCoords
+{
+public:
+	PathCoords(TiXmlElement *checkPointNode);
+
+	Coordinates2D mCoords;
+	int mRadius;
+};
+
 class Path
 {
 public:
 	Path();
 	Path(TiXmlElement *pathNode);
+
+private:
+	vector<PathCoords> mCheckpoint;
 };
 
 class Map

@@ -70,7 +70,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 
 	if (!node)
 	{
-		oslFatalError("No head not in: %i", temp);
+		oslFatalError("No head node in: %i", temp);
 		return;
 	}
 
