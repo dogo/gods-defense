@@ -24,6 +24,7 @@ void GameOptionsScreen::update()
 	if(osl_keys->pressed.cross)
 	{				
 		Screen = ScreenManager::SCREEN_GAME; //Start game!
+		oslStopSound(menuTheme);
 	}
 	if(osl_keys->pressed.circle)
 	{
