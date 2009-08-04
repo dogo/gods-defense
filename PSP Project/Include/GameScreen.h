@@ -14,9 +14,14 @@
 class GameScreen : public IScreen
 {
 private:
+	OSL_IMAGE *cursor;
+	OSL_IMAGE *map;
+	int i;
 
 public:
 	GameScreen();
+
+	virtual ~GameScreen();
 
 	virtual void draw();
 

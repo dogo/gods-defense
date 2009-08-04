@@ -38,6 +38,7 @@ char const Resource::STR_ABOUT_TEXT[] =
 	"Art & Design\n"
 	"Hideaki Morohashi\n"
 	"Luca Watanabe\n"
+	"Julio Sena\n"
 	"\n"
 	"Developed by AnyKey Entertainment\n"
 	"\n"

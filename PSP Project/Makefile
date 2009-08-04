@@ -1,6 +1,6 @@
 TARGET = GodsDefense
 CFLAGS = -O2 -g -G0 -Wall
-CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti -DTIXML_USE_STL
+CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti -DTIXML_USE_STL -DDEBUG
 ASFLAGS = $(CFLAGS)
 
 GAMEOBJECTS=Src/Main.o Src/AnykeyScreen.o Src/ScreenManager.o Src/TitleScreen.o Src/MainMenuScreen.o Src/GameOptionsScreen.o \
