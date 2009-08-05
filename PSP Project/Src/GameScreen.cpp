@@ -11,6 +11,10 @@ GameScreen::GameScreen()
 {
 	cursor = oslLoadImageFilePNG("Res/cursor.png", OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	map = oslLoadImageFilePNG("Res/maps/test/icarusfalls.png", OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+
+	if (!map || !cursor)
+		oslFatalError("At least one file is missing. Please copy all the file in the game directory.");
+
 	//Initialize variables
 	cursor->centerY = cursor->sizeY / 2;
 	cursor->x = 240;							//Place cursor at the center of the screen
