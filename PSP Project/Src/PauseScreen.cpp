@@ -38,9 +38,17 @@ void PauseScreen::update()
 		gMenu++;
 		gMenu%=2;
 	}
-	if(osl_keys->pressed.circle || osl_keys->pressed.start)
+	if(osl_keys->pressed.circle)
 	{
 		oslFlushKey();
 		mNextScreen = ScreenManager::SCREEN_GAME; //go back CLR
+	}
+	if(osl_keys->pressed.cross)
+	{
+		oslFlushKey();
+		if(gMenu == 0)
+			mNextScreen = ScreenManager::SCREEN_GAME; //go back CLR
+		else if (gMenu == 1)
+			mNextScreen = ScreenManager::SCREEN_MAIN_MENU;
 	}
 }

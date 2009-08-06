@@ -71,37 +71,11 @@ int main()
 				mScreenManager->mCurrentScreen->draw();
 				mScreenManager->mCurrentScreen->update();
 			}
-			else
-				mScreenManager->deactivate();
 
 			if(gScreen == ScreenManager::SCREEN_TITLE){   
 				if(osl_keys->pressed.start)
 				{
 					oslPlaySound(menuTheme, 1); //Plays the sound in the menu
-				}
-			}
-
-			if(gScreen == ScreenManager::SCREEN_MULTIPLAYER){
-				if(oslIsWlanPowerOn())
-				{
-					mScreenManager->activate(ScreenManager::SCREEN_MULTIPLAYER);
-					if(mScreenManager->isActive())
-					{
-						mScreenManager->mCurrentScreen->draw();
-						mScreenManager->mCurrentScreen->update();
-					}
-						mScreenManager->deactivate();
-				}
-				else
-				{
-					mScreenManager->activate(ScreenManager::SCREEN_WARNING);
-					if(mScreenManager->isActive())
-					{
-						mScreenManager->mCurrentScreen->draw();
-						mScreenManager->mCurrentScreen->update();
-					}
-					else
-						mScreenManager->deactivate();
 				}
 			}
 			oslEndDrawing();

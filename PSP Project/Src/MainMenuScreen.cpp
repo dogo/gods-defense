@@ -55,7 +55,10 @@ void MainMenuScreen::update()
 		if(gMenu == 1)
 		{
 			oslFlushKey();
-			mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
+			if(oslIsWlanPowerOn())
+				mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
+			else
+				mNextScreen = ScreenManager::SCREEN_WARNING;
 		}
 		if(gMenu == 2)
 		{
