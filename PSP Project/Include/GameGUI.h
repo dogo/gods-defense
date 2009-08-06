@@ -9,11 +9,15 @@
 #include "../Include/GodLibrary.h"
 #include "../Include/GameScreen.h"
 
+//Class Declarations
+class GameScreen;
+
 class GameGUI
 {
 public:
 	void LoadStuffs();
 	static void InitGUI(GameScreen *gameLogic);
+	void Update(unsigned timePassed);
 
 private:
 	GameGUI(GameScreen *gameLogic);

@@ -7,7 +7,7 @@
 
 GameGUI *GameGUI::mHighLander = NULL;
 
-static void GameGUI::InitGUI(GameScreen *gameLogic)
+void GameGUI::InitGUI(GameScreen *gameLogic)
 {
 	if (gameLogic != NULL)
 	{
@@ -15,7 +15,7 @@ static void GameGUI::InitGUI(GameScreen *gameLogic)
 		return;
 	}
 	
-	mHighLander = new GameUI(gameLogic);
+	mHighLander = new GameGUI(gameLogic);
 }
 
 void GameGUI::LoadStuffs()
