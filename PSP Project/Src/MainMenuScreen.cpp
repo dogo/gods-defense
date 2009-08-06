@@ -9,17 +9,17 @@
 
 MainMenuScreen::MainMenuScreen()
 {
-	//menubg = oslLoadImageFilePNG(Resource::MAIN_MENU_BG, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	menubg = oslLoadImageFilePNG(Resource::IMG_MAIN_MENU_BG, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 }
 
 MainMenuScreen::~MainMenuScreen()
 {
-	//oslDeleteImage(menubg);
+	oslDeleteImage(menubg);
 }
 
 void MainMenuScreen::draw()
 {
-	//oslDrawImageXY(menubg, (480/2) - (menubg->stretchX/2), (272/2) - (menubg->stretchY/2));
+	oslDrawImageXY(menubg, (480/2) - (menubg->stretchX/2), (272/2) - (menubg->stretchY/2));
 	(gMenu == 0) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
 	oslDrawString(340, 100,Resource::STR_START_GAME);
 	(gMenu == 1) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
@@ -50,27 +50,27 @@ void MainMenuScreen::update()
 		if(gMenu == 0)
 		{
 			oslFlushKey();
-			Screen = ScreenManager::SCREEN_GAME_OPTIONS; // start game options!
+			mNextScreen = ScreenManager::SCREEN_GAME_OPTIONS; // start game options!
 		}
 		if(gMenu == 1)
 		{
 			oslFlushKey();
-			Screen = ScreenManager::SCREEN_MULTIPLAYER;
+			mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
 		}
 		if(gMenu == 2)
 		{
 			oslFlushKey();
-			Screen = ScreenManager::SCREEN_HELP;
+			mNextScreen = ScreenManager::SCREEN_HELP;
 		}
 		if(gMenu == 3)
 		{
 			oslFlushKey();
-			Screen = ScreenManager::SCREEN_ABOUT;
+			mNextScreen = ScreenManager::SCREEN_ABOUT;
 		}
 		if(gMenu == 4)
 		{
 			oslFlushKey();
-			Screen = ScreenManager::SCREEN_CONFIRM_EXIT;
+			mNextScreen = ScreenManager::SCREEN_CONFIRM_EXIT;
 		}
 	}
 }

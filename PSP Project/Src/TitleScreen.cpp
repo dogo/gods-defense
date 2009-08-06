@@ -32,4 +32,6 @@ void TitleScreen::draw()
 
 void TitleScreen::update()
 {
+	if(osl_keys->pressed.start)
+		mNextScreen = ScreenManager::SCREEN_MAIN_MENU;
 }

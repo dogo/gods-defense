@@ -23,29 +23,25 @@ ScreenManager::ScreenManager()
 
 void ScreenManager::activate(int aIndex)
 {
-	isActive();
-
 	if(!activeScreen){
 		mCurrentScreen = ScreenManager::createScreen(aIndex);
+		gScreen = aIndex;
+		mNextScreen = -1;
 		activeScreen = true;
 	}
 }
 
 bool ScreenManager::isActive()
 {
-	screenActive = true;
-	return true;
+	return activeScreen;
 }
 
 void ScreenManager::deactivate()
 {
-	if(screenActive)
-	{
-		delete(mCurrentScreen);
-		mCurrentScreen = NULL;
-		screenActive = false;
-		activeScreen = false;
-	}
+	delete(mCurrentScreen);
+	mCurrentScreen = NULL;
+	activeScreen = false;
+	gScreen = -1;
 }
 
 IScreen * ScreenManager::createScreen(int aIndex)

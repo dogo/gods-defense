@@ -8,6 +8,7 @@
 
 AnykeyScreen::AnykeyScreen()
 {
+	mWait = 0;
 	AnykeySplash = oslLoadImageFilePNG(Resource::IMG_ANYKEY_SPLASH, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	mySplash = new GodLibrary;
 }
@@ -26,5 +27,9 @@ void AnykeyScreen::draw()
 
 void AnykeyScreen::update()
 {
-
+	mWait++;
+	if(mWait == 250) //wait 250 frames until this screen is over
+	{
+		mNextScreen = ScreenManager::SCREEN_TITLE;		
+	}
 }

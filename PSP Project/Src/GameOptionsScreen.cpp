@@ -23,11 +23,11 @@ void GameOptionsScreen::update()
 {
 	if(osl_keys->pressed.cross)
 	{				
-		Screen = ScreenManager::SCREEN_GAME; //Start game!
+		mNextScreen = ScreenManager::SCREEN_GAME; //Start game!
 		oslStopSound(menuTheme);
 	}
 	if(osl_keys->pressed.circle)
 	{
-		Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+		mNextScreen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
 	}
 }

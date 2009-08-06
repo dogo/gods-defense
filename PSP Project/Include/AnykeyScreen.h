@@ -14,6 +14,7 @@ class AnykeyScreen : public IScreen
 private:
 	GodLibrary *mySplash;
 	OSL_IMAGE *AnykeySplash;
+	int	mWait;
 
 public:
 	AnykeyScreen();

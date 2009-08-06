@@ -33,6 +33,6 @@ void WarningScreen::update()
 	if(osl_keys->pressed.circle)
 	{
 		oslFlushKey();
-		Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+		mNextScreen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
 	}
 }

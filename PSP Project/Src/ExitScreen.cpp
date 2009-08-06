@@ -45,12 +45,12 @@ void ExitScreen::update()
 		{
 			oslFlushKey();
 			gMenu = 0;
-			Screen = ScreenManager::SCREEN_MAIN_MENU;
+			mNextScreen = ScreenManager::SCREEN_MAIN_MENU;
 		}
 	}
 	if(osl_keys->pressed.circle)
 	{
 		gMenu = 0;
-		Screen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+		mNextScreen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
 	}
 }

@@ -10,8 +10,8 @@ PSP_MAIN_THREAD_ATTR(PSP_THREAD_ATTR_USER | PSP_THREAD_ATTR_VFPU);
 PSP_HEAP_SIZE_KB(12*1024);
 
 //Screen display
-int	Screen = 0;
-int	wait = 0;
+int mNextScreen = -1;
+int	gScreen = 0;
 int	gMenu = 0;
 OSL_FONT *gFont;
 OSL_SOUND *menuTheme;
@@ -42,124 +42,46 @@ int main()
 
 	menuTheme = oslLoadSoundFileBGM("/Res/menuTheme.bgm", OSL_FMT_STREAM); //Loads the Main menu theme music
 
-	OSL_IMAGE *menubg = oslLoadImageFilePNG(Resource::IMG_MAIN_MENU_BG, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
-
     // Load fonts
 	gFont = oslLoadFontFile("flash0:/font/ltn8.pgf");
     oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT); //Tells the psp what font to use in intrafont
 	oslSetFont(gFont);
 
-	if (!menuTheme || !menubg || !gFont)
+	if (!menuTheme /*|| !menubg*/ || !gFont)
 		oslFatalError("At least one file is missing. Please copy all the file in the game directory.");
 
 	ScreenManager *mScreenManager = new ScreenManager();
+	mNextScreen = ScreenManager::SCREEN_ANYKEY;
 
     while(!osl_quit){
         if (!skip){
             oslStartDrawing();
 			oslCls();
-			if(Screen == ScreenManager::SCREEN_ANYKEY){
-				mScreenManager->activate(ScreenManager::SCREEN_ANYKEY);
+
+			if(mNextScreen != -1)
+			{
 				if(mScreenManager->isActive())
-				{		
-					mScreenManager->mCurrentScreen->draw();
-					wait++;
-				}
-				if(wait == 250) //wait 250 frames until this screen is over
-				{	
 					mScreenManager->deactivate();
-					Screen = ScreenManager::SCREEN_TITLE;		
-				}
+
+				mScreenManager->activate(mNextScreen);
 			}
 
-			if(Screen == ScreenManager::SCREEN_TITLE){   
-				mScreenManager->activate(ScreenManager::SCREEN_TITLE);
-				if(mScreenManager->isActive())
-					mScreenManager->mCurrentScreen->draw();
+			if(mScreenManager->isActive())
+			{		
+				mScreenManager->mCurrentScreen->draw();
+				mScreenManager->mCurrentScreen->update();
+			}
+			else
+				mScreenManager->deactivate();
+
+			if(gScreen == ScreenManager::SCREEN_TITLE){   
 				if(osl_keys->pressed.start)
 				{
-					mScreenManager->deactivate();
-					Screen = ScreenManager::SCREEN_MAIN_MENU;
 					oslPlaySound(menuTheme, 1); //Plays the sound in the menu
 				}
 			}
-			
-			if(Screen == ScreenManager::SCREEN_MAIN_MENU){
-				mScreenManager->activate(ScreenManager::SCREEN_MAIN_MENU);
-				if(mScreenManager->isActive())
-				{
-					oslDrawImageXY(menubg, (480/2) - (menubg->stretchX/2), (272/2) - (menubg->stretchY/2));
-					mScreenManager->mCurrentScreen->draw();
-					mScreenManager->mCurrentScreen->update();
-				}
-					mScreenManager->deactivate();
-			}
 
-			if(Screen == ScreenManager::SCREEN_CONFIRM_EXIT){
-				mScreenManager->activate(ScreenManager::SCREEN_CONFIRM_EXIT);
-				if(mScreenManager->isActive())
-				{
-					mScreenManager->mCurrentScreen->draw();
-					mScreenManager->mCurrentScreen->update();
-				}
-				else
-					mScreenManager->deactivate();
-			}
-
-			if(Screen == ScreenManager::SCREEN_GAME_OPTIONS){
-				mScreenManager->activate(ScreenManager::SCREEN_GAME_OPTIONS);
-				if(mScreenManager->isActive())
-				{
-					mScreenManager->mCurrentScreen->draw();
-					mScreenManager->mCurrentScreen->update();
-				}
-					mScreenManager->deactivate();
-			}
-
-			if(Screen == ScreenManager::SCREEN_PAUSE){
-				mScreenManager->activate(ScreenManager::SCREEN_PAUSE);
-				if(mScreenManager->isActive())
-				{
-					mScreenManager->mCurrentScreen->draw();
-					mScreenManager->mCurrentScreen->update();
-				}
-				else
-					mScreenManager->deactivate();
-			}
-
-			if(Screen == ScreenManager::SCREEN_GAME){
-				mScreenManager->activate(ScreenManager::SCREEN_GAME);
-				if(mScreenManager->isActive())
-				{
-					mScreenManager->mCurrentScreen->draw();
-					mScreenManager->mCurrentScreen->update();
-				}
-				else
-					mScreenManager->deactivate();
-			}
-			
-			if(Screen == ScreenManager::SCREEN_HELP){
-				mScreenManager->activate(ScreenManager::SCREEN_HELP);
-				if(mScreenManager->isActive())
-				{
-					mScreenManager->mCurrentScreen->draw();
-					mScreenManager->mCurrentScreen->update();
-				}
-				else
-					mScreenManager->deactivate();
-			}
-			if(Screen == ScreenManager::SCREEN_ABOUT){
-				mScreenManager->activate(ScreenManager::SCREEN_ABOUT);
-				if(mScreenManager->isActive())
-				{
-					mScreenManager->mCurrentScreen->draw();
-					mScreenManager->mCurrentScreen->update();
-				}
-				else 
-					mScreenManager->deactivate();
-			}
-
-			if(Screen == ScreenManager::SCREEN_MULTIPLAYER){
+			if(gScreen == ScreenManager::SCREEN_MULTIPLAYER){
 				if(oslIsWlanPowerOn())
 				{
 					mScreenManager->activate(ScreenManager::SCREEN_MULTIPLAYER);
@@ -190,7 +112,6 @@ int main()
     	skip = oslSyncFrame();
     }
 
-	oslDeleteImage(menubg);
 	oslDeleteSound(menuTheme);
 	oslDeleteFont(gFont);
     oslIntraFontShutdown();

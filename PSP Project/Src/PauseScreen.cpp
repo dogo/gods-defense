@@ -41,6 +41,6 @@ void PauseScreen::update()
 	if(osl_keys->pressed.circle || osl_keys->pressed.start)
 	{
 		oslFlushKey();
-		Screen = ScreenManager::SCREEN_GAME; //go back CLR
+		mNextScreen = ScreenManager::SCREEN_GAME; //go back CLR
 	}
 }
