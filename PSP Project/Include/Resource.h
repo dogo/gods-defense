@@ -40,6 +40,7 @@ public:
 	static char IMG_GAME_TITLE[];
 	static char IMG_ANYKEY_SPLASH[];
 	static char IMG_MAIN_MENU_BG[];
+	static char IMG_CURSOR[];
 };
 
 

@@ -1,10 +1,10 @@
 TARGET = GodsDefense
 CFLAGS = -O2 -g -G0 -Wall
-CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti -DTIXML_USE_STL -DDEBUG
+CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti -DTIXML_USE_STL
 ASFLAGS = $(CFLAGS)
 
 GAMEOBJECTS=Src/Main.o Src/AnykeyScreen.o Src/ScreenManager.o Src/TitleScreen.o Src/MainMenuScreen.o Src/GameOptionsScreen.o \
-Src/GameScreen.o Src/HelpScreen.o Src/AboutScreen.o Src/MultiplayerScreen.o Src/PauseScreen.o \
+Src/GameScreen.o Src/HelpScreen.o Src/AboutScreen.o Src/MultiplayerScreen.o Src/PauseScreen.o Src/GameGUI.o \
 Src/Resource.o Src/ExitScreen.o Src/GodLibrary.o Src/WarningScreen.o Src/Tower.o Src/Projectile.o Src/Enemy.o Src/Map.o
 TINYXML=tinyxml/tinystr.o tinyxml/tinyxml.o tinyxml/tinyxmlerror.o tinyxml/tinyxmlparser.o
 
