@@ -78,6 +78,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Src\GameGUI.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Src\GameOptionsScreen.cpp"
 				>
 			</File>
@@ -155,6 +159,10 @@
 			</File>
 			<File
 				RelativePath=".\Include\ExitScreen.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\GameGUI.h"
 				>
 			</File>
 			<File
