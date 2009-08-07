@@ -47,7 +47,7 @@ int main()
     oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT); //Tells the psp what font to use in intrafont
 	oslSetFont(gFont);
 
-	if (!menuTheme /*|| !menubg*/ || !gFont)
+	if (!menuTheme || !gFont)
 		oslFatalError("At least one file is missing. Please copy all the file in the game directory.");
 
 	ScreenManager *mScreenManager = new ScreenManager();

@@ -7,6 +7,7 @@
 #define INCLUDED_MAP_H
 
 //Class Declarations
+class EnemyWave;
 class Wave;
 class Path;
 class Map;
@@ -15,14 +16,16 @@ class Map;
 #include "../Include/Tower.h"
 #include "../Include/GodLibrary.h"
 #include "tinyxml/tinyxml.h"
+#include <string>
 #include <vector>
+#include <map>
 
 using namespace std;
 
 class EnemyWave
 {
 public:
-	EnemyWave(string MapDirName, int waveLevel);
+	EnemyWave(string folderName, int waveLevel);
 	string mMapDirName;
 	int mWaveLevel;
 };
@@ -71,7 +74,25 @@ private:
 class Map
 {
 public:
+	Map();
+	~Map();
 	void LoadMap(const string &mapName);
+	static Map *InitMap();
+
+	char *mMapName;
+	char *mCurrentMapName;
+	char *mImgMapName;
+	int mInitialGold;
+	int mInitialLives;
+	vector<char*> mDescription;
+	vector<Wave*> mWaves;
+	map<string, Path> mPaths;
+	int mGridTilesWidth;
+	int mGridTilesHeight;
+	bool **mColisionMap;
+	string** mTowersMenu;
+private:
+	static Map *sHighLander;
 };
 
 #endif

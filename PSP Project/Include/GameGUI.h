@@ -24,7 +24,8 @@ private:
 
 	GameScreen *mGame;
 	OSL_IMAGE *mCursor;
-	static GameGUI *mHighLander;
+	static GameGUI *sHighLander;
+	Tower *mPutingTower;
 };
 
 #endif

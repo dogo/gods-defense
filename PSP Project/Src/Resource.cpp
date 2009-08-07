@@ -10,6 +10,7 @@ char Resource::IMG_ANYKEY_SPLASH[] = "/Res/anykeylogo.png";
 char Resource::IMG_GAME_TITLE[] = "/Res/GDSplash.png";
 char Resource::IMG_MAIN_MENU_BG[] = "/Res/background.png";
 char Resource::IMG_CURSOR[] = "/Res/cursor.png";
+char Resource::IMG_BACK[] = "/Res/circle.png";
 
 char const Resource::STR_BACK_SK[] = "Back";
 char const Resource::STR_MULTIPLAYER_CAPTION[] = "Multiplayer";

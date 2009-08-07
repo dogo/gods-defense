@@ -5,9 +5,9 @@
 
 #include "../Include/Map.h"
 
-EnemyWave::EnemyWave(string mapDirName, int waveLevel)
+EnemyWave::EnemyWave(string folderName, int waveLevel)
 {
-	mMapDirName = mapDirName;
+	mMapDirName = folderName;
 	mWaveLevel = waveLevel;
 }
 
@@ -132,6 +132,172 @@ Path::Path(TiXmlElement *pathNode)
 	}
 }
 
-void Map::LoadMap(const string &mapName)
+Map::Map()
 {
+	mCurrentMapName = NULL;
+}
+
+void Map::LoadMap(const string &MapDirName)
+{
+	char temp[256];
+	sprintf(temp, "Res/maps/%s/level.xml", MapDirName.c_str());
+
+	TiXmlDocument MapXMLInput;
+	MapXMLInput.LoadFile(temp);
+
+	if (MapXMLInput.Error())
+	{
+		oslFatalError("Cannot open: %i", MapXMLInput.ErrorDesc());
+		return;
+	}
+
+	mMapName = strdup(MapDirName.c_str());
+
+	TiXmlElement *node = NULL;
+	node = MapXMLInput.FirstChildElement(); //head
+
+	if (!node)
+	{
+		oslFatalError("No head node in: %i", temp);
+		return;
+	}
+
+	node = node->FirstChildElement();
+
+	while (node != NULL) //Read all XML file
+	{
+		string mCurrentLine = node->ValueStr();
+		if (mCurrentLine == "Name")
+		{
+			mCurrentMapName = strdup(node->GetText());
+		}
+		else if (mCurrentLine == "Description")
+		{
+			char *checkText = strdup(node->GetText());
+			/*
+				A função strtok busca dentro da string declarada um token definido, ou em tempo de compilação ou em tempo 
+				de execução. Se a função encontra o token determinado é devolvido NULL.
+			*/
+			char *tempDes = strtok(checkText, "\n"); // "\r\n ou \n\r" ???
+			while (tempDes != NULL)
+			{
+				mDescription.push_back(strdup(tempDes));
+				tempDes = strtok(NULL, "\n");
+			}
+			free(checkText);
+		}
+		else if (mCurrentLine == "Initializers")
+		{
+			node->QueryIntAttribute("Gold", &mInitialGold);
+			node->QueryIntAttribute("Lives", &mInitialLives);
+		}
+		else if (mCurrentLine == "BuildTowerMenu")
+		{
+			TiXmlElement *towerMenuNode = node->FirstChildElement();
+			while (towerMenuNode != NULL)
+			{
+				int x=0, y=0;
+
+				towerMenuNode->QueryIntAttribute("X", &x);
+				towerMenuNode->QueryIntAttribute("Y", &y);
+
+				mTowersMenu[x][y] = string(towerMenuNode->Attribute("Folder"));
+
+				towerMenuNode = towerMenuNode->NextSiblingElement();
+			}
+		}
+		else if (mCurrentLine == "ColisionMap")
+		{
+			if (mColisionMap == NULL)
+			{
+				oslFatalError("Map::LoadMap Colision Error");
+				return;
+			}
+
+			const char* lText = node->GetText();
+			int x = 0;
+			int y = 0;
+			int maxX = 0;
+
+			while (*lText != '\0')
+			{
+				switch (*lText)
+				{
+				case '\n':
+					if (x > 0)
+					{
+						maxX = x;
+						x = 0;
+						y++;
+					}
+					break;
+				case '#':
+					mColisionMap[x][y] = true;
+					x++;
+					break;
+				case '_':
+					mColisionMap[x][y] = false;
+					x++;
+					break;
+				default:
+					oslFatalError("Bad character %i in Map::LoadMap.",*lText);
+					return;
+				}
+				lText++;
+			}
+			if ( y != mGridTilesHeight )
+			{
+				oslFatalError("Map Height size error");
+				return;
+			}
+			if ( maxX != mGridTilesWidth )
+			{
+				oslFatalError("Map Width size error");
+				return;
+			}
+
+		}
+		else if (mCurrentLine == "MapImg")
+		{
+			mImgMapName = strdup(node->Attribute("File"));
+
+			node->QueryIntAttribute("Width", &mGridTilesWidth);
+			node->QueryIntAttribute("Height", &mGridTilesHeight);
+
+			mColisionMap = new bool*[mGridTilesWidth];
+			for (int i = 0; i < mGridTilesWidth; i++)
+				mColisionMap[i] = new bool[mGridTilesHeight];
+		}
+		else if (mCurrentLine == "Path")
+		{
+			string pathName = string(node->Attribute("Name"));
+			mPaths[pathName] = Path(node);
+		}
+		else if (mCurrentLine == "Waves")
+		{
+			TiXmlElement* waveNode = node->FirstChildElement();
+			while (waveNode != NULL)
+			{
+				if (waveNode->ValueStr() != "Wave")
+				{
+					oslFatalError("Error at load waves in Map::LoadMap %i",waveNode->Value());
+					return;
+				}
+
+				mWaves.push_back(new Wave(waveNode));
+
+				waveNode = waveNode->NextSiblingElement();
+			}
+		}
+		node = node->NextSiblingElement();
+	}
+}
+
+Map *Map::sHighLander = 0; //init this really necessary?
+
+Map *Map::InitMap()
+{
+	if (sHighLander == NULL)
+		sHighLander = new Map();
+	return sHighLander;
 }

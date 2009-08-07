@@ -15,8 +15,8 @@
 extern OSL_FONT *gFont;
 extern OSL_SOUND *menuTheme;
 extern int gMenu;
-extern short state;
-extern int fade;
+extern short gState;
+extern int gFade;
 extern int gScreen;
 extern int mNextScreen;
 

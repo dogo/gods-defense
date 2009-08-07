@@ -11,13 +11,14 @@
 #include "../Include/Tower.h"
 #include "../Include/Enemy.h"
 #include "../Include/GameGUI.h"
+#include "../Include/Map.h"
 
 
 enum GameState
 {
 	GS_SCROLL_MAP,		//User is scrolling on the map
 	GS_MAP_PLACE_TOWER, //User has selected a tower to build and is placing it on the map
-	GS_INGAME_MENU,		//Menu overlaid on the map
+	GS_PAUSE_MENU,		//Pause menu in game
 	GS_TOWER_MENU,		//User is choosing a tower from the menu
 	GS_GAME_OVER		//Player has won or loose the game
 };
@@ -27,9 +28,12 @@ class GameScreen : public IScreen
 private:
 	OSL_IMAGE *map;
 	GameState mGameState;
+	Map *mCurrentMap;
+
 
 public:
 	GameScreen();
+	OSL_IMAGE *LoadMapImage(const char* imageMapName);
 
 	virtual ~GameScreen();
 

@@ -9,7 +9,7 @@
 
 HelpScreen::HelpScreen()
 {
-	back = oslLoadImageFilePNG("/Res/circle.png", OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	back = oslLoadImageFilePNG(Resource::IMG_BACK, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 }
 
 void HelpScreen::draw()

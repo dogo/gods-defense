@@ -41,6 +41,7 @@ public:
 	static char IMG_ANYKEY_SPLASH[];
 	static char IMG_MAIN_MENU_BG[];
 	static char IMG_CURSOR[];
+	static char IMG_BACK[];
 };
 
 

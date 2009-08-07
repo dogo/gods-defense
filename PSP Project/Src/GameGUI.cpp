@@ -5,7 +5,7 @@
 
 #include "../Include/GameGUI.h"
 
-GameGUI *GameGUI::mHighLander = NULL;
+GameGUI *GameGUI::sHighLander = NULL;
 
 void GameGUI::InitGUI(GameScreen *gameLogic)
 {
@@ -15,7 +15,7 @@ void GameGUI::InitGUI(GameScreen *gameLogic)
 		return;
 	}
 	
-	mHighLander = new GameGUI(gameLogic);
+	sHighLander = new GameGUI(gameLogic);
 }
 
 void GameGUI::LoadStuffs()
@@ -36,6 +36,8 @@ GameGUI::GameGUI(GameScreen *gameLogic)
 	
 	mCursor->x = 480/2;	//Place cursor at the center of the screen
 	mCursor->y = 272/2;
+
+	mPutingTower = NULL; //none tower is building
 }
 
 void GameGUI::Update(unsigned timePassed)

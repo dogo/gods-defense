@@ -5,8 +5,8 @@
 
 #include "../Include/GodLibrary.h"
 
-short state = 0;
-int fade = 255;
+short gState = 0;
+int gFade = 255;
 
 //Dogo : This is a cpu-killer wait function.
 void GodLibrary::Wait(unsigned long iTime) {
@@ -20,20 +20,20 @@ void GodLibrary::Wait(unsigned long iTime) {
 
 void GodLibrary::drawSplash(int iTime, OSL_IMAGE *Splash) {
 	oslDrawImageXY(Splash, (480/2) - (Splash->stretchX/2), (272/2) - (Splash->stretchY/2));
-	if(state == 0 || state == 2) {
-		oslDrawFillRect(0, 0, 480, 272, RGBA(0, 0, 0, fade));
+	if(gState == 0 || gState == 2) {
+		oslDrawFillRect(0, 0, 480, 272, RGBA(0, 0, 0, gFade));
 	}
-	if (state == 0) {
-		fade = fade - 2;
-		if (fade <= 0) {
-			fade = 0;
-			state = 1;
+	if (gState == 0) {
+		gFade = gFade - 2;
+		if (gFade <= 0) {
+			gFade = 0;
+			gState = 1;
 		}
-	} else if (state == 1) {
+	} else if (gState == 1) {
 		sceKernelDelayThread(iTime);
-		state = 2;
-	} else if (state == 2) {
-		fade = fade + 2;		 
+		gState = 2;
+	} else if (gState == 2) {
+		gFade = gFade + 2;		 
 	}
 }
 

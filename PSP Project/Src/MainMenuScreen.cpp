@@ -10,6 +10,9 @@
 MainMenuScreen::MainMenuScreen()
 {
 	menubg = oslLoadImageFilePNG(Resource::IMG_MAIN_MENU_BG, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+
+	if (!menubg)
+		oslFatalError("At least one file is missing. Please copy all the file in the game directory.");
 }
 
 MainMenuScreen::~MainMenuScreen()

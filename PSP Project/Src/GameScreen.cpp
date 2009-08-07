@@ -9,12 +9,26 @@
 
 GameScreen::GameScreen()
 {
-	map = oslLoadImageFilePNG("Res/maps/test/icarusfalls.png", OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+
+	mCurrentMap = Map::InitMap();
+
+	map = LoadMapImage("icarusfalls.png");
 
 	if (!map)
 		oslFatalError("At least one file is missing. Please copy all the file in the game directory.");
 	map->x = 0;
 	map->y = 0;
+}
+
+OSL_IMAGE *GameScreen::LoadMapImage(const char *imageMapName)
+{
+	char temp[256];
+	OSL_IMAGE *mMapImg = NULL;
+
+	sprintf(temp, "Res/maps/%s/%s", mCurrentMap->mMapName, imageMapName);
+	mMapImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+
+	return mMapImg;
 }
 
 GameScreen::~GameScreen()
