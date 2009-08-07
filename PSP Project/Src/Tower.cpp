@@ -34,7 +34,7 @@ TowerInfo::TowerInfo(TiXmlElement* infoNode)
 	infoNode->QueryIntAttribute("CriticalPlus", &mCriticalPlus);
 }
 
-Tower::Tower(const string &mapName, const string &towerName)
+Tower::Tower(const string &towerName)
 {
 	//Default Initializers
 	mTowerDirName = towerName;
@@ -54,7 +54,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 	mTowerImg->centerX = (mTowerImg->sizeX/2); //hotspot
 
 	char temp[256];
-	sprintf(temp, "Res/maps/%s/towers/%s/tower.xml", mapName.c_str(), mTowerDirName.c_str());
+	sprintf(temp, "Res/towers/%s/tower.xml", mTowerDirName.c_str());
 
 	TiXmlDocument TowerXMLInput;
 	TowerXMLInput.LoadFile(temp);
@@ -136,7 +136,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 			
 			//More Projectile Types goes here.
 
-			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("Sprite"));
+			sprintf(temp, "Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("Sprite"));
 			mProjectileImg = ProjectileInstance::LoadProjectileImage(mProjectileType, temp);
 		}
 		else if (mCurrentLine == "TowersLevels")
@@ -156,7 +156,7 @@ Tower::Tower(const string &mapName, const string &towerName)
 		}
 		else if (mCurrentLine == "TowerImg")
 		{
-			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
+			sprintf(temp, "Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
 			mTowerImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 			node->QueryIntAttribute("Width", &mTowerWidth);
@@ -164,17 +164,17 @@ Tower::Tower(const string &mapName, const string &towerName)
 		}
 		else if (mCurrentLine == "MenuIcon")
 		{
-			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
+			sprintf(temp, "Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
 			mMenuIcon = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 		}
 		else if (mCurrentLine == "FireSound")
 		{
-			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
+			sprintf(temp, "Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
 			mFireSound = oslLoadSoundFileWAV (temp, OSL_FMT_NONE);
 		}
 		else if (mCurrentLine == "HitSound")
 		{
-			sprintf(temp, "Res/maps/%s/towers/%s/%s", mapName.c_str(), mTowerDirName.c_str(), node->Attribute("File"));
+			sprintf(temp, "Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
 			mHitSound = oslLoadSoundFileWAV (temp, OSL_FMT_NONE);
 		}
 		else

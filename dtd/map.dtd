@@ -11,6 +11,8 @@
 <!ATTLIST BuildTowerMenu X NMTOKEN #REQUIRED >
 <!ATTLIST BuildTowerMenu Y NMTOKEN #REQUIRED >
 
+<!ELEMENT Menu ( BuildTowerMenu* ) >
+
 <!ELEMENT MapImg EMPTY >
 <!ATTLIST MapImg File NMTOKEN #IMPLIED >
 <!ATTLIST MapImg Height NMTOKEN #REQUIRED >
@@ -30,11 +32,11 @@
 <!ATTLIST Path Name NMTOKEN #REQUIRED >
 
 <!ELEMENT Wave ( Enemy+ ) >
-<!ATTLIST Wave Boss NMTOKEN #IMPLIED >
-<!ATTLIST Wave Description CDATA #REQUIRED >
 <!ATTLIST Wave Path NMTOKEN #REQUIRED >
-<!ATTLIST Wave PointOfInterest (True|False) #IMPLIED >
 <!ATTLIST Wave IntervalSpawnTime NMTOKEN #REQUIRED >
+<!ATTLIST Wave Description CDATA #REQUIRED >
+<!ATTLIST Wave Boss NMTOKEN #IMPLIED >
+<!ATTLIST Wave PointOfInterest (True|False) #IMPLIED >
 <!ATTLIST Wave BossSound NMTOKEN #IMPLIED >
 
 <!ELEMENT Waves ( Wave+ ) >
@@ -44,4 +46,4 @@
 <!ATTLIST Enemy Folder NMTOKEN #REQUIRED >
 <!ATTLIST Enemy Map NMTOKEN #IMPLIED >
 
-<!ELEMENT Map ( Name, Description, Initializers, BuildTowerMenu, MapImg, ColisionMap, Path+, Waves) >
+<!ELEMENT Map ( Name, Description, Initializers, Menu, MapImg, ColisionMap, Path+, Waves) >

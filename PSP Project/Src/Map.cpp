@@ -140,7 +140,7 @@ Map::Map()
 void Map::LoadMap(const string &MapDirName)
 {
 	char temp[256];
-	sprintf(temp, "Res/maps/%s/level.xml", MapDirName.c_str());
+	sprintf(temp, "Res/maps/%s/map.xml", MapDirName.c_str());
 
 	TiXmlDocument MapXMLInput;
 	MapXMLInput.LoadFile(temp);

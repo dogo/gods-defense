@@ -59,7 +59,7 @@ public:
 class Tower
 {
 public:
-	Tower(const string &mapName, const string &towerName);
+	Tower(const string &towerName);
 	~Tower();
 
 	void RenderTower(const Coordinates2D &position);
