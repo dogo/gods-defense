@@ -1,0 +1,84 @@
+<!DOCTYPE Tower SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/map.dtd">
+<Map>
+    <Name>Icarus Falls</Name>
+    <Description><![CDATA[5 Waves of Tower.]]></Description>
+    <Initializers Gold="20" Lives="20" />
+
+    <Menu>
+        <BuildTowerMenu X="0" Y="0" Folder="arrow" />
+        <BuildTowerMenu X="3" Y="1" Folder="ice" />
+    </Menu>
+    <MapImg File="icarusfalls.png" Width="480" Height="480" />
+    <ColisionMap><![CDATA[
+################################
+################################
+##_____________##_____________##
+##_____________##_____________##
+##__########___##___########__##
+##__########___##___########__##
+##__##____##___##___##____##__##
+##__##____##___##___##____##__##
+____##____##___##___##____##__##
+____##____##___##___##____##__##
+____########___##___########__##
+############___##___########__##
+######_________##________##___##
+____##_________##________##___##
+____##__##############___##___##
+____##__##############___##___##
+##__##__##__________##___##___##
+##__##__##__________##___##___##
+##__##__##__________##___##___##
+##__##__##__________##___##___##
+##__##__##############___##___##
+##__##__##############___##___##
+##__##___________________##___##
+##__##___________________##___##
+##__##___________________##___##
+##__#######################___##
+##__#######################___##
+##____________________________##
+##____________________________##
+##____________________________##
+################################
+################################
+]]></ColisionMap>
+
+    <Path Name="default">
+        <Checkpoint X="-16" Y="144" />
+        <Checkpoint X="48" Y="144" />
+        <Checkpoint X="48" Y="48" />
+        <Checkpoint X="208" Y="48" />
+        <Checkpoint X="208" Y="48" />
+        <Checkpoint X="208" Y="208" />
+        <Checkpoint X="112" Y="208" />
+        <Checkpoint X="112" Y="368" />
+        <Checkpoint X="368" Y="368" />
+        <Checkpoint X="368" Y="208" />
+        <Checkpoint X="304" Y="208" />
+        <Checkpoint X="304" Y="48" />
+        <Checkpoint X="464" Y="48" />
+        <Checkpoint X="464" Y="464" />
+        <Checkpoint X="48" Y="464" />
+        <Checkpoint X="48" Y="240" />
+        <Checkpoint X="-16" Y="240" />
+    </Path>
+    
+    <Waves>
+        <Wave Path="default" IntervalSpawnTime="600" Description="Wave 1!">
+            <Enemy Folder="panda" NumberOfEnemies="20" />
+        </Wave>
+        <Wave Path="default" IntervalSpawnTime="600" Description="Wave 2!">
+            <Enemy Folder="panda" NumberOfEnemies="20" />
+        </Wave>
+        <Wave Path="default" IntervalSpawnTime="600" Description="Wave 3!">
+            <Enemy Folder="panda" NumberOfEnemies="20" />
+        </Wave>
+        <Wave Path="default" IntervalSpawnTime="600" Description="Wave 4!">
+            <Enemy Folder="panda" NumberOfEnemies="20" />
+        </Wave>
+        <Wave Path="default" IntervalSpawnTime="5000" Description="Wave 5 Bosssss!" Boss="True" BossSound="True">
+            <Enemy Folder="panda" NumberOfEnemies="10" />
+        </Wave>
+    </Waves>
+</Map>
