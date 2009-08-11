@@ -6,6 +6,14 @@
 #include "../Include/GameScreen.h"
 #include "../Include/ScreenManager.h"
 
+GameScreen *GameScreen::sHighLander = 0; //init this really necessary?
+
+GameScreen *GameScreen::InitGame()
+{
+	if (sHighLander == NULL)
+		sHighLander = new GameScreen();
+	return sHighLander;
+}
 
 GameScreen::GameScreen()
 {
@@ -25,7 +33,7 @@ OSL_IMAGE *GameScreen::LoadMapImage(const char *imageMapName)
 	char temp[256];
 	OSL_IMAGE *mMapImg = NULL;
 
-	sprintf(temp, "Res/maps/%s/%s", mCurrentMap->mMapName, imageMapName);
+	sprintf(temp, "Res/maps/icarusfalls/%s"/*%s, mCurrentMap->mMapName*/, imageMapName);
 	mMapImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 	return mMapImg;

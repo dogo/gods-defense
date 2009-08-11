@@ -191,18 +191,25 @@ void Map::LoadMap(const string &MapDirName)
 			node->QueryIntAttribute("Gold", &mInitialGold);
 			node->QueryIntAttribute("Lives", &mInitialLives);
 		}
-		else if (mCurrentLine == "BuildTowerMenu")
+		else if (mCurrentLine == "Menu")
 		{
 			TiXmlElement *towerMenuNode = node->FirstChildElement();
 			while (towerMenuNode != NULL)
 			{
-				int x=0, y=0;
+				if (mCurrentLine == "BuildTowerMenu")
+				{
+					int x=0, y=0;
 
-				towerMenuNode->QueryIntAttribute("X", &x);
-				towerMenuNode->QueryIntAttribute("Y", &y);
+					towerMenuNode->QueryIntAttribute("X", &x);
+					towerMenuNode->QueryIntAttribute("Y", &y);
 
-				mTowersMenu[x][y] = string(towerMenuNode->Attribute("Folder"));
-
+					mTowersMenu[x][y] = string(towerMenuNode->Attribute("Folder"));
+				}
+				else
+				{
+					oslFatalError("Error at BuildTowerMenu: %i", towerMenuNode->Value());
+					return;
+				}
 				towerMenuNode = towerMenuNode->NextSiblingElement();
 			}
 		}

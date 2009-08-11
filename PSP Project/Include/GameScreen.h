@@ -29,11 +29,13 @@ private:
 	OSL_IMAGE *map;
 	GameState mGameState;
 	Map *mCurrentMap;
+	static GameScreen *sHighLander;
 
 
 public:
 	GameScreen();
 	OSL_IMAGE *LoadMapImage(const char* imageMapName);
+	static GameScreen *InitGame();
 
 	virtual ~GameScreen();
 

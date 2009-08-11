@@ -7,17 +7,22 @@
 #define GAMEOPTIONSSCREEN_H_INCLUDED
 
 #include "../Include/ILib.h"
+#include "../Include/GameScreen.h"
+#include <vector>
+#include <string>
 
 class GameOptionsScreen : public IScreen
 {
 private:
+	void ChooseMap(); //Set selected map to load
 
 public:
 	GameOptionsScreen();
-
 	virtual void draw();
-
 	virtual void update();
+
+	int mSelectedMap; //Index of current map
+	vector<string> mMap; // vector of map names
 
 };
 #endif
