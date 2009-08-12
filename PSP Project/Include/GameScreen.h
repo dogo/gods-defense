@@ -6,13 +6,15 @@
 #ifndef GAMESCREEN_H_INCLUDED
 #define GAMESCREEN_H_INCLUDED
 
+//Class Declarations
+class GameGUI;
+
 #include "../Include/ILib.h"
 #include "../Include/Projectile.h"
 #include "../Include/Tower.h"
 #include "../Include/Enemy.h"
 #include "../Include/GameGUI.h"
 #include "../Include/Map.h"
-
 
 enum GameState
 {
@@ -29,12 +31,19 @@ private:
 	OSL_IMAGE *map;
 	GameState mGameState;
 	Map *mCurrentMap;
+	GameGUI *mGameGUI;
 	static GameScreen *sHighLander;
+	int mPlayerLives;
+	int mPlayerMoney;
+	float mPlayerPoints;
+	unsigned int mActiveWaves;
+	bool mWaveIsRunning; 
 
 
 public:
 	GameScreen();
-	OSL_IMAGE *LoadMapImage(const char* imageMapName);
+	OSL_IMAGE *LoadMapImage(const char* imageName);
+	void LoadMap(const string &mapName);
 	static GameScreen *InitGame();
 
 	virtual ~GameScreen();

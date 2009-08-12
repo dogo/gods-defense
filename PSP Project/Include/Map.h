@@ -76,6 +76,7 @@ class Map
 public:
 	Map();
 	~Map();
+	void draw();
 	void LoadMap(const string &mapName);
 	static Map *InitMap();
 

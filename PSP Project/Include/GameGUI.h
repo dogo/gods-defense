@@ -18,9 +18,12 @@ public:
 	void LoadStuffs();
 	static void InitGUI(GameScreen *gameLogic);
 	void Update(unsigned timePassed);
+	void draw();
+	void PutingTower(Tower *tower);
 
 private:
 	GameGUI(GameScreen *gameLogic);
+	void CheckViewBounds();
 
 	GameScreen *mGame;
 	OSL_IMAGE *mCursor;

@@ -135,6 +135,10 @@ Path::Path(TiXmlElement *pathNode)
 Map::Map()
 {
 	mCurrentMapName = NULL;
+	mMapName = NULL;
+	mCurrentMapName = NULL;
+	mImgMapName = NULL;
+	mColisionMap = NULL;
 }
 
 void Map::LoadMap(const string &MapDirName)
@@ -298,6 +302,11 @@ void Map::LoadMap(const string &MapDirName)
 		}
 		node = node->NextSiblingElement();
 	}
+}
+
+void Map::draw()
+{
+
 }
 
 Map *Map::sHighLander = 0; //init this really necessary?

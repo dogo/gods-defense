@@ -50,4 +50,28 @@ void GameGUI::Update(unsigned timePassed)
 		mCursor->x += (mCursor->x * timePassed) / 5;
 		mCursor->y += (mCursor->y * timePassed) / 5;
 	}
+	CheckViewBounds();
+}
+
+void GameGUI::CheckViewBounds()
+{
+	if (mCursor->x < 0)
+		mCursor->x = 0;
+	else if (mCursor->x > 464 -1) //psp 480 - 16 cursor - 1 fine tunning
+		mCursor->x = 464 -1;
+
+	if (mCursor->y < 0)
+		mCursor->y = 0;
+	else if (mCursor->y > 256 - 1) //psp 272 - 16 cursor -1 fine tunning
+		mCursor->y = 256 - 1;
+}
+
+void GameGUI::draw()
+{
+
+}
+void GameGUI::PutingTower(Tower *tower)
+{
+	mGame->SetGameState(GS_MAP_PLACE_TOWER);
+	mPutingTower = tower;
 }

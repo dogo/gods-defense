@@ -19,21 +19,36 @@ GameScreen::GameScreen()
 {
 
 	mCurrentMap = Map::InitMap();
+	///Dogo buggg mGameGUI = GameGUI::InitGUI(this);
 
-	map = LoadMapImage("icarusfalls.png");
+	/*map = LoadMapImage(mCurrentMap->mImgMapName);
 
 	if (!map)
 		oslFatalError("At least one file is missing. Please copy all the file in the game directory.");
 	map->x = 0;
 	map->y = 0;
+	*/
 }
 
-OSL_IMAGE *GameScreen::LoadMapImage(const char *imageMapName)
+void GameScreen::LoadMap(const string &mapName)
+{
+	mGameState = GS_SCROLL_MAP;
+	mActiveWaves = 0;
+	mWaveIsRunning = false;
+
+	mPlayerPoints = 0;
+	mCurrentMap->LoadMap(mapName);
+
+	mPlayerLives = mCurrentMap->mInitialLives;
+	mPlayerMoney = mCurrentMap->mInitialGold;
+}
+
+OSL_IMAGE *GameScreen::LoadMapImage(const char *imageName)
 {
 	char temp[256];
 	OSL_IMAGE *mMapImg = NULL;
 
-	sprintf(temp, "Res/maps/icarusfalls/%s"/*%s, mCurrentMap->mMapName*/, imageMapName);
+	sprintf(temp, "Res/maps/%s/%s", mCurrentMap->mMapName, imageName);
 	mMapImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 	return mMapImg;
@@ -47,10 +62,16 @@ GameScreen::~GameScreen()
 
 void GameScreen::draw()
 {
-	oslDrawImage(map);
-	oslIntraFontSetStyle(gFont, 2.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER); //Tells the PSP what size and shape the text is
-	oslDrawString(240,120,"No Towers Defense for you!");
-	/*oslDrawImage(cursor);
+
+	mCurrentMap->draw();
+
+	//mGameGUI->???;  render offset? cursor ?
+	mGameGUI->draw();
+	
+	
+	
+	
+/*
 #ifdef DEBUG
 	oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
 	oslDrawStringf(0,15,"Value of joystick X : %d",osl_keys->analogX);
