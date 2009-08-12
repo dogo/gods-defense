@@ -32,9 +32,10 @@ private:
 	GameState mGameState;
 	Map *mCurrentMap;
 	GameGUI *mGameGUI;
-	static GameScreen *sHighLander;
 	int mPlayerLives;
 	int mPlayerMoney;
+	int mSetViewX;
+	int mSetViewY;
 	float mPlayerPoints;
 	unsigned int mActiveWaves;
 	bool mWaveIsRunning; 
@@ -44,7 +45,6 @@ public:
 	GameScreen();
 	OSL_IMAGE *LoadMapImage(const char* imageName);
 	void LoadMap(const string &mapName);
-	static GameScreen *InitGame();
 
 	virtual ~GameScreen();
 
@@ -53,8 +53,8 @@ public:
 	virtual void update();
 
 	const GameState GetGameState();
-
 	void SetGameState(const GameState &newState);
+	void SetView(const int &scrollX, const int &scrollY);
 
 };
 #endif

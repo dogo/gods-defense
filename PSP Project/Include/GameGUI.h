@@ -16,10 +16,11 @@ class GameGUI
 {
 public:
 	void LoadStuffs();
+	static GameGUI *Instance();
 	static void InitGUI(GameScreen *gameLogic);
 	void Update(unsigned timePassed);
 	void draw();
-	void PutingTower(Tower *tower);
+	void PuttingTower(Tower *tower);
 
 private:
 	GameGUI(GameScreen *gameLogic);
@@ -28,7 +29,7 @@ private:
 	GameScreen *mGame;
 	OSL_IMAGE *mCursor;
 	static GameGUI *sHighLander;
-	Tower *mPutingTower;
+	Tower *mPuttingTower;
 };
 
 #endif

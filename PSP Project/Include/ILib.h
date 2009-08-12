@@ -11,6 +11,9 @@
 #include <oslib/oslib.h>
 #include "../Include/IScreen.h"
 #include "../Include/Resource.h"
+#include <string>
+
+using namespace std;
 
 extern OSL_FONT *gFont;
 extern OSL_SOUND *menuTheme;
@@ -19,5 +22,6 @@ extern short gState;
 extern int gFade;
 extern int gScreen;
 extern int mNextScreen;
+extern string gChoosedMap;
 
 #endif

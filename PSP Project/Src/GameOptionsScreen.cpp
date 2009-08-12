@@ -6,8 +6,11 @@
 #include "../Include/GameOptionsScreen.h"
 #include "../Include/ScreenManager.h"
 
+string gChoosedMap;
+
 GameOptionsScreen::GameOptionsScreen()
 {
+	gChoosedMap = "NULL";
 	mSelectedMap = 0;
 	int dfd;
 	dfd = sceIoDopen("/Res/maps");
@@ -51,7 +54,8 @@ void GameOptionsScreen::draw()
 void GameOptionsScreen::update()
 {
 	if(osl_keys->pressed.cross)
-	{				
+	{		
+		ChooseMap();
 		mNextScreen = ScreenManager::SCREEN_GAME; //Start game!
 		oslStopSound(menuTheme);
 	}
@@ -71,5 +75,5 @@ void GameOptionsScreen::update()
 
 void GameOptionsScreen::ChooseMap()
 {
-	GameScreen::InitGame()->LoadMap(mMap[mSelectedMap]);
+	gChoosedMap = mMap[mSelectedMap];
 }

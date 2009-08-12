@@ -6,12 +6,16 @@
 #include "../Include/GameGUI.h"
 
 GameGUI *GameGUI::sHighLander = NULL;
+GameGUI *GameGUI::Instance()
+{
+	return sHighLander;
+}
 
 void GameGUI::InitGUI(GameScreen *gameLogic)
 {
-	if (gameLogic != NULL)
+	if (sHighLander != NULL)
 	{
-		oslFatalError("Error GameLogic == NULL .");
+		oslFatalError("Error GameLogic is not NULL .");
 		return;
 	}
 	
@@ -37,7 +41,7 @@ GameGUI::GameGUI(GameScreen *gameLogic)
 	mCursor->x = 480/2;	//Place cursor at the center of the screen
 	mCursor->y = 272/2;
 
-	mPutingTower = NULL; //none tower is building
+	mPuttingTower = NULL; //none tower is building
 }
 
 void GameGUI::Update(unsigned timePassed)
@@ -55,6 +59,7 @@ void GameGUI::Update(unsigned timePassed)
 
 void GameGUI::CheckViewBounds()
 {
+	//
 	if (mCursor->x < 0)
 		mCursor->x = 0;
 	else if (mCursor->x > 464 -1) //psp 480 - 16 cursor - 1 fine tunning
@@ -64,14 +69,16 @@ void GameGUI::CheckViewBounds()
 		mCursor->y = 0;
 	else if (mCursor->y > 256 - 1) //psp 272 - 16 cursor -1 fine tunning
 		mCursor->y = 256 - 1;
+
+	mGame->SetView((480/2) - mCursor->x, (480/2) - mCursor->y);
 }
 
 void GameGUI::draw()
 {
 
 }
-void GameGUI::PutingTower(Tower *tower)
+void GameGUI::PuttingTower(Tower *tower)
 {
 	mGame->SetGameState(GS_MAP_PLACE_TOWER);
-	mPutingTower = tower;
+	mPuttingTower = tower;
 }

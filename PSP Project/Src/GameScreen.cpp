@@ -6,28 +6,26 @@
 #include "../Include/GameScreen.h"
 #include "../Include/ScreenManager.h"
 
-GameScreen *GameScreen::sHighLander = 0; //init this really necessary?
-
-GameScreen *GameScreen::InitGame()
-{
-	if (sHighLander == NULL)
-		sHighLander = new GameScreen();
-	return sHighLander;
-}
-
 GameScreen::GameScreen()
 {
+	LoadMap(gChoosedMap);
+	
+	GameGUI::InitGUI(this);
+	
+	mGameGUI = GameGUI::Instance();
 
 	mCurrentMap = Map::InitMap();
-	///Dogo buggg mGameGUI = GameGUI::InitGUI(this);
+	
+	mSetViewX = 0;
+	mSetViewY = 0;
 
-	/*map = LoadMapImage(mCurrentMap->mImgMapName);
+	map = LoadMapImage(mCurrentMap->mImgMapName);
 
 	if (!map)
 		oslFatalError("At least one file is missing. Please copy all the file in the game directory.");
 	map->x = 0;
 	map->y = 0;
-	*/
+	
 }
 
 void GameScreen::LoadMap(const string &mapName)
@@ -54,6 +52,12 @@ OSL_IMAGE *GameScreen::LoadMapImage(const char *imageName)
 	return mMapImg;
 }
 
+//void GameScreen::LoadFirstPartForMap()
+//{
+//	//Load map image
+//	mCurrentMap->LoadImage();
+//}
+
 GameScreen::~GameScreen()
 {
 	//oslDeleteImage(cursor);
@@ -66,11 +70,7 @@ void GameScreen::draw()
 	mCurrentMap->draw();
 
 	//mGameGUI->???;  render offset? cursor ?
-	mGameGUI->draw();
-	
-	
-	
-	
+	mGameGUI->draw();	
 /*
 #ifdef DEBUG
 	oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
@@ -79,6 +79,22 @@ void GameScreen::draw()
 	oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
 	oslDrawStringf(0,35,"Value of joystick Y : %d",osl_keys->analogY);
 #endif*/
+}
+
+void GameScreen::SetView(const int &scrollX, const int &scrollY)
+{
+	mSetViewX = scrollX;
+	mSetViewY = scrollY;
+
+	if (mSetViewX < (480 - 32 * mCurrentMap->mGridTilesWidth))  //(PSP Screen - Tiles Size * Tiles)
+		mSetViewX = (480 - 32 * mCurrentMap->mGridTilesWidth);
+	if (mSetViewX > 0)
+		mSetViewX = 0;
+
+	if (mSetViewY < (480 - 32* mCurrentMap->mGridTilesHeight))
+		mSetViewY = (480 - 32* mCurrentMap->mGridTilesHeight);
+	if (mSetViewY > 0)
+		mSetViewY = 0;
 }
 
 void GameScreen::update()
