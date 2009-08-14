@@ -144,14 +144,14 @@ Map::Map()
 void Map::LoadMap(const string &MapDirName)
 {
 	char temp[256];
-	sprintf(temp, "Res/maps/%s/map.xml", MapDirName.c_str());
+	sprintf(temp, "ms0:/PSP/GAME/GodsDefense/Res/maps/%s/map.xml", MapDirName.c_str()); //we have to pass all path to XML
 
 	TiXmlDocument MapXMLInput;
 	MapXMLInput.LoadFile(temp);
 
 	if (MapXMLInput.Error())
 	{
-		oslFatalError("Cannot open: %i", MapXMLInput.ErrorDesc());
+		oslFatalError("Cannot open: %s", MapXMLInput.ErrorDesc());
 		return;
 	}
 
@@ -162,7 +162,7 @@ void Map::LoadMap(const string &MapDirName)
 
 	if (!node)
 	{
-		oslFatalError("No head node in: %i", temp);
+		oslFatalError("No head node in: %s", temp);
 		return;
 	}
 
@@ -182,11 +182,11 @@ void Map::LoadMap(const string &MapDirName)
 				A função strtok busca dentro da string declarada um token definido, ou em tempo de compilação ou em tempo 
 				de execução. Se a função encontra o token determinado é devolvido NULL.
 			*/
-			char *tempDes = strtok(checkText, "\n"); // "\r\n ou \n\r" ???
+			char *tempDes = strtok(checkText, "\r\n"); // windows uses \r\n -> "\r" carrige return, "\n" break line
 			while (tempDes != NULL)
 			{
 				mDescription.push_back(strdup(tempDes));
-				tempDes = strtok(NULL, "\n");
+				tempDes = strtok(NULL, "\r\n");
 			}
 			free(checkText);
 		}
@@ -211,7 +211,7 @@ void Map::LoadMap(const string &MapDirName)
 				}
 				else
 				{
-					oslFatalError("Error at BuildTowerMenu: %i", towerMenuNode->Value());
+					oslFatalError("Error at BuildTowerMenu: %s", towerMenuNode->Value());
 					return;
 				}
 				towerMenuNode = towerMenuNode->NextSiblingElement();
@@ -234,6 +234,9 @@ void Map::LoadMap(const string &MapDirName)
 			{
 				switch (*lText)
 				{
+				case '\r':
+					//Do nothing, like 06
+					break;
 				case '\n':
 					if (x > 0)
 					{
@@ -251,7 +254,7 @@ void Map::LoadMap(const string &MapDirName)
 					x++;
 					break;
 				default:
-					oslFatalError("Bad character %i in Map::LoadMap.",*lText);
+					oslFatalError("Bad character %s in Map::LoadMap.",*lText);
 					return;
 				}
 				lText++;
