@@ -134,9 +134,9 @@ Path::Path(TiXmlElement *pathNode)
 
 Map::Map()
 {
+	mMapImage = NULL;
 	mCurrentMapName = NULL;
 	mMapName = NULL;
-	mCurrentMapName = NULL;
 	mImgMapName = NULL;
 	mColisionMap = NULL;
 }
@@ -304,9 +304,23 @@ void Map::LoadMap(const string &MapDirName)
 	}
 }
 
+void Map::LoadMapImage()
+{
+	char temp[256];
+	sprintf(temp, "Res/maps/%s/%s", mMapName, mImgMapName);
+	mMapImage = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+}
+
+
 void Map::draw()
 {
+	oslDrawImage(mMapImage);
+}
 
+Map::~Map()
+{
+	if(mMapImage != NULL)
+		oslDeleteImage(mMapImage);
 }
 
 Map *Map::sHighLander = 0; //init this really necessary?

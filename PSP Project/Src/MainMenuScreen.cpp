@@ -17,7 +17,8 @@ MainMenuScreen::MainMenuScreen()
 
 MainMenuScreen::~MainMenuScreen()
 {
-	oslDeleteImage(menubg);
+	if(menubg != NULL)
+		oslDeleteImage(menubg);
 }
 
 void MainMenuScreen::draw()

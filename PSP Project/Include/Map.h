@@ -78,6 +78,7 @@ public:
 	~Map();
 	void draw();
 	void LoadMap(const string &mapName);
+	void LoadMapImage();
 	static Map *InitMap();
 
 	char *mMapName;
@@ -94,6 +95,7 @@ public:
 	string** mTowersMenu;
 private:
 	static Map *sHighLander;
+	OSL_IMAGE *mMapImage;
 };
 
 #endif

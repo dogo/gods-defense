@@ -12,6 +12,12 @@ HelpScreen::HelpScreen()
 	back = oslLoadImageFilePNG(Resource::IMG_BACK, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 }
 
+HelpScreen::~HelpScreen()
+{
+	if(back != NULL)
+		oslDeleteImage(back);
+}
+
 void HelpScreen::draw()
 {
 	oslIntraFontSetStyle(gFont, 1.5f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);

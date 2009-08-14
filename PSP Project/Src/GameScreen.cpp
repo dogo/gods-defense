@@ -14,18 +14,12 @@ GameScreen::GameScreen()
 	
 	mGameGUI = GameGUI::Instance();
 
-	mCurrentMap = Map::InitMap();
+	mGameMap = Map::InitMap();
+
+	LoadFirstPartForMap();
 	
 	mSetViewX = 0;
 	mSetViewY = 0;
-
-	map = LoadMapImage(mCurrentMap->mImgMapName);
-
-	if (!map)
-		oslFatalError("At least one file is missing. Please copy all the file in the game directory.");
-	map->x = 0;
-	map->y = 0;
-	
 }
 
 void GameScreen::LoadMap(const string &mapName)
@@ -35,50 +29,36 @@ void GameScreen::LoadMap(const string &mapName)
 	mWaveIsRunning = false;
 
 	mPlayerPoints = 0;
-	mCurrentMap->LoadMap(mapName);
+	mGameMap->LoadMap(mapName);
 
-	mPlayerLives = mCurrentMap->mInitialLives;
-	mPlayerMoney = mCurrentMap->mInitialGold;
+	mPlayerLives = mGameMap->mInitialLives;
+	mPlayerMoney = mGameMap->mInitialGold;
 }
 
-OSL_IMAGE *GameScreen::LoadMapImage(const char *imageName)
+void GameScreen::LoadFirstPartForMap()
 {
-	char temp[256];
-	OSL_IMAGE *mMapImg = NULL;
-
-	sprintf(temp, "Res/maps/%s/%s", mCurrentMap->mMapName, imageName);
-	mMapImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
-
-	return mMapImg;
+	//Load map image
+	mGameMap->LoadMapImage();
 }
-
-//void GameScreen::LoadFirstPartForMap()
-//{
-//	//Load map image
-//	mCurrentMap->LoadImage();
-//}
 
 GameScreen::~GameScreen()
 {
-	//oslDeleteImage(cursor);
-	oslDeleteImage(map);
 }
 
 void GameScreen::draw()
 {
 
-	mCurrentMap->draw();
+	mGameMap->draw();
 
 	//mGameGUI->???;  render offset? cursor ?
 	mGameGUI->draw();	
-/*
 #ifdef DEBUG
 	oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
 	oslDrawStringf(0,15,"Value of joystick X : %d",osl_keys->analogX);
 	
 	oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
 	oslDrawStringf(0,35,"Value of joystick Y : %d",osl_keys->analogY);
-#endif*/
+#endif
 }
 
 void GameScreen::SetView(const int &scrollX, const int &scrollY)
@@ -86,13 +66,13 @@ void GameScreen::SetView(const int &scrollX, const int &scrollY)
 	mSetViewX = scrollX;
 	mSetViewY = scrollY;
 
-	if (mSetViewX < (480 - 32 * mCurrentMap->mGridTilesWidth))  //(PSP Screen - Tiles Size * Tiles)
-		mSetViewX = (480 - 32 * mCurrentMap->mGridTilesWidth);
+	if (mSetViewX < (480 - 32 * mGameMap->mGridTilesWidth))  //(PSP Screen - Tiles Size * Tiles)
+		mSetViewX = (480 - 32 * mGameMap->mGridTilesWidth);
 	if (mSetViewX > 0)
 		mSetViewX = 0;
 
-	if (mSetViewY < (480 - 32* mCurrentMap->mGridTilesHeight))
-		mSetViewY = (480 - 32* mCurrentMap->mGridTilesHeight);
+	if (mSetViewY < (480 - 32* mGameMap->mGridTilesHeight))
+		mSetViewY = (480 - 32* mGameMap->mGridTilesHeight);
 	if (mSetViewY > 0)
 		mSetViewY = 0;
 }

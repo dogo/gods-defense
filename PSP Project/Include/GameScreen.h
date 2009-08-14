@@ -30,7 +30,7 @@ class GameScreen : public IScreen
 private:
 	OSL_IMAGE *map;
 	GameState mGameState;
-	Map *mCurrentMap;
+	Map *mGameMap;
 	GameGUI *mGameGUI;
 	int mPlayerLives;
 	int mPlayerMoney;
@@ -45,6 +45,7 @@ public:
 	GameScreen();
 	OSL_IMAGE *LoadMapImage(const char* imageName);
 	void LoadMap(const string &mapName);
+	void LoadFirstPartForMap();
 
 	virtual ~GameScreen();
 
