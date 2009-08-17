@@ -8,13 +8,13 @@
 
 GameScreen::GameScreen()
 {
-	LoadMap(gChoosedMap);
-	
 	GameGUI::InitGUI(this);
 	
 	mGameGUI = GameGUI::Instance();
 
 	mGameMap = Map::InitMap();
+
+	LoadMap(gChoosedMap);
 
 	LoadFirstPartForMap();
 	

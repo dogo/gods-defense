@@ -139,6 +139,10 @@ Map::Map()
 	mMapName = NULL;
 	mImgMapName = NULL;
 	mColisionMap = NULL;
+
+	mTowersMenu = new string*[4];
+	for (int i = 0; i < 4; i++)
+		mTowersMenu[i] = new string[4];
 }
 
 void Map::LoadMap(const string &MapDirName)
@@ -200,7 +204,7 @@ void Map::LoadMap(const string &MapDirName)
 			TiXmlElement *towerMenuNode = node->FirstChildElement();
 			while (towerMenuNode != NULL)
 			{
-				if (mCurrentLine == "BuildTowerMenu")
+				if (towerMenuNode->ValueStr() == "BuildTowerMenu")
 				{
 					int x=0, y=0;
 
@@ -285,16 +289,17 @@ void Map::LoadMap(const string &MapDirName)
 		else if (mCurrentLine == "Path")
 		{
 			string pathName = string(node->Attribute("Name"));
-			mPaths[pathName] = Path(node);
+			//Dogo : Fix This mPaths[pathName] = Path(node);
 		}
 		else if (mCurrentLine == "Waves")
 		{
 			TiXmlElement* waveNode = node->FirstChildElement();
+			//Dogo : Fix This 
 			while (waveNode != NULL)
 			{
 				if (waveNode->ValueStr() != "Wave")
 				{
-					oslFatalError("Error at load waves in Map::LoadMap %i",waveNode->Value());
+					oslFatalError("Error at load waves in Map::LoadMap %s",waveNode->Value());
 					return;
 				}
 
@@ -310,7 +315,7 @@ void Map::LoadMap(const string &MapDirName)
 void Map::LoadMapImage()
 {
 	char temp[256];
-	sprintf(temp, "Res/maps/%s/%s", mMapName, mImgMapName);
+	sprintf(temp, "/Res/maps/%s/%s", mMapName, mImgMapName);
 	mMapImage = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 }
 

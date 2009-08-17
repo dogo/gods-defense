@@ -92,7 +92,7 @@ public:
 	int mGridTilesWidth;
 	int mGridTilesHeight;
 	bool **mColisionMap;
-	string** mTowersMenu;
+	string **mTowersMenu;
 private:
 	static Map *sHighLander;
 	OSL_IMAGE *mMapImage;
