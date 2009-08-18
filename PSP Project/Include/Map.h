@@ -67,6 +67,8 @@ public:
 	Path();
 	Path(TiXmlElement *pathNode);
 
+	float mCheckpointLength; //Total length of path
+
 private:
 	vector<PathCoords> mCheckpoint;
 };

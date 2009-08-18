@@ -114,14 +114,17 @@ Path::Path()
 
 Path::Path(TiXmlElement *pathNode)
 {
+	mCheckpointLength = 0.0f;
 	TiXmlElement *node = pathNode->FirstChildElement();
 	while (node != NULL) //process all the checkpoints
 	{
 		if (node->ValueStr() == "Checkpoint")
 		{
 			mCheckpoint.push_back(PathCoords(node));
-
-			//TODO : Calculate path length
+			if(mCheckpoint.size() >= 2)
+			{	//path length
+				mCheckpointLength +=sqrtf(mCheckpoint[mCheckpoint.size()-2].mCoords.SquareDistance(mCheckpoint[mCheckpoint.size()-1].mCoords));
+			}
 		}
 		else
 		{
@@ -287,13 +290,22 @@ void Map::LoadMap(const string &MapDirName)
 				mColisionMap[i] = new bool[mGridTilesHeight];
 		}
 		else if (mCurrentLine == "Path")
-		{
+		{	//Dogo : nerver enter here ?? why ?
+			while(true)
+			{
+				oslPrintf("Path");
+			}
 			string pathName = string(node->Attribute("Name"));
-			//Dogo : Fix This mPaths[pathName] = Path(node);
+			mPaths[pathName] = Path(node);
 		}
 		else if (mCurrentLine == "Waves")
 		{
-			TiXmlElement* waveNode = node->FirstChildElement();
+			TiXmlElement *waveNode = node->FirstChildElement();
+			//Dogo : nerver enter here ?? why ?
+			while(true)
+			{
+				oslPrintf("Waves");
+			}
 			//Dogo : Fix This 
 			while (waveNode != NULL)
 			{
