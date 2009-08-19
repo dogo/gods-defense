@@ -8,8 +8,8 @@
         <BuildTowerMenu X="0" Y="0" Folder="arrow" />
         <BuildTowerMenu X="3" Y="1" Folder="ice" />
     </Menu>
-    <MapImg File="icarusfalls.png" Width="480" Height="480" />
-    <ColisionMap><![CDATA[
+    <MapImg File="icarusfalls.png" Width="32" Height="32" />
+    <CollisionMap><![CDATA[
 ################################
 ################################
 ##_____________##_____________##
@@ -42,7 +42,7 @@ ____##__##############___##___##
 ##____________________________##
 ################################
 ################################
-]]></ColisionMap>
+]]></CollisionMap>
     <Path Name="default">
         <Checkpoint X="-16" Y="144" Radius="1" />
         <Checkpoint X="48" Y="144" Radius="1" />

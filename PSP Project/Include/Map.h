@@ -93,7 +93,7 @@ public:
 	map<string, Path> mPaths;
 	int mGridTilesWidth;
 	int mGridTilesHeight;
-	bool **mColisionMap;
+	bool **mCollisionMap;
 	string **mTowersMenu;
 private:
 	static Map *sHighLander;

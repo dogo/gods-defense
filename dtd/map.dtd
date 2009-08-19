@@ -18,7 +18,7 @@
 <!ATTLIST MapImg Height NMTOKEN #REQUIRED >
 <!ATTLIST MapImg Width NMTOKEN #REQUIRED >
 
-<!ELEMENT ColisionMap ( #PCDATA ) >
+<!ELEMENT CollisionMap ( #PCDATA ) >
 
 <!ELEMENT Checkpoint EMPTY >
 <!ATTLIST Checkpoint Radius NMTOKEN #IMPLIED >
@@ -46,4 +46,4 @@
 <!ATTLIST Enemy Folder NMTOKEN #REQUIRED >
 <!ATTLIST Enemy Map NMTOKEN #IMPLIED >
 
-<!ELEMENT Map ( Name, Description, Initializers, Menu, MapImg, ColisionMap, Path+, Waves) >
+<!ELEMENT Map ( Name, Description, Initializers, Menu, MapImg, CollisionMap, Path+, Waves) >

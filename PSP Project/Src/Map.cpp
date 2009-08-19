@@ -141,7 +141,7 @@ Map::Map()
 	mCurrentMapName = NULL;
 	mMapName = NULL;
 	mImgMapName = NULL;
-	mColisionMap = NULL;
+	mCollisionMap = NULL;
 
 	mTowersMenu = new string*[4];
 	for (int i = 0; i < 4; i++)
@@ -224,9 +224,20 @@ void Map::LoadMap(const string &MapDirName)
 				towerMenuNode = towerMenuNode->NextSiblingElement();
 			}
 		}
+		else if (mCurrentLine == "MapImg")
+		{
+			mImgMapName = strdup(node->Attribute("File"));
+
+			node->QueryIntAttribute("Width", &mGridTilesWidth);
+			node->QueryIntAttribute("Height", &mGridTilesHeight);
+
+			mCollisionMap = new bool*[mGridTilesWidth];
+			for (int i = 0; i < mGridTilesWidth; i++)
+				mCollisionMap[i] = new bool[mGridTilesHeight];
+		}
 		else if (mCurrentLine == "ColisionMap")
 		{
-			if (mColisionMap == NULL)
+			if (mCollisionMap == NULL)
 			{
 				oslFatalError("Map::LoadMap Colision Error");
 				return;
@@ -237,7 +248,7 @@ void Map::LoadMap(const string &MapDirName)
 			int y = 0;
 			int maxX = 0;
 
-			/*while (*lText != '\0')
+			while (*lText != '\0')
 			{
 				switch (*lText)
 				{
@@ -253,11 +264,11 @@ void Map::LoadMap(const string &MapDirName)
 						}
 						break;
 					case '#':
-						mColisionMap[x][y] = true;
+						mCollisionMap[x][y] = true;
 						x++;
 						break;
 					case '_':
-						mColisionMap[x][y] = false;
+						mCollisionMap[x][y] = false;
 						x++;
 						break;
 					default:
@@ -275,19 +286,8 @@ void Map::LoadMap(const string &MapDirName)
 			{
 				oslFatalError("Map Width size error");
 				return;
-			}*/
+			}
 
-		}
-		else if (mCurrentLine == "MapImg")
-		{
-			mImgMapName = strdup(node->Attribute("File"));
-
-			node->QueryIntAttribute("Width", &mGridTilesWidth);
-			node->QueryIntAttribute("Height", &mGridTilesHeight);
-
-			mColisionMap = new bool*[mGridTilesWidth];
-			for (int i = 0; i < mGridTilesWidth; i++)
-				mColisionMap[i] = new bool[mGridTilesHeight];
 		}
 		else if (mCurrentLine == "Path")
 		{
