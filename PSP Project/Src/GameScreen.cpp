@@ -53,11 +53,8 @@ void GameScreen::draw()
 	//mGameGUI->???;  render offset? cursor ?
 	mGameGUI->draw();	
 #ifdef DEBUG
-	oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
-	oslDrawStringf(0,15,"Value of joystick X : %d",osl_keys->analogX);
-	
-	oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
-	oslDrawStringf(0,35,"Value of joystick Y : %d",osl_keys->analogY);
+	oslPrintf_xy(0,20,"Value of joystick X : %d",osl_keys->analogX);
+	oslPrintf_xy(0,30,"Value of joystick Y : %d",osl_keys->analogY);
 #endif
 }
 

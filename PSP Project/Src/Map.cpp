@@ -237,32 +237,32 @@ void Map::LoadMap(const string &MapDirName)
 			int y = 0;
 			int maxX = 0;
 
-			while (*lText != '\0')
+			/*while (*lText != '\0')
 			{
 				switch (*lText)
 				{
-				case '\r':
-					//Do nothing, like 06
-					break;
-				case '\n':
-					if (x > 0)
-					{
-						maxX = x;
-						x = 0;
-						y++;
-					}
-					break;
-				case '#':
-					mColisionMap[x][y] = true;
-					x++;
-					break;
-				case '_':
-					mColisionMap[x][y] = false;
-					x++;
-					break;
-				default:
-					oslFatalError("Bad character %s in Map::LoadMap.",*lText);
-					return;
+					case '\r':
+						//Do nothing, like 06
+						break;
+					case '\n':
+						if (x > 0)
+						{
+							maxX = x;
+							x = 0;
+							y++;
+						}
+						break;
+					case '#':
+						mColisionMap[x][y] = true;
+						x++;
+						break;
+					case '_':
+						mColisionMap[x][y] = false;
+						x++;
+						break;
+					default:
+						oslFatalError("Bad character %s in Map::LoadMap.",*lText);
+						return;
 				}
 				lText++;
 			}
@@ -275,7 +275,7 @@ void Map::LoadMap(const string &MapDirName)
 			{
 				oslFatalError("Map Width size error");
 				return;
-			}
+			}*/
 
 		}
 		else if (mCurrentLine == "MapImg")
@@ -290,23 +290,14 @@ void Map::LoadMap(const string &MapDirName)
 				mColisionMap[i] = new bool[mGridTilesHeight];
 		}
 		else if (mCurrentLine == "Path")
-		{	//Dogo : nerver enter here ?? why ?
-			while(true)
-			{
-				oslPrintf("Path");
-			}
+		{
 			string pathName = string(node->Attribute("Name"));
 			mPaths[pathName] = Path(node);
 		}
 		else if (mCurrentLine == "Waves")
 		{
 			TiXmlElement *waveNode = node->FirstChildElement();
-			//Dogo : nerver enter here ?? why ?
-			while(true)
-			{
-				oslPrintf("Waves");
-			}
-			//Dogo : Fix This 
+
 			while (waveNode != NULL)
 			{
 				if (waveNode->ValueStr() != "Wave")
@@ -316,7 +307,6 @@ void Map::LoadMap(const string &MapDirName)
 				}
 
 				mWaves.push_back(new Wave(waveNode));
-
 				waveNode = waveNode->NextSiblingElement();
 			}
 		}
@@ -329,6 +319,9 @@ void Map::LoadMapImage()
 	char temp[256];
 	sprintf(temp, "/Res/maps/%s/%s", mMapName, mImgMapName);
 	mMapImage = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+
+	if(!mMapImage)
+		oslFatalError("Error at load %s",mImgMapName);
 }
 
 

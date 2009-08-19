@@ -67,9 +67,13 @@ int main()
 			}
 
 			if(mScreenManager->isActive())
-			{		
+			{	
 				mScreenManager->mCurrentScreen->draw();
 				mScreenManager->mCurrentScreen->update();
+#ifdef DEBUG
+				oslPrintf_xy(0,0,"mNextScreen %d",mNextScreen);
+				oslPrintf_xy(0,10,"gScreen %d",gScreen);
+#endif
 			}
 
 			if(gScreen == ScreenManager::SCREEN_TITLE){   
