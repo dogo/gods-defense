@@ -235,7 +235,7 @@ void Map::LoadMap(const string &MapDirName)
 			for (int i = 0; i < mGridTilesWidth; i++)
 				mCollisionMap[i] = new bool[mGridTilesHeight];
 		}
-		else if (mCurrentLine == "ColisionMap")
+		else if (mCurrentLine == "CollisionMap")
 		{
 			if (mCollisionMap == NULL)
 			{
