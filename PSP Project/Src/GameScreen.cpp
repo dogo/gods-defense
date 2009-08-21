@@ -29,6 +29,7 @@ void GameScreen::LoadMap(const string &mapName)
 	mWaveIsRunning = false;
 
 	mPlayerPoints = 0;
+	mGameMap->ResetMap();
 	mGameMap->LoadMap(mapName);
 
 	mPlayerLives = mGameMap->mInitialLives;

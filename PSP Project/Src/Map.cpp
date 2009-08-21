@@ -150,6 +150,9 @@ Map::Map()
 
 void Map::LoadMap(const string &MapDirName)
 {
+
+	ResetMap();
+
 	char temp[256];
 	sprintf(temp, "ms0:/PSP/GAME/GodsDefense/Res/maps/%s/map.xml", MapDirName.c_str()); //we have to pass all path to XML
 
@@ -324,6 +327,45 @@ void Map::LoadMapImage()
 		oslFatalError("Error at load %s",mImgMapName);
 }
 
+void Map::ResetMap()
+{
+	if (mMapImage != NULL)
+		oslDeleteImage(mMapImage);
+	if (mMapName != NULL) //We have to be free :)
+		free(mMapName);
+	if (mCurrentMapName != NULL)
+		free(mCurrentMapName);
+	if (mImgMapName != NULL)
+		free(mImgMapName);
+	if (mCollisionMap != NULL)
+	{
+		for (int i = 0; i < mGridTilesWidth; i++)
+			delete[] mCollisionMap[i];
+		delete[] mCollisionMap;
+		mCollisionMap = NULL;
+	}
+
+	for(unsigned int j = 0; j < mDescription.size(); j++)
+	{
+		free(mDescription[j]);
+	}
+	mDescription.clear();
+
+	if (mTowersMenu != NULL)
+	{
+		for (unsigned int x = 0; x < 4; x++)
+			for (unsigned int y = 0; y < 4; y++)
+				mTowersMenu[x][y] = "";
+	}
+
+	mWaves.clear();
+	mPaths.clear();
+
+	mInitialGold = 0;
+	mInitialLives = 0;
+	mGridTilesWidth = 0;
+	mGridTilesHeight = 0;
+}
 
 void Map::draw()
 {

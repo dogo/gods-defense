@@ -81,6 +81,7 @@ public:
 	void draw();
 	void LoadMap(const string &mapName);
 	void LoadMapImage();
+	void ResetMap();
 	static Map *InitMap();
 
 	char *mMapName;
