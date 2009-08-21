@@ -11,6 +11,7 @@ char Resource::IMG_GAME_TITLE[] = "/Res/GDSplash.png";
 char Resource::IMG_MAIN_MENU_BG[] = "/Res/background.png";
 char Resource::IMG_CURSOR[] = "/Res/cursor.png";
 char Resource::IMG_BACK[] = "/Res/circle.png";
+char Resource::IMG_SIDEBAR[] = "/Res/sidebar.png";
 
 char const Resource::STR_BACK_SK[] = "Back";
 char const Resource::STR_MULTIPLAYER_CAPTION[] = "Multiplayer";
@@ -62,7 +63,7 @@ char const Resource::STR_HELP_TEXT[] =
 	"Controls:\n"
 	"\n"
 	"Analogic pad - Move selector.\n"
-	"Digital pad - Move map.\n"
+	"L/R Button - Move map.\n"
 	"Cross - Select/Confirm.\n"
 	"Circle - Cancel/Back.\n"
 	"Triangle - Next Wave.\n"

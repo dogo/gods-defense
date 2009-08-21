@@ -39,6 +39,7 @@ void GameScreen::LoadFirstPartForMap()
 {
 	//Load map image
 	mGameMap->LoadMapImage();
+	mGameGUI->LoadStuffs();
 }
 
 GameScreen::~GameScreen()
@@ -115,23 +116,10 @@ void GameScreen::update()
 			cursor->y -= 2;                
         }
 	}
-
-	if(osl_keys->pressed.L)
-	{
-		oslFlushKey();
-		map->x = 0;
-		map->y = -208;
-	}
-
-	if(osl_keys->pressed.R)
-	{
-		oslFlushKey();
-		map->x = 0;
-		map->y = 0;
-	}
 	*/
 	//
-
+	mGameGUI->Update(/*timePassed*/);
+	
 	if(osl_keys->pressed.start)
 	{	
 		oslFlushKey();

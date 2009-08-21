@@ -336,7 +336,7 @@ Map::~Map()
 		oslDeleteImage(mMapImage);
 }
 
-Map *Map::sHighLander = 0; //init this really necessary?
+Map *Map::sHighLander = NULL; //init this really necessary?
 
 Map *Map::InitMap()
 {

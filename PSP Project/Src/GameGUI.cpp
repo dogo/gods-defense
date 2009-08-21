@@ -27,8 +27,11 @@ void GameGUI::LoadStuffs()
 	//Load Cursor :D
 	if (mCursor != NULL)
 		oslDeleteImage(mCursor);
+	if (mSidebar != NULL)
+		oslDeleteImage(mSidebar);
 	
 	mCursor = oslLoadImageFilePNG(Resource::IMG_CURSOR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	mSidebar = oslLoadImageFilePNG(Resource::IMG_SIDEBAR,OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 	//Initialize variables
 	mCursor->centerY = mCursor->sizeY / 2;
@@ -42,19 +45,26 @@ GameGUI::GameGUI(GameScreen *gameLogic)
 	mCursor->y = 272/2;
 
 	mPuttingTower = NULL; //none tower is building
+	mCursor = NULL;
+	mSidebar = NULL;
+	mShowSidebar = false;
 }
 
-void GameGUI::Update(unsigned timePassed)
-{
-	const GameState currentGameState = mGame->GetGameState();
+void GameGUI::Update(/*unsigned timePassed*/)
+{	//Dogo : temporary removed, we need to change update
+	/*const GameState currentGameState = mGame->GetGameState();
 	
 	//Scroll the map
 	if (currentGameState == GS_SCROLL_MAP || currentGameState == GS_MAP_PLACE_TOWER)
 	{
 		mCursor->x += (mCursor->x * timePassed) / 5;
 		mCursor->y += (mCursor->y * timePassed) / 5;
-	}
-	CheckViewBounds();
+		CheckViewBounds();
+	}*/
+	if(osl_keys->pressed.square)
+		mShowSidebar = !mShowSidebar ;
+		
+	oslPrintf_xy(0,20,"UpdateGUI");
 }
 
 void GameGUI::CheckViewBounds()
@@ -75,7 +85,8 @@ void GameGUI::CheckViewBounds()
 
 void GameGUI::draw()
 {
-
+	if(mShowSidebar)
+		oslDrawImageXY(mSidebar,480-48, 0);
 }
 void GameGUI::PuttingTower(Tower *tower)
 {

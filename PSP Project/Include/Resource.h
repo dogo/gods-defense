@@ -42,6 +42,7 @@ public:
 	static char IMG_MAIN_MENU_BG[];
 	static char IMG_CURSOR[];
 	static char IMG_BACK[];
+	static char IMG_SIDEBAR[];
 };
 
 

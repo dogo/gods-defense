@@ -18,7 +18,7 @@ public:
 	void LoadStuffs();
 	static GameGUI *Instance();
 	static void InitGUI(GameScreen *gameLogic);
-	void Update(unsigned timePassed);
+	void Update(/*unsigned timePassed*/);
 	void draw();
 	void PuttingTower(Tower *tower);
 
@@ -28,8 +28,10 @@ private:
 
 	GameScreen *mGame;
 	OSL_IMAGE *mCursor;
+	OSL_IMAGE *mSidebar;
 	static GameGUI *sHighLander;
 	Tower *mPuttingTower;
+	bool mShowSidebar;
 };
 
 #endif
