@@ -52,6 +52,8 @@ GameScreen::~GameScreen()
 void GameScreen::draw()
 {
 
+	//move camera
+
 	mGameMap->draw();
 
 	//mGameGUI->???;  render offset? cursor ?

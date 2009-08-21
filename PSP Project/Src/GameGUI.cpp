@@ -96,8 +96,8 @@ void GameGUI::CheckViewBounds()
 	else if (mCursor->x > 464 -1) //psp 480 - 16 cursor - 1 fine tunning
 		mCursor->x = 464 -1;
 
-	if (mCursor->y < 0)
-		mCursor->y = 0;
+	if (mCursor->y < 8) //0 + 16/2 cursor
+		mCursor->y = 8;
 	else if (mCursor->y > 464 - 1) //psp 272 - 16 cursor -1 fine tunning
 		mCursor->y = 464 - 1;
 
