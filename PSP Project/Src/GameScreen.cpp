@@ -17,9 +17,6 @@ GameScreen::GameScreen()
 	LoadMap(gChoosedMap);
 
 	LoadFirstPartForMap();
-	
-	mSetViewX = 0;
-	mSetViewY = 0;
 }
 
 void GameScreen::LoadMap(const string &mapName)
@@ -51,9 +48,6 @@ GameScreen::~GameScreen()
 
 void GameScreen::draw()
 {
-
-	//move camera
-
 	mGameMap->draw();
 
 	//mGameGUI->???;  render offset? cursor ?
@@ -62,25 +56,6 @@ void GameScreen::draw()
 	oslPrintf_xy(0,20,"Value of joystick X : %d",osl_keys->analogX);
 	oslPrintf_xy(0,30,"Value of joystick Y : %d",osl_keys->analogY);
 #endif
-}
-
-void GameScreen::SetView(const int &scrollX, const int &scrollY)
-{
-	mSetViewX = scrollX;
-	mSetViewY = scrollY;
-
-	oslPrintf_xy(0,30,"mSetViewX %d",mSetViewX);
-	oslPrintf_xy(0,40,"mSetViewY %d",mSetViewY);
-
-	if (mSetViewX < (480 - 16 * mGameMap->mGridTilesWidth))  //(PSP Screen - Tiles Size * Tiles)
-		mSetViewX = (480 - 16 * mGameMap->mGridTilesWidth);
-	if (mSetViewX > 0)
-		mSetViewX = 0;
-
-	if (mSetViewY < (480 - 16 * mGameMap->mGridTilesHeight))
-		mSetViewY = (480 - 16 * mGameMap->mGridTilesHeight);
-	if (mSetViewY > 0)
-		mSetViewY = 0;
 }
 
 void GameScreen::update()

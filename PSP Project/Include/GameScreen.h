@@ -34,8 +34,6 @@ private:
 	GameGUI *mGameGUI;
 	int mPlayerLives;
 	int mPlayerMoney;
-	int mSetViewX;
-	int mSetViewY;
 	float mPlayerPoints;
 	unsigned int mActiveWaves;
 	bool mWaveIsRunning; 
@@ -55,7 +53,5 @@ public:
 
 	const GameState GetGameState();
 	void SetGameState(const GameState &newState);
-	void SetView(const int &scrollX, const int &scrollY);
-
 };
 #endif

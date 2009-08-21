@@ -370,6 +370,7 @@ void Map::ResetMap()
 void Map::draw()
 {
 	oslDrawImage(mMapImage);
+	ScrollMap();
 }
 
 Map::~Map()
@@ -387,4 +388,31 @@ Map *Map::InitMap()
 	if (sMapReference == NULL)
 		sMapReference = new Map();
 	return sMapReference;
+}
+
+void Map::ScrollMap()
+{
+	if(osl_keys->pressed.L)
+	{
+		oslFlushKey();
+		if (mMapImage->y <= -204) //New Hot Point
+			mMapImage->y = -204;
+		else
+		{
+			mMapImage->x = 0;
+			mMapImage->y -= 34;
+		}
+	}
+	
+	if(osl_keys->pressed.R)
+	{
+		oslFlushKey();		
+		if (mMapImage->y >= 0) //Old Hot Point
+			mMapImage->y = 0;
+		else
+		{
+			mMapImage->x = 0;
+			mMapImage->y += 34;
+		}
+	}
 }

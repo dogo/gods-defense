@@ -82,6 +82,7 @@ public:
 	void LoadMap(const string &mapName);
 	void LoadMapImage();
 	void ResetMap();
+	void ScrollMap(); // Dogo : =(
 	static Map *InitMap();
 
 	char *mMapName;
