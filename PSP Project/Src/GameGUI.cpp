@@ -5,21 +5,31 @@
 
 #include "../Include/GameGUI.h"
 
-GameGUI *GameGUI::sHighLander = NULL;
+GameGUI *GameGUI::sGameGUIReference = NULL;
+
 GameGUI *GameGUI::Instance()
 {
-	return sHighLander;
+	return sGameGUIReference;
 }
 
 void GameGUI::InitGUI(GameScreen *gameLogic)
 {
-	if (sHighLander != NULL)
+	if (sGameGUIReference != NULL)
 	{
 		oslFatalError("Error GameLogic is not NULL .");
 		return;
 	}
 	
-	sHighLander = new GameGUI(gameLogic);
+	sGameGUIReference = new GameGUI(gameLogic);
+}
+
+GameGUI::~GameGUI()
+{
+	sGameGUIReference = NULL;
+	if (mCursor != NULL)
+		oslDeleteImage(mCursor);
+	if (mSidebar != NULL)
+		oslDeleteImage(mSidebar);
 }
 
 void GameGUI::LoadStuffs()
@@ -31,19 +41,17 @@ void GameGUI::LoadStuffs()
 		oslDeleteImage(mSidebar);
 	
 	mCursor = oslLoadImageFilePNG(Resource::IMG_CURSOR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
-	mSidebar = oslLoadImageFilePNG(Resource::IMG_SIDEBAR,OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	mSidebar = oslLoadImageFilePNG(Resource::IMG_SIDEBAR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 	//Initialize variables
 	mCursor->centerY = mCursor->sizeY / 2;
+	mCursor->x = 480/2;	//Place cursor at the center of the screen
+	mCursor->y = 272/2;
 }
 
 GameGUI::GameGUI(GameScreen *gameLogic)
 {
 	mGame = gameLogic;
-	
-	mCursor->x = 480/2;	//Place cursor at the center of the screen
-	mCursor->y = 272/2;
-
 	mPuttingTower = NULL; //none tower is building
 	mCursor = NULL;
 	mSidebar = NULL;
@@ -51,16 +59,29 @@ GameGUI::GameGUI(GameScreen *gameLogic)
 }
 
 void GameGUI::Update(/*unsigned timePassed*/)
-{	//Dogo : temporary removed, we need to change update
-	/*const GameState currentGameState = mGame->GetGameState();
-	
+{
+	const GameState currentGameState = mGame->GetGameState();
+	int i;
+
 	//Scroll the map
 	if (currentGameState == GS_SCROLL_MAP || currentGameState == GS_MAP_PLACE_TOWER)
 	{
-		mCursor->x += (mCursor->x * timePassed) / 5;
-		mCursor->y += (mCursor->y * timePassed) / 5;
+		for (i=32;i<=120;i+=48)
+		{
+			//Move X Coords
+			if (osl_keys->analogX > i)
+				mCursor->x += 2;                
+			if (osl_keys->analogX < -i)
+				mCursor->x -= 2;                
+
+			//Move Y Coords
+			if (osl_keys->analogY > i)
+				mCursor->y += 2;                
+			if (osl_keys->analogY < -i)
+				mCursor->y -= 2;                
+		}
 		CheckViewBounds();
-	}*/
+	}
 	if(osl_keys->pressed.square)
 		mShowSidebar = !mShowSidebar ;
 		
@@ -77,8 +98,8 @@ void GameGUI::CheckViewBounds()
 
 	if (mCursor->y < 0)
 		mCursor->y = 0;
-	else if (mCursor->y > 256 - 1) //psp 272 - 16 cursor -1 fine tunning
-		mCursor->y = 256 - 1;
+	else if (mCursor->y > 464 - 1) //psp 272 - 16 cursor -1 fine tunning
+		mCursor->y = 464 - 1;
 
 	mGame->SetView((480/2) - mCursor->x, (480/2) - mCursor->y);
 }
@@ -87,6 +108,8 @@ void GameGUI::draw()
 {
 	if(mShowSidebar)
 		oslDrawImageXY(mSidebar,480-48, 0);
+
+	oslDrawImage(mCursor);
 }
 void GameGUI::PuttingTower(Tower *tower)
 {

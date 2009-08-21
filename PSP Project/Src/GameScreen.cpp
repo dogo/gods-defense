@@ -45,6 +45,8 @@ void GameScreen::LoadFirstPartForMap()
 
 GameScreen::~GameScreen()
 {
+	delete(mGameMap);
+	delete(mGameGUI);
 }
 
 void GameScreen::draw()
@@ -65,13 +67,16 @@ void GameScreen::SetView(const int &scrollX, const int &scrollY)
 	mSetViewX = scrollX;
 	mSetViewY = scrollY;
 
-	if (mSetViewX < (480 - 32 * mGameMap->mGridTilesWidth))  //(PSP Screen - Tiles Size * Tiles)
-		mSetViewX = (480 - 32 * mGameMap->mGridTilesWidth);
+	oslPrintf_xy(0,30,"mSetViewX %d",mSetViewX);
+	oslPrintf_xy(0,40,"mSetViewY %d",mSetViewY);
+
+	if (mSetViewX < (480 - 16 * mGameMap->mGridTilesWidth))  //(PSP Screen - Tiles Size * Tiles)
+		mSetViewX = (480 - 16 * mGameMap->mGridTilesWidth);
 	if (mSetViewX > 0)
 		mSetViewX = 0;
 
-	if (mSetViewY < (480 - 32* mGameMap->mGridTilesHeight))
-		mSetViewY = (480 - 32* mGameMap->mGridTilesHeight);
+	if (mSetViewY < (480 - 16 * mGameMap->mGridTilesHeight))
+		mSetViewY = (480 - 16 * mGameMap->mGridTilesHeight);
 	if (mSetViewY > 0)
 		mSetViewY = 0;
 }
@@ -85,40 +90,6 @@ void GameScreen::update()
 	*   Dogo 10/03/09 -> Congelar o jogo, pintar a tela de pause por cima, quando voltar ao jogo repintar e voltar o
 	*   estado do jogo.
 	*/
-
-	//Temporary, for test
-	//Joystick to move the cursor
-	/*
-    for (i=32;i<=120;i+=48)
-    {
-		//Move X Coords
-        if (osl_keys->analogX > i)
-        {
-			if(cursor->x > 464 -1) //psp 480 - 16 cursor - 1 fine tunning
-				cursor->x = 464;
-			else
-				cursor->x += 2;                
-        }
-        if (osl_keys->analogX < -i)
-        {
-			if(cursor->x < 0)
-				cursor->x = 0;
-			else
-				cursor->x -= 2;                
-        }    
-
-        //Move Y Coords
-        if (osl_keys->analogY > i)
-        {
-			cursor->y += 2;                
-        }
-        if (osl_keys->analogY < -i)
-        {
-			cursor->y -= 2;                
-        }
-	}
-	*/
-	//
 	mGameGUI->Update(/*timePassed*/);
 	
 	if(osl_keys->pressed.start)

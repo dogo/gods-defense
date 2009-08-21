@@ -15,6 +15,7 @@ class GameScreen;
 class GameGUI
 {
 public:
+	~GameGUI();
 	void LoadStuffs();
 	static GameGUI *Instance();
 	static void InitGUI(GameScreen *gameLogic);
@@ -29,7 +30,7 @@ private:
 	GameScreen *mGame;
 	OSL_IMAGE *mCursor;
 	OSL_IMAGE *mSidebar;
-	static GameGUI *sHighLander;
+	static GameGUI *sGameGUIReference;
 	Tower *mPuttingTower;
 	bool mShowSidebar;
 };

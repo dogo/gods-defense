@@ -376,13 +376,15 @@ Map::~Map()
 {
 	if(mMapImage != NULL)
 		oslDeleteImage(mMapImage);
+	
+	sMapReference = NULL;
 }
 
-Map *Map::sHighLander = NULL; //init this really necessary?
+Map *Map::sMapReference = NULL; //init this really necessary?
 
 Map *Map::InitMap()
 {
-	if (sHighLander == NULL)
-		sHighLander = new Map();
-	return sHighLander;
+	if (sMapReference == NULL)
+		sMapReference = new Map();
+	return sMapReference;
 }

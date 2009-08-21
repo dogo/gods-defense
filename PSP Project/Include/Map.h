@@ -97,7 +97,7 @@ public:
 	bool **mCollisionMap;
 	string **mTowersMenu;
 private:
-	static Map *sHighLander;
+	static Map *sMapReference;
 	OSL_IMAGE *mMapImage;
 };
 
