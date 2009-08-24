@@ -77,7 +77,7 @@ void GameScreen::update()
 	if(osl_keys->pressed.circle)
 	{
 		oslFlushKey();
-		mNextScreen = ScreenManager::SCREEN_GAME_OPTIONS; //go back CLR
+		//mNextScreen = ScreenManager::SCREEN_GAME_OPTIONS; //go back CLR
 	}
 }
 

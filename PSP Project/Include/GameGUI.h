@@ -26,6 +26,7 @@ public:
 private:
 	GameGUI(GameScreen *gameLogic);
 	void CheckViewBounds();
+	void SelectedTowerItem();
 
 	GameScreen *mGame;
 	OSL_IMAGE *mCursor;

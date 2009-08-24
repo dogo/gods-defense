@@ -12,7 +12,6 @@
 class GodLibrary
 {
 private:
-	OSL_IMAGE *Splash;
 	int mTempAnimation;
 	int mAnimation;
 

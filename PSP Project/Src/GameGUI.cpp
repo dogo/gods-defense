@@ -16,7 +16,7 @@ void GameGUI::InitGUI(GameScreen *gameLogic)
 {
 	if (sGameGUIReference != NULL)
 	{
-		oslFatalError("Error GameLogic is not NULL .");
+		oslFatalError("Error GameLogic is not NULL.");
 		return;
 	}
 	
@@ -25,13 +25,14 @@ void GameGUI::InitGUI(GameScreen *gameLogic)
 
 GameGUI::~GameGUI()
 {
-	sGameGUIReference = NULL;
 	if (mCursor != NULL)
 		oslDeleteImage(mCursor);
 	if (mSidebar != NULL)
 		oslDeleteImage(mSidebar);
 	if (mSelectorSidebar != NULL)
 		oslDeleteImage(mSelectorSidebar);
+	
+	sGameGUIReference = NULL;
 }
 
 void GameGUI::LoadStuffs()
@@ -99,7 +100,7 @@ void GameGUI::Update(/*unsigned timePassed*/)
 						
 		if (osl_keys->pressed.cross)
 		{
-			//Selected menu item
+			SelectedTowerItem();
 		}
 		
 		if (osl_keys->pressed.square)
@@ -144,4 +145,16 @@ void GameGUI::PuttingTower(Tower *tower)
 {
 	mGame->SetGameState(GS_MAP_PLACE_TOWER);
 	mPuttingTower = tower;
+}
+
+void GameGUI::SelectedTowerItem()
+{
+	/*if (mTowerItems[0][mSelectedItemY] == NULL)
+	{
+		return;
+	}
+	else
+	{
+		mTowerItems[0][mSelectedItemY];
+	}*/
 }
