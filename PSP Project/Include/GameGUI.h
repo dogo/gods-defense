@@ -30,9 +30,11 @@ private:
 	GameScreen *mGame;
 	OSL_IMAGE *mCursor;
 	OSL_IMAGE *mSidebar;
+	OSL_IMAGE *mSelectorSidebar;
 	static GameGUI *sGameGUIReference;
 	Tower *mPuttingTower;
 	bool mShowSidebar;
+	int mSelectedItemY;
 };
 
 #endif

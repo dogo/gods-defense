@@ -30,6 +30,8 @@ GameGUI::~GameGUI()
 		oslDeleteImage(mCursor);
 	if (mSidebar != NULL)
 		oslDeleteImage(mSidebar);
+	if (mSelectorSidebar != NULL)
+		oslDeleteImage(mSelectorSidebar);
 }
 
 void GameGUI::LoadStuffs()
@@ -39,9 +41,12 @@ void GameGUI::LoadStuffs()
 		oslDeleteImage(mCursor);
 	if (mSidebar != NULL)
 		oslDeleteImage(mSidebar);
+	if (mSelectorSidebar != NULL)
+		oslDeleteImage(mSelectorSidebar);
 	
 	mCursor = oslLoadImageFilePNG(Resource::IMG_CURSOR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	mSidebar = oslLoadImageFilePNG(Resource::IMG_SIDEBAR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	mSelectorSidebar = oslLoadImageFilePNG(Resource::IMG_SELECTOR_SIDEBAR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 	//Initialize variables
 	mCursor->centerY = mCursor->sizeY / 2;
@@ -56,6 +61,8 @@ GameGUI::GameGUI(GameScreen *gameLogic)
 	mCursor = NULL;
 	mSidebar = NULL;
 	mShowSidebar = false;
+	mSelectorSidebar = NULL;
+	mSelectedItemY = 0;
 }
 
 void GameGUI::Update(/*unsigned timePassed*/)
@@ -82,8 +89,31 @@ void GameGUI::Update(/*unsigned timePassed*/)
 		}
 		CheckViewBounds();
 	}
-	if(osl_keys->pressed.square)
-		mShowSidebar = !mShowSidebar ;
+
+	else if (currentGameState == GS_TOWER_MENU)
+	{
+		if (osl_keys->pressed.up)
+			mSelectedItemY = (mSelectedItemY-1+4)%4;
+		if (osl_keys->pressed.down)
+			mSelectedItemY = (mSelectedItemY+1)%4;
+						
+		if (osl_keys->pressed.cross)
+		{
+			//Selected menu item
+		}
+		
+		if (osl_keys->pressed.square)
+		{
+			mShowSidebar = !mShowSidebar;
+			mGame->SetGameState(GS_SCROLL_MAP);
+		}
+	}
+
+	if((osl_keys->pressed.square) && (currentGameState == GS_SCROLL_MAP || currentGameState == GS_MAP_PLACE_TOWER))
+	{
+		mGame->SetGameState(GS_TOWER_MENU);
+		mShowSidebar = !mShowSidebar;
+	}
 		
 	oslPrintf_xy(0,20,"UpdateGUI");
 }
@@ -104,8 +134,10 @@ void GameGUI::CheckViewBounds()
 void GameGUI::draw()
 {
 	if(mShowSidebar)
+	{
 		oslDrawImageXY(mSidebar,480-48, 0);
-
+		oslDrawImageXY(mSelectorSidebar, 480-40, 29 + (mSelectedItemY * 61)); //(PSP Screen - sidebar - 8 to align, Side bar spacing + (Selected Item * Image->Y));
+	}
 	oslDrawImage(mCursor);
 }
 void GameGUI::PuttingTower(Tower *tower)

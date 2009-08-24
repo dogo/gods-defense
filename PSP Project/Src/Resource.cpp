@@ -12,6 +12,7 @@ char Resource::IMG_MAIN_MENU_BG[] = "/Res/background.png";
 char Resource::IMG_CURSOR[] = "/Res/cursor.png";
 char Resource::IMG_BACK[] = "/Res/circle.png";
 char Resource::IMG_SIDEBAR[] = "/Res/sidebar.png";
+char Resource::IMG_SELECTOR_SIDEBAR[] = "/Res/selector.png";
 
 char const Resource::STR_BACK_SK[] = "Back";
 char const Resource::STR_MULTIPLAYER_CAPTION[] = "Multiplayer";
