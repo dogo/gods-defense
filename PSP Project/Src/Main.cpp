@@ -75,13 +75,6 @@ int main()
 				oslPrintf_xy(0,10,"gScreen %d",gScreen);
 #endif
 			}
-
-			if(gScreen == ScreenManager::SCREEN_TITLE){   
-				if(osl_keys->pressed.start)
-				{
-					oslPlaySound(menuTheme, 1); //Plays the sound in the menu
-				}
-			}
 			oslEndDrawing();
 		}
 

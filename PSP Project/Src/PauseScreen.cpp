@@ -53,6 +53,10 @@ void PauseScreen::update()
 		if(gMenu == 0)
 			mNextScreen = ScreenManager::SCREEN_GAME; //go back CLR
 		else if (gMenu == 1)
+		{
 			mNextScreen = ScreenManager::SCREEN_MAIN_MENU;
+			gMenu = 0;
+			oslPlaySound(menuTheme, 1); //Plays the sound in the menu
+		}
 	}
 }
