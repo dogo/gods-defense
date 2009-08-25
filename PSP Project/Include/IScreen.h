@@ -10,6 +10,7 @@
 class IScreen
 {
 public:
+	virtual ~IScreen() {};
 
 	virtual void draw() = 0;
 

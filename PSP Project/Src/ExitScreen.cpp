@@ -12,6 +12,10 @@ ExitScreen::ExitScreen()
 	gMenu = 0;
 }
 
+ExitScreen::~ExitScreen()
+{
+}
+
 void ExitScreen::draw()
 {
 	oslIntraFontSetStyle(gFont, 2.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);

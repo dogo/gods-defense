@@ -14,6 +14,7 @@ private:
 
 public:
 	ExitScreen();
+	~ExitScreen();
 
 	virtual void draw();
 

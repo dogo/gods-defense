@@ -12,6 +12,10 @@ PauseScreen::PauseScreen()
 	gMenu = 0;
 }
 
+PauseScreen::~PauseScreen()
+{
+}
+
 void PauseScreen::draw()
 {
 	//Screen Title

@@ -14,6 +14,7 @@ private:
 
 public:
 	MultiplayerScreen();
+	~MultiplayerScreen();
 
 	virtual void draw();
 

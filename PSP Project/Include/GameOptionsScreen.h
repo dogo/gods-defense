@@ -18,6 +18,7 @@ private:
 
 public:
 	GameOptionsScreen();
+	~GameOptionsScreen();
 	virtual void draw();
 	virtual void update();
 
