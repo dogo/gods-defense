@@ -132,8 +132,6 @@ void GameGUI::Update(/*unsigned timePassed*/)
 		mGame->SetGameState(GS_TOWER_MENU);
 		mShowSidebar = !mShowSidebar;
 	}
-		
-	oslPrintf_xy(0,20,"UpdateGUI");
 }
 
 void GameGUI::CheckViewBounds()
@@ -167,7 +165,7 @@ void GameGUI::draw()
 				}
 				else
 				{
-					bool selected = (currentGameState == GS_TOWER_MENU) && (mSelectedItemY == y);
+					bool selected = (currentGameState == GS_TOWER_MENU) && (0==x) && (mSelectedItemY == y);
 					mTowerItems[x][y]->drawIcons(selected);
 				}
 			}
@@ -198,6 +196,7 @@ TowerMenuItem::TowerMenuItem(Tower *tower, const int &x, const int &y)
 {
 	mTower = tower;
 	mY = y;
+	mX = x;
 	mMenuIcon = mTower->mMenuIcon;
 }
 

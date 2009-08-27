@@ -51,8 +51,6 @@ Tower::Tower(const string &towerName)
 	mFireSound = NULL;
 	mHitSound = NULL;
 
-	//mTowerImg->centerX = (mTowerImg->sizeX/2); //hotspot TODO : move this to another place
-
 	char temp[256];
 	sprintf(temp, "ms0:/PSP/GAME/GodsDefense/Res/towers/%s/tower.xml", mTowerDirName.c_str());
 
@@ -61,7 +59,7 @@ Tower::Tower(const string &towerName)
 
 	if (TowerXMLInput.Error())
 	{
-		oslFatalError("Cannot open: %i", TowerXMLInput.ErrorDesc());
+		oslFatalError("Cannot open: %s", TowerXMLInput.ErrorDesc());
 		return;
 	}
 
@@ -70,7 +68,7 @@ Tower::Tower(const string &towerName)
 
 	if (!node)
 	{
-		oslFatalError("No head node in: %i", temp);
+		oslFatalError("No head node in: %s", temp);
 		return;
 	}
 
@@ -152,7 +150,7 @@ Tower::Tower(const string &towerName)
 			{
 				if (TowerLevelNode->ValueStr() != "TowersLevel")
 				{
-					oslFatalError("TowersLevel Error: %i",TowerLevelNode->Value());
+					oslFatalError("TowersLevel Error: %s",TowerLevelNode->Value());
 					return;
 				}
 				mTowerVector.push_back(TowerInfo(TowerLevelNode)); //Insert a element in the end
@@ -164,6 +162,8 @@ Tower::Tower(const string &towerName)
 		{
 			sprintf(temp, "/Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
 			mTowerImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+
+			mTowerImg->centerX = (mTowerImg->sizeX/2); //hotspot
 
 			node->QueryIntAttribute("Width", &mTowerWidth);
 			node->QueryIntAttribute("Height", &mTowerHeight);
@@ -185,7 +185,7 @@ Tower::Tower(const string &towerName)
 		}
 		else
 		{
-			oslFatalError("Bad node, not donout for you: %i",mCurrentLine);
+			oslFatalError("Bad node, not donout for you: %s",mCurrentLine);
 			return;
 		}
 		node = node->NextSiblingElement();
