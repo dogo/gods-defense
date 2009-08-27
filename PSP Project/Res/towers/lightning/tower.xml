@@ -1,0 +1,25 @@
+<!DOCTYPE Tower SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/tower.dtd">
+<Tower>
+	<Name>Lightning Tower</Name>
+	<Description>Flyers</Description>
+	
+	<TowerLength>7</TowerLength>
+	
+	<Capability HitsLand="False" HitsFlyers="True" />
+	
+	<Projectile Type="Lightning" Sprite="ST_Ice.png" />
+	<TowersLevels>
+		<TowersLevel Cost="10" SellAmount="7"  Damage="4"  ROF="700" Range="100" Splash="0" Speed="250"/>
+		<TowersLevel Cost="10" SellAmount="16" Damage="5"  ROF="700" Range="110" Splash="0" Speed="250"/>
+		<TowersLevel Cost="20" SellAmount="32" Damage="10" ROF="700" Range="110" Splash="0" Speed="275"/>
+		<TowersLevel Cost="30" SellAmount="56" Damage="18" ROF="600" Range="120" Splash="0" Speed="300"/>
+		<TowersLevel Cost="40" SellAmount="88" Damage="32" ROF="600" Range="120" Splash="0" Speed="300"/>
+	</TowersLevels>
+	
+	<TowerImg File="tower.png" Width="2" Height="2" />
+
+	<MenuIcon File="icon.png" />
+	
+	<FireSound File="shot.wav" />
+	<HitSound File="hit.wav" />
+</Tower>

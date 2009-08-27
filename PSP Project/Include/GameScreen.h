@@ -8,6 +8,7 @@
 
 //Class Declarations
 class GameGUI;
+class TowerMenuItem;
 
 #include "../Include/ILib.h"
 #include "../Include/Projectile.h"
@@ -15,6 +16,9 @@ class GameGUI;
 #include "../Include/Enemy.h"
 #include "../Include/GameGUI.h"
 #include "../Include/Map.h"
+#include <map>
+
+using namespace std;
 
 enum GameState
 {
@@ -28,7 +32,10 @@ enum GameState
 class GameScreen : public IScreen
 {
 private:
-	OSL_IMAGE *map;
+	map<string, Tower*> mTowers;
+	void LoadTower(const string &towerName);
+
+	OSL_IMAGE *mMap;
 	GameState mGameState;
 	Map *mGameMap;
 	GameGUI *mGameGUI;
@@ -36,14 +43,15 @@ private:
 	int mPlayerMoney;
 	float mPlayerPoints;
 	unsigned int mActiveWaves;
-	bool mWaveIsRunning; 
-
+	bool mWaveIsRunning;
 
 public:
 	GameScreen();
 	OSL_IMAGE *LoadMapImage(const char* imageName);
 	void LoadMap(const string &mapName);
 	void LoadFirstPartForMap();
+	string **GetMenuTowers() const;
+	Tower *GetTower(const string &towerName) const;
 
 	virtual ~GameScreen();
 

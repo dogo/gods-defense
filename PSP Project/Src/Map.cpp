@@ -377,6 +377,10 @@ Map::~Map()
 {
 	if(mMapImage != NULL)
 		oslDeleteImage(mMapImage);
+
+	for (int i = 0; i < 4; i++)
+		delete[] mTowersMenu[i];
+	delete[] mTowersMenu;
 	
 	sMapReference = NULL;
 }

@@ -17,8 +17,9 @@ class ProjectileInstance;
 enum ProjectileType
 {
 	PT_Arrow,
-	PT_Ice
-	//TODO : Define all Projectiles Types
+	PT_Ice,
+	PT_Lightning,
+	PT_Fire
 };
 
 class ProjectileInstance

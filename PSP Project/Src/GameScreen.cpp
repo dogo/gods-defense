@@ -37,6 +37,33 @@ void GameScreen::LoadFirstPartForMap()
 {
 	//Load map image
 	mGameMap->LoadMapImage();
+
+	//Load all Towers
+	int dfd;
+	dfd = sceIoDopen("/Res/towers");
+	
+	//get all the folders name in towers directory to load
+	if(dfd > 0)
+	{
+		struct SceIoDirent dir;
+		memset(&dir,0,sizeof(SceIoDirent));
+
+		while(sceIoDread(dfd, &dir) > 0)
+		{
+			if(dir.d_stat.st_attr & FIO_SO_IFDIR)
+			{
+				if(dir.d_name[0] != '.')
+				{
+					LoadTower(dir.d_name);
+				}
+			}
+			else
+			{
+				oslFatalError("Error reading towers folder!");
+			}
+		}
+		sceIoDclose(dfd);
+	}
 	mGameGUI->LoadStuffs();
 }
 
@@ -89,4 +116,24 @@ const GameState GameScreen::GetGameState()
 void GameScreen::SetGameState(const GameState &newState)
 {
 	mGameState = newState;
+}
+
+string **GameScreen::GetMenuTowers() const
+{
+	return mGameMap->mTowersMenu;
+}
+
+Tower *GameScreen::GetTower(const string &towerName) const
+{
+	map<string, Tower*>::const_iterator iter = mTowers.find(towerName);
+	if (iter != mTowers.end())
+		return iter->second;
+	else
+		return NULL;
+}
+
+void GameScreen::LoadTower(const string &towerName)
+{
+	Tower* t = new Tower(towerName);
+	mTowers[t->mTowerDirName] = t;
 }

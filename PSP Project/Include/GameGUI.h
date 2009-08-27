@@ -8,9 +8,14 @@
 
 #include "../Include/GodLibrary.h"
 #include "../Include/GameScreen.h"
+#include "../Include/Tower.h"
+#include "../Include/Map.h"
 
 //Class Declarations
+class GameGUI;
 class GameScreen;
+class SidebarItem;
+class TowerMenuItem;
 
 class GameGUI
 {
@@ -36,6 +41,31 @@ private:
 	Tower *mPuttingTower;
 	bool mShowSidebar;
 	int mSelectedItemY;
+	SidebarItem *mTowerItems[4][4];
+};
+
+class SidebarItem
+{
+public:
+	void drawIcons(const bool &selected);
+
+	int mX;
+	int mY;
+
+protected:
+	OSL_IMAGE *mMenuIcon;
+
+	~SidebarItem();
+};
+
+class TowerMenuItem : public SidebarItem
+{
+public:
+	TowerMenuItem(Tower *tower, const int &x, const int &y);
+
+	Tower *mTower;
+protected:
+	~TowerMenuItem();
 };
 
 #endif

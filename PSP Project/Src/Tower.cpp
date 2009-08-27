@@ -51,10 +51,10 @@ Tower::Tower(const string &towerName)
 	mFireSound = NULL;
 	mHitSound = NULL;
 
-	mTowerImg->centerX = (mTowerImg->sizeX/2); //hotspot
+	//mTowerImg->centerX = (mTowerImg->sizeX/2); //hotspot TODO : move this to another place
 
 	char temp[256];
-	sprintf(temp, "Res/towers/%s/tower.xml", mTowerDirName.c_str());
+	sprintf(temp, "ms0:/PSP/GAME/GodsDefense/Res/towers/%s/tower.xml", mTowerDirName.c_str());
 
 	TiXmlDocument TowerXMLInput;
 	TowerXMLInput.LoadFile(temp);
@@ -124,7 +124,7 @@ Tower::Tower(const string &towerName)
 				oslFatalError("No ProjectileType.");
 				return;
 			}
-
+			//More Projectile Types goes here.
 			if (!strcmp(ProjectileType, "Arrow"))
 			{
 				mProjectileType = PT_Arrow;
@@ -133,10 +133,16 @@ Tower::Tower(const string &towerName)
 			{
 				mProjectileType = PT_Ice;
 			}
-			
-			//More Projectile Types goes here.
+			else if (!strcmp(ProjectileType, "Fire"))
+			{
+				mProjectileType = PT_Fire;
+			}
+			else if (!strcmp(ProjectileType, "Lightning"))
+			{
+				mProjectileType = PT_Lightning;
+			}
 
-			sprintf(temp, "Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("Sprite"));
+			sprintf(temp, "/Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("Sprite"));
 			mProjectileImg = ProjectileInstance::LoadProjectileImage(mProjectileType, temp);
 		}
 		else if (mCurrentLine == "TowersLevels")
@@ -156,7 +162,7 @@ Tower::Tower(const string &towerName)
 		}
 		else if (mCurrentLine == "TowerImg")
 		{
-			sprintf(temp, "Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
+			sprintf(temp, "/Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
 			mTowerImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 			node->QueryIntAttribute("Width", &mTowerWidth);
@@ -164,17 +170,17 @@ Tower::Tower(const string &towerName)
 		}
 		else if (mCurrentLine == "MenuIcon")
 		{
-			sprintf(temp, "Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
+			sprintf(temp, "/Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
 			mMenuIcon = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 		}
 		else if (mCurrentLine == "FireSound")
 		{
-			sprintf(temp, "Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
+			sprintf(temp, "/Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
 			mFireSound = oslLoadSoundFileWAV (temp, OSL_FMT_NONE);
 		}
 		else if (mCurrentLine == "HitSound")
 		{
-			sprintf(temp, "Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
+			sprintf(temp, "/Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
 			mHitSound = oslLoadSoundFileWAV (temp, OSL_FMT_NONE);
 		}
 		else

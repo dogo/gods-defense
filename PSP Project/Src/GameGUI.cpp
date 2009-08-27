@@ -53,6 +53,23 @@ void GameGUI::LoadStuffs()
 	mCursor->centerY = mCursor->sizeY / 2;
 	mCursor->x = 480/2;	//Place cursor at the center of the screen
 	mCursor->y = 272/2;
+
+	string **menuTowers = mGame->GetMenuTowers();
+
+	for (int y = 0; y < 4; y++)
+	{
+		for (int x = 0; x < 4; x++)
+		{
+			if (menuTowers[x][y] == "")
+			{
+				mTowerItems[x][y] = NULL;
+			}
+			else
+			{
+				mTowerItems[x][y] = new TowerMenuItem(mGame->GetTower(menuTowers[x][y]), x, y);
+			}
+		}
+	}
 }
 
 GameGUI::GameGUI(GameScreen *gameLogic)
@@ -134,10 +151,28 @@ void GameGUI::CheckViewBounds()
 
 void GameGUI::draw()
 {
+
+	GameState currentGameState = mGame->GetGameState();
+
 	if(mShowSidebar)
 	{
-		oslDrawImageXY(mSidebar,480-48, 0);
-		oslDrawImageXY(mSelectorSidebar, 480-40, 29 + (mSelectedItemY * 61)); //(PSP Screen - sidebar - 8 to align, Side bar spacing + (Selected Item * Image->Y));
+		oslDrawImageXY(mSidebar, (480-48), 0);
+		for (int y = 0; y < 4; y++)
+		{
+			for (int x = 0; x < 4; x++)
+			{
+				if (mTowerItems[x][y] == NULL)
+				{
+					continue; //Workaround :D
+				}
+				else
+				{
+					bool selected = (currentGameState == GS_TOWER_MENU) && (mSelectedItemY == y);
+					mTowerItems[x][y]->drawIcons(selected);
+				}
+			}
+		}
+		oslDrawImageXY(mSelectorSidebar, (480-40), 29 + (mSelectedItemY * 61)); //(PSP Screen - sidebar - 8 to align, Side bar spacing + (Selected Item * Image->Y));
 	}
 	oslDrawImage(mCursor);
 }
@@ -149,12 +184,24 @@ void GameGUI::PuttingTower(Tower *tower)
 
 void GameGUI::SelectedTowerItem()
 {
-	/*if (mTowerItems[0][mSelectedItemY] == NULL)
+	if (mTowerItems[0][mSelectedItemY] == NULL)
 	{
 		return;
 	}
 	else
 	{
-		mTowerItems[0][mSelectedItemY];
-	}*/
+		mTowerItems[0][mSelectedItemY]; //TODO : Selected tower
+	}
+}
+
+TowerMenuItem::TowerMenuItem(Tower *tower, const int &x, const int &y)
+{
+	mTower = tower;
+	mY = y;
+	mMenuIcon = mTower->mMenuIcon;
+}
+
+void SidebarItem::drawIcons(const bool &selected)
+{
+	oslDrawImageXY(mMenuIcon, (480-40),29 + (mY * 61));
 }

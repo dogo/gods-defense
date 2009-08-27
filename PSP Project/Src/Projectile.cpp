@@ -18,6 +18,12 @@ void ProjectileInstance::CreateProjectile(TowerInstance *shooter, EnemyInstance 
 	case PT_Ice:
 		//TODO : kind of Projectile Instance
 		break;
+	case PT_Lightning:
+		//TODO : kind of Projectile Instance
+		break;
+	case PT_Fire:
+		//TODO : kind of Projectile Instance
+		break;
 	default:
 		return;
 	}
@@ -32,9 +38,13 @@ OSL_IMAGE *ProjectileInstance::LoadProjectileImage(const char &projectileType, c
 	
 	case PT_Ice:
 		return oslLoadImageFilePNG(filename, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
-	/*case :
+
+	case PT_Lightning:
 		return oslLoadImageFilePNG(filename, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
-	*/
+
+	case PT_Fire:
+		return oslLoadImageFilePNG(filename, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	
 	default:
 		return NULL;
 	}

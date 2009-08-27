@@ -27,4 +27,9 @@ void MultiplayerScreen::update()
 	{	
 		mNextScreen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
 	}
+	
+	if(!oslIsWlanPowerOn())
+	{
+		mNextScreen = ScreenManager::SCREEN_WARNING;
+	}
 }
