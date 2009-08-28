@@ -6,6 +6,11 @@
 #define MAIN_H_INCLUDED
 
 #include <oslib/oslib.h>
+
+#ifdef MEMORY_DEBUG
+#include "../Include/GodLibrary.h"
+#endif
+
 #include "../Include/ScreenManager.h"
 
 	int main();

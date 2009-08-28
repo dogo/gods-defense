@@ -58,6 +58,16 @@ drawCircle(int x, int y, int radius, osl_color);
 \endcode */
 void static drawCircle(int x, int y, int radius, OSL_COLOR color);
 
+/** Get real time info about memory.
+
+\code
+GetMemoryInfo();
+    Arena:	Current total non-mmapped bytes allocated from system.
+    Used:	Current used memory.
+    Free:	Current free memory.
+\endcode */
+void static GetMemoryInfo();
+
 /** Animate an generic sprite.
 	mAnimateImg - Image to animate.
 	mMAXFRAMES - Max image frames.

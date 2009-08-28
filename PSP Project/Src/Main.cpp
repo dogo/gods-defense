@@ -70,6 +70,9 @@ int main()
 			{	
 				mScreenManager->mCurrentScreen->draw();
 				mScreenManager->mCurrentScreen->update();
+#ifdef MEMORY_DEBUG
+				GodLibrary::GetMemoryInfo();
+#endif
 #ifdef DEBUG
 				oslPrintf_xy(0,0,"mNextScreen %d",mNextScreen);
 				oslPrintf_xy(0,10,"gScreen %d",gScreen);
