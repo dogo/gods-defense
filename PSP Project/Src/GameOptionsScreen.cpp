@@ -12,8 +12,7 @@ GameOptionsScreen::GameOptionsScreen()
 {
 	gChoosedMap = "NULL";
 	mSelectedMap = 0;
-	int dfd;
-	dfd = sceIoDopen("/Res/maps");
+	int dfd = sceIoDopen("/Res/maps");
 
 	//get all the folders name in map directory to fill mMap vector 
 	if(dfd > 0)

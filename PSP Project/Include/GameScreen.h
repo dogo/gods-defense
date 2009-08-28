@@ -34,6 +34,7 @@ class GameScreen : public IScreen
 private:
 	map<string, Tower*> mTowers;
 	void LoadTower(const string &towerName);
+	void CleanTowers();
 
 	OSL_IMAGE *mMap;
 	GameState mGameState;

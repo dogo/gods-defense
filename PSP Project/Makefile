@@ -17,6 +17,7 @@ LIBS =  -losl -lpng -lz -lpsphprm -lpspaudiolib -lpspaudio -lpspsdk -lpspctrl -l
 
 BUILD_PRX = 1
 PSP_FW_VERSION=390
+PSP_LARGE_MEMORY = 1
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Gods Defense
 PSP_EBOOT_ICON = ICON0.png

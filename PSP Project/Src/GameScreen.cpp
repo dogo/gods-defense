@@ -35,12 +35,14 @@ void GameScreen::LoadMap(const string &mapName)
 
 void GameScreen::LoadFirstPartForMap()
 {
+	//reset towers :D
+	CleanTowers();
+
 	//Load map image
 	mGameMap->LoadMapImage();
 
 	//Load all Towers
-	int dfd;
-	dfd = sceIoDopen("/Res/towers");
+	int dfd = sceIoDopen("/Res/towers");
 	
 	//get all the folders name in towers directory to load
 	if(dfd > 0)
@@ -69,6 +71,7 @@ void GameScreen::LoadFirstPartForMap()
 
 GameScreen::~GameScreen()
 {
+	CleanTowers();
 	delete(mGameMap);
 	delete(mGameGUI);
 }
@@ -134,6 +137,17 @@ Tower *GameScreen::GetTower(const string &towerName) const
 
 void GameScreen::LoadTower(const string &towerName)
 {
-	Tower* t = new Tower(towerName);
-	mTowers[t->mTowerDirName] = t;
+	Tower *t = new Tower(towerName);
+	mTowers[t-> mTowerDirName] = t;
+}
+
+void GameScreen::CleanTowers()
+{
+	//Clean Towers
+	map<string, Tower*>::iterator t_iter;
+	for (t_iter = mTowers.begin(); t_iter != mTowers.end(); t_iter++)
+	{
+		delete t_iter->second;
+	}
+	mTowers.clear();
 }
