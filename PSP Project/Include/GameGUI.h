@@ -49,7 +49,6 @@ class SidebarItem
 public:
 	void drawIcons(const bool &selected);
 
-	int mX;
 	int mY;
 
 protected:
@@ -61,7 +60,7 @@ protected:
 class TowerMenuItem : public SidebarItem
 {
 public:
-	TowerMenuItem(Tower *tower, const int &x, const int &y);
+	TowerMenuItem(Tower *tower, const int &y);
 
 	Tower *mTower;
 protected:

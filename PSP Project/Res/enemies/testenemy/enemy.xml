@@ -1,4 +1,4 @@
-<!DOCTYPE Tower SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/enemy.dtd">
+<!DOCTYPE Enemy SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/enemy.dtd">
 <Enemy>
 	<Name>Test Enemy</Name>
 	<Description>Simple Ground Enemy</Description>

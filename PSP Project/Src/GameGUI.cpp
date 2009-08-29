@@ -56,17 +56,21 @@ void GameGUI::LoadStuffs()
 
 	string **menuTowers = mGame->GetMenuTowers();
 
+	string Blank = "Blank";
 	for (int y = 0; y < 4; y++)
 	{
 		for (int x = 0; x < 4; x++)
 		{
 			if (menuTowers[x][y] == "")
 			{
+				printf("%i %i = %s\n", x, y, Blank.c_str());
 				mTowerItems[x][y] = NULL;
 			}
 			else
 			{
-				mTowerItems[x][y] = new TowerMenuItem(mGame->GetTower(menuTowers[x][y]), x, y);
+				//Dogo : this fucking line!
+				printf("%i %i = %s\n", x, y, menuTowers[x][y].c_str());
+				mTowerItems[x][y] = new TowerMenuItem(mGame->GetTower(menuTowers[x][y]), y);
 			}
 		}
 	}
@@ -165,7 +169,7 @@ void GameGUI::draw()
 				}
 				else
 				{
-					bool selected = (currentGameState == GS_TOWER_MENU) && (0==x) && (mSelectedItemY == y);
+					bool selected = (currentGameState == GS_TOWER_MENU) && (mSelectedItemY == y);
 					mTowerItems[x][y]->drawIcons(selected);
 				}
 			}
@@ -182,22 +186,33 @@ void GameGUI::PuttingTower(Tower *tower)
 
 void GameGUI::SelectedTowerItem()
 {
+	string click = "click";
 	if (mTowerItems[0][mSelectedItemY] == NULL)
 	{
 		return;
 	}
 	else
 	{
-		mTowerItems[0][mSelectedItemY]; //TODO : Selected tower
+		printf("%s\n",click.c_str());
+		//mTowerItems[0][mSelectedItemY]; //TODO : Selected tower
 	}
 }
 
-TowerMenuItem::TowerMenuItem(Tower *tower, const int &x, const int &y)
+TowerMenuItem::TowerMenuItem(Tower *tower, const int &y)
 {
 	mTower = tower;
 	mY = y;
-	mX = x;
 	mMenuIcon = mTower->mMenuIcon;
+}
+
+TowerMenuItem::~TowerMenuItem()
+{
+	// 06 job
+}
+
+SidebarItem::~SidebarItem()
+{
+	//06 job
 }
 
 void SidebarItem::drawIcons(const bool &selected)

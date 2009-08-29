@@ -1,4 +1,4 @@
-<!DOCTYPE Tower SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/map.dtd">
+<!DOCTYPE Map SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/map.dtd">
 <Map>
     <Name>Icarus Falls</Name>
     <Description><![CDATA[5 Waves of Tower.]]></Description>
@@ -6,7 +6,9 @@
 
     <Menu>
         <BuildTowerMenu X="0" Y="0" Folder="arrow" />
-        <BuildTowerMenu X="3" Y="1" Folder="ice" />
+        <BuildTowerMenu X="0" Y="1" Folder="ice" />
+		<BuildTowerMenu X="0" Y="2" Folder="fire" />
+		<BuildTowerMenu X="0" Y="3" Folder="lightning" />
     </Menu>
     <MapImg File="icarusfalls.png" Width="32" Height="32" />
     <CollisionMap><![CDATA[
