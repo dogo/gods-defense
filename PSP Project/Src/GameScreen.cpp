@@ -128,7 +128,14 @@ string *GameScreen::GetMenuTowers() const
 
 Tower *GameScreen::GetTower(const string &towerName) const
 {
-	map<string, Tower*>::const_iterator iter = mTowers.find(towerName);
+	map<string, Tower*>::const_iterator iter = mTowers.find(towerName);//.begin();
+
+	/*while(iter != mTowers.end())
+	{
+		oslWarning("iter->second %s",iter->second->mTowerDirName.c_str());
+		iter++;
+	}*/
+
 	if (iter != mTowers.end())
 		return iter->second;
 	else

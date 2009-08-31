@@ -193,7 +193,7 @@ TowerMenuItem::TowerMenuItem(Tower *tower, const int &y)
 {
 	mTower = tower;
 	mY = y;
-	mMenuIcon = mTower->mMenuIcon;
+	mIcon = mTower->mMenuIcon;
 }
 
 TowerMenuItem::~TowerMenuItem()
@@ -207,6 +207,6 @@ SidebarItem::~SidebarItem()
 }
 
 void SidebarItem::drawIcons()
-{
-	oslDrawImageXY(mMenuIcon, (480-40),29 + (mY * 61));
+{	
+	oslDrawImageXY(mIcon, (480-40),29 + (mY * 61));
 }

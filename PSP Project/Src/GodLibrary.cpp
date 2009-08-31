@@ -114,3 +114,9 @@ float const Coordinates2D::SquareDistance(const Coordinates2D &enemy)
 	float dy = enemy.Y - this->Y; //dx = enemy.x - Tower->x
 	return sqrt((dy*dy)+(dx*dx)); //Pythagoras distance is D(A,B) = sqrt( (xA-xB)² + (yA-yB)²)
 }
+
+void lowerCase(string &str)
+{
+	for (unsigned int i = 0; i < str.length(); i++)
+		str[i] = tolower(str[i]);
+}

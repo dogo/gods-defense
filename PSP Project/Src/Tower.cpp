@@ -38,6 +38,8 @@ Tower::Tower(const string &towerName)
 {
 	//Default Initializers
 	mTowerDirName = towerName;
+	lowerCase(mTowerDirName);
+
 	mIsBuildable = true;
 	mTowerName = NULL;
 	mTowerDescription = NULL;

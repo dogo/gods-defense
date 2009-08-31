@@ -92,4 +92,7 @@ public:
 	float X;
 	float Y;
 };
+
+void lowerCase(string &str); //http://www.cplusplus.com/forum/beginner/613/
+
 #endif

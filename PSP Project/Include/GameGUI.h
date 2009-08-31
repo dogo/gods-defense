@@ -52,7 +52,7 @@ public:
 	int mY;
 
 protected:
-	OSL_IMAGE *mMenuIcon;
+	OSL_IMAGE *mIcon;
 
 	~SidebarItem();
 };

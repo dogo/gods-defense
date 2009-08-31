@@ -348,8 +348,11 @@ void Map::ResetMap()
 	}
 	mDescription.clear();
 
-	for (unsigned int y = 0; y < 4; y++)
-		mTowersMenu[y] = "";
+	if (mTowersMenu != NULL)
+	{
+		for (unsigned int y = 0; y < 4; y++)
+			mTowersMenu[y] = "";
+	}
 
 	mWaves.clear();
 	mPaths.clear();
