@@ -54,24 +54,21 @@ void GameGUI::LoadStuffs()
 	mCursor->x = 480/2;	//Place cursor at the center of the screen
 	mCursor->y = 272/2;
 
-	string **menuTowers = mGame->GetMenuTowers();
+	string *menuTowers = mGame->GetMenuTowers();
 
 	string Blank = "Blank";
 	for (int y = 0; y < 4; y++)
 	{
-		for (int x = 0; x < 4; x++)
+		if (menuTowers[y] == "")
 		{
-			if (menuTowers[x][y] == "")
-			{
-				printf("%i %i = %s\n", x, y, Blank.c_str());
-				mTowerItems[x][y] = NULL;
-			}
-			else
-			{
-				//Dogo : this fucking line!
-				printf("%i %i = %s\n", x, y, menuTowers[x][y].c_str());
-				mTowerItems[x][y] = new TowerMenuItem(mGame->GetTower(menuTowers[x][y]), y);
-			}
+			printf("%i = %s\n", y, Blank.c_str());
+			mTowerItems[y] = NULL;
+		}
+		else
+		{
+			//Dogo : this fucking line!
+			printf("%i = %s\n", y, menuTowers[y].c_str());
+			//mTowerItems[y] = new TowerMenuItem(mGame->GetTower(menuTowers[y]), y);
 		}
 	}
 }
@@ -161,17 +158,14 @@ void GameGUI::draw()
 		oslDrawImageXY(mSidebar, (480-48), 0);
 		for (int y = 0; y < 4; y++)
 		{
-			for (int x = 0; x < 4; x++)
+			if (mTowerItems[y] == NULL)
 			{
-				if (mTowerItems[x][y] == NULL)
-				{
-					continue; //Workaround :D
-				}
-				else
-				{
-					bool selected = (currentGameState == GS_TOWER_MENU) && (mSelectedItemY == y);
-					mTowerItems[x][y]->drawIcons(selected);
-				}
+				continue; //Workaround :D
+			}
+			else
+			{
+				bool selected = (currentGameState == GS_TOWER_MENU) && (mSelectedItemY == y);
+				mTowerItems[y]->drawIcons(selected);
 			}
 		}
 		oslDrawImageXY(mSelectorSidebar, (480-40), 29 + (mSelectedItemY * 61)); //(PSP Screen - sidebar - 8 to align, Side bar spacing + (Selected Item * Image->Y));
@@ -187,14 +181,14 @@ void GameGUI::PuttingTower(Tower *tower)
 void GameGUI::SelectedTowerItem()
 {
 	string click = "click";
-	if (mTowerItems[0][mSelectedItemY] == NULL)
+	if (mTowerItems[mSelectedItemY] == NULL)
 	{
 		return;
 	}
 	else
 	{
 		printf("%s\n",click.c_str());
-		//mTowerItems[0][mSelectedItemY]; //TODO : Selected tower
+		//mTowerItems[mSelectedItemY]; //TODO : Selected tower
 	}
 }
 

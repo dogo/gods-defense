@@ -143,9 +143,7 @@ Map::Map()
 	mImgMapName = NULL;
 	mCollisionMap = NULL;
 
-	mTowersMenu = new string*[4];
-	for (int i = 0; i < 4; i++)
-		mTowersMenu[i] = new string[4];
+	mTowersMenu = new string[4];
 }
 
 void Map::LoadMap(const string &MapDirName)
@@ -212,12 +210,11 @@ void Map::LoadMap(const string &MapDirName)
 			{
 				if (towerMenuNode->ValueStr() == "BuildTowerMenu")
 				{
-					int x=0, y=0;
+					int y=0;
 
-					towerMenuNode->QueryIntAttribute("X", &x);
 					towerMenuNode->QueryIntAttribute("Y", &y);
 
-					mTowersMenu[x][y] = string(towerMenuNode->Attribute("Folder"));
+					mTowersMenu[y] = string(towerMenuNode->Attribute("Folder"));
 				}
 				else
 				{
@@ -351,12 +348,8 @@ void Map::ResetMap()
 	}
 	mDescription.clear();
 
-	if (mTowersMenu != NULL)
-	{
-		for (unsigned int x = 0; x < 4; x++)
-			for (unsigned int y = 0; y < 4; y++)
-				mTowersMenu[x][y] = "";
-	}
+	for (unsigned int y = 0; y < 4; y++)
+		mTowersMenu[y] = "";
 
 	mWaves.clear();
 	mPaths.clear();
@@ -378,8 +371,6 @@ Map::~Map()
 	if(mMapImage != NULL)
 		oslDeleteImage(mMapImage);
 
-	for (int i = 0; i < 4; i++)
-		delete[] mTowersMenu[i];
 	delete[] mTowersMenu;
 	
 	sMapReference = NULL;

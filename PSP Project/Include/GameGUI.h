@@ -41,7 +41,7 @@ private:
 	Tower *mPuttingTower;
 	bool mShowSidebar;
 	int mSelectedItemY;
-	SidebarItem *mTowerItems[4][4];
+	SidebarItem *mTowerItems[4];
 };
 
 class SidebarItem

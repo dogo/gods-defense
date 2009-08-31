@@ -8,7 +8,6 @@
 
 <!ELEMENT BuildTowerMenu EMPTY >
 <!ATTLIST BuildTowerMenu Folder NMTOKEN #REQUIRED >
-<!ATTLIST BuildTowerMenu X NMTOKEN #REQUIRED >
 <!ATTLIST BuildTowerMenu Y NMTOKEN #REQUIRED >
 
 <!ELEMENT Menu ( BuildTowerMenu* ) >

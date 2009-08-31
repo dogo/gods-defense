@@ -121,7 +121,7 @@ void GameScreen::SetGameState(const GameState &newState)
 	mGameState = newState;
 }
 
-string **GameScreen::GetMenuTowers() const
+string *GameScreen::GetMenuTowers() const
 {
 	return mGameMap->mTowersMenu;
 }
@@ -138,7 +138,7 @@ Tower *GameScreen::GetTower(const string &towerName) const
 void GameScreen::LoadTower(const string &towerName)
 {
 	Tower *t = new Tower(towerName);
-	mTowers[t-> mTowerDirName] = t;
+	mTowers[t->mTowerDirName] = t;
 }
 
 void GameScreen::CleanTowers()
