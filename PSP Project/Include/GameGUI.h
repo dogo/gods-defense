@@ -47,7 +47,7 @@ private:
 class SidebarItem
 {
 public:
-	void drawIcons(const bool &selected);
+	void drawIcons();
 
 	int mY;
 

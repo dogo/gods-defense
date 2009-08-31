@@ -56,19 +56,17 @@ void GameGUI::LoadStuffs()
 
 	string *menuTowers = mGame->GetMenuTowers();
 
-	string Blank = "Blank";
 	for (int y = 0; y < 4; y++)
 	{
 		if (menuTowers[y] == "")
 		{
-			printf("%i = %s\n", y, Blank.c_str());
 			mTowerItems[y] = NULL;
 		}
 		else
 		{
-			//Dogo : this fucking line!
-			printf("%i = %s\n", y, menuTowers[y].c_str());
-			//mTowerItems[y] = new TowerMenuItem(mGame->GetTower(menuTowers[y]), y);
+			Tower *mCurrentTower = mGame->GetTower(menuTowers[y]);
+			if (mCurrentTower != NULL)
+				mTowerItems[y] = new TowerMenuItem(mCurrentTower, y);
 		}
 	}
 }
@@ -164,8 +162,7 @@ void GameGUI::draw()
 			}
 			else
 			{
-				bool selected = (currentGameState == GS_TOWER_MENU) && (mSelectedItemY == y);
-				mTowerItems[y]->drawIcons(selected);
+				mTowerItems[y]->drawIcons();
 			}
 		}
 		oslDrawImageXY(mSelectorSidebar, (480-40), 29 + (mSelectedItemY * 61)); //(PSP Screen - sidebar - 8 to align, Side bar spacing + (Selected Item * Image->Y));
@@ -209,7 +206,7 @@ SidebarItem::~SidebarItem()
 	//06 job
 }
 
-void SidebarItem::drawIcons(const bool &selected)
+void SidebarItem::drawIcons()
 {
 	oslDrawImageXY(mMenuIcon, (480-40),29 + (mY * 61));
 }

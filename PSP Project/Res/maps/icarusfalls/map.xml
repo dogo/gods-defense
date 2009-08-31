@@ -5,10 +5,10 @@
     <Initializers Gold="20" Lives="20" />
 
     <Menu>
-        <BuildTowerMenu X="0" Y="0" Folder="arrow" />
-        <BuildTowerMenu X="0" Y="1" Folder="ice" />
-		<BuildTowerMenu X="0" Y="2" Folder="fire" />
-		<BuildTowerMenu X="0" Y="3" Folder="lightning" />
+        <BuildTowerMenu Y="0" Folder="arrow" />
+        <BuildTowerMenu Y="1" Folder="ice" />
+		<BuildTowerMenu Y="2" Folder="fire" />
+		<BuildTowerMenu Y="3" Folder="lightning" />
     </Menu>
     <MapImg File="icarusfalls.png" Width="32" Height="32" />
     <CollisionMap><![CDATA[
