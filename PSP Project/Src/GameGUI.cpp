@@ -91,6 +91,7 @@ void GameGUI::Update(/*unsigned timePassed*/)
 	int i;
 
 	oslPrintf_xy(0,10,"currentGameState %d",currentGameState);
+	oslPrintf_xy(0,20,"mShowSidebar %d",mShowSidebar);
 	//Scroll the map
 	if (currentGameState == GS_SCROLL_MAP || currentGameState == GS_MAP_PLACE_TOWER)
 	{
@@ -111,8 +112,13 @@ void GameGUI::Update(/*unsigned timePassed*/)
 		if(osl_keys->pressed.square)
 		{
 			mPuttingTower = NULL;
-			mGame->SetGameState(GS_TOWER_MENU);
 			mShowSidebar = !mShowSidebar;
+			mGame->SetGameState(GS_TOWER_MENU);
+		}
+		else if(osl_keys->pressed.circle)
+		{
+			mPuttingTower = NULL;
+			mGame->SetGameState(GS_SCROLL_MAP);
 		}
 		CheckViewBounds();
 	}
@@ -123,7 +129,7 @@ void GameGUI::Update(/*unsigned timePassed*/)
 		mShowSidebar = !mShowSidebar;
 	}*/
 
-	if (currentGameState == GS_TOWER_MENU)
+	if ((currentGameState == GS_TOWER_MENU) && (mShowSidebar))
 	{
 		if (osl_keys->pressed.up)
 			mSelectedItemY = (mSelectedItemY-1+4)%4;
@@ -132,6 +138,7 @@ void GameGUI::Update(/*unsigned timePassed*/)
 
 		if (osl_keys->pressed.cross)
 		{
+			mShowSidebar = !mShowSidebar;
 			SelectedTowerItem();
 		}
 
@@ -151,7 +158,7 @@ void GameGUI::RenderPlacingTower()
 	{
 		Coordinates2D buildingPosition = Coordinates2D::Coordinates2D(mCursor->x, mCursor->y);
 		mPuttingTower->RenderRangeCircle(buildingPosition, 0, COLOR_RED);
-		//mPuttingTower->RenderTower(buildingPosition);
+		mPuttingTower->RenderTower(buildingPosition);
 	}
 }
 
