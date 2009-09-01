@@ -80,7 +80,7 @@ void GameScreen::draw()
 {
 	mGameMap->draw();
 
-	//mGameGUI->???;  render offset? cursor ?
+	mGameGUI->RenderPlacingTower();
 	mGameGUI->draw();	
 #ifdef DEBUG
 	oslPrintf_xy(0,20,"Value of joystick X : %d",osl_keys->analogX);
@@ -124,6 +124,11 @@ void GameScreen::SetGameState(const GameState &newState)
 string *GameScreen::GetMenuTowers() const
 {
 	return mGameMap->mTowersMenu;
+}
+
+int const GameScreen::GetPlayerMoney()
+{
+	return mPlayerMoney;
 }
 
 Tower *GameScreen::GetTower(const string &towerName) const

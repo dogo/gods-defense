@@ -10,12 +10,16 @@
 #include "../Include/GameScreen.h"
 #include "../Include/Tower.h"
 #include "../Include/Map.h"
+#include <math.h>
 
 //Class Declarations
 class GameGUI;
 class GameScreen;
 class SidebarItem;
 class TowerMenuItem;
+
+#define COLOR_RED RGB(255, 0, 0)
+#define COLOR_GREEN RGB(0, 255, 0)
 
 class GameGUI
 {
@@ -27,13 +31,18 @@ public:
 	void Update(/*unsigned timePassed*/);
 	void draw();
 	void PuttingTower(Tower *tower);
+	void setTowerReference(Tower *tower);
+	Tower *getTowerReference();
+	void RenderPlacingTower();
+
+	Tower *gTowerReference;
+	GameScreen *mGame;
 
 private:
 	GameGUI(GameScreen *gameLogic);
 	void CheckViewBounds();
 	void SelectedTowerItem();
 
-	GameScreen *mGame;
 	OSL_IMAGE *mCursor;
 	OSL_IMAGE *mSidebar;
 	OSL_IMAGE *mSelectorSidebar;
@@ -48,7 +57,7 @@ class SidebarItem
 {
 public:
 	void drawIcons();
-
+	void Selected();
 	int mY;
 
 protected:

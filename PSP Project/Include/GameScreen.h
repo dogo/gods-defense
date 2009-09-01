@@ -53,6 +53,7 @@ public:
 	void LoadFirstPartForMap();
 	string *GetMenuTowers() const;
 	Tower *GetTower(const string &towerName) const;
+	int const GetPlayerMoney();
 
 	virtual ~GameScreen();
 
