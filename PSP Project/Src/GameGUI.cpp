@@ -121,7 +121,6 @@ void GameGUI::Update(/*unsigned timePassed*/)
 		{
 			if (currentGameState == GS_MAP_PLACE_TOWER)
 			{
-				oslWarning("mPuttingTower %s",mPuttingTower->mTowerName);
 				if (mGame->TryBuildTower(mPuttingTower, Coordinates2D::Coordinates2D(mCursor->x, mCursor->y)))
 				{
 					mPuttingTower = NULL;					
@@ -175,7 +174,7 @@ void GameGUI::CheckViewBounds()
 	else if (mCursor->x > 464 -1) //psp 480 - 16 cursor - 1 fine tunning
 		mCursor->x = 464 -1;
 
-	if (mCursor->y < 0) //0 + 16/2 cursor
+	if (mCursor->y < 0)
 		mCursor->y = 0;
 	else if (mCursor->y > 256 - 1) //psp 272 - 16 cursor -1 fine tunning
 		mCursor->y = 256 - 1;
@@ -208,7 +207,6 @@ void GameGUI::PuttingTower(Tower *tower)
 {
 	mGame->SetGameState(GS_MAP_PLACE_TOWER);
 	mPuttingTower = tower;
-	oslWarning("mPuttingTower-> %s",mPuttingTower->mTowerName);
 }
 
 Tower *GameGUI::getTowerReference()
@@ -243,12 +241,12 @@ void SidebarItem::Selected()
 	{
 		if (gamegui->mGame->GetPlayerMoney() >= mTower->mTowerVector[0].mCost)
 		{
-			oslWarning("Putting %s",mTower->mTowerName);
 			gamegui->PuttingTower(mTower);
 		}
 		else
 		{
 			oslWarning("NO Cash!");
+			gamegui->mGame->SetGameState(GS_SCROLL_MAP);
 		}
 	}
 	else

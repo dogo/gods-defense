@@ -79,6 +79,13 @@ GameScreen::~GameScreen()
 void GameScreen::draw()
 {
 	mGameMap->draw();
+	oslPrintf_xy(0,30,"mPlayerMoney %d", mPlayerMoney);
+	//Draw the towers
+	list<TowerInstance*>::const_iterator realTowers_iter;
+	for (realTowers_iter = mRealTowers.begin(); realTowers_iter != mRealTowers.end(); realTowers_iter++)
+	{
+		(*realTowers_iter)->RenderTower();
+	}
 
 	mGameGUI->RenderPlacingTower();
 	mGameGUI->draw();	
@@ -168,13 +175,9 @@ bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)
 {
 	if (true)//TODO : Check if can build here
 	{
-		oslWarning("DeployTowerAt((%d,%d)-> %s)",position.X,position.Y,tower->mTowerName);
-		oslWarning("mPlayerMoney %d", mPlayerMoney);
 		mGameMap->DeployTowerAt(position, tower);
 		mPlayerMoney -= tower->mTowerVector[0].mCost;
 		mRealTowers.push_back(new TowerInstance(tower, position));
-		oslWarning("mPlayerMoney %d", mPlayerMoney);
-
 		return true;
 	}
 	else
