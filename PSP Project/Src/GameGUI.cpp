@@ -123,26 +123,19 @@ void GameGUI::Update(/*unsigned timePassed*/)
 		CheckViewBounds();
 	}
 
-	/*else if((osl_keys->pressed.square) && (currentGameState == GS_SCROLL_MAP || currentGameState == GS_MAP_PLACE_TOWER))
-	{
-		mGame->SetGameState(GS_TOWER_MENU);
-		mShowSidebar = !mShowSidebar;
-	}*/
-
 	if ((currentGameState == GS_TOWER_MENU) && (mShowSidebar))
 	{
 		if (osl_keys->pressed.up)
 			mSelectedItemY = (mSelectedItemY-1+4)%4;
-		if (osl_keys->pressed.down)
+		else if (osl_keys->pressed.down)
 			mSelectedItemY = (mSelectedItemY+1)%4;
 
-		if (osl_keys->pressed.cross)
+		else if (osl_keys->pressed.cross)
 		{
 			mShowSidebar = !mShowSidebar;
 			SelectedTowerItem();
 		}
-
-		if (osl_keys->pressed.square)
+		else if ((osl_keys->pressed.square) || (osl_keys->pressed.circle))
 		{
 			mShowSidebar = !mShowSidebar;
 			mGame->SetGameState(GS_SCROLL_MAP);
@@ -222,6 +215,7 @@ void GameGUI::SelectedTowerItem()
 	}
 	else
 	{
+		oslPrintf_xy(0,30,"mTowerItems[%d]\n", mSelectedItemY);
 		mTowerItems[mSelectedItemY]->Selected();
 	}
 }
@@ -235,11 +229,10 @@ void SidebarItem::Selected()
 	{
 		if (gamegui->mGame->GetPlayerMoney() >= mTower->mTowerVector[0].mCost)
 		{
-			//oslWarning("PuttingTower!");
+			printf("Player Money %d",gamegui->mGame->GetPlayerMoney());
+			printf("Tower type %s",mTower->mTowerName);
+			printf("Tower Cost %d",mTower->mTowerVector[0].mCost);
 			gamegui->PuttingTower(mTower);
-			//oslWarning("Player Money %d",gamegui->mGame->GetPlayerMoney());
-			//oslWarning("Tower type %s",mTower->mTowerName);
-			//oslWarning("Tower Cost %d",mTower->mTowerVector[0].mCost);
 		}
 		else
 		{

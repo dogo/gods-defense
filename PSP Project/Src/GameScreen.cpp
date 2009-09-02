@@ -163,3 +163,19 @@ void GameScreen::CleanTowers()
 	}
 	mTowers.clear();
 }
+
+bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)
+{
+	if (true)//TODO : Check if can build here
+	{
+		mPlayerMoney -= tower->mTowerVector[0].mCost;
+		mRealTowers.push_back(new TowerInstance(tower, position));
+
+		return true;
+	}
+	else
+	{
+		//Player can't build here
+		return false;
+	}
+}

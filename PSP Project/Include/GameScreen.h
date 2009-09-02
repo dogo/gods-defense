@@ -17,6 +17,7 @@ class TowerMenuItem;
 #include "../Include/GameGUI.h"
 #include "../Include/Map.h"
 #include <map>
+#include <list>
 
 using namespace std;
 
@@ -45,6 +46,7 @@ private:
 	float mPlayerPoints;
 	unsigned int mActiveWaves;
 	bool mWaveIsRunning;
+	list<TowerInstance*> mRealTowers;  //Current builded towers
 
 public:
 	GameScreen();
@@ -54,6 +56,7 @@ public:
 	string *GetMenuTowers() const;
 	Tower *GetTower(const string &towerName) const;
 	int const GetPlayerMoney();
+	bool TryBuildTower(Tower *tower, Coordinates2D position);
 
 	virtual ~GameScreen();
 
