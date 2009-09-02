@@ -39,15 +39,15 @@ void GodLibrary::drawSplash(int iTime, OSL_IMAGE *Splash) {
 
 void GodLibrary::drawPixel(float x, float y, OSL_COLOR color)
 {
-	oslDrawRect(x, y , x+1, y+1, color);
+	oslDrawFillRect(x, y , x+1, y+1, color);
 }
 
 void GodLibrary::drawCircle(int x, int y, int radius, OSL_COLOR color)
 {
-	for(int i=0;i<360;i+=30)
+	for(float i=0;i<360.0;i+=0.40)
 	{
-		float tx = x + sinf((i*(M_PI/180))*radius);
-		float ty = y - cosf((i*(M_PI/180))*radius);
+		float tx = x + radius * sinf(i * M_PI/180.0);
+		float ty = y - radius * cosf(i * M_PI/180.0);
 		drawPixel(tx, ty, color);
 	}
 }
