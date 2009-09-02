@@ -16,7 +16,6 @@
 class GameGUI;
 class GameScreen;
 class SidebarItem;
-class TowerMenuItem;
 
 #define COLOR_RED RGB(255, 0, 0)
 #define COLOR_GREEN RGB(0, 255, 0)
@@ -56,24 +55,16 @@ private:
 class SidebarItem
 {
 public:
+	SidebarItem(Tower *tower, const int &y);
 	void drawIcons();
 	void Selected();
+
 	int mY;
+	Tower *mTower;
 
 protected:
 	OSL_IMAGE *mIcon;
 
 	~SidebarItem();
 };
-
-class TowerMenuItem : public SidebarItem
-{
-public:
-	TowerMenuItem(Tower *tower, const int &y);
-
-	Tower *mTower;
-protected:
-	~TowerMenuItem();
-};
-
 #endif

@@ -66,10 +66,7 @@ void GameGUI::LoadStuffs()
 		{
 			Tower *mCurrentTower = mGame->GetTower(menuTowers[y]);
 			if (mCurrentTower != NULL)
-			{
-				mTowerItems[y] = new TowerMenuItem(mCurrentTower, y);
-				setTowerReference(mCurrentTower);
-			}
+				mTowerItems[y] = new SidebarItem(mCurrentTower, y);
 		}
 	}
 }
@@ -215,7 +212,7 @@ void GameGUI::SelectedTowerItem()
 	}
 	else
 	{
-		oslPrintf_xy(0,30,"mTowerItems[%d]\n", mSelectedItemY);
+		setTowerReference(mTowerItems[mSelectedItemY]->mTower);
 		mTowerItems[mSelectedItemY]->Selected();
 	}
 }
@@ -229,9 +226,6 @@ void SidebarItem::Selected()
 	{
 		if (gamegui->mGame->GetPlayerMoney() >= mTower->mTowerVector[0].mCost)
 		{
-			printf("Player Money %d",gamegui->mGame->GetPlayerMoney());
-			printf("Tower type %s",mTower->mTowerName);
-			printf("Tower Cost %d",mTower->mTowerVector[0].mCost);
 			gamegui->PuttingTower(mTower);
 		}
 		else
@@ -245,16 +239,11 @@ void SidebarItem::Selected()
 	}
 }
 
-TowerMenuItem::TowerMenuItem(Tower *tower, const int &y)
+SidebarItem::SidebarItem(Tower *tower, const int &y)
 {
 	mTower = tower;
 	mY = y;
 	mIcon = mTower->mMenuIcon;
-}
-
-TowerMenuItem::~TowerMenuItem()
-{
-	// 06 job
 }
 
 SidebarItem::~SidebarItem()

@@ -8,7 +8,6 @@
 
 //Class Declarations
 class GameGUI;
-class TowerMenuItem;
 
 #include "../Include/ILib.h"
 #include "../Include/Projectile.h"
