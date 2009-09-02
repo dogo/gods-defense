@@ -50,7 +50,6 @@ void GameGUI::LoadStuffs()
 	mSelectorSidebar = oslLoadImageFilePNG(Resource::IMG_SELECTOR_SIDEBAR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 	//Initialize variables
-	mCursor->centerY = mCursor->sizeY / 2;
 	mCursor->x = 480/2;	//Place cursor at the center of the screen
 	mCursor->y = 272/2;
 
@@ -176,10 +175,10 @@ void GameGUI::CheckViewBounds()
 	else if (mCursor->x > 464 -1) //psp 480 - 16 cursor - 1 fine tunning
 		mCursor->x = 464 -1;
 
-	if (mCursor->y < 8) //0 + 16/2 cursor
-		mCursor->y = 8;
-	else if (mCursor->y > 264 - 1) //psp 272 - 16/2 cursor -1 fine tunning
-		mCursor->y = 264 - 1;
+	if (mCursor->y < 0) //0 + 16/2 cursor
+		mCursor->y = 0;
+	else if (mCursor->y > 256 - 1) //psp 272 - 16 cursor -1 fine tunning
+		mCursor->y = 256 - 1;
 }
 
 void GameGUI::draw()

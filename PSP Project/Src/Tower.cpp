@@ -166,6 +166,7 @@ Tower::Tower(const string &towerName)
 			mTowerImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 			mTowerImg->centerX = (mTowerImg->sizeX/2); //hotspot
+			mTowerImg->centerY = (mTowerImg->sizeY/2); //hotspot
 
 			node->QueryIntAttribute("Width", &mTowerWidth);
 			node->QueryIntAttribute("Height", &mTowerHeight);
