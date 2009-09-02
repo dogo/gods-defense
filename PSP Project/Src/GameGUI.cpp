@@ -117,6 +117,23 @@ void GameGUI::Update(/*unsigned timePassed*/)
 			mPuttingTower = NULL;
 			mGame->SetGameState(GS_SCROLL_MAP);
 		}
+
+		else if (osl_keys->pressed.cross)
+		{
+			if (currentGameState == GS_MAP_PLACE_TOWER)
+			{
+				oslWarning("mPuttingTower %s",mPuttingTower->mTowerName);
+				if (mGame->TryBuildTower(mPuttingTower, Coordinates2D::Coordinates2D(mCursor->x, mCursor->y)))
+				{
+					mPuttingTower = NULL;					
+					mGame->SetGameState(GS_SCROLL_MAP);
+				}
+				else
+				{
+					oslWarning("Can't build here");
+				}
+			}
+		}
 		CheckViewBounds();
 	}
 
@@ -192,6 +209,7 @@ void GameGUI::PuttingTower(Tower *tower)
 {
 	mGame->SetGameState(GS_MAP_PLACE_TOWER);
 	mPuttingTower = tower;
+	oslWarning("mPuttingTower-> %s",mPuttingTower->mTowerName);
 }
 
 Tower *GameGUI::getTowerReference()
@@ -226,6 +244,7 @@ void SidebarItem::Selected()
 	{
 		if (gamegui->mGame->GetPlayerMoney() >= mTower->mTowerVector[0].mCost)
 		{
+			oslWarning("Putting %s",mTower->mTowerName);
 			gamegui->PuttingTower(mTower);
 		}
 		else

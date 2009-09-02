@@ -84,6 +84,7 @@ public:
 	void ResetMap();
 	void ScrollMap(); // Dogo : =(
 	static Map *InitMap();
+	void DeployTowerAt(const Coordinates2D &position, Tower *tower);
 
 	char *mMapName;
 	char *mCurrentMapName;
