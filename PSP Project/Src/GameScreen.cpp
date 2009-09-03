@@ -92,6 +92,10 @@ void GameScreen::draw()
 #ifdef DEBUG
 	oslPrintf_xy(0,20,"Value of joystick X : %d",osl_keys->analogX);
 	oslPrintf_xy(0,30,"Value of joystick Y : %d",osl_keys->analogY);
+
+	for (int i=0; i<32 ; i++)
+		for (int j=0; j<32; j++)
+			oslDrawRect(i*32,j*32 + Map::mScrollAmount,32,32,COLOR_RED);
 #endif
 }
 
@@ -189,4 +193,9 @@ bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)
 		//Player can't build here
 		return false;
 	}
+}
+
+int GameScreen::GetScrollAmount()
+{
+	return Map::mScrollAmount;
 }

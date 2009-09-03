@@ -142,6 +142,7 @@ Map::Map()
 	mMapName = NULL;
 	mImgMapName = NULL;
 	mCollisionMap = NULL;
+	mScrollAmount = 0;
 
 	mTowersMenu = new string[4];
 }
@@ -361,6 +362,7 @@ void Map::ResetMap()
 	mInitialLives = 0;
 	mGridTilesWidth = 0;
 	mGridTilesHeight = 0;
+	mScrollAmount = 0;
 }
 
 void Map::draw()
@@ -379,7 +381,9 @@ Map::~Map()
 	sMapReference = NULL;
 }
 
+//Statics
 Map *Map::sMapReference = NULL; //init this really necessary?
+int Map::mScrollAmount = 0; //init this really necessary?
 
 Map *Map::InitMap()
 {
@@ -413,6 +417,7 @@ void Map::ScrollMap()
 			mMapImage->y += 34;
 		}
 	}
+	setScrollAmount(mMapImage->y);
 }
 
 void Map::DeployTowerAt(const Coordinates2D &position, Tower *tower)
@@ -439,4 +444,9 @@ bool Map::TestBuildCollision(const Coordinates2D &position, Tower *tower)
 				return false;
 		}
 		return true;
+}
+
+void Map::setScrollAmount(int scrollValue)
+{
+	mScrollAmount = scrollValue;
 }

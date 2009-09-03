@@ -277,10 +277,15 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 
 void TowerInstance::RenderTower()
 {
-	oslDrawImageXY(mTower->mTowerImg, mTowerPosition.X, mTowerPosition.Y);
+	oslDrawImageXY(mTower->mTowerImg, mTowerPosition.X, mTowerPosition.Y + GetCurrentScroll());
 }
 
 void TowerInstance::RenderRangeCircle(const Coordinates2D &position, const int &TowerInfo, const OSL_COLOR color)
 {
 	GodLibrary::drawCircle(position.X, position.Y, mCurrentMap, color);
+}
+
+int TowerInstance::GetCurrentScroll()
+{
+	return GameScreen::GetScrollAmount();
 }

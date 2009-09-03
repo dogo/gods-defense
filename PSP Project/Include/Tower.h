@@ -106,6 +106,7 @@ public:
 
 	void RenderTower();
 	void RenderRangeCircle(const Coordinates2D &position, const int &TowerInfo, const OSL_COLOR color);
+	int GetCurrentScroll();
 private:
 	unsigned int mCurrentMap;
 	Coordinates2D mTowerPosition; //Tower Center

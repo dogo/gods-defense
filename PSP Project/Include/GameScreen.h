@@ -56,6 +56,7 @@ public:
 	Tower *GetTower(const string &towerName) const;
 	int const GetPlayerMoney();
 	bool TryBuildTower(Tower *tower, Coordinates2D position);
+	static int GetScrollAmount();
 
 	virtual ~GameScreen();
 
