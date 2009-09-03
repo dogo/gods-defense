@@ -426,3 +426,17 @@ void Map::DeployTowerAt(const Coordinates2D &position, Tower *tower)
 				mCollisionMap[x+i][y+j] = false;
 		}
 }
+
+bool Map::TestBuildCollision(const Coordinates2D &position, Tower *tower)
+{
+	int x = ((int)position.X / 16)  - (tower->mTowerWidth / 2);
+	int y = ((int)position.Y / 16) - (tower->mTowerHeight / 2);
+
+	for (int i = 0; i < tower->mTowerWidth; i++)
+		for (int j = 0; j < tower->mTowerHeight; j++)
+		{
+			if (x+i < 0 || x+i >= mGridTilesWidth || y+j < 0 || y+j >= mGridTilesHeight || !mCollisionMap[x+i][y+j])
+				return false;
+		}
+		return true;
+}

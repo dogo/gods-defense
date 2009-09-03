@@ -85,6 +85,8 @@ public:
 	void ScrollMap(); // Dogo : =(
 	static Map *InitMap();
 	void DeployTowerAt(const Coordinates2D &position, Tower *tower);
+	//Returns true if all blocks under the tower are available
+	bool TestBuildCollision(const Coordinates2D &position, Tower *tower);
 
 	char *mMapName;
 	char *mCurrentMapName;

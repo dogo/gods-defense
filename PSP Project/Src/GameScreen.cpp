@@ -173,7 +173,7 @@ void GameScreen::CleanTowers()
 
 bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)
 {
-	if (true)//TODO : Check if can build here
+	if (mGameMap->TestBuildCollision(position, tower))
 	{
 		mGameMap->DeployTowerAt(position, tower);
 		mPlayerMoney -= tower->mTowerVector[0].mCost;
