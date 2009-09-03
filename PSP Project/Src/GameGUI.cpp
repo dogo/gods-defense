@@ -162,6 +162,9 @@ void GameGUI::RenderPlacingTower()
 	if (currentGameState == GS_MAP_PLACE_TOWER)
 	{
 		Coordinates2D buildingPosition = Coordinates2D::Coordinates2D(mCursor->x, mCursor->y);
+		//Snap :D \o/ workss
+		buildingPosition.X = ((int)(buildingPosition.X + (16/2 )) / 16 ) * 16; // 16 == Width
+		buildingPosition.Y = ((int)(buildingPosition.Y + (16/2)) / 16) * 16; // 16 == Heigth
 		mPuttingTower->RenderRangeCircle(buildingPosition, 0, COLOR_RED);
 		mPuttingTower->RenderTower(buildingPosition);
 	}
