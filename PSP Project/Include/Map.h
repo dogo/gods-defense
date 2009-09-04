@@ -87,7 +87,7 @@ public:
 	void DeployTowerAt(const Coordinates2D &position, Tower *tower);
 	//Returns true if all blocks under the tower are available
 	bool TestBuildCollision(const Coordinates2D &position, Tower *tower);
-	static void setScrollAmount(int scrollValue);
+	static void setScrollAmount(float scrollValue);
 
 	char *mMapName;
 	char *mCurrentMapName;
@@ -101,7 +101,7 @@ public:
 	int mGridTilesHeight;
 	bool **mCollisionMap;
 	string *mTowersMenu;
-	static int mScrollAmount;
+	static float mScrollAmount;
 private:
 	static Map *sMapReference;
 	OSL_IMAGE *mMapImage;

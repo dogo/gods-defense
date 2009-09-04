@@ -383,7 +383,7 @@ Map::~Map()
 
 //Statics
 Map *Map::sMapReference = NULL; //init this really necessary?
-int Map::mScrollAmount = 0; //init this really necessary?
+float Map::mScrollAmount = 0.0; //init this really necessary?
 
 Map *Map::InitMap()
 {
@@ -398,7 +398,7 @@ void Map::ScrollMap()
 	{
 		oslFlushKey();
 		
-		mMapImage->y -= 34;
+		mMapImage->y -= 34.0;
 		
 		if (mMapImage->y <= -208) //New Hot Point
 			mMapImage->y = -208;			
@@ -408,7 +408,7 @@ void Map::ScrollMap()
 	{
 		oslFlushKey();		
 		
-		mMapImage->y += 34;
+		mMapImage->y += 34.0;
 		
 		if (mMapImage->y >= 0) //Old Hot Point
 			mMapImage->y = 0;
@@ -432,7 +432,7 @@ bool Map::TestBuildCollision(const Coordinates2D &position, Tower *tower)
 	return mCollisionMap[x][y];
 }
 
-void Map::setScrollAmount(int scrollValue)
+void Map::setScrollAmount(float scrollValue)
 {
 	mScrollAmount = scrollValue;
 }

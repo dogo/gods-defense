@@ -128,7 +128,7 @@ void GameGUI::Update(/*unsigned timePassed*/)
 				}
 				else
 				{
-					oslWarning("Can't build here");
+					oslMessageBox("Can't build here.", "Warning", oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
 				}
 			}
 		}
@@ -163,8 +163,8 @@ void GameGUI::RenderPlacingTower()
 	{
 		Coordinates2D buildingPosition = Coordinates2D::Coordinates2D(mCursor->x, mCursor->y);
 		//Snap :D \o/ workss
-		buildingPosition.X = ((int)(buildingPosition.X + (16/2 )) / 16 ) * 16; // 16 == Width
-		buildingPosition.Y = ((int)(buildingPosition.Y + (16/2)) / 16) * 16; // 16 == Heigth
+		buildingPosition.X = (((int)(buildingPosition.X) / 32) * 32) + 16; // 32 == Width
+		buildingPosition.Y = (((int)(buildingPosition.Y) / 32) * 32) + 16; // 32 == Heigth
 		mPuttingTower->RenderRangeCircle(buildingPosition, 0, COLOR_RED);
 		mPuttingTower->RenderTower(buildingPosition);
 	}
@@ -248,7 +248,7 @@ void SidebarItem::Selected()
 		}
 		else
 		{
-			oslWarning("NO Cash!");
+			oslMessageBox("More gold is required.", "Warning", oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
 			gamegui->mGame->SetGameState(GS_SCROLL_MAP);
 		}
 	}

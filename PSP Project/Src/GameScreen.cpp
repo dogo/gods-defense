@@ -186,10 +186,6 @@ void GameScreen::CleanTowers()
 
 bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)
 {
-	//Snap :D \o/ workss
-	position.X = ((int)(position.X + (16/2)) / 16) * 16; // 16 == Width
-	position.Y = ((int)(position.Y + (16/2)) / 16) * 16; // 16 == Heigth
-
 	if (mGameMap->TestBuildCollision(position, tower))
 	{
 		mGameMap->DeployTowerAt(position, tower);

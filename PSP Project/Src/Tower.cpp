@@ -225,9 +225,11 @@ void Tower::RenderRangeCircle(const Coordinates2D &position, const int &TowerInf
 
 TowerInstance::TowerInstance(Tower *tower, const Coordinates2D &position)
 {
+	int x = ((int)position.X / 32);
+	int y = ((int)position.Y / 32);
 	mCurrentMap = 0;
 	mTower = tower;
-	mTowerPosition = position;
+	mTowerPosition = Coordinates2D::Coordinates2D(x*32, y*32);
 	mTowerTarget = NULL;
 	mProjectileInterval = 0;
 }
@@ -277,7 +279,7 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 
 void TowerInstance::RenderTower()
 {
-	oslDrawImageXY(mTower->mTowerImg, mTowerPosition.X, mTowerPosition.Y + GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount);
+	oslDrawImageXY(mTower->mTowerImg, mTowerPosition.X + (mTower->mTowerImg->sizeX/2), (mTower->mTowerImg->sizeY/2) + mTowerPosition.Y + GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount);
 }
 
 void TowerInstance::RenderRangeCircle(const Coordinates2D &position, const int &TowerInfo, const OSL_COLOR color)
