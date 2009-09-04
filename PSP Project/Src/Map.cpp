@@ -367,8 +367,8 @@ void Map::ResetMap()
 
 void Map::draw()
 {
-	oslDrawImage(mMapImage);
 	ScrollMap();
+	oslDrawImage(mMapImage);
 }
 
 Map::~Map()
@@ -397,53 +397,39 @@ void Map::ScrollMap()
 	if(osl_keys->pressed.L)
 	{
 		oslFlushKey();
-		if (mMapImage->y <= -204) //New Hot Point
-			mMapImage->y = -204;
-		else
-		{
-			mMapImage->x = 0;
-			mMapImage->y -= 34;
-		}
+		
+		mMapImage->y -= 34;
+		
+		if (mMapImage->y <= -208) //New Hot Point
+			mMapImage->y = -208;			
 	}
 	
 	if(osl_keys->pressed.R)
 	{
 		oslFlushKey();		
+		
+		mMapImage->y += 34;
+		
 		if (mMapImage->y >= 0) //Old Hot Point
 			mMapImage->y = 0;
-		else
-		{
-			mMapImage->x = 0;
-			mMapImage->y += 34;
-		}
 	}
 	setScrollAmount(mMapImage->y);
 }
 
 void Map::DeployTowerAt(const Coordinates2D &position, Tower *tower)
 {
-	int x = ((int)position.X / 16) - (tower->mTowerWidth / 2);
-	int y = ((int)position.Y / 16) - (tower->mTowerHeight / 2);
-	for (int i = 0; i < tower->mTowerWidth; i++)
-		for (int j = 0; j < tower->mTowerHeight; j++)
-		{
-			if (x+i >= 0 && x+i < mGridTilesWidth && y+j >= 0 && y+j < mGridTilesHeight)
-				mCollisionMap[x+i][y+j] = false;
-		}
+	int x = ((int)position.X / 32);
+	int y = ((int)position.Y / 32);
+
+	mCollisionMap[x][y] = false;
 }
 
 bool Map::TestBuildCollision(const Coordinates2D &position, Tower *tower)
 {
-	int x = ((int)position.X / 16)  - (tower->mTowerWidth / 2);
-	int y = ((int)position.Y / 16) - (tower->mTowerHeight / 2);
+	int x = ((int)position.X / 32);
+	int y = ((int)position.Y / 32);
 
-	for (int i = 0; i < tower->mTowerWidth; i++)
-		for (int j = 0; j < tower->mTowerHeight; j++)
-		{
-			if (x+i < 0 || x+i >= mGridTilesWidth || y+j < 0 || y+j >= mGridTilesHeight || !mCollisionMap[x+i][y+j])
-				return false;
-		}
-		return true;
+	return mCollisionMap[x][y];
 }
 
 void Map::setScrollAmount(int scrollValue)

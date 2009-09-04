@@ -80,6 +80,19 @@ void GameScreen::draw()
 {
 	mGameMap->draw();
 	oslPrintf_xy(0,30,"mPlayerMoney %d", mPlayerMoney);
+
+	if(mGameState == GS_MAP_PLACE_TOWER)
+	{
+		for (int i=0; i<15 ; i++)
+			for (int j=0; j<15; j++)
+			{
+				if(mGameMap->mCollisionMap[i][j])
+				{
+					oslDrawFillRect(i*32,j*32+mGameMap->mScrollAmount,i*32+31,j*32+31+mGameMap->mScrollAmount,ALPHA_COLOR_BLACK);
+					oslDrawRect(i*32,j*32+mGameMap->mScrollAmount,i*32+32,j*32+32+mGameMap->mScrollAmount,COLOR_WHITE);
+				}
+			}
+	}
 	//Draw the towers
 	list<TowerInstance*>::const_iterator realTowers_iter;
 	for (realTowers_iter = mRealTowers.begin(); realTowers_iter != mRealTowers.end(); realTowers_iter++)
@@ -91,11 +104,7 @@ void GameScreen::draw()
 	mGameGUI->draw();	
 #ifdef DEBUG
 	oslPrintf_xy(0,20,"Value of joystick X : %d",osl_keys->analogX);
-	oslPrintf_xy(0,30,"Value of joystick Y : %d",osl_keys->analogY);
-
-	for (int i=0; i<32 ; i++)
-		for (int j=0; j<32; j++)
-			oslDrawRect(i*32,j*32 + Map::mScrollAmount,32,32,COLOR_RED);
+	oslPrintf_xy(0,30,"Value of joystick Y : %d",osl_keys->analogY);			
 #endif
 }
 
@@ -178,7 +187,7 @@ void GameScreen::CleanTowers()
 bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)
 {
 	//Snap :D \o/ workss
-	position.X = ((int)(position.X + (16/2 )) / 16 ) * 16; // 16 == Width
+	position.X = ((int)(position.X + (16/2)) / 16) * 16; // 16 == Width
 	position.Y = ((int)(position.Y + (16/2)) / 16) * 16; // 16 == Heigth
 
 	if (mGameMap->TestBuildCollision(position, tower))
@@ -195,7 +204,7 @@ bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)
 	}
 }
 
-int GameScreen::GetScrollAmount()
+Map *GameScreen::GetGameMap()
 {
-	return Map::mScrollAmount;
+	return mGameMap;
 }

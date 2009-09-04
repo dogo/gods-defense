@@ -121,7 +121,7 @@ void GameGUI::Update(/*unsigned timePassed*/)
 		{
 			if (currentGameState == GS_MAP_PLACE_TOWER)
 			{
-				if (mGame->TryBuildTower(mPuttingTower, Coordinates2D::Coordinates2D(mCursor->x, mCursor->y)))
+				if (mGame->TryBuildTower(mPuttingTower, Coordinates2D::Coordinates2D(mCursor->x, mCursor->y + fabsf(mGame->GetGameMap()->mScrollAmount))))
 				{
 					mPuttingTower = NULL;					
 					mGame->SetGameState(GS_SCROLL_MAP);

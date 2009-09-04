@@ -7,7 +7,7 @@
 #include <math.h>
 
 #include "../Include/Tower.h"
-
+#include "../Include/GameGUI.h"
 
 TowerInfo::TowerInfo(TiXmlElement* infoNode)
 {
@@ -277,15 +277,10 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 
 void TowerInstance::RenderTower()
 {
-	oslDrawImageXY(mTower->mTowerImg, mTowerPosition.X, mTowerPosition.Y + GetCurrentScroll());
+	oslDrawImageXY(mTower->mTowerImg, mTowerPosition.X, mTowerPosition.Y + GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount);
 }
 
 void TowerInstance::RenderRangeCircle(const Coordinates2D &position, const int &TowerInfo, const OSL_COLOR color)
 {
 	GodLibrary::drawCircle(position.X, position.Y, mCurrentMap, color);
-}
-
-int TowerInstance::GetCurrentScroll()
-{
-	return GameScreen::GetScrollAmount();
 }
