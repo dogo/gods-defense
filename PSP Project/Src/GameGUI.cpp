@@ -161,7 +161,7 @@ void GameGUI::RenderPlacingTower()
 
 	if (currentGameState == GS_MAP_PLACE_TOWER)
 	{
-		Coordinates2D buildingPosition = Coordinates2D::Coordinates2D(mCursor->x, mCursor->y);
+		Coordinates2D buildingPosition = Coordinates2D::Coordinates2D(mCursor->x, mCursor->y+fabsf(mGame->GetGameMap()->mScrollAmount));
 		//Snap :D \o/ workss
 		buildingPosition.X = (((int)(buildingPosition.X) / 32) * 32) + 16; // 32 == Width
 		buildingPosition.Y = (((int)(buildingPosition.Y) / 32) * 32) + 16; // 32 == Heigth
