@@ -35,14 +35,12 @@
 <!ATTLIST Wave IntervalSpawnTime NMTOKEN #REQUIRED >
 <!ATTLIST Wave Description CDATA #REQUIRED >
 <!ATTLIST Wave Boss NMTOKEN #IMPLIED >
-<!ATTLIST Wave PointOfInterest (True|False) #IMPLIED >
-<!ATTLIST Wave BossSound NMTOKEN #IMPLIED >
 
 <!ELEMENT Waves ( Wave+ ) >
 
 <!ELEMENT Enemy EMPTY >
 <!ATTLIST Enemy NumberOfEnemies NMTOKEN #IMPLIED >
 <!ATTLIST Enemy Folder NMTOKEN #REQUIRED >
-<!ATTLIST Enemy Map NMTOKEN #IMPLIED >
+<!ATTLIST Enemy EnemieLevel NMTOKEN #IMPLIED >
 
 <!ELEMENT Map ( Name, Description, Initializers, Menu, MapImg, CollisionMap, Path+, Waves) >

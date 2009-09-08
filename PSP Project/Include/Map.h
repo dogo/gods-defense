@@ -25,9 +25,9 @@ using namespace std;
 class EnemyWave
 {
 public:
-	EnemyWave(string folderName, int waveLevel);
-	string mMapDirName;
-	int mWaveLevel;
+	EnemyWave(string folderName, int enemyLevel);
+	string mEnemyDirName;
+	int mEnemyLevel;
 };
 
 class Wave

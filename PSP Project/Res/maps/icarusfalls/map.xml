@@ -61,7 +61,7 @@ __#_#######_#_#
         <Wave Path="default" IntervalSpawnTime="600" Description="Wave 4!">
             <Enemy Folder="testenemy" NumberOfEnemies="20" />
         </Wave>
-        <Wave Path="default" IntervalSpawnTime="5000" Description="Wave 5 Bosssss!" Boss="True" BossSound="True">
+        <Wave Path="default" IntervalSpawnTime="5000" Description="Wave 5 Bosssss!" Boss="True">
             <Enemy Folder="testenemy" NumberOfEnemies="10" />
         </Wave>
     </Waves>
