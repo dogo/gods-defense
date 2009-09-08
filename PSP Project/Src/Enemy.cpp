@@ -180,7 +180,7 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 	mSlowLength = 0;
 }
 
-void EnemyInstance::Update(unsigned int timePassed)
+void EnemyInstance::Update(u64 timePassed)
 {
 	//Enemy is dead so we return
 	if (EnemyIsDead())

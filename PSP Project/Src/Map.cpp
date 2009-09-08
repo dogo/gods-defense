@@ -72,7 +72,7 @@ void Wave::StartEnemySpawn()
 	mEnemySpawnTimer = mTempSpawnTimer;
 }
 
-void Wave::GetCurrenteWaveEnemy(string &enemyName, int &WaveLevel)
+void Wave::GetCurrentWaveEnemy(string &enemyName, int &WaveLevel)
 {
 	enemyName = mEnemySpawns[mCurrentEnemySpawn].mMapDirName;
 	WaveLevel = mEnemySpawns[mCurrentEnemySpawn].mWaveLevel;

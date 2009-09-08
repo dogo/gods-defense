@@ -25,7 +25,7 @@ void AnykeyScreen::draw()
 	mySplash->drawSplash(200,AnykeySplash);
 }
 
-void AnykeyScreen::update()
+void AnykeyScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 {
 	mWait++;
 	if(mWait == 250) //wait 250 frames until this screen is over

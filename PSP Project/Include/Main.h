@@ -6,6 +6,7 @@
 #define MAIN_H_INCLUDED
 
 #include <oslib/oslib.h>
+#include <psprtc.h>
 
 #ifdef MEMORY_DEBUG
 #include "../Include/GodLibrary.h"
@@ -18,5 +19,7 @@
 	int initOSLib();
 
 	int endOSLib();
+
+	u64 GetTicks();
 
 #endif

@@ -34,6 +34,14 @@ int endOSLib(){
     return 0;
 }
 
+//Return time in milliseconds
+u64 GetTicks()
+{
+     u64 temp;
+     sceRtcGetCurrentTick(&temp);
+     return temp/1000;
+}
+
 int main()
 {
 	int skip = 0;
@@ -52,11 +60,15 @@ int main()
 
 	ScreenManager *mScreenManager = new ScreenManager();
 	mNextScreen = ScreenManager::SCREEN_ANYKEY;
+	u64 lastLoopTime = GetTicks();
 
     while(!osl_quit){
         if (!skip){
             oslStartDrawing();
 			oslCls();
+
+			u64 timeDifference = GetTicks() - lastLoopTime;
+			lastLoopTime += timeDifference;
 
 			if(mNextScreen != -1)
 			{
@@ -69,7 +81,7 @@ int main()
 			if(mScreenManager->isActive())
 			{	
 				mScreenManager->mCurrentScreen->draw();
-				mScreenManager->mCurrentScreen->update();
+				mScreenManager->mCurrentScreen->update(timeDifference);
 #ifdef MEMORY_DEBUG
 				GodLibrary::GetMemoryInfo();
 #endif

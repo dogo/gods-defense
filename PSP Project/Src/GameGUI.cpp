@@ -81,7 +81,7 @@ GameGUI::GameGUI(GameScreen *gameLogic)
 	mSelectedItemY = 0;
 }
 
-void GameGUI::Update(/*unsigned timePassed*/)
+void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 {
 	const GameState currentGameState = mGame->GetGameState();
 	int i;
@@ -107,7 +107,7 @@ void GameGUI::Update(/*unsigned timePassed*/)
 		if (osl_keys->pressed.triangle) // Next Wave
 		{
 			mGame->TryRunNextWave();
-			oslWarning("TryRunNextWave");
+			printf("TryRunNextWave\n");
 		}
 		if(osl_keys->pressed.square)
 		{

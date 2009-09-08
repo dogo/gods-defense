@@ -36,7 +36,7 @@ void MainMenuScreen::draw()
 	oslDrawString(340, 180,Resource::STR_EXIT_CAPTION);
 }
 
-void MainMenuScreen::update()
+void MainMenuScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 {
 	//menu keys
 	if(osl_keys->pressed.up){

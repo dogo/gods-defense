@@ -148,7 +148,7 @@ void GameScreen::draw()
 #endif
 }
 
-void GameScreen::update()
+void GameScreen::update(u64 timePassed)
 {
 	/*
 	*	Dogo : Vai buga futuramente, o pause nao pode deletar a tela anterior ou seja a tela do jogo,
@@ -157,7 +157,7 @@ void GameScreen::update()
 	*   Dogo 10/03/09 -> Congelar o jogo, pintar a tela de pause por cima, quando voltar ao jogo repintar e voltar o
 	*   estado do jogo.
 	*/
-	mGameGUI->Update(/*timePassed*/);
+	mGameGUI->Update(timePassed);
 
 	//Check if we need to run a new wave
 	if (mActiveWaves > 0)
@@ -168,6 +168,19 @@ void GameScreen::update()
 	if (mWaveIsRunning)
 	{
 		//TODO :  Spawn the enemies and check for waves ending.
+		//Spawn Enemies
+		for (unsigned int i = 0; i < mActiveWaves; i++)
+		{
+			if (true/*mGameMap->mWaves[i]->SpawnUpdate(timePassed)*/)
+			{
+				string newEnemy = "";
+				int newEnemyLevel = 0;
+				mGameMap->mWaves[i]->GetCurrentWaveEnemy(newEnemy, newEnemyLevel);
+				printf("[ %d Spawning: %s ]\n", i, newEnemy);
+				EnemyInstance* ei = new EnemyInstance(mGameMap->mWaves[i], mEnemies[newEnemy], mGameMap->mWaves[i]->mPath, newEnemyLevel);
+				mRealEnemies.push_back(ei);
+			}
+		}
 	}
 	
 	if(osl_keys->pressed.start)
@@ -178,7 +191,6 @@ void GameScreen::update()
 	if(osl_keys->pressed.circle)
 	{
 		oslFlushKey();
-		//mNextScreen = ScreenManager::SCREEN_GAME_OPTIONS; //go back CLR
 	}
 }
 
@@ -274,9 +286,13 @@ void GameScreen::TryRunNextWave()
 void GameScreen::RunNextWave(const bool &forceRunNow)
 {
 	if (!forceRunNow && mWaveIsRunning)
+	{
+		printf("Return\n");
 		return;
+	}
 
 	mWaveIsRunning = true;
 	mGameMap->mWaves[mActiveWaves]->StartEnemySpawn();
-	mActiveWaves++;
+	//mActiveWaves++; //TODO : Fix this array out of bounds
+	printf("RunNextWave end\n");
 }

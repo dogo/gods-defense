@@ -29,7 +29,7 @@ void PauseScreen::draw()
 	oslDrawString(240, 120,Resource::STR_PAUSE_MENU);
 }
 
-void PauseScreen::update()
+void PauseScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 {
 	if(osl_keys->pressed.up){
 		gMenu--;

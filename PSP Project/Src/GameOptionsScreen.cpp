@@ -55,7 +55,7 @@ void GameOptionsScreen::draw()
 	oslDrawString(240+ oslGetStringWidth(mMap[mSelectedMap].c_str()),160,"->");
 }
 
-void GameOptionsScreen::update()
+void GameOptionsScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 {
 	if(osl_keys->pressed.cross)
 	{		

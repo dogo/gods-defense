@@ -21,7 +21,7 @@ void MultiplayerScreen::draw()
 	oslDrawString(240,120,"MULTIPLAYER Screen");
 }
 
-void MultiplayerScreen::update()
+void MultiplayerScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 {
 	if(osl_keys->pressed.circle)
 	{	

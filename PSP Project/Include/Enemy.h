@@ -93,7 +93,7 @@ public:
 
 	const int GetGold();
 	void RenderEnemy();
-	void Update(unsigned timePassed);
+	void Update(u64 timePassed);
 	bool const EnemyIsDead(); // check if the enemy is dead.
 	bool const EnemyCanFly(); // check if the enemy can fly.
 	bool const EnemyStillOnMap(); //check if the enemy still on the map.

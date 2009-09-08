@@ -28,7 +28,7 @@ void WarningScreen::draw()
 	oslDrawString((510) - back->stretchX,(272) - (back->stretchY/2),Resource::STR_BACK_SK);
 }
 
-void WarningScreen::update()
+void WarningScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 {
 	if(osl_keys->pressed.circle)
 	{

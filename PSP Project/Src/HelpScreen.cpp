@@ -29,7 +29,7 @@ void HelpScreen::draw()
 	oslDrawString((510) - back->stretchX,(272) - (back->stretchY/2),Resource::STR_BACK_SK);
 }
 
-void HelpScreen::update()
+void HelpScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 {
 	if(osl_keys->pressed.circle)
 	{
