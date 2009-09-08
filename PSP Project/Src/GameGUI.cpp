@@ -87,7 +87,6 @@ void GameGUI::Update(/*unsigned timePassed*/)
 	int i;
 
 	oslPrintf_xy(0,10,"currentGameState %d",currentGameState);
-	oslPrintf_xy(0,20,"mShowSidebar %d",mShowSidebar);
 	//Scroll the map
 	if (currentGameState == GS_SCROLL_MAP || currentGameState == GS_MAP_PLACE_TOWER)
 	{
@@ -104,6 +103,11 @@ void GameGUI::Update(/*unsigned timePassed*/)
 				mCursor->y += 2;                
 			if (osl_keys->analogY < -i)
 				mCursor->y -= 2;                
+		}
+		if (osl_keys->pressed.triangle) // Next Wave
+		{
+			mGame->TryRunNextWave();
+			oslWarning("TryRunNextWave");
 		}
 		if(osl_keys->pressed.square)
 		{

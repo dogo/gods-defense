@@ -53,7 +53,7 @@ public:
 class Enemy
 {
 public:
-	Enemy(const string &mapName, const string &enemyName);
+	Enemy(const string &enemyName);
 	~Enemy();
 
 	string mEnemyDirName;

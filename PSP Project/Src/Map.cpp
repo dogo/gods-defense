@@ -46,7 +46,7 @@ Wave::Wave(TiXmlElement *waveNode)
 	{
 		if (WaveEnemyNode->ValueStr() != "Enemy")
 		{
-			oslFatalError("Bad node, not donout for you: %i",WaveEnemyNode->ValueStr());
+			oslFatalError("Bad node, not donout for you: %s",WaveEnemyNode->ValueStr());
 			return;
 		}
 

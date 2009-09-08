@@ -17,6 +17,9 @@ GameScreen::GameScreen()
 	LoadMap(gChoosedMap);
 
 	LoadFirstPartForMap();
+
+	mActiveWaves = 0;
+	mWaveIsRunning = false;
 }
 
 void GameScreen::LoadMap(const string &mapName)
@@ -38,19 +41,48 @@ void GameScreen::LoadFirstPartForMap()
 	//reset towers :D
 	CleanTowers();
 
+	//reset enemies :D
+	CleanEnemies();
+
 	//Load map image
 	mGameMap->LoadMapImage();
 
-	//Load all Towers
-	int dfd = sceIoDopen("/Res/towers");
-	
-	//get all the folders name in towers directory to load
-	if(dfd > 0)
+	//Load all Enemies
+	int roorDirEnemies = sceIoDopen("/Res/enemies");
+
+	//get all the folders name in enemies directory to load
+	if(roorDirEnemies > 0)
 	{
 		struct SceIoDirent dir;
 		memset(&dir,0,sizeof(SceIoDirent));
 
-		while(sceIoDread(dfd, &dir) > 0)
+		while(sceIoDread(roorDirEnemies, &dir) > 0)
+		{
+			if(dir.d_stat.st_attr & FIO_SO_IFDIR)
+			{
+				if(dir.d_name[0] != '.')
+				{
+					LoadEnemy(dir.d_name);
+				}
+			}
+			else
+			{
+				oslFatalError("Error reading enemies folder!");
+			}
+		}
+		sceIoDclose(roorDirEnemies);
+	}
+
+	//Load all Towers
+	int roorDirTowers = sceIoDopen("/Res/towers");
+	
+	//get all the folders name in towers directory to load
+	if(roorDirTowers > 0)
+	{
+		struct SceIoDirent dir;
+		memset(&dir,0,sizeof(SceIoDirent));
+
+		while(sceIoDread(roorDirTowers, &dir) > 0)
 		{
 			if(dir.d_stat.st_attr & FIO_SO_IFDIR)
 			{
@@ -64,7 +96,7 @@ void GameScreen::LoadFirstPartForMap()
 				oslFatalError("Error reading towers folder!");
 			}
 		}
-		sceIoDclose(dfd);
+		sceIoDclose(roorDirTowers);
 	}
 	mGameGUI->LoadStuffs();
 }
@@ -79,7 +111,7 @@ GameScreen::~GameScreen()
 void GameScreen::draw()
 {
 	mGameMap->draw();
-	oslPrintf_xy(0,30,"mPlayerMoney %d", mPlayerMoney);
+	oslPrintf_xy(0,20,"mPlayerMoney %d", mPlayerMoney);
 
 	if(mGameState == GS_MAP_PLACE_TOWER)
 	{
@@ -93,6 +125,14 @@ void GameScreen::draw()
 				}
 			}
 	}
+	//dogo : not working yet
+	//Draw the enemies
+	list<EnemyInstance*>::const_iterator realEnemies_iter;
+	for (realEnemies_iter = mRealEnemies.begin(); realEnemies_iter != mRealEnemies.end(); realEnemies_iter++)
+	{
+		(*realEnemies_iter)->RenderEnemy();
+	}
+
 	//Draw the towers
 	list<TowerInstance*>::const_iterator realTowers_iter;
 	for (realTowers_iter = mRealTowers.begin(); realTowers_iter != mRealTowers.end(); realTowers_iter++)
@@ -118,6 +158,17 @@ void GameScreen::update()
 	*   estado do jogo.
 	*/
 	mGameGUI->Update(/*timePassed*/);
+
+	//Check if we need to run a new wave
+	if (mActiveWaves > 0)
+	{
+		RunNextWave(true);
+	}
+	//Run Waves
+	if (mWaveIsRunning)
+	{
+		//TODO :  Spawn the enemies and check for waves ending.
+	}
 	
 	if(osl_keys->pressed.start)
 	{	
@@ -153,14 +204,7 @@ int const GameScreen::GetPlayerMoney()
 
 Tower *GameScreen::GetTower(const string &towerName) const
 {
-	map<string, Tower*>::const_iterator iter = mTowers.find(towerName);//.begin();
-
-	/*while(iter != mTowers.end())
-	{
-		oslWarning("iter->second %s",iter->second->mTowerDirName.c_str());
-		iter++;
-	}*/
-
+	map<string, Tower*>::const_iterator iter = mTowers.find(towerName);
 	if (iter != mTowers.end())
 		return iter->second;
 	else
@@ -173,6 +217,12 @@ void GameScreen::LoadTower(const string &towerName)
 	mTowers[t->mTowerDirName] = t;
 }
 
+void GameScreen::LoadEnemy(const string &enemyName)
+{
+	Enemy* e = new Enemy(enemyName);
+	mEnemies[e->mEnemyDirName] = e;
+}
+
 void GameScreen::CleanTowers()
 {
 	//Clean Towers
@@ -182,6 +232,17 @@ void GameScreen::CleanTowers()
 		delete t_iter->second;
 	}
 	mTowers.clear();
+}
+
+void GameScreen::CleanEnemies()
+{
+	//Clear Enemies
+	map<string, Enemy*>::iterator e_iter;
+	for (e_iter = mEnemies.begin(); e_iter != mEnemies.end(); e_iter++)
+	{
+		delete e_iter->second;
+	}
+	mEnemies.clear();
 }
 
 bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)
@@ -203,4 +264,19 @@ bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)
 Map *GameScreen::GetGameMap()
 {
 	return mGameMap;
+}
+
+void GameScreen::TryRunNextWave()
+{
+	RunNextWave(false);
+}
+
+void GameScreen::RunNextWave(const bool &forceRunNow)
+{
+	if (!forceRunNow && mWaveIsRunning)
+		return;
+
+	mWaveIsRunning = true;
+	mGameMap->mWaves[mActiveWaves]->StartEnemySpawn();
+	mActiveWaves++;
 }

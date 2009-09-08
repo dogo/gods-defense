@@ -33,8 +33,12 @@ class GameScreen : public IScreen
 {
 private:
 	map<string, Tower*> mTowers;
+	map<string, Enemy*> mEnemies;
 	void LoadTower(const string &towerName);
+	void LoadEnemy(const string &enemyName);
 	void CleanTowers();
+	void CleanEnemies();
+	void RunNextWave(const bool &forceRunNow);
 
 	OSL_IMAGE *mMap;
 	GameState mGameState;
@@ -46,6 +50,7 @@ private:
 	unsigned int mActiveWaves;
 	bool mWaveIsRunning;
 	list<TowerInstance*> mRealTowers;  //Current builded towers
+	list<EnemyInstance*> mRealEnemies; //Current spawned enemies
 
 public:
 	GameScreen();
@@ -57,6 +62,7 @@ public:
 	int const GetPlayerMoney();
 	bool TryBuildTower(Tower *tower, Coordinates2D position);
 	Map *GetGameMap();
+	void TryRunNextWave();
 
 	virtual ~GameScreen();
 
