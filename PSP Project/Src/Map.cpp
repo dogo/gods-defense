@@ -72,6 +72,19 @@ void Wave::StartEnemySpawn()
 	mEnemySpawnTimer = mTempSpawnTimer;
 }
 
+bool Wave::SpawnUpdate(u64 timePassed)
+{
+	mEnemySpawnTimer += timePassed;
+
+	if (mCurrentEnemySpawn < mEnemySpawns.size() && mEnemySpawnTimer >= mTempSpawnTimer)
+	{
+		mEnemySpawnTimer -= mTempSpawnTimer;
+		return true;
+	}
+	else
+		return false;
+}
+
 void Wave::GetCurrentWaveEnemy(string &enemyName, int &WaveLevel)
 {
 	enemyName = mEnemySpawns[mCurrentEnemySpawn].mMapDirName;

@@ -167,11 +167,10 @@ void GameScreen::update(u64 timePassed)
 	//Run Waves
 	if (mWaveIsRunning)
 	{
-		//TODO :  Spawn the enemies and check for waves ending.
 		//Spawn Enemies
 		for (unsigned int i = 0; i < mActiveWaves; i++)
 		{
-			if (true/*mGameMap->mWaves[i]->SpawnUpdate(timePassed)*/)
+			if (mGameMap->mWaves[i]->SpawnUpdate(timePassed))
 			{
 				string newEnemy = "";
 				int newEnemyLevel = 0;
@@ -181,6 +180,7 @@ void GameScreen::update(u64 timePassed)
 				mRealEnemies.push_back(ei);
 			}
 		}
+		//TODO :  check for waves ending.
 	}
 	
 	if(osl_keys->pressed.start)
