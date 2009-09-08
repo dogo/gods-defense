@@ -63,7 +63,9 @@ Enemy::Enemy(const string &enemyName)
 	mSize = 0;
 	mCanFly = false;
 	mEnemyImg = NULL;
+	mAliveFrames = 0;
 	mEnemyImgDeath = NULL;
+	mDeathFrames = 0;
 	mDeathSound = NULL;
 
 	char temp[256];
@@ -121,8 +123,10 @@ Enemy::Enemy(const string &enemyName)
 		}
 		else if (mCurrentLine == "EnemyImg")
 		{
+			node->QueryIntAttribute("Frames", &mAliveFrames);
+
 			sprintf(temp, "/Res/enemies/%s/%s", mEnemyDirName.c_str(), node->Attribute("File"));
-			mEnemyImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+			mEnemyImg = GodLibrary::LoadSpriteFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888, 32, 32); //32 Width && 32 Height
 
 			mEnemyImg->centerX = (mEnemyImg->sizeX/2); //hotspot
 			mEnemyImg->centerY = (mEnemyImg->sizeY/2); //hotspot
@@ -132,8 +136,10 @@ Enemy::Enemy(const string &enemyName)
 		}
 		else if (mCurrentLine == "EnemyDeath")
 		{
+			node->QueryIntAttribute("Frames", &mDeathFrames);
+
 			sprintf(temp, "/Res/enemies/%s/%s", mEnemyDirName.c_str(), node->Attribute("File"));
-			mEnemyImgDeath = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+			mEnemyImgDeath = GodLibrary::LoadSpriteFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888, 32, 32); //32 Width && 32 Height
 
 			mEnemyImgDeath->centerX = (mEnemyImgDeath->sizeX/2);
 			mEnemyImgDeath->centerY = (mEnemyImgDeath->sizeY/2);
@@ -205,10 +211,10 @@ void EnemyInstance::RenderEnemy()
 {
 	if (EnemyIsDead()) 
 	{
-		oslDrawImageXY(mEnemy->mEnemyImgDeath, mEnemyPosition.X, mEnemyPosition.Y);
+		DrawImageFrameXY(mEnemy->mEnemyImgDeath, mEnemyPosition.X, mEnemyPosition.Y, mEnemy->mDeathFrames);
 		return;
 	}
-	oslDrawImageXY(mEnemy->mEnemyImg, mEnemyPosition.X, mEnemyPosition.Y);
+	DrawImageFrameXY(mEnemy->mEnemyImg, mEnemyPosition.X, mEnemyPosition.Y, mEnemy->mAliveFrames);
 }
 
 bool const EnemyInstance::EnemyIsDead()

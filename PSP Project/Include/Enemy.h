@@ -66,8 +66,10 @@ public:
 	OSL_SOUND *mDeathSound;
 	int mEnemyWidth;
 	int mEnemyHeight;
+	int mAliveFrames;
 	int mEnemyDeathWidth;
 	int mEnemyDeathHeight;
+	int mDeathFrames;
 
 	vector<EnemyInfo> mEnemyVector;
 };

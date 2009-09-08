@@ -52,29 +52,6 @@ void GodLibrary::drawCircle(int x, int y, int radius, OSL_COLOR color)
 	}
 }
 
-void GodLibrary::Animation(OSL_IMAGE *mAnimateImg, int mMAXFRAMES, int mSpritePosition, int mImageWidth, int mImageHeight)
-{
-	//time of the animation
-	mTempAnimation++;
-	if (mTempAnimation == mMAXFRAMES)
-	{
-		//relaunch the time
-		mTempAnimation = 0;
-
-		//next step of the animation
-		mAnimation++;
-
-		//display the right position
-		//oslSetImageTileSize (image, x, y, width, height); 
-		oslSetImageTileSize(mAnimateImg,(mAnimation * mImageWidth), mSpritePosition, mImageWidth, mImageHeight);
-		mAnimateImg->centerX = (mAnimation * mImageWidth) >> 1;		//Sprite hotspot
-
-		//relaunch animation
-		if (mAnimation == mMAXFRAMES)
-			mAnimation = 0;
-	}
-}
-
 void GodLibrary::GetMemoryInfo()
 {
     struct mallinfo minfo = mallinfo();
@@ -88,6 +65,13 @@ void GodLibrary::GetMemoryInfo()
     oslPrintf_xy(0, 30, "Free:  %u.%01uMB\n", mem_free/10, mem_free%10); //current free memory
 }
 
+OSL_IMAGE  *GodLibrary::LoadSpriteFilePNG(char *filename, int location, int pixelFormat, int frameWidth, int frameHeight)
+{
+	OSL_IMAGE *img = oslLoadImageFilePNG(filename, location, pixelFormat);
+	if (img)
+		oslSetImageFrameSize(img, frameWidth, frameHeight);
+	return img;
+}
 
 Coordinates2D::Coordinates2D()
 {

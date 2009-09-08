@@ -9,12 +9,16 @@
 #include "../Include/ILib.h"
 #include <math.h>
 
+/** Draws a specific frame of an image at a specified location (like a real sprite)
+
+\code
+DrawImageFrameXY(OSL_IMAGE *img, int x, int y, int frame);
+\endcode */
+#define DrawImageFrameXY(img, x, y, frame)do \
+	{ oslSetImageFrame(img, frame); oslDrawImageXY(img, x, y); }while(0)
+
 class GodLibrary
 {
-private:
-	int mTempAnimation;
-	int mAnimation;
-
 public:
 
 /** Suspends the current thread for a specified time.
@@ -68,16 +72,12 @@ GetMemoryInfo();
 \endcode */
 void static GetMemoryInfo();
 
-/** Animate an generic sprite.
-	mAnimateImg - Image to animate.
-	mMAXFRAMES - Max image frames.
-	mSpritePosition - Sprite Position (LEFT, DOWN, RIGHT, UP).
-	mImageWidth - Image Width.
-	mImageHeight - Image Height.
+/** Load an image specifying the frame size directly
+
 \code
-Animation(OSL_IMAGE *mAnimateImg, int mMAXFRAMES, int mSpritePosition, int mImageWidth, int mImageHeight);
+LoadSpriteFilePNG(char *filename, int location, int pixelFormat, int frameWidth, int frameHeight);
 \endcode */
-void Animation(OSL_IMAGE *mAnimateImg, int mMAXFRAMES, int mSpritePosition, int mImageWidth, int mImageHeight);
+OSL_IMAGE static *LoadSpriteFilePNG(char *filename, int location, int pixelFormat, int frameWidth, int frameHeight);
 };
 
 //coordinates in pixels

@@ -7,8 +7,8 @@
 		<Stat Health="10" GoldValue="10" PointValue="30" Speed="10" CanFly="False" HasImunity="False"/>
 	</Stats>
 	
-	<EnemyImg File="testenemy.png" Width="2" Height="2" />
-	<EnemyDeath File="DefaultEnemyDeath.png" Width="2" Height="2" />
+	<EnemyImg File="testenemy.png" Frames="4" Width="2" Height="2" />
+	<EnemyDeath File="DefaultEnemyDeath.png" Frames="4" Width="2" Height="2" />
 	
 	<DeathSound File="death.wav"/>
 </Enemy>
