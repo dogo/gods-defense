@@ -50,19 +50,19 @@ __#_#######_#_#
     
     <Waves>
         <Wave Path="default" IntervalSpawnTime="600" Description="Wave 1!">
-            <Enemy Folder="panda" NumberOfEnemies="20" />
+            <Enemy Folder="testenemy" NumberOfEnemies="20" />
         </Wave>
         <Wave Path="default" IntervalSpawnTime="600" Description="Wave 2!">
-            <Enemy Folder="panda" NumberOfEnemies="20" />
+            <Enemy Folder="testenemy" NumberOfEnemies="20" />
         </Wave>
         <Wave Path="default" IntervalSpawnTime="600" Description="Wave 3!">
-            <Enemy Folder="panda" NumberOfEnemies="20" />
+            <Enemy Folder="testenemy" NumberOfEnemies="20" />
         </Wave>
         <Wave Path="default" IntervalSpawnTime="600" Description="Wave 4!">
-            <Enemy Folder="panda" NumberOfEnemies="20" />
+            <Enemy Folder="testenemy" NumberOfEnemies="20" />
         </Wave>
         <Wave Path="default" IntervalSpawnTime="5000" Description="Wave 5 Bosssss!" Boss="True" BossSound="True">
-            <Enemy Folder="panda" NumberOfEnemies="10" />
+            <Enemy Folder="testenemy" NumberOfEnemies="10" />
         </Wave>
     </Waves>
 </Map>
