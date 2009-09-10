@@ -175,7 +175,26 @@ void GameScreen::update(u64 timePassed)
 				mRealEnemies.push_back(ei);
 			}
 		}
-		//TODO :  check for waves ending.
+		
+		//Check for waves ending
+		for (unsigned int j = 0; j < mActiveWaves; j++)
+		{
+			mWaveIsRunning = false;
+
+			if (mGameMap->mWaves[j]->EndOfWave())
+			{
+				//Give Money
+				mPlayerMoney = (mPlayerMoney * (100));
+				printf("mPlayerMoney: %d\n", mPlayerMoney);
+			}
+			
+			if (!mGameMap->mWaves[j]->EndOfWave())
+			{
+				mWaveIsRunning = true;
+				printf("mWaveIsRunning == TRUE\n");
+			}
+			printf("Check for waves ending\n");
+		}
 	}
 	
 	if(osl_keys->pressed.start)
