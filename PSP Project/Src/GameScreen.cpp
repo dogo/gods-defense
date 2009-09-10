@@ -159,11 +159,6 @@ void GameScreen::update(u64 timePassed)
 	*/
 	mGameGUI->Update(timePassed);
 
-	//Check if we need to run a new wave
-	if (mActiveWaves > 0)
-	{
-		RunNextWave(true);
-	}
 	//Run Waves
 	if (mWaveIsRunning)
 	{
@@ -175,7 +170,7 @@ void GameScreen::update(u64 timePassed)
 				string newEnemy = "";
 				int newEnemyLevel = 0;
 				mGameMap->mWaves[i]->GetCurrentWaveEnemy(newEnemy, newEnemyLevel);
-				printf("[ %d Spawning: %s ]\n", i, newEnemy);
+				printf("[%d] Spawning: %s\n", i, newEnemy.c_str());
 				EnemyInstance* ei = new EnemyInstance(mGameMap->mWaves[i], mEnemies[newEnemy], mGameMap->mWaves[i]->mPath, newEnemyLevel);
 				mRealEnemies.push_back(ei);
 			}
@@ -292,7 +287,10 @@ void GameScreen::RunNextWave(const bool &forceRunNow)
 	}
 
 	mWaveIsRunning = true;
-	mGameMap->mWaves[mActiveWaves]->StartEnemySpawn();
-	//mActiveWaves++; //TODO : Fix this array out of bounds
+	if(mActiveWaves < mGameMap->mWaves.size());
+	{
+		mGameMap->mWaves[mActiveWaves]->StartEnemySpawn();
+		mActiveWaves++;
+	}
 	printf("RunNextWave end\n");
 }

@@ -37,7 +37,7 @@ public:
 	void StartEnemySpawn();
 	bool EndOfWave(); //Check if is the end of wave
 	void EnemyKilled(); // Every time when an dies or reaches the end of the path.
-	void GetCurrentWaveEnemy(string &enemyName, int &WaveLevel);
+	void GetCurrentWaveEnemy(string &enemyName, int &EnemyLevel);
 	bool SpawnUpdate(u64 timePassed);
 	~Wave();
 

@@ -54,7 +54,6 @@ Wave::Wave(TiXmlElement *waveNode)
 		for (int i = 0; i < EnemyCounter; i++)
 		{
 			mEnemySpawns.push_back(EnemyWave(string(EnemyFolder), EnemieLevel-1));
-			printf("mEnemySpawns %d\n",mEnemySpawns.size());
 		}
 		WaveEnemyNode = WaveEnemyNode->NextSiblingElement();
 	}
@@ -81,11 +80,14 @@ bool Wave::SpawnUpdate(u64 timePassed)
 		return false;
 }
 
-void Wave::GetCurrentWaveEnemy(string &enemyName, int &WaveLevel)
+void Wave::GetCurrentWaveEnemy(string &enemyName, int &EnemyLevel)
 {
 	enemyName = mEnemySpawns[mCurrentEnemySpawn].mEnemyDirName;
-	WaveLevel = mEnemySpawns[mCurrentEnemySpawn].mEnemyLevel;
+	EnemyLevel = mEnemySpawns[mCurrentEnemySpawn].mEnemyLevel;
+	printf("enemyName %s\n",enemyName.c_str());
+	printf("EnemyLevel %d\n",EnemyLevel);
 	mCurrentEnemySpawn++;
+	printf("mCurrentEnemySpawn %d\n",mCurrentEnemySpawn);
 }
 
 bool Wave::EndOfWave()
@@ -318,7 +320,6 @@ void Map::LoadMap(const string &MapDirName)
 
 				mWaves.push_back(new Wave(waveNode));
 				waveNode = waveNode->NextSiblingElement();
-				printf("mWaves Size %d\n",mWaves.size());
 			}
 		}
 		node = node->NextSiblingElement();
