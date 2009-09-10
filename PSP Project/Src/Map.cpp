@@ -84,7 +84,6 @@ void Wave::GetCurrentWaveEnemy(string &enemyName, int &EnemyLevel)
 {
 	enemyName = mEnemySpawns[mCurrentEnemySpawn].mEnemyDirName;
 	EnemyLevel = mEnemySpawns[mCurrentEnemySpawn].mEnemyLevel;
-	printf("enemyName %s\n",enemyName.c_str());
 	printf("EnemyLevel %d\n",EnemyLevel);
 	mCurrentEnemySpawn++;
 	printf("mCurrentEnemySpawn %d\n",mCurrentEnemySpawn);
@@ -144,6 +143,17 @@ Path::Path(TiXmlElement *pathNode)
 		}
 		node = node->NextSiblingElement();
 	}
+}
+
+Coordinates2D Path::GetCheckpoint(const int &index) const
+{
+	if (mCheckpoint[index].mRadius == 0)
+		return mCheckpoint[index].mCoords;
+}
+
+unsigned int Path::GetCheckpointCount() const
+{
+	return mCheckpoint.size();
 }
 
 Map::Map()

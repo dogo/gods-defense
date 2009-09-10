@@ -23,8 +23,9 @@ using namespace std;
 enum EnemyState
 {
 	NOTHING_HAPPENING, //Nothing is happening with the enemy
-	ENEMY_DIED, //Enemy died
-	ENEMY_HIT_THE_END //Enemy hit the end of the path	
+	ENEMY_DIED, //Just died, death animation in progress, give player gold
+	ENEMY_HIT_THE_END, //Enemy hit the end of the path
+	ENEMY_FULLY_DEAD //Enemy died
 };
 
 class EnemyInfo
@@ -79,6 +80,7 @@ class EnemyInstance
 public:
 	EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const unsigned int &level);
 	Coordinates2D mEnemyPosition;
+	Coordinates2D mNextCheckpoint; //Waypoint we are travelling to
 	Wave *mWave; //Wave :)
 	Enemy *mEnemy;
 	int mHealth; //Enemy health, <= 0 dead
@@ -98,6 +100,9 @@ public:
 	bool const EnemyCanFly(); // check if the enemy can fly.
 	bool const EnemyStillOnMap(); //check if the enemy still on the map.
 	void EnemyReciveDamage(const int &damage, const float &slowAmount, const int &slowLength); // the enemy recive damage
+
+private:
+	unsigned int mCurrentCheckpoint;
 };
 
 

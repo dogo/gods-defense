@@ -175,9 +175,11 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 {
 	mWave = wave;
 	mEnemy = enemy;
+	mNextCheckpoint = mPath->GetCheckpoint(1); // mIndex == 1, to start
 	mHealth = mEnemy->mEnemyVector[mStat].mHealth;
 	mSlowAmount = 0.0;
 	mSlowLength = 0;
+	mEnemyState = NOTHING_HAPPENING;
 }
 
 void EnemyInstance::Update(u64 timePassed)
@@ -185,6 +187,52 @@ void EnemyInstance::Update(u64 timePassed)
 	//Enemy is dead so we return
 	if (EnemyIsDead())
 		return;
+
+	float angle = mEnemyPosition.AimTo(mNextCheckpoint);
+	float changeX = mEnemy->mEnemyVector[mStat].mSpeed * cos(angle);
+	float changeY = mEnemy->mEnemyVector[mStat].mSpeed * sin(angle);
+	float movement = mEnemy->mEnemyVector[mStat].mSpeed * timePassed / 1000.0f; //distance I'll move this tick
+
+	//If we are going slow then travel at reduced speed
+	if (mSlowLength > 0)
+	{
+		movement *= mSlowAmount;
+	}
+	
+	float xdif = fabs(mEnemyPosition.X - mNextCheckpoint.X);
+	float ydif = fabs(mEnemyPosition.Y - mNextCheckpoint.Y);
+
+	float distance = sqrtf((xdif * xdif) + (ydif * ydif));
+
+	printf("TRAP\n");
+
+	if (distance <= movement)
+	{
+		mEnemyPosition = mNextCheckpoint;
+
+		mCurrentCheckpoint++;
+		if (mCurrentCheckpoint >= mPath->GetCheckpointCount())
+		{
+			mEnemyState = ENEMY_HIT_THE_END;
+			mWave->EnemyKilled();
+			return;
+		}
+
+		mNextCheckpoint = mPath->GetCheckpoint(mCurrentCheckpoint);
+
+		return;
+	}
+		//Calculate new position
+	if (mSlowLength > 0)
+	{
+		mEnemyPosition.X += (changeX * timePassed * mSlowAmount)/1000;
+		mEnemyPosition.Y += (changeY * timePassed * mSlowAmount)/1000;
+	}
+	else
+	{
+		mEnemyPosition.X += (changeX * timePassed)/1000;
+		mEnemyPosition.Y += (changeY * timePassed)/1000;
+	}
 }
 
 EnemyState EnemyInstance::GetEnemyState()
@@ -198,6 +246,10 @@ EnemyState EnemyInstance::GetEnemyState()
 	else if (mEnemyState == ENEMY_HIT_THE_END)
 	{
 		return ENEMY_HIT_THE_END;
+	}
+	else if (mEnemyState == ENEMY_FULLY_DEAD)
+	{
+		mEnemyState = ENEMY_FULLY_DEAD;
 	}
 	return mEnemyState;
 }
@@ -214,6 +266,7 @@ void EnemyInstance::RenderEnemy()
 		DrawImageFrameXY(mEnemy->mEnemyImgDeath, mEnemyPosition.X, mEnemyPosition.Y, mEnemy->mDeathFrames);
 		return;
 	}
+	oslPrintf_xy(0,35, "Enemy X-> %d    Enemy Y %d", mEnemyPosition.X, mEnemyPosition.Y);
 	DrawImageFrameXY(mEnemy->mEnemyImg, mEnemyPosition.X, mEnemyPosition.Y, mEnemy->mAliveFrames);
 }
 

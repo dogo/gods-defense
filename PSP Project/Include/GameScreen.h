@@ -63,6 +63,7 @@ public:
 	bool TryBuildTower(Tower *tower, Coordinates2D position);
 	Map *GetGameMap();
 	void TryRunNextWave();
+	bool mDeleteEnemy;
 
 	virtual ~GameScreen();
 

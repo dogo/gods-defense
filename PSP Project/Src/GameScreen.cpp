@@ -196,6 +196,39 @@ void GameScreen::update(u64 timePassed)
 			printf("Check for waves ending\n");
 		}
 	}
+
+	//Run Enemies
+	mDeleteEnemy = false;
+	list<EnemyInstance*>::iterator ei_iter;
+	printf("Run Enemies\n");
+	for (ei_iter = mRealEnemies.begin(); ei_iter != mRealEnemies.end(); ei_iter++)
+	{
+		(*ei_iter)->Update(timePassed);
+
+		EnemyState ret = (*ei_iter)->GetEnemyState();
+		printf("EnemyState %d\n",ret);
+		switch (ret)
+		{
+		case NOTHING_HAPPENING: //Nothing happened
+		break;
+
+		case ENEMY_DIED: //Just died, death animation in progress, give player $$$
+			{
+			//Award player money
+			mPlayerMoney += (*ei_iter)->GetGold();
+			}
+		break;
+
+		case ENEMY_HIT_THE_END: //Got to the end of the path, make the player lose a life
+			//Lose life
+			mPlayerLives--;
+		break;
+
+		case ENEMY_FULLY_DEAD: //Dead and done
+			mDeleteEnemy = true;
+		break;
+		}
+	}
 	
 	if(osl_keys->pressed.start)
 	{	
