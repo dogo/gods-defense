@@ -159,6 +159,12 @@ void GameScreen::update(u64 timePassed)
 	*/
 	mGameGUI->Update(timePassed);
 
+	//Check if we need to run a new wave
+	/*if (mActiveWaves > 0)
+	{
+		RunNextWave(true);
+	}*/
+
 	//Run Waves
 	if (mWaveIsRunning)
 	{
@@ -227,6 +233,21 @@ void GameScreen::update(u64 timePassed)
 		case ENEMY_FULLY_DEAD: //Dead and done
 			mDeleteEnemy = true;
 		break;
+		}
+	}
+
+	//Delete enemies from list that are fully dead
+	while (mDeleteEnemy)
+	{
+		mDeleteEnemy = false;
+		for (ei_iter = mRealEnemies.begin(); ei_iter != mRealEnemies.end(); ei_iter++)
+		{
+			if ((*ei_iter)->GetEnemyState() == ENEMY_FULLY_DEAD)
+			{
+				mRealEnemies.erase(ei_iter);
+				mDeleteEnemy = true;
+				break;
+			}
 		}
 	}
 	
