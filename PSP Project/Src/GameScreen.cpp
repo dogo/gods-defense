@@ -197,16 +197,14 @@ void GameScreen::update(u64 timePassed)
 			if (!mGameMap->mWaves[j]->EndOfWave())
 			{
 				mWaveIsRunning = true;
-				printf("mWaveIsRunning == TRUE\n");
+				printf("Wave Is Running\n");
 			}
-			printf("Check for waves ending\n");
 		}
 	}
 
 	//Run Enemies
 	mDeleteEnemy = false;
 	list<EnemyInstance*>::iterator ei_iter;
-	printf("Run Enemies\n");
 	for (ei_iter = mRealEnemies.begin(); ei_iter != mRealEnemies.end(); ei_iter++)
 	{
 		(*ei_iter)->Update(timePassed);

@@ -175,7 +175,10 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 {
 	mWave = wave;
 	mEnemy = enemy;
-	mNextCheckpoint = mPath->GetCheckpoint(1); // mIndex == 1, to start
+	mStat = level;
+	mPath = &(Map::InitMap()->mPaths[path]);
+	//mEnemyPosition = mPath->GetCheckpoint(0); // mIndex == 0, to start
+	//mNextCheckpoint = mPath->GetCheckpoint(1); // mIndex == 1, nextCheckpoint
 	mHealth = mEnemy->mEnemyVector[mStat].mHealth;
 	mSlowAmount = 0.0;
 	mSlowLength = 0;
@@ -203,8 +206,6 @@ void EnemyInstance::Update(u64 timePassed)
 	float ydif = fabs(mEnemyPosition.Y - mNextCheckpoint.Y);
 
 	float distance = sqrtf((xdif * xdif) + (ydif * ydif));
-
-	printf("TRAP\n");
 
 	if (distance <= movement)
 	{
