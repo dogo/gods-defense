@@ -70,12 +70,9 @@ class Path
 public:
 	Path();
 	Path(TiXmlElement *pathNode);
-	Coordinates2D GetCheckpoint(const int &index) const;
 	unsigned int GetCheckpointCount() const;
 
 	float mCheckpointLength; //Total length of path
-
-private:
 	vector<PathCoords> mCheckpoint;
 };
 

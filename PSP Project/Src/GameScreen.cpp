@@ -112,7 +112,7 @@ void GameScreen::draw()
 {
 	mGameMap->draw();
 	oslPrintf_xy(0,20,"mPlayerMoney %d", mPlayerMoney);
-
+	oslPrintf_xy(0,40,"mPlayerLives %d\n",mPlayerLives);
 	if(mGameState == GS_MAP_PLACE_TOWER)
 	{
 		for (int i=0; i<15 ; i++)
@@ -125,7 +125,7 @@ void GameScreen::draw()
 				}
 			}
 	}
-	//dogo : not working yet
+
 	//Draw the enemies
 	list<EnemyInstance*>::const_iterator realEnemies_iter;
 	for (realEnemies_iter = mRealEnemies.begin(); realEnemies_iter != mRealEnemies.end(); realEnemies_iter++)

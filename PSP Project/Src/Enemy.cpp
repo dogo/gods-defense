@@ -176,13 +176,15 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 	mWave = wave;
 	mEnemy = enemy;
 	mStat = level;
-	mPath = &(Map::InitMap()->mPaths[path]);
-	//mEnemyPosition = mPath->GetCheckpoint(0); // mIndex == 0, to start
-	//mNextCheckpoint = mPath->GetCheckpoint(1); // mIndex == 1, nextCheckpoint
+	mPath = &(Map::InitMap()->mPaths["default"]); //TODO :  Fix this path is empty why ?!
+
+	mEnemyPosition = mPath->mCheckpoint[0].mCoords; // mIndex == 0, to start
+	mNextCheckpoint = mPath->mCheckpoint[1].mCoords; // mIndex == 1, nextCheckpoint
 	mHealth = mEnemy->mEnemyVector[mStat].mHealth;
 	mSlowAmount = 0.0;
 	mSlowLength = 0;
 	mEnemyState = NOTHING_HAPPENING;
+	mCurrentCheckpoint = 1;
 }
 
 void EnemyInstance::Update(u64 timePassed)
@@ -219,7 +221,7 @@ void EnemyInstance::Update(u64 timePassed)
 			return;
 		}
 
-		mNextCheckpoint = mPath->GetCheckpoint(mCurrentCheckpoint);
+		mNextCheckpoint = mPath->mCheckpoint[mCurrentCheckpoint].mCoords;
 
 		return;
 	}
@@ -267,8 +269,8 @@ void EnemyInstance::RenderEnemy()
 		DrawImageFrameXY(mEnemy->mEnemyImgDeath, mEnemyPosition.X, mEnemyPosition.Y, mEnemy->mDeathFrames);
 		return;
 	}
-	oslPrintf_xy(0,35, "Enemy X-> %d    Enemy Y %d", mEnemyPosition.X, mEnemyPosition.Y);
-	DrawImageFrameXY(mEnemy->mEnemyImg, mEnemyPosition.X, mEnemyPosition.Y, mEnemy->mAliveFrames);
+	DrawImageFrameXY(mEnemy->mEnemyImg, mEnemyPosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y, mEnemy->mAliveFrames);
+	oslPrintf_xy(0,30, "Enemy X-> %f    Enemy Y %f", mEnemyPosition.X, mEnemyPosition.Y);
 }
 
 bool const EnemyInstance::EnemyIsDead()

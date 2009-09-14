@@ -29,23 +29,22 @@ __#_#######_#_#
 ###############
 ]]></CollisionMap>
     <Path Name="default">
-        <Checkpoint X="-16" Y="144" Radius="1" />
-        <Checkpoint X="48" Y="144" Radius="1" />
-        <Checkpoint X="48" Y="48" Radius="1" />
-        <Checkpoint X="208" Y="48" Radius="1" />
-        <Checkpoint X="208" Y="48" Radius="1" />
-        <Checkpoint X="208" Y="208" Radius="1" />
-        <Checkpoint X="112" Y="208" Radius="1" />
-        <Checkpoint X="112" Y="368" Radius="1" />
-        <Checkpoint X="368" Y="368" Radius="1" />
-        <Checkpoint X="368" Y="208" Radius="1" />
-        <Checkpoint X="304" Y="208" Radius="1" />
-        <Checkpoint X="304" Y="48" Radius="1" />
-        <Checkpoint X="464" Y="48" Radius="1" />
-        <Checkpoint X="464" Y="464" Radius="1" />
-        <Checkpoint X="48" Y="464" Radius="1" />
-        <Checkpoint X="48" Y="240" Radius="1" />
-        <Checkpoint X="-16" Y="240" Radius="1" />
+		<Checkpoint X="-16" Y="144" Radius="1" />
+		<Checkpoint X="96" Y="144" Radius="1" />
+		<Checkpoint X="96" Y="48" Radius="1" />
+		<Checkpoint X="256" Y="48" Radius="1" />
+		<Checkpoint X="256" Y="208" Radius="1" />
+		<Checkpoint X="160" Y="208" Radius="1" />
+		<Checkpoint X="160" Y="368" Radius="1" />
+		<Checkpoint X="416" Y="368" Radius="1" />
+		<Checkpoint X="416" Y="208" Radius="1" />
+		<Checkpoint X="320" Y="208" Radius="1" />
+		<Checkpoint X="320" Y="48" Radius="1" />
+		<Checkpoint X="480" Y="48" Radius="1" />
+		<Checkpoint X="480" Y="432" Radius="1" />
+		<Checkpoint X="96" Y="432" Radius="1" />
+		<Checkpoint X="96" Y="240" Radius="1" />
+		<Checkpoint X="-16" Y="240" Radius="1" />
     </Path>
     
     <Waves>

@@ -145,12 +145,6 @@ Path::Path(TiXmlElement *pathNode)
 	}
 }
 
-Coordinates2D Path::GetCheckpoint(const int &index) const
-{
-	if (mCheckpoint[index].mRadius == 0)
-		return mCheckpoint[index].mCoords;
-}
-
 unsigned int Path::GetCheckpointCount() const
 {
 	return mCheckpoint.size();
