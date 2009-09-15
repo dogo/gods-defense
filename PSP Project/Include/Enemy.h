@@ -91,6 +91,7 @@ public:
 	int mSlowLength;
 	EnemyState mEnemyState;
 	float mAngle;
+	u64 mAnimationTime;
 
 	EnemyState GetEnemyState();
 

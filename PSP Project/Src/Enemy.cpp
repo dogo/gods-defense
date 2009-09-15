@@ -185,13 +185,17 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 	mSlowLength = 0;
 	mEnemyState = NOTHING_HAPPENING;
 	mCurrentCheckpoint = 1;
+	mAnimationTime = 0;
 }
 
 void EnemyInstance::Update(u64 timePassed)
 {
 	//Enemy is dead so we return
 	if (EnemyIsDead())
+	{
+		mAnimationTime += timePassed;
 		return;
+	}
 
 	float angle = mEnemyPosition.AimTo(mNextCheckpoint);
 	float changeX = mEnemy->mEnemyVector[mStat].mSpeed * cos(angle);
@@ -224,6 +228,16 @@ void EnemyInstance::Update(u64 timePassed)
 
 	//Decrement the slow counter
 	mSlowLength -= timePassed;
+
+	//Animate!
+	mAnimationTime = (mAnimationTime + timePassed);
+
+	if(mAnimationTime >= 600)
+	{
+		mEnemy->mAliveFrames++;
+		mEnemy->mAliveFrames %= 4;
+		mAnimationTime = 0;
+	}
 
 	//If we are going slow then travel at reduced speed
 	if (mSlowLength > 0)
