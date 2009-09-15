@@ -177,9 +177,9 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 	mEnemy = enemy;
 	mStat = level;
 	mPath = &(Map::InitMap()->mPaths["default"]); //TODO :  Fix this path is empty why ?!
-
 	mEnemyPosition = mPath->mCheckpoint[0].mCoords; // mIndex == 0, to start
 	mNextCheckpoint = mPath->mCheckpoint[1].mCoords; // mIndex == 1, nextCheckpoint
+	mAngle = mEnemyPosition.AimTo(mNextCheckpoint);
 	mHealth = mEnemy->mEnemyVector[mStat].mHealth;
 	mSlowAmount = 0.0;
 	mSlowLength = 0;
@@ -197,6 +197,33 @@ void EnemyInstance::Update(u64 timePassed)
 	float changeX = mEnemy->mEnemyVector[mStat].mSpeed * cos(angle);
 	float changeY = mEnemy->mEnemyVector[mStat].mSpeed * sin(angle);
 	float movement = mEnemy->mEnemyVector[mStat].mSpeed * timePassed / 1000.0f; //distance I'll move this tick
+
+	//Update mAngle (render angle) to flow smoothly with the angle of travel
+	if (mAngle != angle)
+	{
+		//Fix the render angle to be within M_PI so the enemy rotates in the right direction
+		while (mAngle - angle >= M_PI)
+			mAngle -= 2*M_PI;
+		while (mAngle - angle <= -M_PI)
+			mAngle += 2*M_PI;
+
+		//Now slowly move the angle over
+		float angleForTime = 2 * M_PI * timePassed / 1000.0f;
+		if (fabs(mAngle - angle) <= angleForTime)
+		{
+			mAngle = angle;
+		}
+		else
+		{
+			if (mAngle > angle)
+				mAngle -= angleForTime;
+			else //mAngle < angle
+				mAngle += angleForTime;
+		}
+	}
+
+	//Decrement the slow counter
+	mSlowLength -= timePassed;
 
 	//If we are going slow then travel at reduced speed
 	if (mSlowLength > 0)
@@ -269,8 +296,10 @@ void EnemyInstance::RenderEnemy()
 		DrawImageFrameXY(mEnemy->mEnemyImgDeath, mEnemyPosition.X, mEnemyPosition.Y, mEnemy->mDeathFrames);
 		return;
 	}
+	mEnemy->mEnemyImg->centerX = 16; //Enemie / 2
+	mEnemy->mEnemyImg->angle = (mAngle * 180/M_PI);
 	DrawImageFrameXY(mEnemy->mEnemyImg, mEnemyPosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y, mEnemy->mAliveFrames);
-	oslPrintf_xy(0,30, "Enemy X-> %f    Enemy Y %f", mEnemyPosition.X, mEnemyPosition.Y);
+	oslPrintf_xy(0,30, "Enemy X-> %f    Enemy Y %f  mAngle %d", mEnemyPosition.X, mEnemyPosition.Y, mEnemy->mEnemyImg->angle);
 }
 
 bool const EnemyInstance::EnemyIsDead()

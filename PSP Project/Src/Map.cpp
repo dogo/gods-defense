@@ -64,16 +64,16 @@ Wave::Wave(TiXmlElement *waveNode)
 void Wave::StartEnemySpawn()
 {
 	mCurrentEnemySpawn = 0;
-	mEnemySpawnTimer = mTempSpawnTimer;
+	mEnemySpawnTimer = mIntervalSpawnTime;
 }
 
 bool Wave::SpawnUpdate(u64 timePassed)
 {
 	mEnemySpawnTimer += timePassed;
 
-	if (mCurrentEnemySpawn < mEnemySpawns.size() && mEnemySpawnTimer >= mTempSpawnTimer)
+	if (mCurrentEnemySpawn < mEnemySpawns.size() && mEnemySpawnTimer >= mIntervalSpawnTime)
 	{
-		mEnemySpawnTimer -= mTempSpawnTimer;
+		mEnemySpawnTimer -= mIntervalSpawnTime;
 		return true;
 	}
 	else

@@ -46,7 +46,6 @@ public:
 private:
 	unsigned int mCurrentEnemySpawn; // Array watcher
 	int mEnemySpawnTimer; // Controls the time of the last enemy spawned
-	int mTempSpawnTimer;
 	char *mWaveDescription; //wave Description
 	bool mIsBoss; // boss wave? 
 	bool mPointOfInterest; //The enemy reached the point of interest, the player loses points for life

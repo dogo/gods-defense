@@ -90,6 +90,7 @@ public:
 	float mSlowAmount;
 	int mSlowLength;
 	EnemyState mEnemyState;
+	float mAngle;
 
 	EnemyState GetEnemyState();
 
