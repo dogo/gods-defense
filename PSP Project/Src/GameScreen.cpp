@@ -248,6 +248,24 @@ void GameScreen::update(u64 timePassed)
 			}
 		}
 	}
+
+	//Check if player is dead
+	if (mGameState != GS_GAME_OVER)
+	{
+		if (mPlayerLives <= 0)
+		{
+			//Loose
+			SetGameState(GS_GAME_OVER);
+			printf("YOU LOOSE!\n");
+		}
+		//Maybe end of game.
+		else if (!mWaveIsRunning && mActiveWaves >= mGameMap->mWaves.size())
+		{
+			//Win
+			SetGameState(GS_GAME_OVER);
+			printf("YOU WIN!\n");
+		}
+	}
 	
 	if(osl_keys->pressed.start)
 	{	
