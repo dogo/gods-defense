@@ -107,7 +107,6 @@ void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 		if (osl_keys->pressed.triangle) // Next Wave
 		{
 			mGame->TryRunNextWave();
-			printf("TryRunNextWave\n");
 		}
 		if(osl_keys->pressed.square)
 		{

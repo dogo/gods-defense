@@ -164,12 +164,6 @@ void GameScreen::update(u64 timePassed)
 	*/
 	mGameGUI->Update(timePassed);
 
-	//Check if we need to run a new wave
-	/*if (mActiveWaves > 0)
-	{
-		RunNextWave(true);
-	}*/
-
 	//Run Waves
 	if (mWaveIsRunning)
 	{
@@ -181,8 +175,7 @@ void GameScreen::update(u64 timePassed)
 				string newEnemy = "";
 				int newEnemyLevel = 0;
 				mGameMap->mWaves[i]->GetCurrentWaveEnemy(newEnemy, newEnemyLevel);
-				printf("[%d] Spawning: %s\n", i, newEnemy.c_str());
-				EnemyInstance* ei = new EnemyInstance(mGameMap->mWaves[i], mEnemies[newEnemy], mGameMap->mWaves[i]->mPath, newEnemyLevel);
+				EnemyInstance *ei = new EnemyInstance(mGameMap->mWaves[i], mEnemies[newEnemy], mGameMap->mWaves[i]->mPath, newEnemyLevel);
 				mRealEnemies.push_back(ei);
 			}
 		}
@@ -195,7 +188,7 @@ void GameScreen::update(u64 timePassed)
 			if (mGameMap->mWaves[j]->EndOfWave())
 			{
 				//Give Money
-				mPlayerMoney = (mPlayerMoney * (100));
+				mPlayerMoney = (mPlayerMoney * (1.5));
 				printf("mPlayerMoney: %d\n", mPlayerMoney);
 			}
 			
@@ -231,7 +224,6 @@ void GameScreen::update(u64 timePassed)
 		case ENEMY_HIT_THE_END: //Got to the end of the path, make the player lose a life
 			//Lose life
 			mPlayerLives--;
-			enemyState = ENEMY_FULLY_DEAD;
 		break;
 
 		case ENEMY_FULLY_DEAD: //Dead and done
@@ -263,7 +255,6 @@ void GameScreen::update(u64 timePassed)
 			//Loose
 			SetGameState(GS_GAME_OVER);
 			mNextScreen = ScreenManager::SCREEN_ENDING;
-			printf("YOU LOOSE!\n");
 		}
 		//Maybe end of game.
 		else if (!mWaveIsRunning && mActiveWaves >= mGameMap->mWaves.size())
@@ -272,7 +263,6 @@ void GameScreen::update(u64 timePassed)
 			gWin = true;
 			SetGameState(GS_GAME_OVER);
 			mNextScreen = ScreenManager::SCREEN_ENDING;
-			printf("YOU WIN!\n");
 		}
 	}
 	
@@ -380,7 +370,6 @@ void GameScreen::RunNextWave(const bool &forceRunNow)
 {
 	if (!forceRunNow && mWaveIsRunning)
 	{
-		printf("Return\n");
 		return;
 	}
 
@@ -390,5 +379,4 @@ void GameScreen::RunNextWave(const bool &forceRunNow)
 		mGameMap->mWaves[mActiveWaves]->StartEnemySpawn();
 		mActiveWaves++;
 	}
-	printf("RunNextWave end\n");
 }

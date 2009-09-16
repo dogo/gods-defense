@@ -285,10 +285,12 @@ EnemyState EnemyInstance::GetEnemyState()
 	{
 		if (mEnemy->mDeathSound != NULL)
 			oslPlaySound(mEnemy->mDeathSound, 1); //Plays the die sound on channel 1
+		mEnemyState = ENEMY_DIED;
 		return ENEMY_DIED;
 	}
 	else if (mEnemyState == ENEMY_HIT_THE_END)
 	{
+		mEnemyState = ENEMY_FULLY_DEAD;
 		return ENEMY_HIT_THE_END;
 	}
 	else if (mEnemyState == ENEMY_FULLY_DEAD)
@@ -318,7 +320,7 @@ void EnemyInstance::RenderEnemy()
 
 bool const EnemyInstance::EnemyIsDead()
 {
-	return (mHealth <= 0);
+	return (mHealth <= 0 || mEnemyState == ENEMY_FULLY_DEAD || mEnemyState == ENEMY_HIT_THE_END || mEnemyState == ENEMY_DIED);
 }
 
 bool const EnemyInstance::EnemyCanFly()
@@ -354,5 +356,7 @@ void EnemyInstance::EnemyReciveDamage(const int &damage, const float &slowAmount
 	if (enemyIsAlive && EnemyIsDead())
 	{
 		mEnemyState = ENEMY_DIED;
+		mWave->EnemyKilled();
+		mAnimationTime = 0;
 	}
 }

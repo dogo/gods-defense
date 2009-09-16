@@ -409,7 +409,7 @@ Map *Map::InitMap()
 
 void Map::ScrollMap()
 {
-	if(osl_keys->pressed.L)
+	if(osl_keys->pressed.R) //UP
 	{
 		oslFlushKey();
 		
@@ -419,7 +419,7 @@ void Map::ScrollMap()
 			mMapImage->y = -208;			
 	}
 	
-	if(osl_keys->pressed.R)
+	if(osl_keys->pressed.L) //Down
 	{
 		oslFlushKey();		
 		
