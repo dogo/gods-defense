@@ -11,6 +11,7 @@ char Resource::IMG_GAME_TITLE[] = "/Res/GDSplash.png";
 char Resource::IMG_MAIN_MENU_BG[] = "/Res/background.png";
 char Resource::IMG_CURSOR[] = "/Res/cursor.png";
 char Resource::IMG_BACK[] = "/Res/circle.png";
+char Resource::IMG_CROSS[] = "/Res/x.png";
 char Resource::IMG_SIDEBAR[] = "/Res/sidebar.png";
 char Resource::IMG_SELECTOR_SIDEBAR[] = "/Res/selector.png";
 
@@ -70,3 +71,14 @@ char const Resource::STR_HELP_TEXT[] =
 	"Triangle - Next Wave.\n"
 	"Square - Build Menu(Show/Hide).\n"
 	"Start - Pause menu.\n";
+
+char const Resource::STR_CONGRATS[] = 
+	"Congratulations!\n"
+	"\n"
+	"You Win!\n"
+	"Press Cross to go back to main menu.\n";
+
+char const Resource::STR_LOSE[] = 
+	"You have been defeated!\n"
+	"\n"
+	"Press Cross to go back to main menu.\n";

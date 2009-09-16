@@ -23,5 +23,6 @@ extern int gFade;
 extern int gScreen;
 extern int mNextScreen;
 extern string gChoosedMap;
+extern bool gWin;
 
 #endif

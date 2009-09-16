@@ -6,6 +6,9 @@
 #include "../Include/GameScreen.h"
 #include "../Include/ScreenManager.h"
 
+//Statics
+bool gWin;
+
 GameScreen::GameScreen()
 {
 	GameGUI::InitGUI(this);
@@ -20,6 +23,8 @@ GameScreen::GameScreen()
 
 	mActiveWaves = 0;
 	mWaveIsRunning = false;
+
+	gWin = false;
 }
 
 void GameScreen::LoadMap(const string &mapName)
@@ -209,9 +214,9 @@ void GameScreen::update(u64 timePassed)
 	{
 		(*ei_iter)->Update(timePassed);
 
-		EnemyState ret = (*ei_iter)->GetEnemyState();
-		printf("EnemyState %d\n",ret);
-		switch (ret)
+		EnemyState enemyState = (*ei_iter)->GetEnemyState();
+		printf("EnemyState %d\n",enemyState);
+		switch (enemyState)
 		{
 		case NOTHING_HAPPENING: //Nothing happened
 		break;
@@ -226,6 +231,7 @@ void GameScreen::update(u64 timePassed)
 		case ENEMY_HIT_THE_END: //Got to the end of the path, make the player lose a life
 			//Lose life
 			mPlayerLives--;
+			enemyState = ENEMY_FULLY_DEAD;
 		break;
 
 		case ENEMY_FULLY_DEAD: //Dead and done
@@ -256,13 +262,16 @@ void GameScreen::update(u64 timePassed)
 		{
 			//Loose
 			SetGameState(GS_GAME_OVER);
+			mNextScreen = ScreenManager::SCREEN_ENDING;
 			printf("YOU LOOSE!\n");
 		}
 		//Maybe end of game.
 		else if (!mWaveIsRunning && mActiveWaves >= mGameMap->mWaves.size())
 		{
 			//Win
+			gWin = true;
 			SetGameState(GS_GAME_OVER);
+			mNextScreen = ScreenManager::SCREEN_ENDING;
 			printf("YOU WIN!\n");
 		}
 	}
