@@ -20,6 +20,7 @@ Wave::Wave(TiXmlElement *waveNode)
 	mCurrentEnemySpawn = 0;
 	mEnemySpawnTimer = 0;
 	mEnemiesLeftAlive = 0;
+	mWaveEndOnce = false;
 
 	const char *description = waveNode->Attribute("Description");
 
@@ -92,6 +93,16 @@ void Wave::GetCurrentWaveEnemy(string &enemyName, int &EnemyLevel)
 bool Wave::EndOfWave()
 {
 	return (mEnemiesLeftAlive == 0);
+}
+
+bool Wave::EndOfOneWave()
+{
+	if (mEnemiesLeftAlive == 0 && !mWaveEndOnce)
+	{
+		mWaveEndOnce = true;
+		return true;
+	}
+	return false;
 }
 
 void Wave::EnemyKilled()

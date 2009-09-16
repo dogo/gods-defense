@@ -36,12 +36,14 @@ public:
 	Wave(TiXmlElement *waveNode);
 	void StartEnemySpawn();
 	bool EndOfWave(); //Check if is the end of wave
+	bool EndOfOneWave(); //Same as EndOfWave but only returns true once
 	void EnemyKilled(); // Every time when an dies or reaches the end of the path.
 	void GetCurrentWaveEnemy(string &enemyName, int &EnemyLevel);
 	bool SpawnUpdate(u64 timePassed);
 	~Wave();
 
 	string mPath;
+	bool mWaveEndOnce;
 
 private:
 	unsigned int mCurrentEnemySpawn; // Array watcher

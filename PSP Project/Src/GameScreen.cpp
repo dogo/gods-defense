@@ -185,11 +185,10 @@ void GameScreen::update(u64 timePassed)
 		{
 			mWaveIsRunning = false;
 
-			if (mGameMap->mWaves[j]->EndOfWave())
+			if (mGameMap->mWaves[j]->EndOfOneWave())
 			{
-				//Give Money
-				mPlayerMoney = (mPlayerMoney * (1.5));
-				printf("mPlayerMoney: %d\n", mPlayerMoney);
+				//Give Gold
+				mPlayerMoney += (mPlayerLives * (mGameMap->mWaves.size() - (mGameMap->mWaves.size() - j)));
 			}
 			
 			if (!mGameMap->mWaves[j]->EndOfWave())
