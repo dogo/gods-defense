@@ -71,6 +71,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Src\EndingScreen.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Src\Enemy.cpp"
 				>
 			</File>
@@ -152,6 +156,10 @@
 			</File>
 			<File
 				RelativePath=".\Include\AnykeyScreen.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\EndingScreen.h"
 				>
 			</File>
 			<File
