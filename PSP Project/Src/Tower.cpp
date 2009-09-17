@@ -242,11 +242,11 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 	float mTowerSquareRange = mTower->mTowerVector[mCurrentMap].mRange * mTower->mTowerVector[mCurrentMap].mRange; //Range²
 
 	printf("TowerInstance::Update 3\n");
-	/*if(mTowerPosition.SquareDistance(mTowerTarget->mEnemyPosition) > mTowerSquareRange || mTowerTarget->EnemyIsDead() || mTowerTarget->EnemyStillOnMap())
+	if (mTowerTarget && (mTowerTarget->EnemyIsDead() || mTowerPosition.SquareDistance(mTowerTarget->mEnemyPosition) > mTowerSquareRange || !mTowerTarget->EnemyStillOnMap()))
 	{
 		//The target its out of range or dead
 		mTowerTarget = NULL;
-	}*/
+	}	
 
 	printf("TowerInstance::Update 4\n");
 
@@ -262,6 +262,7 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 				((mTower->mHitsFlyer && (*enemyIteratorList)->EnemyCanFly()) || (mTower->mHitsLand && !(*enemyIteratorList)->EnemyCanFly()))
 			)
 			{
+				printf("FOUND TARGET\n");
 				mTowerTarget = (*enemyIteratorList);
 				break;
 			}
@@ -276,6 +277,7 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 		*/
 		if (mProjectileInterval <= 0)
 		{
+			printf("BANG\n");
 			mProjectileInterval = mTower->mTowerVector[mCurrentMap].mRateOfFire;		
 			ProjectileInstance::CreateProjectile(this, mTowerTarget);
 		}
