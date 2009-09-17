@@ -13,7 +13,7 @@ void ProjectileInstance::CreateProjectile(TowerInstance *shooter, EnemyInstance 
 	switch(shooter->mTower->mProjectileType)
 	{
 	case PT_Arrow:
-		//TODO : kind of Projectile Instance
+		mKindOfProjectile = new ArrowInstance(shooter, target);
 		break;
 	case PT_Ice:
 		//TODO : kind of Projectile Instance
@@ -52,9 +52,9 @@ OSL_IMAGE *ProjectileInstance::LoadProjectileImage(const char &projectileType, c
 
 ProjectileInstance::ProjectileInstance(TowerInstance *shooter, EnemyInstance *target)
 {
-	mEnemyIsDead = false;
+	mDisappearProjectile = false;
 	mProjectilePosition = shooter->mTowerPosition;
-	mProjectileSprite = shooter->mTower->mProjectileImg;
+	mProjectileImg = shooter->mTower->mProjectileImg;
 	mFireSound = shooter->mTower->mFireSound;
 	mHitSound = shooter->mTower->mHitSound;
 	mTarget = target;
@@ -67,4 +67,53 @@ ProjectileInstance::ProjectileInstance(TowerInstance *shooter, EnemyInstance *ta
 
 ProjectileInstance::~ProjectileInstance()
 {
+}
+
+bool ProjectileInstance::DisappearProjectile()
+{
+	return mDisappearProjectile;
+}
+
+//ArrowInstance
+ArrowInstance::ArrowInstance(TowerInstance *shooter, EnemyInstance *target)	: ProjectileInstance(shooter, target)
+{
+	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSpeed;
+
+	if (mFireSound != NULL)
+		oslPlaySound(mFireSound,1);
+}
+
+ArrowInstance::~ArrowInstance()
+{
+}
+
+void ArrowInstance::Update(u64 timePassed)
+{
+	//Calculate angle to target, move towards it
+	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //distance I'll move this tick
+	movement *= movement;
+	float xdif = mProjectilePosition.X - mTarget->mEnemyPosition.X;
+	float ydif = mProjectilePosition.Y - mTarget->mEnemyPosition.Y;
+	float distance = (xdif * xdif) + (ydif * ydif); //pythagoras without the sqrt
+	if (distance < movement)
+	{
+		//We hit!
+		//TODO : Deal Damage here
+		printf("Fire!\n");
+		if (mHitSound != NULL)
+			oslPlaySound(mHitSound,1);
+		mDisappearProjectile = true;
+	}
+
+	//Calculate new position
+	mAngle = mProjectilePosition.AimTo(mTarget->mEnemyPosition);
+	float changeX = mMovementSpeed * cos(mAngle) * timePassed / 1000;
+	float changeY = mMovementSpeed * sin(mAngle) * timePassed / 1000;
+	mProjectilePosition.X += changeX;
+	mProjectilePosition.Y += changeY;
+}
+
+void ArrowInstance::ProjectileRender()
+{
+	oslDrawImageXY(mProjectileImg, mProjectilePosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mProjectilePosition.Y);
 }

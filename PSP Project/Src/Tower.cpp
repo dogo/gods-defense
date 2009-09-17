@@ -236,14 +236,19 @@ TowerInstance::TowerInstance(Tower *tower, const Coordinates2D &position)
 
 void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enemies)
 {
+	printf("TowerInstance::Update 1\n");
 	mProjectileInterval -= timePassed;
+	printf("TowerInstance::Update 2\n");
 	float mTowerSquareRange = mTower->mTowerVector[mCurrentMap].mRange * mTower->mTowerVector[mCurrentMap].mRange; //Range²
 
-	if(mTowerPosition.SquareDistance(mTowerTarget->mEnemyPosition) > mTowerSquareRange || mTowerTarget->EnemyIsDead() || mTowerTarget->EnemyStillOnMap())
+	printf("TowerInstance::Update 3\n");
+	/*if(mTowerPosition.SquareDistance(mTowerTarget->mEnemyPosition) > mTowerSquareRange || mTowerTarget->EnemyIsDead() || mTowerTarget->EnemyStillOnMap())
 	{
 		//The target its out of range or dead
 		mTowerTarget = NULL;
-	}
+	}*/
+
+	printf("TowerInstance::Update 4\n");
 
 	if (!mTowerTarget) //we don't have a target, seek for an enemy.
 	{

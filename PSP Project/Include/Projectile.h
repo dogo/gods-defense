@@ -28,25 +28,41 @@ public:
 	ProjectileInstance(TowerInstance *shooter, EnemyInstance *target);
 	virtual ~ProjectileInstance();
 	static void CreateProjectile(TowerInstance *shooter, EnemyInstance *target);
-
-	//TODO : :D write this functions
-	//virtual void Update(unsigned timePassed) = 0;
-	//virtual void ProjectileRender() = 0;
+	bool DisappearProjectile();
+	virtual void Update(u64 timePassed) = 0;
+	virtual void ProjectileRender() = 0;
 
 	static OSL_IMAGE *LoadProjectileImage(const char &projectileType, char *filename);
 
-private:
-	bool mEnemyIsDead;
-	Coordinates2D mProjectilePosition;
-	EnemyInstance *mTarget;
-	OSL_IMAGE *mProjectileSprite;
 	OSL_SOUND *mFireSound;
 	OSL_SOUND *mHitSound;
+	Coordinates2D mProjectilePosition;
+	OSL_IMAGE *mProjectileImg;
+	int mHitSize;
+	EnemyInstance *mTarget;
+	bool mDisappearProjectile;
+private:
 	int mTowerDamage;
 	float mSlowAmount;
 	int mSlowLength;
 	bool mHitsFlyer;
 	bool mHitsLand;
+
+};
+
+
+class ArrowInstance : public ProjectileInstance
+{
+public:
+	ArrowInstance(TowerInstance *shooter, EnemyInstance *target);
+	virtual ~ArrowInstance();
+
+	//ShotInstance
+	virtual void Update(u64 timePassed);
+	virtual void ProjectileRender();
+private:
+	int mMovementSpeed;
+	float mAngle; //Last calculated angle
 };
 
 #endif

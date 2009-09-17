@@ -145,6 +145,13 @@ void GameScreen::draw()
 		(*realTowers_iter)->RenderTower();
 	}
 
+	//Draw the Projectiles
+	list<ProjectileInstance*>::const_iterator si_iter;
+	for (si_iter = mRealProjectiles.begin(); si_iter != mRealProjectiles.end(); si_iter++)
+	{
+		(*si_iter)->ProjectileRender();
+	}
+
 	mGameGUI->RenderPlacingTower();
 	mGameGUI->draw();	
 #ifdef DEBUG
@@ -197,6 +204,37 @@ void GameScreen::update(u64 timePassed)
 				printf("Wave Is Running\n");
 			}
 		}
+	}
+
+	//Run Projectiles
+	list<ProjectileInstance*>::iterator si_iter;
+	for (si_iter = mRealProjectiles.begin(); si_iter != mRealProjectiles.end(); si_iter++)
+	{
+		(*si_iter)->Update(timePassed);
+	}
+
+	//Delete Projectiles that are done
+	bool mDeleteProjectile = true;
+	while (mDeleteProjectile)
+	{
+		mDeleteProjectile = false;
+		for (si_iter = mRealProjectiles.begin(); si_iter != mRealProjectiles.end(); si_iter++)
+		{
+			if ((*si_iter)->DisappearProjectile())
+			{
+				delete (*si_iter);
+				mRealProjectiles.erase(si_iter);
+				mDeleteProjectile = true;
+				break;
+			}
+		}
+	}
+
+	//Run Towers
+	list<TowerInstance*>::const_iterator ti_iter;
+	for (ti_iter = mRealTowers.begin(); ti_iter != mRealTowers.end(); ti_iter++)
+	{
+		(*ti_iter)->Update(timePassed, mRealEnemies);
 	}
 
 	//Run Enemies
