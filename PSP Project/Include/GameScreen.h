@@ -51,7 +51,6 @@ private:
 	bool mWaveIsRunning;
 	list<TowerInstance*> mRealTowers;  //Current builded towers
 	list<EnemyInstance*> mRealEnemies; //Current spawned enemies
-	list<ProjectileInstance* > mRealProjectiles;   //Current shots
 
 public:
 	GameScreen();
@@ -65,6 +64,8 @@ public:
 	Map *GetGameMap();
 	void TryRunNextWave();
 	bool mDeleteEnemy;
+	static GameScreen *gGameReference;
+	list<ProjectileInstance*> mRealProjectiles;   //Current shots
 
 	virtual ~GameScreen();
 

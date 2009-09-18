@@ -110,7 +110,6 @@ public:
 	unsigned int mCurrentMap;
 private:
 	Coordinates2D mTowerPosition; //Tower Center
-	float mTowerAngle;
 	int mProjectileInterval;
 
 	EnemyInstance *mTowerTarget;

@@ -31,7 +31,7 @@ public:
 	bool DisappearProjectile();
 	virtual void Update(u64 timePassed) = 0;
 	virtual void ProjectileRender() = 0;
-
+	void DealDamage();
 	static OSL_IMAGE *LoadProjectileImage(const char &projectileType, char *filename);
 
 	OSL_SOUND *mFireSound;
@@ -41,6 +41,7 @@ public:
 	int mHitSize;
 	EnemyInstance *mTarget;
 	bool mDisappearProjectile;
+
 private:
 	int mTowerDamage;
 	float mSlowAmount;

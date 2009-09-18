@@ -27,6 +27,7 @@ void ProjectileInstance::CreateProjectile(TowerInstance *shooter, EnemyInstance 
 	default:
 		return;
 	}
+	GameScreen::gGameReference->mRealProjectiles.push_back(mKindOfProjectile);
 }
 
 OSL_IMAGE *ProjectileInstance::LoadProjectileImage(const char &projectileType, char *filename)
@@ -94,11 +95,11 @@ void ArrowInstance::Update(u64 timePassed)
 	movement *= movement;
 	float xdif = mProjectilePosition.X - mTarget->mEnemyPosition.X;
 	float ydif = mProjectilePosition.Y - mTarget->mEnemyPosition.Y;
-	float distance = (xdif * xdif) + (ydif * ydif); //pythagoras without the sqrt
+	float distance = (xdif * xdif) + (ydif * ydif); //Pythagoras without the sqrt
 	if (distance < movement)
 	{
 		//We hit!
-		//TODO : Deal Damage here
+		DealDamage();
 		printf("Fire!\n");
 		if (mHitSound != NULL)
 			oslPlaySound(mHitSound,1);
@@ -116,4 +117,12 @@ void ArrowInstance::Update(u64 timePassed)
 void ArrowInstance::ProjectileRender()
 {
 	oslDrawImageXY(mProjectileImg, mProjectilePosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mProjectilePosition.Y);
+}
+
+void ProjectileInstance::DealDamage()
+{
+	printf("deal damage\n");
+	mProjectilePosition = mTarget->mEnemyPosition;
+	printf("mProjectilePosition X %f mProjectilePosition Y %f\n",mProjectilePosition.X,mProjectilePosition.Y);
+	mTarget->EnemyReciveDamage(mTowerDamage, mSlowAmount, mSlowLength);
 }

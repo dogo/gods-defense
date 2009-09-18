@@ -236,19 +236,14 @@ TowerInstance::TowerInstance(Tower *tower, const Coordinates2D &position)
 
 void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enemies)
 {
-	printf("TowerInstance::Update 1\n");
 	mProjectileInterval -= timePassed;
-	printf("TowerInstance::Update 2\n");
 	float mTowerSquareRange = mTower->mTowerVector[mCurrentMap].mRange * mTower->mTowerVector[mCurrentMap].mRange; //Range²
 
-	printf("TowerInstance::Update 3\n");
 	if (mTowerTarget && (mTowerTarget->EnemyIsDead() || mTowerPosition.SquareDistance(mTowerTarget->mEnemyPosition) > mTowerSquareRange || !mTowerTarget->EnemyStillOnMap()))
 	{
 		//The target its out of range or dead
 		mTowerTarget = NULL;
 	}	
-
-	printf("TowerInstance::Update 4\n");
 
 	if (!mTowerTarget) //we don't have a target, seek for an enemy.
 	{
@@ -270,15 +265,14 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 	}
 	else if (mTowerTarget)
 	{
-		mTowerAngle = mTowerPosition.AimTo(mTowerTarget->mEnemyPosition);
-
 		/*
 		* Tower can shoot when the Projectile Interval is < 0. (is a gun shot delay, like shooters games)
 		*/
 		if (mProjectileInterval <= 0)
 		{
-			printf("BANG\n");
-			mProjectileInterval = mTower->mTowerVector[mCurrentMap].mRateOfFire;		
+			printf("Shot interval BANG\n");
+			mProjectileInterval = mTower->mTowerVector[mCurrentMap].mRateOfFire;
+			printf("this %d\n",this->mTower->mProjectileType);
 			ProjectileInstance::CreateProjectile(this, mTowerTarget);
 		}
 	}

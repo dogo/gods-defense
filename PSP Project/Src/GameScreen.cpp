@@ -8,6 +8,7 @@
 
 //Statics
 bool gWin;
+GameScreen *GameScreen::gGameReference = NULL;
 
 GameScreen::GameScreen()
 {
@@ -23,6 +24,8 @@ GameScreen::GameScreen()
 
 	mActiveWaves = 0;
 	mWaveIsRunning = false;
+
+	gGameReference = this;
 
 	gWin = false;
 }
@@ -201,7 +204,7 @@ void GameScreen::update(u64 timePassed)
 			if (!mGameMap->mWaves[j]->EndOfWave())
 			{
 				mWaveIsRunning = true;
-				printf("Wave Is Running\n");
+				//printf("Wave Is Running\n");
 			}
 		}
 	}
