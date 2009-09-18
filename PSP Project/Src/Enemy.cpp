@@ -283,8 +283,9 @@ EnemyState EnemyInstance::GetEnemyState()
 {
 	if (mEnemyState == ENEMY_DIED)
 	{
-		if (mEnemy->mDeathSound != NULL)
-			oslPlaySound(mEnemy->mDeathSound, 1); //Plays the die sound on channel 1
+		/*if (mEnemy->mDeathSound != NULL)
+			oslPlaySound(mEnemy->mDeathSound, 3); //Plays the die sound on channel 1
+		*/
 		mEnemyState = ENEMY_DIED;
 		return ENEMY_DIED;
 	}
@@ -296,6 +297,7 @@ EnemyState EnemyInstance::GetEnemyState()
 	else if (mEnemyState == ENEMY_FULLY_DEAD)
 	{
 		mEnemyState = ENEMY_FULLY_DEAD;
+		return ENEMY_FULLY_DEAD;
 	}
 	return mEnemyState;
 }
@@ -337,7 +339,7 @@ mEnemyPosition.X < 0 |---------------------------| mEnemyPosition.X >= 480
 					 |						     |
 mEnemyPosition.Y < 0 |---------------------------| mEnemyPosition.Y >= 480
 	*/
-	return !(mEnemyPosition.X < 0 || mEnemyPosition.X >= MAPSIZE || mEnemyPosition.Y < 0 || mEnemyPosition.Y >= MAPSIZE);
+	return !(mEnemyPosition.X < 0 || mEnemyPosition.X >= MAPSIZE || GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y < 0 || GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y >= MAPSIZE);
 }
 
 void EnemyInstance::EnemyReciveDamage(const int &damage, const float &slowAmount, const int &slowLength)
@@ -353,10 +355,8 @@ void EnemyInstance::EnemyReciveDamage(const int &damage, const float &slowAmount
 
 	bool enemyIsAlive = (!EnemyIsDead());
 	mHealth -= damage;
-	printf("mHealth %d\n",mHealth);
 	if (enemyIsAlive && EnemyIsDead())
 	{
-		printf("ENEMY_DIED\n");
 		mEnemyState = ENEMY_DIED;
 		mWave->EnemyKilled();
 	}

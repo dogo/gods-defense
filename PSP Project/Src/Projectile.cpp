@@ -80,8 +80,9 @@ ArrowInstance::ArrowInstance(TowerInstance *shooter, EnemyInstance *target)	: Pr
 {
 	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSpeed;
 
-	if (mFireSound != NULL)
+	/*if (mFireSound != NULL)
 		oslPlaySound(mFireSound,1);
+	*/
 }
 
 ArrowInstance::~ArrowInstance()
@@ -91,7 +92,6 @@ ArrowInstance::~ArrowInstance()
 void ArrowInstance::Update(u64 timePassed)
 {
 	//Calculate angle to target, move towards it
-	printf("ArrowInstance::Update Inicio\n");
 	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //distance I'll move this tick
 	movement *= movement;
 	float xdif = mProjectilePosition.X - mTarget->mEnemyPosition.X;
@@ -101,9 +101,9 @@ void ArrowInstance::Update(u64 timePassed)
 	{
 		//We hit!
 		DealDamage();
-		printf("Fire!\n");
-		if (mHitSound != NULL)
+		/*if (mHitSound != NULL)
 			oslPlaySound(mHitSound,2);
+		*/
 		mDisappearProjectile = true;
 	}
 
@@ -113,7 +113,6 @@ void ArrowInstance::Update(u64 timePassed)
 	float changeY = mMovementSpeed * sin(mAngle) * timePassed / 1000;
 	mProjectilePosition.X += changeX;
 	mProjectilePosition.Y += changeY;
-	printf("ArrowInstance::Update Fim\n");
 }
 
 void ArrowInstance::ProjectileRender()
@@ -123,8 +122,6 @@ void ArrowInstance::ProjectileRender()
 
 void ProjectileInstance::DealDamage()
 {
-	printf("deal damage\n");
 	mProjectilePosition = mTarget->mEnemyPosition;
-	printf("mProjectilePosition X %f mProjectilePosition Y %f\n",mProjectilePosition.X,mProjectilePosition.Y);
 	mTarget->EnemyReciveDamage(mTowerDamage, mSlowAmount, mSlowLength);
 }

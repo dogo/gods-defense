@@ -239,13 +239,11 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 	mProjectileInterval -= timePassed;
 	float mTowerSquareRange = mTower->mTowerVector[mCurrentMap].mRange * mTower->mTowerVector[mCurrentMap].mRange; //Range²
 
-	printf("inside Run Towers\n");
 	if (mTowerTarget && (mTowerTarget->EnemyIsDead() || mTowerPosition.SquareDistance(mTowerTarget->mEnemyPosition) > mTowerSquareRange || !mTowerTarget->EnemyStillOnMap()))
 	{
 		//The target its out of range or dead
 		mTowerTarget = NULL;
 	}	
-	printf("inside Run Towers 2\n");
 	if (!mTowerTarget) //we don't have a target, seek for an enemy.
 	{
 		//Seek for an enemy.
@@ -258,7 +256,6 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 				((mTower->mHitsFlyer && (*enemyIteratorList)->EnemyCanFly()) || (mTower->mHitsLand && !(*enemyIteratorList)->EnemyCanFly()))
 			)
 			{
-				printf("FOUND TARGET\n");
 				mTowerTarget = (*enemyIteratorList);
 				break;
 			}
@@ -271,9 +268,7 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 		*/
 		if (mProjectileInterval <= 0)
 		{
-			printf("Shot interval BANG\n");
 			mProjectileInterval = mTower->mTowerVector[mCurrentMap].mRateOfFire;
-			printf("this %d\n",this->mTower->mProjectileType);
 			ProjectileInstance::CreateProjectile(this, mTowerTarget);
 		}
 	}

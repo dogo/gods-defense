@@ -85,9 +85,7 @@ void Wave::GetCurrentWaveEnemy(string &enemyName, int &EnemyLevel)
 {
 	enemyName = mEnemySpawns[mCurrentEnemySpawn].mEnemyDirName;
 	EnemyLevel = mEnemySpawns[mCurrentEnemySpawn].mEnemyLevel;
-	printf("EnemyLevel %d\n",EnemyLevel);
 	mCurrentEnemySpawn++;
-	printf("mCurrentEnemySpawn %d\n",mCurrentEnemySpawn);
 }
 
 bool Wave::EndOfWave()
