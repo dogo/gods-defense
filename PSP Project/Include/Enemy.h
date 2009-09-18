@@ -94,7 +94,7 @@ public:
 	u64 mAnimationTime;
 
 	EnemyState GetEnemyState();
-
+	void RenderLife();
 	const int GetGold();
 	void RenderEnemy();
 	void Update(u64 timePassed);
