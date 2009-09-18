@@ -23,7 +23,7 @@ using namespace std;
 enum EnemyState
 {
 	NOTHING_HAPPENING, //Nothing is happening with the enemy
-	ENEMY_DIED, //Just died, death animation in progress, give player gold
+	ENEMY_DIED, //Just died, give player gold
 	ENEMY_HIT_THE_END, //Enemy hit the end of the path
 	ENEMY_FULLY_DEAD //Enemy died
 };

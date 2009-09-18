@@ -119,8 +119,8 @@ GameScreen::~GameScreen()
 void GameScreen::draw()
 {
 	mGameMap->draw();
-	oslPrintf_xy(0,20,"mPlayerMoney %d", mPlayerMoney);
-	oslPrintf_xy(0,40,"mPlayerLives %d\n",mPlayerLives);
+	oslPrintf_xy(0,0,"mPlayerMoney %d", mPlayerMoney);
+	oslPrintf_xy(0,10,"mPlayerLives %d",mPlayerLives);
 	if(mGameState == GS_MAP_PLACE_TOWER)
 	{
 		for (int i=0; i<15 ; i++)
@@ -249,24 +249,22 @@ void GameScreen::update(u64 timePassed)
 		EnemyState enemyState = (*ei_iter)->GetEnemyState();
 		switch (enemyState)
 		{
-		case NOTHING_HAPPENING: //Nothing happened
-		break;
+			case NOTHING_HAPPENING: //Nothing happened
+			break;
 
-		case ENEMY_DIED: //Just died, death animation in progress, give player $$$
-			{
-			//Award player money
-			mPlayerMoney += (*ei_iter)->GetGold();
-			}
-		break;
+			case ENEMY_DIED: //Just died, give player $$$
+				//Award player money
+				mPlayerMoney += (*ei_iter)->GetGold();
+			break;
 
-		case ENEMY_HIT_THE_END: //Got to the end of the path, make the player lose a life
-			//Lose life
-			mPlayerLives--;
-		break;
+			case ENEMY_HIT_THE_END: //Got to the end of the path, make the player lose a life
+				//Lose life
+				mPlayerLives--;
+			break;
 
-		case ENEMY_FULLY_DEAD: //Dead and done
-			mDeleteEnemy = true;
-		break;
+			case ENEMY_FULLY_DEAD: //Dead and done
+				mDeleteEnemy = true;
+			break;
 		}
 	}
 

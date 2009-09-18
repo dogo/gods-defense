@@ -85,8 +85,9 @@ void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 {
 	const GameState currentGameState = mGame->GetGameState();
 	int i;
-
+#ifdef DEBUG
 	oslPrintf_xy(0,10,"currentGameState %d",currentGameState);
+#endif
 	//Scroll the map
 	if (currentGameState == GS_SCROLL_MAP || currentGameState == GS_MAP_PLACE_TOWER)
 	{

@@ -286,7 +286,7 @@ EnemyState EnemyInstance::GetEnemyState()
 		/*if (mEnemy->mDeathSound != NULL)
 			oslPlaySound(mEnemy->mDeathSound, 3); //Plays the die sound on channel 1
 		*/
-		mEnemyState = ENEMY_DIED;
+		mEnemyState = ENEMY_FULLY_DEAD;
 		return ENEMY_DIED;
 	}
 	else if (mEnemyState == ENEMY_HIT_THE_END)
@@ -317,7 +317,9 @@ void EnemyInstance::RenderEnemy()
 	mEnemy->mEnemyImg->centerX = 16; //Enemie / 2
 	mEnemy->mEnemyImg->angle = (mAngle * 180/M_PI);
 	DrawImageFrameXY(mEnemy->mEnemyImg, mEnemyPosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y, mEnemy->mAliveFrames);
+#ifdef DEBUG
 	oslPrintf_xy(0,30, "Enemy X-> %f    Enemy Y %f  mAngle %d", mEnemyPosition.X, mEnemyPosition.Y, mEnemy->mEnemyImg->angle);
+#endif
 }
 
 bool const EnemyInstance::EnemyIsDead()
