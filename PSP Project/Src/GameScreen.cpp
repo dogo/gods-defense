@@ -225,6 +225,7 @@ void GameScreen::update(u64 timePassed)
 		{
 			if ((*si_iter)->DisappearProjectile())
 			{
+				printf("erase shot\n");
 				delete (*si_iter);
 				mRealProjectiles.erase(si_iter);
 				mDeleteProjectile = true;
@@ -233,6 +234,7 @@ void GameScreen::update(u64 timePassed)
 		}
 	}
 
+	printf("Run Towers\n");
 	//Run Towers
 	list<TowerInstance*>::const_iterator ti_iter;
 	for (ti_iter = mRealTowers.begin(); ti_iter != mRealTowers.end(); ti_iter++)
@@ -242,9 +244,11 @@ void GameScreen::update(u64 timePassed)
 
 	//Run Enemies
 	mDeleteEnemy = false;
+	printf("Run Enemies\n");
 	list<EnemyInstance*>::iterator ei_iter;
 	for (ei_iter = mRealEnemies.begin(); ei_iter != mRealEnemies.end(); ei_iter++)
 	{
+		printf("pre Run Enemies update\n");
 		(*ei_iter)->Update(timePassed);
 
 		EnemyState enemyState = (*ei_iter)->GetEnemyState();
