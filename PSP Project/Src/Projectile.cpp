@@ -81,9 +81,9 @@ ArrowInstance::ArrowInstance(TowerInstance *shooter, EnemyInstance *target)	: Pr
 {
 	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSpeed;
 
-	/*if (mFireSound != NULL)
+	if (mFireSound != NULL)
 		oslPlaySound(mFireSound,1);
-	*/
+	
 }
 
 ArrowInstance::~ArrowInstance()
@@ -102,9 +102,9 @@ void ArrowInstance::Update(u64 timePassed)
 	{
 		//We hit!
 		DealDamage();
-		/*if (mHitSound != NULL)
+		if (mHitSound != NULL)
 			oslPlaySound(mHitSound,2);
-		*/
+		
 		mDisappearProjectile = true;
 	}
 
