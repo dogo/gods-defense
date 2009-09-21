@@ -87,6 +87,12 @@ public:
 	Coordinates2D(); //x=0,y=0 
 	Coordinates2D(float x, float y);
 	float const AimTo(const Coordinates2D &enemy);
+/** Calculates the distance between two coordenates
+
+\code
+http://pt.wikipedia.org/wiki/Teorema_de_Pit%C3%A1goras -> Distância entre dois pontos
+SquareDistance(const Coordinates2D &enemy);
+\endcode */
 	float const SquareDistance(const Coordinates2D &enemy);
 	
 	float X;

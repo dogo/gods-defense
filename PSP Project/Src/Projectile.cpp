@@ -59,6 +59,7 @@ ProjectileInstance::ProjectileInstance(TowerInstance *shooter, EnemyInstance *ta
 	mFireSound = shooter->mTower->mFireSound;
 	mHitSound = shooter->mTower->mHitSound;
 	mTarget = target;
+	mHitSize = target->mEnemy->mSize;
 	mHitsFlyer = shooter->mTower->mHitsFlyer;
 	mHitsLand = shooter->mTower->mHitsLand;
 	mSlowAmount = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSlowAmount;

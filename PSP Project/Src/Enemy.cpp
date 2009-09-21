@@ -347,13 +347,16 @@ mEnemyPosition.Y < 0 |---------------------------| mEnemyPosition.Y >= 480
 
 void EnemyInstance::EnemyReciveDamage(const int &damage, const float &slowAmount, const int &slowLength)
 {
-	float currentSlow = (mSlowLength / mSlowAmount);
-	float tempSlow = (slowLength / slowAmount);
-
-	if (tempSlow > currentSlow)
+	if(slowAmount > 0)
 	{
-		mSlowAmount = slowAmount;
-		mSlowLength = slowLength;
+		float currentSlow = (mSlowLength / mSlowAmount);
+		float tempSlow = (slowLength / slowAmount);
+
+		if (tempSlow > currentSlow)
+		{
+			mSlowAmount = slowAmount;
+			mSlowLength = slowLength;
+		}
 	}
 
 	bool enemyIsAlive = (!EnemyIsDead());
@@ -368,7 +371,6 @@ void EnemyInstance::EnemyReciveDamage(const int &damage, const float &slowAmount
 void EnemyInstance::RenderLife()
 {
 	int w = 32 * mHealth / mEnemy->mEnemyVector[mStat].mHealth; 
-	printf("mHealth %d\n",mHealth);
 	oslDrawFillRect(mEnemyPosition.X - 16, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y - 20, mEnemyPosition.X + 16, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y - 16, COLOR_RED); //RED
 	oslDrawFillRect(mEnemyPosition.X - 16, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y - 20, (mEnemyPosition.X -16) + w, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y - 16, COLOR_GREEN); //GREEN
 }
