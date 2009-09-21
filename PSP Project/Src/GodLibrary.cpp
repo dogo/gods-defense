@@ -96,7 +96,7 @@ float const Coordinates2D::SquareDistance(const Coordinates2D &enemy)
 {   
 	float dx = enemy.X - this->X; //dy = enemy.Y - Tower->y 	
 	float dy = enemy.Y - this->Y; //dx = enemy.x - Tower->x
-	return sqrt((dy*dy)+(dx*dx)); //Pythagoras distance is D(A,B) = sqrt( (xA-xB)² + (yA-yB)²)
+	return (dy*dy)+(dx*dx); //Pythagoras distance is D(A,B) = sqrt( (xA-xB)² + (yA-yB)²), but we use without the sqrt
 }
 
 void lowerCase(string &str)
