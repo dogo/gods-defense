@@ -81,4 +81,17 @@ private:
 	float mAngle; //Last calculated angle
 };
 
+class LightningInstance : public ProjectileInstance
+{
+public:
+	LightningInstance(TowerInstance *shooter, EnemyInstance *target);
+	virtual ~LightningInstance();
+
+	//ProjectileInstance
+	virtual void Update(u64 timePassed);
+	virtual void ProjectileRender();
+private:
+	int mAnimationTime;
+};
+
 #endif

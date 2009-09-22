@@ -19,7 +19,7 @@ void ProjectileInstance::CreateProjectile(TowerInstance *shooter, EnemyInstance 
 		mKindOfProjectile = new IceInstance(shooter, target);
 		break;
 	case PT_Lightning:
-		//TODO : kind of Projectile Instance
+		mKindOfProjectile = new LightningInstance(shooter, target);
 		break;
 	case PT_Fire:
 		//TODO : kind of Projectile Instance
@@ -177,4 +177,33 @@ void IceInstance::Update(u64 timePassed)
 void IceInstance::ProjectileRender()
 {
 	oslDrawImageXY(mProjectileImg, mProjectilePosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mProjectilePosition.Y);
+}
+
+//LightningInstance
+LightningInstance::LightningInstance(TowerInstance *shooter, EnemyInstance *target)	: ProjectileInstance(shooter, target)
+{
+	mAnimationTime = 0;
+	DealDamage();
+	if (mFireSound != NULL)
+		oslPlaySound(mFireSound,6);
+}
+
+LightningInstance::~LightningInstance()
+{
+}
+
+void LightningInstance::Update(u64 timePassed)
+{
+	mAnimationTime += timePassed;
+	if(mAnimationTime > 400)
+	{
+		mDisappearProjectile = true;
+	}
+}
+
+void LightningInstance::ProjectileRender()
+{
+	mProjectileImg->centerX = mProjectileImg->sizeX/2;
+	mProjectileImg->centerY = mProjectileImg->sizeY/2;
+	oslDrawImageXY(mProjectileImg, mTarget->mEnemyPosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mTarget->mEnemyPosition.Y);
 }

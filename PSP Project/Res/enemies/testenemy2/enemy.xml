@@ -4,10 +4,10 @@
 	<Description>Simple Ground Enemy</Description>
 	<Size>8</Size>
 	<Stats>
-		<Stat Health="10" GoldValue="1" PointValue="30" Speed="50" CanFly="False" HasImunity="False"/>
+		<Stat Health="10" GoldValue="10" PointValue="30" Speed="20" CanFly="False" HasImunity="False"/>
 	</Stats>
 	
-	<EnemyImg File="testenemy.png" Frames="4" Width="2" Height="2" />
+	<EnemyImg File="testenemy2.png" Frames="4" Width="2" Height="2" />
 	<EnemyDeath File="DefaultEnemyDeath.png" Frames="4" Width="2" Height="2" />
 	
 	<DeathSound File="death.wav"/>

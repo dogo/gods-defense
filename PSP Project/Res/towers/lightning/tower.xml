@@ -1,19 +1,17 @@
 <!DOCTYPE Tower SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/tower.dtd">
 <Tower>
 	<Name>Lightning Tower</Name>
-	<Description>Flyers</Description>
+	<Description>High power, Long reload.</Description>
 	
-	<TowerLength>7</TowerLength>
+	<Capability HitsLand="True" HitsFlyers="True" />
 	
-	<Capability HitsLand="False" HitsFlyers="True" />
-	
-	<Projectile Type="Lightning" Sprite="ST_Ice.png" />
+	<Projectile Type="Lightning" Sprite="ST_Lightning.png" />
 	<TowersLevels>
-		<TowersLevel Cost="10" SellAmount="7"  Damage="4"  ROF="700" Range="100" Splash="0" Speed="250"/>
-		<TowersLevel Cost="10" SellAmount="16" Damage="5"  ROF="700" Range="110" Splash="0" Speed="250"/>
-		<TowersLevel Cost="20" SellAmount="32" Damage="10" ROF="700" Range="110" Splash="0" Speed="275"/>
-		<TowersLevel Cost="30" SellAmount="56" Damage="18" ROF="600" Range="120" Splash="0" Speed="300"/>
-		<TowersLevel Cost="40" SellAmount="88" Damage="32" ROF="600" Range="120" Splash="0" Speed="300"/>
+		<TowersLevel Cost="40" SellAmount="32"  Damage="70"  ROF="3000" Range="160" Splash="0" Speed="0"/>
+		<TowersLevel Cost="40" SellAmount="64"  Damage="120" ROF="3000" Range="160" Splash="0" Speed="0"/>
+		<TowersLevel Cost="50" SellAmount="104" Damage="175" ROF="3000" Range="180" Splash="0" Speed="0"/>
+		<TowersLevel Cost="60" SellAmount="152" Damage="235" ROF="3000" Range="180" Splash="0" Speed="0"/>
+		<TowersLevel Cost="70" SellAmount="208" Damage="300" ROF="3000" Range="220" Splash="0" Speed="0"/>
 	</TowersLevels>
 	
 	<TowerImg File="tower.png" Width="2" Height="2" />

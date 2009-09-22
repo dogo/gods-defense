@@ -4,7 +4,7 @@
 	<Description>Simple Ground Enemy</Description>
 	<Size>8</Size>
 	<Stats>
-		<Stat Health="10" GoldValue="1" PointValue="30" Speed="50" CanFly="False" HasImunity="False"/>
+		<Stat Health="100" GoldValue="10" PointValue="30" Speed="55" CanFly="False" HasImunity="False"/>
 	</Stats>
 	
 	<EnemyImg File="testenemy.png" Frames="4" Width="2" Height="2" />
