@@ -16,7 +16,7 @@ void ProjectileInstance::CreateProjectile(TowerInstance *shooter, EnemyInstance 
 		mKindOfProjectile = new ArrowInstance(shooter, target);
 		break;
 	case PT_Ice:
-		//TODO : kind of Projectile Instance
+		mKindOfProjectile = new IceInstance(shooter, target);
 		break;
 	case PT_Lightning:
 		//TODO : kind of Projectile Instance
@@ -65,6 +65,9 @@ ProjectileInstance::ProjectileInstance(TowerInstance *shooter, EnemyInstance *ta
 	mSlowAmount = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSlowAmount;
 	mSlowLength = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSlowLength;
 	mTowerDamage = shooter->mTower->mTowerVector[shooter->mCurrentMap].mDamage;
+	mSplashRangeSqrd = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSplashRange;
+	mSplashRangeSqrd *= mSplashRangeSqrd;
+
 }
 
 ProjectileInstance::~ProjectileInstance()
@@ -74,6 +77,16 @@ ProjectileInstance::~ProjectileInstance()
 bool ProjectileInstance::DisappearProjectile()
 {
 	return mDisappearProjectile;
+}
+
+void ProjectileInstance::DealDamage()
+{
+	mProjectilePosition = mTarget->mEnemyPosition;
+	mTarget->EnemyReciveDamage(mTowerDamage, mSlowAmount, mSlowLength);
+
+	//If we aren't splash, just hit the target.
+	if (mSplashRangeSqrd == 0)
+		return;
 }
 
 //ArrowInstance
@@ -121,8 +134,47 @@ void ArrowInstance::ProjectileRender()
 	oslDrawImageXY(mProjectileImg, mProjectilePosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mProjectilePosition.Y);
 }
 
-void ProjectileInstance::DealDamage()
+//IceInstance
+IceInstance::IceInstance(TowerInstance *shooter, EnemyInstance *target)	: ProjectileInstance(shooter, target)
 {
-	mProjectilePosition = mTarget->mEnemyPosition;
-	mTarget->EnemyReciveDamage(mTowerDamage, mSlowAmount, mSlowLength);
+	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSpeed;
+
+	if (mFireSound != NULL)
+		oslPlaySound(mFireSound,4);
+	
+}
+
+IceInstance::~IceInstance()
+{
+}
+
+void IceInstance::Update(u64 timePassed)
+{
+	//Calculate angle to target, move towards it
+	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //distance I'll move this tick
+	movement *= movement;
+	float xdif = mProjectilePosition.X - mTarget->mEnemyPosition.X;
+	float ydif = mProjectilePosition.Y - mTarget->mEnemyPosition.Y;
+	float distance = (xdif * xdif) + (ydif * ydif); //Pythagoras without the sqrt
+	if (distance < movement)
+	{
+		//We hit!
+		DealDamage();
+		if (mHitSound != NULL)
+			oslPlaySound(mHitSound,5);
+		
+		mDisappearProjectile = true;
+	}
+
+	//Calculate new position
+	mAngle = mProjectilePosition.AimTo(mTarget->mEnemyPosition);
+	float changeX = mMovementSpeed * cos(mAngle) * timePassed / 1000;
+	float changeY = mMovementSpeed * sin(mAngle) * timePassed / 1000;
+	mProjectilePosition.X += changeX;
+	mProjectilePosition.Y += changeY;
+}
+
+void IceInstance::ProjectileRender()
+{
+	oslDrawImageXY(mProjectileImg, mProjectilePosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mProjectilePosition.Y);
 }

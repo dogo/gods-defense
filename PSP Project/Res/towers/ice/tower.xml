@@ -1,19 +1,19 @@
 <!DOCTYPE Tower SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/tower.dtd">
 <Tower>
 	<Name>Ice Tower</Name>
-	<Description>Ground + flyers</Description>
+	<Description>Slows</Description>
 	
-	<TowerLength>7</TowerLength>
+	<TowerLength>4</TowerLength>
 	
 	<Capability HitsLand="True" HitsFlyers="True" />
 	
 	<Projectile Type="Ice" Sprite="ST_Ice.png" />
 	<TowersLevels>
-		<TowersLevel Cost="10" SellAmount="7"  Damage="4"  ROF="700" Range="100" Splash="0" Speed="250"/>
-		<TowersLevel Cost="10" SellAmount="16" Damage="5"  ROF="700" Range="110" Splash="0" Speed="250"/>
-		<TowersLevel Cost="20" SellAmount="32" Damage="10" ROF="700" Range="110" Splash="0" Speed="275"/>
-		<TowersLevel Cost="30" SellAmount="56" Damage="18" ROF="600" Range="120" Splash="0" Speed="300"/>
-		<TowersLevel Cost="40" SellAmount="88" Damage="32" ROF="600" Range="120" Splash="0" Speed="300"/>
+		<TowersLevel Cost="40" SellAmount="32"  Damage="15" ROF="1200" Range="100" Splash="5"  Speed="200" SlowAmount="0.5" SlowLength="1000"/>
+		<TowersLevel Cost="40" SellAmount="64"  Damage="25" ROF="1200" Range="110" Splash="5"  Speed="200" SlowAmount="0.5" SlowLength="1000"/>
+		<TowersLevel Cost="50" SellAmount="104" Damage="37" ROF="1200" Range="120" Splash="10" Speed="200" SlowAmount="0.5" SlowLength="1000"/>
+		<TowersLevel Cost="60" SellAmount="152" Damage="50" ROF="1200" Range="120" Splash="10" Speed="200" SlowAmount="0.5" SlowLength="1000"/>
+		<TowersLevel Cost="70" SellAmount="208" Damage="60" ROF="1200" Range="140" Splash="25" Speed="200" SlowAmount="0.5" SlowLength="1000"/>
 	</TowersLevels>
 	
 	<TowerImg File="tower.png" Width="2" Height="2" />

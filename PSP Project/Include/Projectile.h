@@ -42,12 +42,13 @@ public:
 	EnemyInstance *mTarget;
 	bool mDisappearProjectile;
 
-private:
+protected:
 	int mTowerDamage;
 	float mSlowAmount;
 	int mSlowLength;
 	bool mHitsFlyer;
 	bool mHitsLand;
+	int mSplashRangeSqrd;
 
 };
 
@@ -58,7 +59,21 @@ public:
 	ArrowInstance(TowerInstance *shooter, EnemyInstance *target);
 	virtual ~ArrowInstance();
 
-	//ShotInstance
+	//ProjectileInstance
+	virtual void Update(u64 timePassed);
+	virtual void ProjectileRender();
+private:
+	int mMovementSpeed;
+	float mAngle; //Last calculated angle
+};
+
+class IceInstance : public ProjectileInstance
+{
+public:
+	IceInstance(TowerInstance *shooter, EnemyInstance *target);
+	virtual ~IceInstance();
+
+	//ProjectileInstance
 	virtual void Update(u64 timePassed);
 	virtual void ProjectileRender();
 private:

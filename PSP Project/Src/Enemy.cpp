@@ -266,7 +266,7 @@ void EnemyInstance::Update(u64 timePassed)
 
 		return;
 	}
-		//Calculate new position
+	//Calculate new position
 	if (mSlowLength > 0)
 	{
 		mEnemyPosition.X += (changeX * timePassed * mSlowAmount)/1000;
