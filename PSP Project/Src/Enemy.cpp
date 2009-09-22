@@ -181,7 +181,7 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 	mNextCheckpoint = mPath->mCheckpoint[1].mCoords; // mIndex == 1, nextCheckpoint
 	mAngle = mEnemyPosition.AimTo(mNextCheckpoint);
 	mHealth = mEnemy->mEnemyVector[mStat].mHealth;
-	mSlowAmount = 0.0;
+	mSlowAmount = 0;
 	mSlowLength = 0;
 	mEnemyState = NOTHING_HAPPENING;
 	mCurrentCheckpoint = 1;
@@ -349,7 +349,7 @@ void EnemyInstance::EnemyReciveDamage(const int &damage, const float &slowAmount
 {
 	if(slowAmount > 0)
 	{
-		float currentSlow = (mSlowLength / mSlowAmount);
+		float currentSlow = (mSlowLength / slowAmount);
 		float tempSlow = (slowLength / slowAmount);
 
 		if (tempSlow > currentSlow)
