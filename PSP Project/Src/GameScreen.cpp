@@ -112,6 +112,7 @@ void GameScreen::LoadFirstPartForMap()
 GameScreen::~GameScreen()
 {
 	CleanTowers();
+	CleanEnemies();
 	delete(mGameMap);
 	delete(mGameGUI);
 }
@@ -276,6 +277,7 @@ void GameScreen::update(u64 timePassed)
 		{
 			if ((*ei_iter)->GetEnemyState() == ENEMY_FULLY_DEAD)
 			{
+				delete (*ei_iter);
 				mRealEnemies.erase(ei_iter);
 				mDeleteEnemy = true;
 				break;
@@ -374,6 +376,14 @@ void GameScreen::CleanEnemies()
 		delete e_iter->second;
 	}
 	mEnemies.clear();
+
+	list<EnemyInstance*>::iterator realEnemies_iter;
+	for(realEnemies_iter = mRealEnemies.begin(); realEnemies_iter != mRealEnemies.end(); realEnemies_iter++)
+	{
+		delete (*realEnemies_iter);
+		mRealEnemies.erase(realEnemies_iter);
+	}
+	mRealEnemies.clear();
 }
 
 bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)

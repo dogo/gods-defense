@@ -22,7 +22,7 @@ void ProjectileInstance::CreateProjectile(TowerInstance *shooter, EnemyInstance 
 		mKindOfProjectile = new LightningInstance(shooter, target);
 		break;
 	case PT_Fire:
-		//TODO : kind of Projectile Instance
+		mKindOfProjectile = new FireInstance(shooter, target);
 		break;
 	default:
 		return;
@@ -93,6 +93,7 @@ void ProjectileInstance::DealDamage()
 ArrowInstance::ArrowInstance(TowerInstance *shooter, EnemyInstance *target)	: ProjectileInstance(shooter, target)
 {
 	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSpeed;
+	mAngle = mProjectilePosition.AimTo(mTarget->mEnemyPosition);
 
 	if (mFireSound != NULL)
 		oslPlaySound(mFireSound,1);
@@ -206,4 +207,49 @@ void LightningInstance::ProjectileRender()
 	mProjectileImg->centerX = mProjectileImg->sizeX/2;
 	mProjectileImg->centerY = mProjectileImg->sizeY/2;
 	oslDrawImageXY(mProjectileImg, mTarget->mEnemyPosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mTarget->mEnemyPosition.Y);
+}
+
+//FireInstance
+FireInstance::FireInstance(TowerInstance *shooter, EnemyInstance *target)	: ProjectileInstance(shooter, target)
+{
+	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSpeed;
+	mAngle = mProjectilePosition.AimTo(mTarget->mEnemyPosition);
+
+	if (mFireSound != NULL)
+		oslPlaySound(mFireSound,7);
+}
+
+FireInstance::~FireInstance()
+{
+}
+
+void FireInstance::Update(u64 timePassed)
+{
+	//Calculate angle to target, move towards it
+	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //distance I'll move this tick
+	movement *= movement;
+	float xdif = mProjectilePosition.X - mTarget->mEnemyPosition.X;
+	float ydif = mProjectilePosition.Y - mTarget->mEnemyPosition.Y;
+	float distance = (xdif * xdif) + (ydif * ydif); //Pythagoras without the sqrt
+	if (distance < movement)
+	{
+		//We hit!
+		DealDamage();
+		if (mHitSound != NULL)
+			oslPlaySound(mHitSound,0);
+		
+		mDisappearProjectile = true;
+	}
+
+	//Calculate new position
+	mAngle = mProjectilePosition.AimTo(mTarget->mEnemyPosition);
+	float changeX = mMovementSpeed * cos(mAngle) * timePassed / 1000;
+	float changeY = mMovementSpeed * sin(mAngle) * timePassed / 1000;
+	mProjectilePosition.X += changeX;
+	mProjectilePosition.Y += changeY;
+}
+
+void FireInstance::ProjectileRender()
+{
+	oslDrawImageXY(mProjectileImg, mProjectilePosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mProjectilePosition.Y);
 }

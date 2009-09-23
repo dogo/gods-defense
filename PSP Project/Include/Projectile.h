@@ -94,4 +94,18 @@ private:
 	int mAnimationTime;
 };
 
+class FireInstance : public ProjectileInstance
+{
+public:
+	FireInstance(TowerInstance *shooter, EnemyInstance *target);
+	virtual ~FireInstance();
+
+	//ProjectileInstance
+	virtual void Update(u64 timePassed);
+	virtual void ProjectileRender();
+private:
+	float mAngle; //Last calculated angle
+	int mMovementSpeed;
+};
+
 #endif
