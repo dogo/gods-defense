@@ -132,6 +132,7 @@ void ArrowInstance::Update(u64 timePassed)
 
 void ArrowInstance::ProjectileRender()
 {
+	mProjectileImg->angle = (mAngle * 180/M_PI);
 	oslDrawImageXY(mProjectileImg, mProjectilePosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mProjectilePosition.Y);
 }
 
@@ -177,6 +178,7 @@ void IceInstance::Update(u64 timePassed)
 
 void IceInstance::ProjectileRender()
 {
+	mProjectileImg->angle = (mAngle * 180/M_PI);
 	oslDrawImageXY(mProjectileImg, mProjectilePosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mProjectilePosition.Y);
 }
 
@@ -251,5 +253,6 @@ void FireInstance::Update(u64 timePassed)
 
 void FireInstance::ProjectileRender()
 {
+	mProjectileImg->angle = (mAngle * 180/M_PI);
 	oslDrawImageXY(mProjectileImg, mProjectilePosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mProjectilePosition.Y);
 }

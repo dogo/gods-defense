@@ -7,7 +7,7 @@
 	
 	<Capability HitsLand="True" HitsFlyers="True" />
 	
-	<Projectile Type="Fire" Sprite="ST_Ice.png" />
+	<Projectile Type="Fire" Sprite="ST_Fire.png" />
 	<TowersLevels>
 		<TowersLevel Cost="10" SellAmount="7"  Damage="4"  ROF="700" Range="100" Splash="0" Speed="250"/>
 		<TowersLevel Cost="10" SellAmount="16" Damage="5"  ROF="700" Range="110" Splash="0" Speed="250"/>
