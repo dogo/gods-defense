@@ -111,6 +111,23 @@ void GameScreen::LoadFirstPartForMap()
 
 GameScreen::~GameScreen()
 {
+	//Clear all instance lists
+	while (!mRealEnemies.empty())
+	{
+		delete (mRealEnemies.front());
+		mRealEnemies.pop_front();
+	}
+	while (!mRealProjectiles.empty())
+	{
+		delete (mRealProjectiles.front());
+		mRealProjectiles.pop_front();
+	}
+	while (!mRealTowers.empty())
+	{
+		delete (mRealTowers.front());
+		mRealTowers.pop_front();
+	}
+
 	CleanTowers();
 	CleanEnemies();
 	delete(mGameMap);
@@ -376,14 +393,6 @@ void GameScreen::CleanEnemies()
 		delete e_iter->second;
 	}
 	mEnemies.clear();
-
-	list<EnemyInstance*>::iterator realEnemies_iter;
-	for(realEnemies_iter = mRealEnemies.begin(); realEnemies_iter != mRealEnemies.end(); realEnemies_iter++)
-	{
-		delete (*realEnemies_iter);
-		mRealEnemies.erase(realEnemies_iter);
-	}
-	mRealEnemies.clear();
 }
 
 bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)
