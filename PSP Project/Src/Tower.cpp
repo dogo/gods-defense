@@ -261,7 +261,7 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 			}
 		}
 	}
-	else if (mTowerTarget)
+	if (mTowerTarget)
 	{
 		/*
 		* Tower can shoot when the Projectile Interval is < 0. (is a gun shot delay, like shooters games)
