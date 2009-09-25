@@ -35,6 +35,7 @@ public:
 	void setTowerReference(Tower *tower);
 	Tower *getTowerReference();
 	void RenderPlacingTower();
+	void updateHud();
 
 	Tower *gTowerReference;
 	GameScreen *mGame;
@@ -47,6 +48,7 @@ private:
 	OSL_IMAGE *mCursor;
 	OSL_IMAGE *mSidebar;
 	OSL_IMAGE *mSelectorSidebar;
+	OSL_IMAGE *mHud;
 	static GameGUI *sGameGUIReference;
 	Tower *mPuttingTower;
 	bool mShowSidebar;

@@ -352,6 +352,11 @@ int const GameScreen::GetPlayerMoney()
 	return mPlayerMoney;
 }
 
+int const GameScreen::GetPlayerLives()
+{
+	return mPlayerLives;
+}
+
 Tower *GameScreen::GetTower(const string &towerName) const
 {
 	map<string, Tower*>::const_iterator iter = mTowers.find(towerName);

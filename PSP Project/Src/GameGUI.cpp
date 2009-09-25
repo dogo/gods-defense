@@ -31,6 +31,8 @@ GameGUI::~GameGUI()
 		oslDeleteImage(mSidebar);
 	if (mSelectorSidebar != NULL)
 		oslDeleteImage(mSelectorSidebar);
+	if (mHud != NULL)
+		oslDeleteImage(mHud);
 	
 	sGameGUIReference = NULL;
 }
@@ -44,10 +46,13 @@ void GameGUI::LoadStuffs()
 		oslDeleteImage(mSidebar);
 	if (mSelectorSidebar != NULL)
 		oslDeleteImage(mSelectorSidebar);
+	if (mHud != NULL)
+		oslDeleteImage(mHud);
 	
 	mCursor = oslLoadImageFilePNG(Resource::IMG_CURSOR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	mSidebar = oslLoadImageFilePNG(Resource::IMG_SIDEBAR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	mSelectorSidebar = oslLoadImageFilePNG(Resource::IMG_SELECTOR_SIDEBAR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	mHud = oslLoadImageFilePNG(Resource::IMG_HUD, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 	//Initialize variables
 	mCursor->x = 480/2;	//Place cursor at the center of the screen
@@ -76,6 +81,7 @@ GameGUI::GameGUI(GameScreen *gameLogic)
 	mPuttingTower = NULL; //none tower is building
 	mCursor = NULL;
 	mSidebar = NULL;
+	mHud = NULL;
 	mShowSidebar = false;
 	mSelectorSidebar = NULL;
 	mSelectedItemY = 0;
@@ -88,6 +94,8 @@ void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 #ifdef DEBUG
 	oslPrintf_xy(0,10,"currentGameState %d",currentGameState);
 #endif
+
+	updateHud();
 	//Scroll the map
 	if (currentGameState == GS_SCROLL_MAP || currentGameState == GS_MAP_PLACE_TOWER)
 	{
@@ -209,6 +217,7 @@ void GameGUI::draw()
 		oslDrawImageXY(mSelectorSidebar, (480-40), 29 + (mSelectedItemY * 61)); //(PSP Screen - sidebar - 8 to align, Side bar spacing + (Selected Item * Image->Y));
 	}
 	oslDrawImage(mCursor);
+	oslDrawImageXY(mHud, 0, 0);
 }
 void GameGUI::PuttingTower(Tower *tower)
 {
@@ -237,6 +246,22 @@ void GameGUI::SelectedTowerItem()
 		setTowerReference(mTowerItems[mSelectedItemY]->mTower);
 		mTowerItems[mSelectedItemY]->Selected();
 	}
+}
+
+//Head-up display
+void GameGUI::updateHud()
+{
+	//Update gold
+	char goldBuffer[256];
+	sprintf(goldBuffer, "%i", mGame->GetPlayerMoney());
+	oslIntraFontSetStyle(gFont, 0.75f,RGBA(0,0,0,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+	oslDrawStringLimited(15, 5, 80, goldBuffer);
+
+	//Update Lives
+	char liveBuffer[256];
+	sprintf(liveBuffer, "%i", mGame->GetPlayerLives());
+	oslIntraFontSetStyle(gFont, 0.75f,RGBA(0,0,0,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+	oslDrawStringLimited(95, 5, 30, liveBuffer);
 }
 
 void SidebarItem::Selected()

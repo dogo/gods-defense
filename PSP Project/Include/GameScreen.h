@@ -60,6 +60,7 @@ public:
 	string *GetMenuTowers() const;
 	Tower *GetTower(const string &towerName) const;
 	int const GetPlayerMoney();
+	int const GetPlayerLives();
 	bool TryBuildTower(Tower *tower, Coordinates2D position);
 	Map *GetGameMap();
 	void TryRunNextWave();

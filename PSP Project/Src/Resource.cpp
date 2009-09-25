@@ -14,6 +14,7 @@ char Resource::IMG_BACK[] = "/Res/circle.png";
 char Resource::IMG_CROSS[] = "/Res/x.png";
 char Resource::IMG_SIDEBAR[] = "/Res/sidebar.png";
 char Resource::IMG_SELECTOR_SIDEBAR[] = "/Res/selector.png";
+char Resource::IMG_HUD[] = "/Res/hud.png";
 
 char const Resource::STR_BACK_SK[] = "Back";
 char const Resource::STR_MULTIPLAYER_CAPTION[] = "Multiplayer";
