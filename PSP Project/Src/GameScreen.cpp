@@ -137,8 +137,10 @@ GameScreen::~GameScreen()
 void GameScreen::draw()
 {
 	mGameMap->draw();
+#ifdef DEBUG
 	oslPrintf_xy(0,0,"mPlayerMoney %d", mPlayerMoney);
-	oslPrintf_xy(0,10,"mPlayerLives %d",mPlayerLives);
+	oslPrintf_xy(0,10,"mPlayerLives %d", mPlayerLives);
+#endif
 	if(mGameState == GS_MAP_PLACE_TOWER)
 	{
 		for (int i=0; i<15 ; i++)
