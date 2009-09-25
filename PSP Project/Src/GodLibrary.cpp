@@ -104,3 +104,21 @@ void lowerCase(string &str)
 	for (unsigned int i = 0; i < str.length(); i++)
 		str[i] = tolower(str[i]);
 }
+
+//ReferenceCounted
+ReferenceCounted::ReferenceCounted()
+{
+	mReferenceCount = 0;
+}
+
+void ReferenceCounted::AddReference()
+{
+	mReferenceCount++;
+}
+
+void ReferenceCounted::RemoveReference()
+{
+	mReferenceCount--;
+	if (mReferenceCount == 0)
+		delete this;
+}

@@ -101,4 +101,15 @@ SquareDistance(const Coordinates2D &enemy);
 
 void lowerCase(string &str); //http://www.cplusplus.com/forum/beginner/613/
 
+class ReferenceCounted
+{
+public:
+	ReferenceCounted();
+	
+	void AddReference();
+	void RemoveReference();
+private:
+	int mReferenceCount;
+};
+
 #endif

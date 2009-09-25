@@ -68,10 +68,12 @@ ProjectileInstance::ProjectileInstance(TowerInstance *shooter, EnemyInstance *ta
 	mSplashRangeSqrd = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSplashRange;
 	mSplashRangeSqrd *= mSplashRangeSqrd;
 
+	mTarget->AddReference();
 }
 
 ProjectileInstance::~ProjectileInstance()
 {
+	mTarget->RemoveReference();
 }
 
 bool ProjectileInstance::DisappearProjectile()

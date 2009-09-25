@@ -114,7 +114,7 @@ GameScreen::~GameScreen()
 	//Clear all instance lists
 	while (!mRealEnemies.empty())
 	{
-		delete (mRealEnemies.front());
+		mRealEnemies.front()->RemoveReference();
 		mRealEnemies.pop_front();
 	}
 	while (!mRealProjectiles.empty())
@@ -134,6 +134,19 @@ GameScreen::~GameScreen()
 	delete(mGameGUI);
 }
 
+void GameScreen::drawGrid()
+{
+	for (int i=0; i<15 ; i++)
+		for (int j=0; j<15; j++)
+		{
+			if(mGameMap->mCollisionMap[i][j])
+			{
+				oslDrawFillRect(i*32,j*32+mGameMap->mScrollAmount,i*32+31,j*32+31+mGameMap->mScrollAmount,ALPHA_COLOR_BLACK);
+				oslDrawRect(i*32,j*32+mGameMap->mScrollAmount,i*32+32,j*32+32+mGameMap->mScrollAmount,COLOR_WHITE);
+			}
+		}
+}
+
 void GameScreen::draw()
 {
 	mGameMap->draw();
@@ -143,15 +156,7 @@ void GameScreen::draw()
 #endif
 	if(mGameState == GS_MAP_PLACE_TOWER)
 	{
-		for (int i=0; i<15 ; i++)
-			for (int j=0; j<15; j++)
-			{
-				if(mGameMap->mCollisionMap[i][j])
-				{
-					oslDrawFillRect(i*32,j*32+mGameMap->mScrollAmount,i*32+31,j*32+31+mGameMap->mScrollAmount,ALPHA_COLOR_BLACK);
-					oslDrawRect(i*32,j*32+mGameMap->mScrollAmount,i*32+32,j*32+32+mGameMap->mScrollAmount,COLOR_WHITE);
-				}
-			}
+		drawGrid();
 	}
 
 	//Draw the enemies
@@ -206,6 +211,7 @@ void GameScreen::update(u64 timePassed)
 				int newEnemyLevel = 0;
 				mGameMap->mWaves[i]->GetCurrentWaveEnemy(newEnemy, newEnemyLevel);
 				EnemyInstance *ei = new EnemyInstance(mGameMap->mWaves[i], mEnemies[newEnemy], mGameMap->mWaves[i]->mPath, newEnemyLevel);
+				ei->AddReference();
 				mRealEnemies.push_back(ei);
 			}
 		}
@@ -296,7 +302,7 @@ void GameScreen::update(u64 timePassed)
 		{
 			if ((*ei_iter)->GetEnemyState() == ENEMY_FULLY_DEAD)
 			{
-				delete (*ei_iter);
+				(*ei_iter)->RemoveReference();
 				mRealEnemies.erase(ei_iter);
 				mDeleteEnemy = true;
 				break;

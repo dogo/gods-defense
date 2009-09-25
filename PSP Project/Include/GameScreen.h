@@ -39,6 +39,7 @@ private:
 	void CleanTowers();
 	void CleanEnemies();
 	void RunNextWave(const bool &forceRunNow);
+	void drawGrid();
 
 	OSL_IMAGE *mMap;
 	GameState mGameState;

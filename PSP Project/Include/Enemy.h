@@ -75,7 +75,7 @@ public:
 	vector<EnemyInfo> mEnemyVector;
 };
 
-class EnemyInstance
+class EnemyInstance  : public ReferenceCounted
 {
 public:
 	EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const unsigned int &level);
