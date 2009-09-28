@@ -98,7 +98,7 @@ ArrowInstance::ArrowInstance(TowerInstance *shooter, EnemyInstance *target)	: Pr
 	mAngle = mProjectilePosition.AimTo(mTarget->mEnemyPosition);
 
 	if (mFireSound != NULL)
-		oslPlaySound(mFireSound,1);
+		oslPlaySound(mFireSound, CHANNEL_1);
 	
 }
 
@@ -119,7 +119,7 @@ void ArrowInstance::Update(u64 timePassed)
 		//We hit!
 		DealDamage();
 		if (mHitSound != NULL)
-			oslPlaySound(mHitSound,2);
+			oslPlaySound(mHitSound, CHANNEL_2);
 		
 		mDisappearProjectile = true;
 	}
@@ -144,7 +144,7 @@ IceInstance::IceInstance(TowerInstance *shooter, EnemyInstance *target)	: Projec
 	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSpeed;
 
 	if (mFireSound != NULL)
-		oslPlaySound(mFireSound,4);
+		oslPlaySound(mFireSound, CHANNEL_3);
 	
 }
 
@@ -165,7 +165,7 @@ void IceInstance::Update(u64 timePassed)
 		//We hit!
 		DealDamage();
 		if (mHitSound != NULL)
-			oslPlaySound(mHitSound,5);
+			oslPlaySound(mHitSound, CHANNEL_4);
 		
 		mDisappearProjectile = true;
 	}
@@ -190,7 +190,7 @@ LightningInstance::LightningInstance(TowerInstance *shooter, EnemyInstance *targ
 	mAnimationTime = 0;
 	DealDamage();
 	if (mHitSound != NULL)
-		oslPlaySound(mHitSound,6);
+		oslPlaySound(mHitSound, CHANNEL_5);
 }
 
 LightningInstance::~LightningInstance()
@@ -220,7 +220,7 @@ FireInstance::FireInstance(TowerInstance *shooter, EnemyInstance *target)	: Proj
 	mAngle = mProjectilePosition.AimTo(mTarget->mEnemyPosition);
 
 	if (mFireSound != NULL)
-		oslPlaySound(mFireSound,7);
+		oslPlaySound(mFireSound, CHANNEL_6);
 }
 
 FireInstance::~FireInstance()
@@ -240,7 +240,7 @@ void FireInstance::Update(u64 timePassed)
 		//We hit!
 		DealDamage();
 		if (mHitSound != NULL)
-			oslPlaySound(mHitSound,0);
+			oslPlaySound(mHitSound, CHANNEL_7);
 		
 		mDisappearProjectile = true;
 	}

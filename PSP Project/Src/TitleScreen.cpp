@@ -35,6 +35,6 @@ void TitleScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 	if(osl_keys->pressed.start)
 	{
 		mNextScreen = ScreenManager::SCREEN_MAIN_MENU;
-		oslPlaySound(menuTheme, 1); //Plays the sound in the menu
+		oslPlaySound(menuTheme, CHANNEL_0); //Plays the sound in the menu
 	}
 }

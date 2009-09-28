@@ -25,4 +25,17 @@ extern int mNextScreen;
 extern string gChoosedMap;
 extern bool gWin;
 
+/*
+	Sound Channels
+*/
+
+#define CHANNEL_0 0
+#define CHANNEL_1 1
+#define CHANNEL_2 2
+#define CHANNEL_3 3
+#define CHANNEL_4 4
+#define CHANNEL_5 5
+#define CHANNEL_6 6
+#define CHANNEL_7 7
+
 #endif

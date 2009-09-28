@@ -284,7 +284,7 @@ EnemyState EnemyInstance::GetEnemyState()
 	if (mEnemyState == ENEMY_DIED)
 	{
 		if (mEnemy->mDeathSound != NULL)
-			oslPlaySound(mEnemy->mDeathSound, 3); //Plays the die sound on channel 3
+			oslPlaySound(mEnemy->mDeathSound, CHANNEL_0); //Plays the die sound on channel 0
 		
 		mEnemyState = ENEMY_FULLY_DEAD;
 		return ENEMY_DIED;

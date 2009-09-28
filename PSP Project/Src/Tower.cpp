@@ -279,7 +279,11 @@ void TowerInstance::RenderTower()
 	oslDrawImageXY(mTower->mTowerImg, mTowerPosition.X + (mTower->mTowerImg->sizeX/2), (mTower->mTowerImg->sizeY/2) + mTowerPosition.Y + GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount);
 }
 
-void TowerInstance::RenderRangeCircle(const Coordinates2D &position, const int &TowerInfo, const OSL_COLOR color)
+void TowerInstance::RenderRangeCircle()
 {
-	GodLibrary::drawCircle(position.X, position.Y, mCurrentMap, color);
+	Coordinates2D buildingPosition = Coordinates2D::Coordinates2D(mTowerPosition.X, mTowerPosition.Y);
+	//Snap :D \o/ workss
+	buildingPosition.X = (((int)(buildingPosition.X) / 32) * 32) + 16; // 32 == Width
+	buildingPosition.Y = (((int)(buildingPosition.Y) / 32) * 32) + 16; // 32 == Heigth
+	mTower->RenderRangeCircle(buildingPosition, 0, COLOR_RED);
 }

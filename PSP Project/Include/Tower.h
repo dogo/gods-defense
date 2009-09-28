@@ -105,7 +105,7 @@ public:
 	void Update(unsigned timePassed, const list<EnemyInstance*> &enemies);
 
 	void RenderTower();
-	void RenderRangeCircle(const Coordinates2D &position, const int &TowerInfo, const OSL_COLOR color);
+	void RenderRangeCircle();
 
 	unsigned int mCurrentMap;
 private:

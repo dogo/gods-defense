@@ -56,7 +56,7 @@ void PauseScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 		{
 			mNextScreen = ScreenManager::SCREEN_MAIN_MENU;
 			gMenu = 0;
-			oslPlaySound(menuTheme, 1); //Plays the sound in the menu
+			oslPlaySound(menuTheme, CHANNEL_0); //Plays the sound in the menu
 		}
 	}
 }

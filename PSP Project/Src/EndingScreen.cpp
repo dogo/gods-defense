@@ -29,6 +29,6 @@ void EndingScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 	if(osl_keys->pressed.cross)
 	{
 		mNextScreen = ScreenManager::SCREEN_MAIN_MENU; //go to main menu
-		oslPlaySound(menuTheme, 1); //Plays the sound in the menu
+		oslPlaySound(menuTheme, CHANNEL_0); //Plays the sound in the menu
 	}
 }
