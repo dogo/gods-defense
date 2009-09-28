@@ -94,8 +94,6 @@ void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 #ifdef DEBUG
 	oslPrintf_xy(0,10,"currentGameState %d",currentGameState);
 #endif
-
-	updateHud();
 	//Scroll the map
 	if (currentGameState == GS_SCROLL_MAP || currentGameState == GS_MAP_PLACE_TOWER)
 	{
@@ -218,6 +216,7 @@ void GameGUI::draw()
 	}
 	oslDrawImage(mCursor);
 	oslDrawImageXY(mHud, 0, 0);
+	updateHud();
 }
 void GameGUI::PuttingTower(Tower *tower)
 {

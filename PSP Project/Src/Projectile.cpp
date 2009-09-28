@@ -189,7 +189,7 @@ LightningInstance::LightningInstance(TowerInstance *shooter, EnemyInstance *targ
 {
 	mAnimationTime = 0;
 	DealDamage();
-	if (mFireSound != NULL)
+	if (mHitSound != NULL)
 		oslPlaySound(mHitSound,6);
 }
 

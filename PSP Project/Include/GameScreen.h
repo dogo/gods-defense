@@ -55,7 +55,6 @@ private:
 
 public:
 	GameScreen();
-	OSL_IMAGE *LoadMapImage(const char* imageName);
 	void LoadMap(const string &mapName);
 	void LoadFirstPartForMap();
 	string *GetMenuTowers() const;
