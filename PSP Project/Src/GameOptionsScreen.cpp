@@ -65,7 +65,10 @@ void GameOptionsScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá wa
 	}
 	if(osl_keys->pressed.circle)
 	{
-		mNextScreen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+		if(!gIsServer && !gIsClient)
+			mNextScreen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+		else if (gIsServer || gIsClient)
+			mNextScreen = ScreenManager::SCREEN_MULTIPLAYER; //go back CLR
 	}
 	if(osl_keys->pressed.right)
 	{

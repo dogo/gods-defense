@@ -63,11 +63,13 @@ void MultiplayerScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá wa
 	else if (osl_keys->pressed.square)
 	{	
 		gIsClient = true;
+		gIsServer = false;
 		mNextScreen = ScreenManager::SCREEN_GAME_OPTIONS;
 	}
 	else if (osl_keys->pressed.cross)
 	{	
 		gIsServer = true;
+		gIsClient = false;
 		mNextScreen = ScreenManager::SCREEN_GAME_OPTIONS;
 	}
 #ifndef JPCSP_EMULATOR
