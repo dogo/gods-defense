@@ -12,6 +12,7 @@ char Resource::IMG_MAIN_MENU_BG[] = "/Res/background.png";
 char Resource::IMG_CURSOR[] = "/Res/cursor.png";
 char Resource::IMG_BACK[] = "/Res/circle.png";
 char Resource::IMG_CROSS[] = "/Res/x.png";
+char Resource::IMG_SQUARE[] = "/Res/square.png"; 
 char Resource::IMG_SIDEBAR[] = "/Res/sidebar.png";
 char Resource::IMG_SELECTOR_SIDEBAR[] = "/Res/selector.png";
 char Resource::IMG_HUD[] = "/Res/hud.png";
@@ -31,6 +32,8 @@ char const Resource::STR_YES[] = "Yes";
 char const Resource::STR_NO[] = "No";
 char const Resource::STR_WARNING_CAPTION[] = "Warning";
 char const Resource::STR_MAPSELECTION_CAPTION[] = "Map Selection";
+char const Resource::STR_ACT_LIKE_SERVER[] = ": to act like a server";
+char const Resource::STR_ACT_LIKE_CLIENT[] = ": to act like a client";
 
 char const Resource::STR_WARNING_TEXT[] =
 	"WLAN switch is off.\n\n"

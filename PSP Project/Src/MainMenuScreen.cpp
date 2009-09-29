@@ -6,9 +6,11 @@
 #include "../Include/MainMenuScreen.h"
 #include "../Include/ScreenManager.h"
 
+bool gIsMultiplayer = false;
 
 MainMenuScreen::MainMenuScreen()
 {
+	gIsMultiplayer = false;
 	menubg = oslLoadImageFilePNG(Resource::IMG_MAIN_MENU_BG, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 	if (!menubg)
@@ -59,10 +61,18 @@ void MainMenuScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warni
 		if(gMenu == 1)
 		{
 			oslFlushKey();
+#ifndef JPCSP_EMULATOR
 			if(oslIsWlanPowerOn())
+			{
+				gIsMultiplayer = true;
 				mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
+			}
 			else
 				mNextScreen = ScreenManager::SCREEN_WARNING;
+#else
+			gIsMultiplayer = true;
+			mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
+#endif
 		}
 		if(gMenu == 2)
 		{

@@ -38,6 +38,8 @@ public:
 	static char const STR_HELP_TEXT[];
 	static char const STR_CONGRATS[];
 	static char const STR_LOSE[];
+	static char const STR_ACT_LIKE_SERVER[];
+	static char const STR_ACT_LIKE_CLIENT[];
 	
 	static char IMG_GAME_TITLE[];
 	static char IMG_ANYKEY_SPLASH[];
@@ -47,6 +49,7 @@ public:
 	static char IMG_SIDEBAR[];
 	static char IMG_SELECTOR_SIDEBAR[];
 	static char IMG_CROSS[];
+	static char IMG_SQUARE[];
 	static char IMG_HUD[];
 };
 

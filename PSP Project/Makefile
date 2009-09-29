@@ -1,3 +1,4 @@
+#use this "-DJPCSP_EMULATOR" on CXXFLAGS to ignore wlan coding
 TARGET = GodsDefense
 CFLAGS = -O2 -g -G0 -Wall
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti -DTIXML_USE_STL

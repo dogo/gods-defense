@@ -24,6 +24,9 @@ extern int gScreen;
 extern int mNextScreen;
 extern string gChoosedMap;
 extern bool gWin;
+extern bool gIsMultiplayer;
+extern bool gIsServer;
+extern bool gIsClient;
 
 /*
 	Sound Channels

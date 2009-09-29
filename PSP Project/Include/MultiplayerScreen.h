@@ -11,6 +11,9 @@
 class MultiplayerScreen : public IScreen
 {
 private:
+	OSL_IMAGE *imgBack;
+	OSL_IMAGE *imgServer;
+	OSL_IMAGE *imgClient;
 
 public:
 	MultiplayerScreen();
