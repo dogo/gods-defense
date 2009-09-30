@@ -15,6 +15,7 @@ class GameOptionsScreen : public IScreen
 {
 private:
 	void ChooseMap(); //Set selected map to load
+	OSL_IMAGE *imgBack;
 
 public:
 	GameOptionsScreen();

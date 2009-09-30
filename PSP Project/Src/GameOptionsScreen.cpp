@@ -10,6 +10,7 @@ string gChoosedMap;
 
 GameOptionsScreen::GameOptionsScreen()
 {
+	imgBack = oslLoadImageFilePNG(Resource::IMG_BACK, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	gChoosedMap = "NULL";
 	mSelectedMap = 0;
 	int dfd = sceIoDopen("/Res/maps");
@@ -41,6 +42,7 @@ GameOptionsScreen::GameOptionsScreen()
 
 GameOptionsScreen::~GameOptionsScreen()
 {
+	oslDeleteImage(imgBack);
 }
 
 void GameOptionsScreen::draw()
@@ -53,6 +55,9 @@ void GameOptionsScreen::draw()
 	oslDrawString(240,160,mMap[mSelectedMap].c_str());
 	oslDrawString(240- oslGetStringWidth(mMap[mSelectedMap].c_str()),160,"<-");
 	oslDrawString(240+ oslGetStringWidth(mMap[mSelectedMap].c_str()),160,"->");
+
+	oslDrawImageXY(imgBack, (430) - (imgBack->stretchX), (272) - (imgBack->stretchY));
+	oslDrawString((510) - imgBack->stretchX,(272) - (imgBack->stretchY/2),Resource::STR_BACK_SK);
 }
 
 void GameOptionsScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
