@@ -28,6 +28,20 @@ GameScreen::GameScreen()
 	gGameReference = this;
 
 	gWin = false;
+
+	mAdhocReference = NULL;
+
+	if(gIsClient && oslIsWlanPowerOn())
+	{
+		mAdhocReference = new Adhoc();
+		mAdhocReference->AdhocClient();
+	}
+	else if (gIsServer && oslIsWlanPowerOn())
+	{
+		mAdhocReference = new Adhoc();
+		mAdhocReference->AdhocServer();
+	}
+
 }
 
 void GameScreen::LoadMap(const string &mapName)
@@ -132,6 +146,11 @@ GameScreen::~GameScreen()
 	CleanEnemies();
 	delete(mGameMap);
 	delete(mGameGUI);
+
+	if(mAdhocReference != NULL){
+		oslAdhocTerm();
+		delete(mAdhocReference);
+	}
 }
 
 void GameScreen::drawGrid()
@@ -181,7 +200,9 @@ void GameScreen::draw()
 	}
 
 	mGameGUI->RenderPlacingTower();
-	mGameGUI->draw();	
+	mGameGUI->draw();
+	if(gIsClient && oslIsWlanPowerOn())
+		mAdhocReference->printInfo();
 #ifdef DEBUG
 	oslPrintf_xy(0,20,"Value of joystick X : %d",osl_keys->analogX);
 	oslPrintf_xy(0,30,"Value of joystick Y : %d",osl_keys->analogY);			
@@ -317,6 +338,14 @@ void GameScreen::update(u64 timePassed)
 		{
 			//Loose
 			SetGameState(GS_GAME_OVER);
+			
+			if(gIsClient && oslIsWlanPowerOn())
+			{
+				char scoreBuffer[256];
+  				sprintf(scoreBuffer, "%i", 00);
+				mAdhocReference->clientUpdate(scoreBuffer);
+			}
+			
 			mNextScreen = ScreenManager::SCREEN_ENDING;
 		}
 		//Maybe end of game.
@@ -325,6 +354,12 @@ void GameScreen::update(u64 timePassed)
 			//Win
 			gWin = true;
 			SetGameState(GS_GAME_OVER);
+			if(gIsClient && oslIsWlanPowerOn())
+			{
+				char scoreBuffer[256];
+  				sprintf(scoreBuffer, "%i",100);
+				mAdhocReference->clientUpdate(scoreBuffer);
+			}
 			mNextScreen = ScreenManager::SCREEN_ENDING;
 		}
 	}

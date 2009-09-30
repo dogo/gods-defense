@@ -7,7 +7,7 @@ ASFLAGS = $(CFLAGS)
 GAMEOBJECTS=Src/Main.o Src/AnykeyScreen.o Src/ScreenManager.o Src/TitleScreen.o Src/MainMenuScreen.o Src/GameOptionsScreen.o \
 Src/GameScreen.o Src/HelpScreen.o Src/AboutScreen.o Src/MultiplayerScreen.o Src/PauseScreen.o Src/GameGUI.o \
 Src/Resource.o Src/ExitScreen.o Src/GodLibrary.o Src/WarningScreen.o Src/Tower.o Src/Projectile.o Src/Enemy.o Src/Map.o \
-Src/EndingScreen.o
+Src/EndingScreen.o Src/Adhoc.o
 TINYXML=tinyxml/tinystr.o tinyxml/tinyxml.o tinyxml/tinyxmlerror.o tinyxml/tinyxmlparser.o
 
 OBJS = $(TINYXML) $(GAMEOBJECTS)
@@ -15,7 +15,8 @@ OBJS = $(TINYXML) $(GAMEOBJECTS)
 LIBDIR =
 LDFLAGS =
 LIBS =  -losl -lpng -lz -lpsphprm -lpspaudiolib -lpspaudio -lpspsdk -lpspctrl -lpspumd -lpsprtc \
-		-lpsppower -lpspgum -lpspgu -lm -lpspaudiolib -lpspaudiocodec -lstdc++ -lpspwlan -lpsphttp -lpspssl
+		-lpsppower -lpspgum -lpspgu -lm -lpspaudiolib -lpspaudiocodec -lstdc++ -lpspwlan -lpsphttp -lpspssl \
+		-lpspnet_adhocmatching -lpspnet_adhoc -lpspnet_adhocctl
 
 BUILD_PRX = 1
 PSP_FW_VERSION=390

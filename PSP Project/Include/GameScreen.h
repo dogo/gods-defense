@@ -15,6 +15,7 @@ class GameGUI;
 #include "../Include/Enemy.h"
 #include "../Include/GameGUI.h"
 #include "../Include/Map.h"
+#include "../Include/Adhoc.h"
 #include <map>
 #include <list>
 
@@ -52,6 +53,7 @@ private:
 	bool mWaveIsRunning;
 	list<TowerInstance*> mRealTowers;  //Current builded towers
 	list<EnemyInstance*> mRealEnemies; //Current spawned enemies
+	Adhoc *mAdhocReference;
 
 public:
 	GameScreen();
