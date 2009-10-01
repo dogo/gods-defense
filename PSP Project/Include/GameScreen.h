@@ -23,11 +23,18 @@ using namespace std;
 
 enum GameState
 {
-	GS_SCROLL_MAP,		//User is scrolling on the map
-	GS_MAP_PLACE_TOWER, //User has selected a tower to build and is placing it on the map
-	GS_PAUSE_MENU,		//Pause menu in game
-	GS_TOWER_MENU,		//User is choosing a tower from the menu
-	GS_GAME_OVER		//Player has won or loose the game
+	GS_SCROLL_MAP,			//User is scrolling on the map
+	GS_MAP_PLACE_TOWER,		//User has selected a tower to build and is placing it on the map
+	GS_PAUSE_MENU,			//Pause menu in game
+	GS_TOWER_MENU,			//User is choosing a tower from the menu
+	GS_GAME_OVER			//Player has won or loose the game
+};
+
+enum GameConnectionState
+{
+	GCS_WAITING_CONNECTION, //Ad hoc server is waiting for a player
+	GCS_CONNECTED,			//Ad hoc connection is ok
+	GCS_DISCONNECTED		//Ad hoc connection is down or disconnected
 };
 
 class GameScreen : public IScreen
@@ -53,7 +60,9 @@ private:
 	bool mWaveIsRunning;
 	list<TowerInstance*> mRealTowers;  //Current builded towers
 	list<EnemyInstance*> mRealEnemies; //Current spawned enemies
+	//ad hoc
 	Adhoc *mAdhocReference;
+	GameConnectionState mGameConnectionState;
 
 public:
 	GameScreen();
@@ -78,5 +87,9 @@ public:
 
 	const GameState GetGameState();
 	void SetGameState(const GameState &newState);
+
+	//ad hoc
+	const GameConnectionState GetGameConnectionState();
+	void SetGameConnectionState(const GameConnectionState &newState);
 };
 #endif

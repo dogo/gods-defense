@@ -7,6 +7,7 @@
 
 Adhoc::Adhoc()
 {
+	mWaitingConnection = true;
 }
 
 Adhoc::~Adhoc()
@@ -15,9 +16,6 @@ Adhoc::~Adhoc()
 
 void Adhoc::AdhocClient()
 {
-	int i = 0;
-	current = 0;
-
 	int init = oslAdhocInit("ULUS99999");
 	if (init)
 	{
@@ -38,7 +36,7 @@ void Adhoc::clientUpdate(char *finalScore)
 	if (oslAdhocGetRemotePspCount())
 	{
 		//Request a connection:
-		int mConnectionState = oslAdhocRequestConnection(oslAdhocGetPspByIndex(0), 30, NULL);
+		oslAdhocRequestConnection(oslAdhocGetPspByIndex(0), 30, NULL);
 		clientConnected(oslAdhocGetPspByIndex(0), finalScore);
 	}
 }
@@ -46,9 +44,64 @@ void Adhoc::clientUpdate(char *finalScore)
 
 void Adhoc::AdhocServer()
 {
+	int init = oslAdhocInit("ULUS99999");
+	if (init)
+	{
+		char message[100] = "";
+		snprintf(message, sizeof(message), "adhocInit error: %i", init);
+		oslMessageBox(message, "Debug",  oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK , 0, 0, 0, 0));
+		return;
+	}
 }
 
-void Adhoc::serverConnected(remotePsp *aPsp)
+bool Adhoc::serverWaitingConnection()
+{
+	struct remotePsp *reqPsp = oslAdhocGetConnectionRequest();
+	char message[100] = "";
+	int dialog = OSL_DIALOG_NONE;
+
+	if (reqPsp == NULL)
+	{
+		oslIntraFontSetStyle(gFont, 1.0, RGBA(255,255,255,255), RGBA(0,0,0,0), INTRAFONT_ALIGN_LEFT);
+		oslDrawStringf(10, 100, "Waiting for a connection request...");
+		return true;
+	}
+	else
+	{
+		snprintf(message, sizeof(message), "Accept request from psp : %s", reqPsp->name);
+		if (oslGetDialogType() == OSL_DIALOG_NONE)
+			oslInitMessageDialog(message, 1);
+	}
+
+	dialog = oslGetDialogType();
+	if (dialog)
+	{
+		oslDrawDialog();
+		if (oslGetDialogStatus() == PSP_UTILITY_DIALOG_NONE)
+		{
+			if (dialog == OSL_DIALOG_MESSAGE)
+			{
+				int button = oslGetDialogButtonPressed();
+				if (button == PSP_UTILITY_MSGDIALOG_RESULT_YES)
+				{
+					oslAdhocAcceptConnection(reqPsp);
+				}
+				else if (button == PSP_UTILITY_MSGDIALOG_RESULT_NO)
+				{
+					oslAdhocRejectConnection(reqPsp);
+				}
+			}
+		oslEndDialog();
+		}
+	}
+	return false;
+}
+
+void Adhoc::serverConnected(remotePsp *aPsp, char *remotePspScore, char *finalScore)
+{
+}
+
+void Adhoc::serverUpdate(char *remotePspScore)
 {
 }
 

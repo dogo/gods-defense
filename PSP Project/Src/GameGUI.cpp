@@ -90,10 +90,17 @@ GameGUI::GameGUI(GameScreen *gameLogic)
 void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 {
 	const GameState currentGameState = mGame->GetGameState();
+	const GameConnectionState currentGameConnectionState = mGame->GetGameConnectionState();
 	int i;
 #ifdef DEBUG
 	oslPrintf_xy(0,10,"currentGameState %d",currentGameState);
 #endif
+#ifndef JPCSP_EMULATOR
+	//Server must wait other player to start 
+	if(gIsServer && oslIsWlanPowerOn() && currentGameConnectionState == GCS_WAITING_CONNECTION)
+		return;
+#endif
+
 	//Scroll the map
 	if (currentGameState == GS_SCROLL_MAP || currentGameState == GS_MAP_PLACE_TOWER)
 	{

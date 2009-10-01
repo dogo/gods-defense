@@ -23,8 +23,10 @@ public:
 
 	//Ad-hoc Server
 	void AdhocServer();
-	void serverConnected(struct remotePsp *aPsp);
+	void serverConnected(struct remotePsp *aPsp, char *remotePspScore, char *finalScore);
+	void serverUpdate(char *remotePspScore);
+	bool serverWaitingConnection();
 
-	int current;
+	bool mWaitingConnection;
 };
 #endif

@@ -31,6 +31,7 @@ GameScreen::GameScreen()
 
 	mAdhocReference = NULL;
 
+#ifndef JPCSP_EMULATOR
 	if(gIsClient && oslIsWlanPowerOn())
 	{
 		mAdhocReference = new Adhoc();
@@ -41,12 +42,13 @@ GameScreen::GameScreen()
 		mAdhocReference = new Adhoc();
 		mAdhocReference->AdhocServer();
 	}
-
+#endif
 }
 
 void GameScreen::LoadMap(const string &mapName)
 {
 	mGameState = GS_SCROLL_MAP;
+	mGameConnectionState = GCS_DISCONNECTED;
 	mActiveWaves = 0;
 	mWaveIsRunning = false;
 
@@ -218,6 +220,25 @@ void GameScreen::update(u64 timePassed)
 	*   Dogo 10/03/09 -> Congelar o jogo, pintar a tela de pause por cima, quando voltar ao jogo repintar e voltar o
 	*   estado do jogo.
 	*/
+#ifndef JPCSP_EMULATOR
+	if (gIsServer && oslIsWlanPowerOn())
+	{
+		if(mGameConnectionState == GCS_DISCONNECTED || mGameConnectionState == GCS_WAITING_CONNECTION)
+		{
+			SetGameConnectionState(GCS_WAITING_CONNECTION);
+			bool checkAdhoc = mAdhocReference->serverWaitingConnection();
+
+			if(!checkAdhoc)
+			{
+				SetGameConnectionState(GCS_CONNECTED);	
+			}
+		}
+		else
+		{
+			mAdhocReference->printInfo();
+		}
+	}
+#endif
 	mGameGUI->Update(timePassed);
 
 	//Run Waves
@@ -337,29 +358,31 @@ void GameScreen::update(u64 timePassed)
 		if (mPlayerLives <= 0)
 		{
 			//Loose
-			SetGameState(GS_GAME_OVER);
-			
+#ifndef JPCSP_EMULATOR
 			if(gIsClient && oslIsWlanPowerOn())
 			{
 				char scoreBuffer[256];
   				sprintf(scoreBuffer, "%i", 00);
 				mAdhocReference->clientUpdate(scoreBuffer);
 			}
-			
+#endif			
+			SetGameState(GS_GAME_OVER);
 			mNextScreen = ScreenManager::SCREEN_ENDING;
 		}
 		//Maybe end of game.
 		else if (!mWaveIsRunning && mActiveWaves >= mGameMap->mWaves.size())
 		{
 			//Win
-			gWin = true;
-			SetGameState(GS_GAME_OVER);
+#ifndef JPCSP_EMULATOR
 			if(gIsClient && oslIsWlanPowerOn())
 			{
 				char scoreBuffer[256];
-  				sprintf(scoreBuffer, "%i",100);
+  				sprintf(scoreBuffer, "%i", 100);
 				mAdhocReference->clientUpdate(scoreBuffer);
 			}
+#endif
+			gWin = true;
+			SetGameState(GS_GAME_OVER);
 			mNextScreen = ScreenManager::SCREEN_ENDING;
 		}
 	}
@@ -378,6 +401,16 @@ void GameScreen::update(u64 timePassed)
 const GameState GameScreen::GetGameState()
 {
 	return mGameState;
+}
+
+void GameScreen::SetGameConnectionState(const GameConnectionState &newState)
+{
+	mGameConnectionState = newState;
+}
+
+const GameConnectionState GameScreen::GetGameConnectionState()
+{
+	return mGameConnectionState;
 }
 
 void GameScreen::SetGameState(const GameState &newState)
