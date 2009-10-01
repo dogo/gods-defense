@@ -66,6 +66,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Src\Adhoc.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Src\AnykeyScreen.cpp"
 				>
 			</File>
@@ -151,6 +155,10 @@
 			>
 			<File
 				RelativePath=".\Include\AboutScreen.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\Adhoc.h"
 				>
 			</File>
 			<File
