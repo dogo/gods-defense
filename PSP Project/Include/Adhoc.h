@@ -18,8 +18,8 @@ public:
 
 	//Ad-hoc Client
 	void AdhocClient();
-	void clientConnected(struct remotePsp *aPsp);	//The client is connected and can send data.
-	void clientUpdate(char *finalScore);
+	void clientConnected(struct remotePsp *aPsp, char *finalScore);	//The client is connected and can send data.
+	void clientSendScore(char *finalScore);
 
 	//Ad-hoc Server
 	void AdhocServer();

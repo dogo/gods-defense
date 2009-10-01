@@ -102,9 +102,11 @@ public:
 	bool const EnemyCanFly(); // check if the enemy can fly.
 	bool const EnemyStillOnMap(); //check if the enemy still on the map.
 	void EnemyReciveDamage(const int &damage, const float &slowAmount, const int &slowLength); // the enemy recive damage
+	float GetPointsWorth() const;
 
 private:
 	unsigned int mCurrentCheckpoint;
+	float mDistanceFromStart;
 };
 
 

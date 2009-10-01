@@ -186,6 +186,7 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 	mEnemyState = NOTHING_HAPPENING;
 	mCurrentCheckpoint = 1;
 	mAnimationTime = 0;
+	mDistanceFromStart = 0;
 }
 
 void EnemyInstance::Update(u64 timePassed)
@@ -249,6 +250,8 @@ void EnemyInstance::Update(u64 timePassed)
 	float ydif = fabs(mEnemyPosition.Y - mNextCheckpoint.Y);
 
 	float distance = sqrtf((xdif * xdif) + (ydif * ydif));
+
+	mDistanceFromStart += movement;
 
 	if (distance <= movement)
 	{
@@ -373,4 +376,11 @@ void EnemyInstance::RenderLife()
 	int w = 32 * mHealth / mEnemy->mEnemyVector[mStat].mHealth; 
 	oslDrawFillRect(mEnemyPosition.X - 16, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y - 20, mEnemyPosition.X + 16, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y - 16, COLOR_RED); //RED
 	oslDrawFillRect(mEnemyPosition.X - 16, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y - 20, (mEnemyPosition.X -16) + w, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y - 16, COLOR_GREEN); //GREEN
+}
+
+float EnemyInstance::GetPointsWorth() const
+{
+	float points = mEnemy->mEnemyVector[mStat].mPointValue * (1.0f - (mDistanceFromStart / mPath->mCheckpointLength));
+
+	return points;
 }

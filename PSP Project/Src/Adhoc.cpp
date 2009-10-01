@@ -74,43 +74,17 @@ void Adhoc::AdhocClient()
 	}
 }
 	
-void Adhoc::clientConnected(struct remotePsp *aPsp)
+void Adhoc::clientConnected(struct remotePsp *aPsp, char *finalScore)
 {
-	int skip = 0;
-	char mess[100] = "Hello distant World !!!";
-
-	while(!osl_quit){
-		if (!skip){
-			oslStartDrawing();
-
-			printInfo();
-			oslDrawStringf(10, 40, "Press O to send a message to %s", aPsp->name);
-			oslDrawString(150, 250, "Press X to quit");
-
-			oslEndDrawing();
-		}
-		oslEndFrame();
-		skip = oslSyncFrame();
-
-		oslReadKeys();
-		if (osl_keys->released.cross)
-		{
-			oslQuit();
-		}
-		else if (osl_keys->released.circle)
-		{
-			oslAdhocSendData(aPsp, mess, strlen(mess));
-		}
-	}
+	oslAdhocSendData(aPsp, finalScore, strlen(finalScore));
 }
 
-void Adhoc::clientUpdate(char *finalScore)
+void Adhoc::clientSendScore(char *finalScore)
 {	
 	if (oslAdhocGetRemotePspCount())
 	{
-		//Request a connection:
 		oslAdhocRequestConnection(oslAdhocGetPspByIndex(0), 30, NULL);
-		clientConnected(oslAdhocGetPspByIndex(0));
+		clientConnected(oslAdhocGetPspByIndex(0), finalScore);
 	}
 }
 
