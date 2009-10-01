@@ -7,7 +7,6 @@
 
 Adhoc::Adhoc()
 {
-	mWaitingConnection = true;
 }
 
 Adhoc::~Adhoc()
@@ -16,6 +15,11 @@ Adhoc::~Adhoc()
 
 void Adhoc::AdhocClient()
 {
+	int skip = 0;
+	int quit = 0;
+	int i = 0;
+	int current = 0;
+
 	int init = oslAdhocInit("ULUS99999");
 	if (init)
 	{
@@ -24,11 +28,80 @@ void Adhoc::AdhocClient()
 		oslMessageBox(message, "Debug",  oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK , 0, 0, 0, 0));
 		return;
 	}
+
+	while(!quit)
+	{
+		if (!skip)
+		{
+			oslStartDrawing();
+
+			if (oslAdhocGetRemotePspCount())
+			{
+				oslIntraFontSetStyle(gFont, 1.3f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+				oslDrawString(10, 40, "Press X to request a connection");
+			}
+
+			for (i=0; i < oslAdhocGetRemotePspCount(); i++)
+			{
+				if (i == current)
+					oslIntraFontSetStyle(gFont, 1.3, RGBA(100,100,100,255), RGBA(0,0,0,0), INTRAFONT_ALIGN_LEFT);
+				else
+					oslIntraFontSetStyle(gFont, 1.3, RGBA(255,255,255,255), RGBA(0,0,0,0), INTRAFONT_ALIGN_LEFT);
+				oslDrawString(10, 100 + 15 * i, oslAdhocGetPspByIndex(i)->name);
+			}
+			oslEndDrawing();
+		}
+		oslReadKeys();
+		oslEndFrame();
+		skip = oslSyncFrame();
+
+		if (osl_keys->pressed.down)
+		{
+			if (++current >= oslAdhocGetRemotePspCount())
+				current = 0;
+		}
+		else if (osl_keys->pressed.up)
+		{
+			if (--current < 0)
+				current = oslAdhocGetRemotePspCount() - 1;
+		}
+		else if (osl_keys->pressed.cross && oslAdhocGetRemotePspCount())
+		{
+			//Request a connection:
+			oslAdhocRequestConnection(oslAdhocGetPspByIndex(current), 30, NULL);
+			quit = 1;
+		}
+	}
 }
 	
-void Adhoc::clientConnected(struct remotePsp *aPsp, char *finalScore)
+void Adhoc::clientConnected(struct remotePsp *aPsp)
 {
-	oslAdhocSendData(aPsp, finalScore, strlen(finalScore));
+	int skip = 0;
+	char mess[100] = "Hello distant World !!!";
+
+	while(!osl_quit){
+		if (!skip){
+			oslStartDrawing();
+
+			printInfo();
+			oslDrawStringf(10, 40, "Press O to send a message to %s", aPsp->name);
+			oslDrawString(150, 250, "Press X to quit");
+
+			oslEndDrawing();
+		}
+		oslEndFrame();
+		skip = oslSyncFrame();
+
+		oslReadKeys();
+		if (osl_keys->released.cross)
+		{
+			oslQuit();
+		}
+		else if (osl_keys->released.circle)
+		{
+			oslAdhocSendData(aPsp, mess, strlen(mess));
+		}
+	}
 }
 
 void Adhoc::clientUpdate(char *finalScore)
@@ -37,7 +110,7 @@ void Adhoc::clientUpdate(char *finalScore)
 	{
 		//Request a connection:
 		oslAdhocRequestConnection(oslAdhocGetPspByIndex(0), 30, NULL);
-		clientConnected(oslAdhocGetPspByIndex(0), finalScore);
+		clientConnected(oslAdhocGetPspByIndex(0));
 	}
 }
 

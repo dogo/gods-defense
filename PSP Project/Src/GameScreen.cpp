@@ -359,12 +359,12 @@ void GameScreen::update(u64 timePassed)
 		{
 			//Loose
 #ifndef JPCSP_EMULATOR
-			if(gIsClient && oslIsWlanPowerOn())
+			/*if(gIsClient && oslIsWlanPowerOn())
 			{
 				char scoreBuffer[256];
   				sprintf(scoreBuffer, "%i", 00);
 				mAdhocReference->clientUpdate(scoreBuffer);
-			}
+			}*/
 #endif			
 			SetGameState(GS_GAME_OVER);
 			mNextScreen = ScreenManager::SCREEN_ENDING;
@@ -374,12 +374,12 @@ void GameScreen::update(u64 timePassed)
 		{
 			//Win
 #ifndef JPCSP_EMULATOR
-			if(gIsClient && oslIsWlanPowerOn())
+			/*if(gIsClient && oslIsWlanPowerOn())
 			{
 				char scoreBuffer[256];
   				sprintf(scoreBuffer, "%i", 100);
 				mAdhocReference->clientUpdate(scoreBuffer);
-			}
+			}*/
 #endif
 			gWin = true;
 			SetGameState(GS_GAME_OVER);
