@@ -72,6 +72,7 @@ public:
 	Tower *GetTower(const string &towerName) const;
 	int const GetPlayerMoney();
 	int const GetPlayerLives();
+	float const GetPlayerScore();
 	bool TryBuildTower(Tower *tower, Coordinates2D position);
 	Map *GetGameMap();
 	void TryRunNextWave();

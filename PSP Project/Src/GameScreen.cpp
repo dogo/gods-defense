@@ -360,13 +360,12 @@ void GameScreen::update(u64 timePassed)
 		if (mPlayerLives <= 0)
 		{
 			//Loose
+			sprintf(gScoreBuffer, "%i", GetPlayerScore());
 #ifndef JPCSP_EMULATOR
-			/*if(gIsClient && oslIsWlanPowerOn())
+			if(gIsClient && oslIsWlanPowerOn())
 			{
-				char scoreBuffer[256];
-  				sprintf(scoreBuffer, "%i", 00);
-				mAdhocReference->clientUpdate(scoreBuffer);
-			}*/
+				mAdhocReference->clientSendScore(gScoreBuffer);
+			}
 #endif			
 			SetGameState(GS_GAME_OVER);
 			mNextScreen = ScreenManager::SCREEN_ENDING;
@@ -378,9 +377,8 @@ void GameScreen::update(u64 timePassed)
 #ifndef JPCSP_EMULATOR
 			/*if(gIsClient && oslIsWlanPowerOn())
 			{
-				char scoreBuffer[256];
-  				sprintf(scoreBuffer, "%i", 100);
-				mAdhocReference->clientUpdate(scoreBuffer);
+  				sprintf(gScoreBuffer, "%i", (*ei_iter)->GetPointsWorth());
+				mAdhocReference->clientSendScore(scoreBuffer);
 			}*/
 #endif
 			gWin = true;
@@ -433,6 +431,11 @@ int const GameScreen::GetPlayerMoney()
 int const GameScreen::GetPlayerLives()
 {
 	return mPlayerLives;
+}
+
+float const GameScreen::GetPlayerScore()
+{
+	return mPlayerPoints;
 }
 
 Tower *GameScreen::GetTower(const string &towerName) const

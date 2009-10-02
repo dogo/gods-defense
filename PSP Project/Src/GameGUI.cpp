@@ -221,8 +221,8 @@ void GameGUI::draw()
 		}
 		oslDrawImageXY(mSelectorSidebar, (480-40), 29 + (mSelectedItemY * 61)); //(PSP Screen - sidebar - 8 to align, Side bar spacing + (Selected Item * Image->Y));
 	}
-	oslDrawImage(mCursor);
 	oslDrawImageXY(mHud, 0, 0);
+	oslDrawImage(mCursor);
 	updateHud();
 }
 void GameGUI::PuttingTower(Tower *tower)

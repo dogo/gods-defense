@@ -24,6 +24,7 @@ extern int gScreen;
 extern int mNextScreen;
 extern string gChoosedMap;
 extern bool gWin;
+extern char gScoreBuffer[256];
 extern bool gIsMultiplayer;
 extern bool gIsServer;
 extern bool gIsClient;
