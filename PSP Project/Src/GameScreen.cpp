@@ -359,14 +359,8 @@ void GameScreen::update(u64 timePassed)
 	{
 		if (mPlayerLives <= 0)
 		{
-			//Loose
-			sprintf(gScoreBuffer, "%i", GetPlayerScore());
-#ifndef JPCSP_EMULATOR
-			if(gIsClient && oslIsWlanPowerOn())
-			{
-				mAdhocReference->clientSendScore(gScoreBuffer);
-			}
-#endif			
+			//Loose, if ad hoc is on the other player can continue to play
+			sprintf(gScoreBuffer, "%d",(int) GetPlayerScore());
 			SetGameState(GS_GAME_OVER);
 			mNextScreen = ScreenManager::SCREEN_ENDING;
 		}
@@ -374,12 +368,16 @@ void GameScreen::update(u64 timePassed)
 		else if (!mWaveIsRunning && mActiveWaves >= mGameMap->mWaves.size())
 		{
 			//Win
+			sprintf(gScoreBuffer, "%d",(int) GetPlayerScore());
 #ifndef JPCSP_EMULATOR
-			/*if(gIsClient && oslIsWlanPowerOn())
+			if(gIsClient && oslIsWlanPowerOn())
 			{
-  				sprintf(gScoreBuffer, "%i", (*ei_iter)->GetPointsWorth());
-				mAdhocReference->clientSendScore(scoreBuffer);
-			}*/
+				/*
+				 *	TODO : Recive msg from server with win status if true send client score and compare with server
+				 *	if clientScore < serverScore -> Client loose else client win and set the new state
+				 */
+				mAdhocReference->clientSendScore(gScoreBuffer);
+			}
 #endif
 			gWin = true;
 			SetGameState(GS_GAME_OVER);
