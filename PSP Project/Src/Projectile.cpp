@@ -142,6 +142,7 @@ void ArrowInstance::ProjectileRender()
 IceInstance::IceInstance(TowerInstance *shooter, EnemyInstance *target)	: ProjectileInstance(shooter, target)
 {
 	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSpeed;
+	mAngle = mProjectilePosition.AimTo(mTarget->mEnemyPosition);
 
 	if (mFireSound != NULL)
 		oslPlaySound(mFireSound, CHANNEL_3);
