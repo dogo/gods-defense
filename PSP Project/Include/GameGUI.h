@@ -61,6 +61,7 @@ class SidebarItem
 public:
 	SidebarItem(Tower *tower, const int &y);
 	void drawIcons();
+	void drawTowerInfo(int y);
 	void Selected();
 
 	int mY;

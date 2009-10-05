@@ -164,7 +164,7 @@ void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 			mShowSidebar = !mShowSidebar;
 			SelectedTowerItem();
 		}
-		else if ((osl_keys->pressed.square) || (osl_keys->pressed.circle))
+		else if ((osl_keys->pressed.square) || (osl_keys->pressed.circle) || (osl_keys->pressed.start))
 		{
 			mShowSidebar = !mShowSidebar;
 			mGame->SetGameState(GS_SCROLL_MAP);
@@ -220,6 +220,7 @@ void GameGUI::draw()
 			}
 		}
 		oslDrawImageXY(mSelectorSidebar, (480-40), 29 + (mSelectedItemY * 61)); //(PSP Screen - sidebar - 8 to align, Side bar spacing + (Selected Item * Image->Y));
+		mTowerItems[mSelectedItemY]->drawTowerInfo(mSelectedItemY);
 	}
 	oslDrawImageXY(mHud, 0, 0);
 	oslDrawImage(mCursor);
@@ -308,4 +309,13 @@ SidebarItem::~SidebarItem()
 void SidebarItem::drawIcons()
 {	
 	oslDrawImageXY(mIcon, (480-40),29 + (mY * 61));
+}
+
+void SidebarItem::drawTowerInfo(int y)
+{
+	char costBuffer[256];
+	sprintf(costBuffer, "Cost: %i", mTower->mTowerVector[y].mCost);
+	oslIntraFontSetStyle(gFont, 0.85f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+	oslDrawString((480 -48 - (oslGetStringWidth(mTower->mTowerName))), 29 + (y * 61), mTower->mTowerName);
+	oslDrawString((480 -48 - (oslGetStringWidth(mTower->mTowerName))), 39 + (y * 61), costBuffer);
 }
