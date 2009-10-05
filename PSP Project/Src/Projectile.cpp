@@ -89,6 +89,25 @@ void ProjectileInstance::DealDamage()
 	//If we aren't splash, just hit the target.
 	if (mSplashRangeSqrd == 0)
 		return;
+	
+	//Else, we are splash. loop all enemies checking range.
+	list<EnemyInstance*>::iterator end_iter = GameScreen::gGameReference->mRealEnemies.end();
+
+	list<EnemyInstance*>::iterator ei_iter;
+	for (ei_iter =  GameScreen::gGameReference->mRealEnemies.begin(); ei_iter != end_iter; ei_iter++)
+	{
+		//Have already damaged the target, don't need to shoot it again :)
+		if (*ei_iter == mTarget)
+		{
+			continue;
+		}
+		//We hit it && Isn't dead && In splash range
+		if (((mHitsFlyer && (*ei_iter)->EnemyCanFly()) || (mHitsLand && !(*ei_iter)->EnemyCanFly())) &&	
+			!(*ei_iter)->EnemyIsDead() && mProjectilePosition.SquareDistance((*ei_iter)->mEnemyPosition) <= mSplashRangeSqrd)
+		{
+			(*ei_iter)->EnemyReciveDamage(mTowerDamage, mSlowAmount, mSlowLength);
+		}
+	}
 }
 
 //ArrowInstance

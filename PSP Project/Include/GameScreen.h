@@ -62,7 +62,6 @@ private:
 	bool mWaveIsRunning;
 	PauseScreen *pauseScreenReference;
 	list<TowerInstance*> mRealTowers;  //Current builded towers
-	list<EnemyInstance*> mRealEnemies; //Current spawned enemies
 	//ad hoc
 	Adhoc *mAdhocReference;
 	GameConnectionState mGameConnectionState;
@@ -83,6 +82,7 @@ public:
 	static GameScreen *gGameReference;
 	static bool gPauseGame;
 	list<ProjectileInstance*> mRealProjectiles;   //Current shots
+	list<EnemyInstance*> mRealEnemies; //Current spawned enemies
 
 	virtual ~GameScreen();
 
