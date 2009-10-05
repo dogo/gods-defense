@@ -131,6 +131,9 @@ void GameScreen::LoadFirstPartForMap()
 
 GameScreen::~GameScreen()
 {
+	gIsClient = false;
+	gIsServer = false;
+
 	//Clear all instance lists
 	while (!mRealEnemies.empty())
 	{
