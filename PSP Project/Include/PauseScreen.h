@@ -7,8 +7,9 @@
 #define PAUSESCREEN_H_INCLUDED
 
 #include "../Include/ILib.h"
+#include "../Include/GameScreen.h"
 
-class PauseScreen : public IScreen
+class PauseScreen
 {
 private:
 

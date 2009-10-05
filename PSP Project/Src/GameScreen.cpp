@@ -8,6 +8,7 @@
 
 //Statics
 bool gWin;
+bool GameScreen::gPauseGame;
 GameScreen *GameScreen::gGameReference = NULL;
 
 GameScreen::GameScreen()
@@ -22,8 +23,11 @@ GameScreen::GameScreen()
 
 	LoadFirstPartForMap();
 
+	pauseScreenReference = new PauseScreen();
+
 	mActiveWaves = 0;
 	mWaveIsRunning = false;
+	gPauseGame = false;
 
 	gGameReference = this;
 
@@ -148,6 +152,7 @@ GameScreen::~GameScreen()
 	CleanEnemies();
 	delete(mGameMap);
 	delete(mGameGUI);
+	delete(pauseScreenReference);
 
 	if(mAdhocReference != NULL){
 		oslAdhocTerm();
@@ -170,6 +175,11 @@ void GameScreen::drawGrid()
 
 void GameScreen::draw()
 {
+	if(mGameState == GS_PAUSE_MENU && gPauseGame)
+	{
+		pauseScreenReference->draw();
+		return;
+	}
 	mGameMap->draw();
 #ifdef DEBUG
 	oslPrintf_xy(0,0,"mPlayerMoney %d", mPlayerMoney);
@@ -213,13 +223,12 @@ void GameScreen::draw()
 
 void GameScreen::update(u64 timePassed)
 {
-	/*
-	*	Dogo : Vai buga futuramente, o pause nao pode deletar a tela anterior ou seja a tela do jogo,
-	*	pois quando voltar do pause nao vai mais ter referencia do jogo.
-	*   TODO : Pensar como pausar!
-	*   Dogo 10/03/09 -> Congelar o jogo, pintar a tela de pause por cima, quando voltar ao jogo repintar e voltar o
-	*   estado do jogo.
-	*/
+	if (mGameState == GS_PAUSE_MENU  && gPauseGame)
+	{
+		pauseScreenReference->update(timePassed);
+		return;
+	}
+
 #ifndef JPCSP_EMULATOR
 	if (gIsServer && oslIsWlanPowerOn())
 	{
@@ -385,10 +394,11 @@ void GameScreen::update(u64 timePassed)
 		}
 	}
 	
-	if(osl_keys->pressed.start)
+	if(osl_keys->pressed.start && !gPauseGame)
 	{	
 		oslFlushKey();
-		mNextScreen = ScreenManager::SCREEN_PAUSE; //Pause game!
+		gPauseGame = !gPauseGame; //Pause game!
+		SetGameState(GS_PAUSE_MENU);
 	}
 	if(osl_keys->pressed.circle)
 	{

@@ -8,6 +8,7 @@
 
 //Class Declarations
 class GameGUI;
+class PauseScreen;
 
 #include "../Include/ILib.h"
 #include "../Include/Projectile.h"
@@ -16,6 +17,7 @@ class GameGUI;
 #include "../Include/GameGUI.h"
 #include "../Include/Map.h"
 #include "../Include/Adhoc.h"
+#include "../Include/PauseScreen.h"
 #include <map>
 #include <list>
 
@@ -58,6 +60,7 @@ private:
 	float mPlayerPoints;
 	unsigned int mActiveWaves;
 	bool mWaveIsRunning;
+	PauseScreen *pauseScreenReference;
 	list<TowerInstance*> mRealTowers;  //Current builded towers
 	list<EnemyInstance*> mRealEnemies; //Current spawned enemies
 	//ad hoc
@@ -78,6 +81,7 @@ public:
 	void TryRunNextWave();
 	bool mDeleteEnemy;
 	static GameScreen *gGameReference;
+	static bool gPauseGame;
 	list<ProjectileInstance*> mRealProjectiles;   //Current shots
 
 	virtual ~GameScreen();

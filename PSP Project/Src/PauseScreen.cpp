@@ -45,13 +45,17 @@ void PauseScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 	if(osl_keys->pressed.circle)
 	{
 		oslFlushKey();
-		mNextScreen = ScreenManager::SCREEN_GAME; //go back CLR
+		GameScreen::gPauseGame = !GameScreen::gPauseGame;
+		GameScreen::gGameReference->SetGameState(GS_SCROLL_MAP); //go back CLR
 	}
 	if(osl_keys->pressed.cross)
 	{
 		oslFlushKey();
 		if(gMenu == 0)
-			mNextScreen = ScreenManager::SCREEN_GAME; //go back CLR
+		{
+			GameScreen::gPauseGame = !GameScreen::gPauseGame;
+			GameScreen::gGameReference->SetGameState(GS_SCROLL_MAP); //go back CLR
+		}
 		else if (gMenu == 1)
 		{
 			mNextScreen = ScreenManager::SCREEN_MAIN_MENU;
