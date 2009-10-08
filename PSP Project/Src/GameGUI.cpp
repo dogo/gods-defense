@@ -219,7 +219,7 @@ void GameGUI::draw()
 				mTowerItems[y]->drawIcons();
 			}
 		}
-		oslDrawImageXY(mSelectorSidebar, (480-40), 29 + (mSelectedItemY * 61)); //(PSP Screen - sidebar - 8 to align, Side bar spacing + (Selected Item * Image->Y));
+		oslDrawImageXY(mSelectorSidebar, (480-43), 26 + (mSelectedItemY * 61)); //(PSP Screen - sidebar - 8 to align, Side bar spacing + (Selected Item * Image->Y));
 		mTowerItems[mSelectedItemY]->drawTowerInfo(mSelectedItemY);
 	}
 	oslDrawImageXY(mHud, 0, 0);
