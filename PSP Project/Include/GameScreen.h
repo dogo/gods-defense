@@ -49,6 +49,8 @@ private:
 	void CleanTowers();
 	void CleanEnemies();
 	void RunNextWave(const bool &forceRunNow);
+	int GetNextWaveNumber() const;
+	int GetWaveCount() const;
 	void drawGrid();
 
 	OSL_IMAGE *mMap;

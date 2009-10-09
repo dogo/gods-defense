@@ -528,7 +528,21 @@ void GameScreen::RunNextWave(const bool &forceRunNow)
 	mWaveIsRunning = true;
 	if(mActiveWaves < mGameMap->mWaves.size());
 	{
+		char title[256];
+		sprintf(title, "Wave %i of %i", GetNextWaveNumber(), GetWaveCount());
+		oslMessageBox(mGameMap->mWaves[mActiveWaves]->mWaveDescription, title, oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
+		sceKernelDelayThread(1400);
 		mGameMap->mWaves[mActiveWaves]->StartEnemySpawn();
 		mActiveWaves++;
 	}
+}
+
+int GameScreen::GetNextWaveNumber() const
+{
+	return mActiveWaves + 1;
+}
+
+int GameScreen::GetWaveCount() const
+{
+	return mGameMap->mWaves.size();
 }
