@@ -262,7 +262,7 @@ void GameGUI::updateHud()
 	char goldBuffer[256];
 	sprintf(goldBuffer, "%i", mGame->GetPlayerMoney());
 	oslIntraFontSetStyle(gFont, 0.75f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
-	oslDrawStringLimited(25, 7, 55, goldBuffer);
+	oslDrawStringLimited(27, 7, 55, goldBuffer);
 
 	//Update Lives
 	char liveBuffer[256];
