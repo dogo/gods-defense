@@ -255,20 +255,20 @@ void GameGUI::SelectedTowerItem()
 	}
 }
 
-//Head-up display
+//Heads-up display
 void GameGUI::updateHud()
 {
 	//Update gold
 	char goldBuffer[256];
 	sprintf(goldBuffer, "%i", mGame->GetPlayerMoney());
-	oslIntraFontSetStyle(gFont, 0.75f,RGBA(0,0,0,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
-	oslDrawStringLimited(15, 5, 80, goldBuffer);
+	oslIntraFontSetStyle(gFont, 0.75f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+	oslDrawStringLimited(25, 7, 55, goldBuffer);
 
 	//Update Lives
 	char liveBuffer[256];
 	sprintf(liveBuffer, "%i", mGame->GetPlayerLives());
-	oslIntraFontSetStyle(gFont, 0.75f,RGBA(0,0,0,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
-	oslDrawStringLimited(95, 5, 30, liveBuffer);
+	oslIntraFontSetStyle(gFont, 0.75f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+	oslDrawStringLimited(90, 7, 40, liveBuffer);
 }
 
 void SidebarItem::Selected()
