@@ -47,6 +47,7 @@ GameScreen::GameScreen()
 		mAdhocReference->AdhocServer();
 	}
 #endif
+	mShowDesc = true;
 }
 
 void GameScreen::LoadMap(const string &mapName)
@@ -178,16 +179,17 @@ void GameScreen::drawGrid()
 
 void GameScreen::draw()
 {
+	//Draw Pause Screen
 	if(mGameState == GS_PAUSE_MENU && gPauseGame)
 	{
 		pauseScreenReference->draw();
 		return;
 	}
+
+	//Draw Map
 	mGameMap->draw();
-#ifdef DEBUG
-	oslPrintf_xy(0,0,"mPlayerMoney %d", mPlayerMoney);
-	oslPrintf_xy(0,10,"mPlayerLives %d", mPlayerLives);
-#endif
+
+	//Draw Grid
 	if(mGameState == GS_MAP_PLACE_TOWER)
 	{
 		drawGrid();
@@ -214,19 +216,20 @@ void GameScreen::draw()
 		(*si_iter)->ProjectileRender();
 	}
 
+	//Draw GUI
 	mGameGUI->RenderPlacingTower();
 	mGameGUI->draw();
+
+#ifdef _DEBUG
 	if(gIsClient && oslIsWlanPowerOn())
 		mAdhocReference->printInfo();
-#ifdef DEBUG
-	oslPrintf_xy(0,20,"Value of joystick X : %d",osl_keys->analogX);
-	oslPrintf_xy(0,30,"Value of joystick Y : %d",osl_keys->analogY);			
 #endif
 }
 
 void GameScreen::update(u64 timePassed)
 {
-	if (mGameState == GS_PAUSE_MENU  && gPauseGame)
+	//Run Pause
+	if (mGameState == GS_PAUSE_MENU && gPauseGame)
 	{
 		pauseScreenReference->update(timePassed);
 		return;
@@ -369,6 +372,13 @@ void GameScreen::update(u64 timePassed)
 	//Check if player is dead
 	if (mGameState != GS_GAME_OVER)
 	{
+		//Show once map description
+		if(mShowDesc)
+		{
+			SetGameState(GS_GAME_LOADED);
+			mShowDesc = false;
+		}
+
 		if (mPlayerLives <= 0)
 		{
 			//Loose, if ad hoc is on the other player can continue to play
@@ -402,10 +412,6 @@ void GameScreen::update(u64 timePassed)
 		oslFlushKey();
 		gPauseGame = !gPauseGame; //Pause game!
 		SetGameState(GS_PAUSE_MENU);
-	}
-	if(osl_keys->pressed.circle)
-	{
-		oslFlushKey();
 	}
 }
 

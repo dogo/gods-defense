@@ -92,7 +92,7 @@ void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 	const GameState currentGameState = mGame->GetGameState();
 	const GameConnectionState currentGameConnectionState = mGame->GetGameConnectionState();
 	int i;
-#ifdef DEBUG
+#ifdef _DEBUG
 	oslPrintf_xy(0,10,"currentGameState %d",currentGameState);
 #endif
 #ifndef JPCSP_EMULATOR
@@ -100,6 +100,12 @@ void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 	if(gIsServer && oslIsWlanPowerOn() && currentGameConnectionState == GCS_WAITING_CONNECTION)
 		return;
 #endif
+
+	if(currentGameState == GS_GAME_LOADED)
+	{
+		oslMessageBox(mGame->GetGameMap()->mDescription[0], Resource::STR_MAP_DESC, oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
+		mGame->SetGameState(GS_SCROLL_MAP);
+	}
 
 	//Scroll the map
 	if (currentGameState == GS_SCROLL_MAP || currentGameState == GS_MAP_PLACE_TOWER)
@@ -287,10 +293,6 @@ void SidebarItem::Selected()
 			oslMessageBox("More gold is required.", "Warning", oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
 			gamegui->mGame->SetGameState(GS_SCROLL_MAP);
 		}
-	}
-	else
-	{
-		oslWarning("Else");
 	}
 }
 

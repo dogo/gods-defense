@@ -321,7 +321,7 @@ void EnemyInstance::RenderEnemy()
 	mEnemy->mEnemyImg->angle = (mAngle * 180/M_PI);
 	DrawImageFrameXY(mEnemy->mEnemyImg, mEnemyPosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y, mEnemy->mAliveFrames);
 	RenderLife();
-#ifdef DEBUG
+#ifdef _DEBUG
 	oslPrintf_xy(0,30, "Enemy X-> %f    Enemy Y %f  mAngle %d", mEnemyPosition.X, mEnemyPosition.Y, mEnemy->mEnemyImg->angle);
 #endif
 }

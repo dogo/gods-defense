@@ -29,7 +29,8 @@ enum GameState
 	GS_MAP_PLACE_TOWER,		//User has selected a tower to build and is placing it on the map
 	GS_PAUSE_MENU,			//Pause menu in game
 	GS_TOWER_MENU,			//User is choosing a tower from the menu
-	GS_GAME_OVER			//Player has won or loose the game
+	GS_GAME_OVER,			//Player has won or loose the game
+	GS_GAME_LOADED
 };
 
 enum GameConnectionState
@@ -62,6 +63,7 @@ private:
 	float mPlayerPoints;
 	unsigned int mActiveWaves;
 	bool mWaveIsRunning;
+	bool mShowDesc;
 	PauseScreen *pauseScreenReference;
 	list<TowerInstance*> mRealTowers;  //Current builded towers
 	//ad hoc
