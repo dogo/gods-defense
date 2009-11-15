@@ -1,0 +1,14 @@
+<!DOCTYPE Enemy SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/enemy.dtd">
+<Enemy>
+	<Name>Minotaur</Name>
+	<Description>The Minotaur is a half-man half-bull, which lives in the maze developed and built by Daedalus.</Description>
+	<Size>8</Size>
+	<Stats>
+		<Stat Health="200" GoldValue="10" PointValue="30" Speed="50" CanFly="False" HasImunity="False"/>
+	</Stats>
+	
+	<EnemyImg File="minotaur.png" Frames="4" Width="2" Height="2" />
+	<EnemyDeath File="DefaultEnemyDeath.png" Frames="4" Width="2" Height="2" />
+	
+	<DeathSound File="death.wav"/>
+</Enemy>
