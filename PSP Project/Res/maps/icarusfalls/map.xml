@@ -1,7 +1,7 @@
 <!DOCTYPE Map SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/map.dtd">
 <Map>
     <Name>Icarus Falls</Name>
-    <Description><![CDATA[5 Waves of Tower.]]></Description>
+    <Description><![CDATA[7 Waves of Tower.]]></Description>
     <Initializers Gold="40" Lives="20" />
 
     <Menu>
@@ -48,20 +48,26 @@ __#_#######_#_#
     </Path>
     
     <Waves>
-        <Wave Path="default" IntervalSpawnTime="600" Description="Wave 1!">
-            <Enemy Folder="flycobra" NumberOfEnemies="20" />
+	    <Wave Path="default" IntervalSpawnTime="600" Description="Wave 1!">
+            <Enemy Folder="minions" NumberOfEnemies="20" />
         </Wave>
         <Wave Path="default" IntervalSpawnTime="900" Description="Wave 2!">
-            <Enemy Folder="superduck" NumberOfEnemies="20" />
+            <Enemy Folder="cyclops" NumberOfEnemies="20" />
         </Wave>
         <Wave Path="default" IntervalSpawnTime="600" Description="Wave 3!">
-            <Enemy Folder="flycobra" NumberOfEnemies="20" />
+            <Enemy Folder="griffin" NumberOfEnemies="20" />
         </Wave>
-        <Wave Path="default" IntervalSpawnTime="600" Description="Wave 4!">
-            <Enemy Folder="testenemy" NumberOfEnemies="20" />
+        <Wave Path="default" IntervalSpawnTime="600" Description="Wave 4 Bosssss!" Boss="True">
+            <Enemy Folder="cerberus" NumberOfEnemies="1" />
         </Wave>
-        <Wave Path="default" IntervalSpawnTime="600" Description="Wave 5 Bosssss!" Boss="True">
-            <Enemy Folder="testenemy" NumberOfEnemies="1" />
+        <Wave Path="default" IntervalSpawnTime="600" Description="Wave 5!">
+            <Enemy Folder="minotaur" NumberOfEnemies="20" />
+        </Wave>
+        <Wave Path="default" IntervalSpawnTime="600" Description="Wave 6!">
+            <Enemy Folder="hydra" NumberOfEnemies="20" />
+        </Wave>
+		<Wave Path="default" IntervalSpawnTime="600" Description="Wave 7 Bosssss!" Boss="True">
+            <Enemy Folder="medusa" NumberOfEnemies="1" />
         </Wave>
     </Waves>
 </Map>
