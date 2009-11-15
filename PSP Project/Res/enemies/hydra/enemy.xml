@@ -1,0 +1,14 @@
+<!DOCTYPE Enemy SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/enemy.dtd">
+<Enemy>
+	<Name>Hydra</Name>
+	<Description>Hydra possesses the body of a dragon, several heads, which regenerate when cut and have a poisonous breath.</Description>
+	<Size>8</Size>
+	<Stats>
+		<Stat Health="100" GoldValue="10" PointValue="30" Speed="55" CanFly="False" HasImunity="False"/>
+	</Stats>
+	
+	<EnemyImg File="hydra.png" Frames="4" Width="2" Height="2" />
+	<EnemyDeath File="DefaultEnemyDeath.png" Frames="4" Width="2" Height="2" />
+	
+	<DeathSound File="death.wav"/>
+</Enemy>
