@@ -4,7 +4,7 @@
 	<Description>Griffin are formidable animals are made up of half lion and half eagle.</Description>
 	<Size>8</Size>
 	<Stats>
-		<Stat Health="10" GoldValue="10" PointValue="30" Speed="20" CanFly="True" HasImunity="False"/>
+		<Stat Health="60" GoldValue="3" PointValue="30" Speed="45" CanFly="True" HasImunity="False"/>
 	</Stats>
 	
 	<EnemyImg File="griffin.png" Frames="4" Width="2" Height="2" />

@@ -342,9 +342,11 @@ void GameScreen::update(u64 timePassed)
 				mPlayerPoints += ((*ei_iter)->GetPointsWorth());
 			break;
 
-			case ENEMY_HIT_THE_END: //Got to the end of the path, make the player lose a life
+			case ENEMY_HIT_THE_END: //Got to the end of the path, make the player lose a life and gold
 				//Lose life
 				mPlayerLives--;
+				//Lose Gold
+				mPlayerMoney -= (*ei_iter)->GetGold();
 			break;
 
 			case ENEMY_FULLY_DEAD: //Dead and done

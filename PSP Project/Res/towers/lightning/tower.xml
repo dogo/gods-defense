@@ -7,11 +7,11 @@
 	
 	<Projectile Type="Lightning" Sprite="ST_Lightning.png" />
 	<TowersLevels>
-		<TowersLevel Cost="40" SellAmount="32"  Damage="70"  ROF="3000" Range="160" Splash="0" Speed="0"/>
-		<TowersLevel Cost="40" SellAmount="64"  Damage="120" ROF="3000" Range="160" Splash="0" Speed="0"/>
-		<TowersLevel Cost="50" SellAmount="104" Damage="175" ROF="3000" Range="180" Splash="0" Speed="0"/>
-		<TowersLevel Cost="60" SellAmount="152" Damage="235" ROF="3000" Range="180" Splash="0" Speed="0"/>
-		<TowersLevel Cost="70" SellAmount="208" Damage="300" ROF="3000" Range="220" Splash="0" Speed="0"/>
+		<TowersLevel Cost="100" SellAmount="32"  Damage="80" ROF="3000" Range="160" Splash="0" Speed="0"/>
+		<TowersLevel Cost="120" SellAmount="64"  Damage="120" ROF="3000" Range="160" Splash="0" Speed="0"/>
+		<TowersLevel Cost="130" SellAmount="104" Damage="175" ROF="3000" Range="180" Splash="0" Speed="0"/>
+		<TowersLevel Cost="160" SellAmount="152" Damage="235" ROF="3000" Range="180" Splash="0" Speed="0"/>
+		<TowersLevel Cost="170" SellAmount="208" Damage="300" ROF="3000" Range="220" Splash="0" Speed="0"/>
 	</TowersLevels>
 	
 	<TowerImg File="tower.png" Width="2" Height="2" />

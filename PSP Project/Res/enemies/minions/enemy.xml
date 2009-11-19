@@ -4,10 +4,10 @@
 	<Description>Simple Ground Enemy</Description>
 	<Size>8</Size>
 	<Stats>
-		<Stat Health="10" GoldValue="1" PointValue="30" Speed="50" CanFly="False" HasImunity="False"/>
+		<Stat Health="10" GoldValue="1" PointValue="10" Speed="50" CanFly="False" HasImunity="False"/>
 	</Stats>
 	
-	<EnemyImg File="medusa_minions.png" Frames="4" Width="2" Height="2" />
+	<EnemyImg File="MedusaMinions.png" Frames="4" Width="2" Height="2" />
 	<EnemyDeath File="DefaultEnemyDeath.png" Frames="4" Width="2" Height="2" />
 	
 	<DeathSound File="death.wav"/>

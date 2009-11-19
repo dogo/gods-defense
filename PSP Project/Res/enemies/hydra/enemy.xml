@@ -4,7 +4,7 @@
 	<Description>Hydra possesses the body of a dragon, several heads, which regenerate when cut and have a poisonous breath.</Description>
 	<Size>8</Size>
 	<Stats>
-		<Stat Health="100" GoldValue="10" PointValue="30" Speed="55" CanFly="False" HasImunity="False"/>
+		<Stat Health="250" GoldValue="11" PointValue="50" Speed="55" CanFly="False" HasImunity="False"/>
 	</Stats>
 	
 	<EnemyImg File="hydra.png" Frames="4" Width="2" Height="2" />

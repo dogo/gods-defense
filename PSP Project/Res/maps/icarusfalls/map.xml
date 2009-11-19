@@ -2,7 +2,7 @@
 <Map>
     <Name>Icarus Falls</Name>
     <Description><![CDATA[7 Waves of Tower.]]></Description>
-    <Initializers Gold="40" Lives="20" />
+    <Initializers Gold="20" Lives="20" />
 
     <Menu>
         <BuildTowerMenu Y="0" Folder="arrow" />
@@ -48,19 +48,19 @@ __#_#######_#_#
     </Path>
     
     <Waves>
-	    <Wave Path="default" IntervalSpawnTime="600" Description="Wave 1!">
+	    <Wave Path="default" IntervalSpawnTime="900" Description="Wave 1!">
             <Enemy Folder="minions" NumberOfEnemies="20" />
         </Wave>
         <Wave Path="default" IntervalSpawnTime="900" Description="Wave 2!">
             <Enemy Folder="cyclops" NumberOfEnemies="20" />
         </Wave>
-        <Wave Path="default" IntervalSpawnTime="600" Description="Wave 3!">
+        <Wave Path="default" IntervalSpawnTime="900" Description="Wave 3!">
             <Enemy Folder="griffin" NumberOfEnemies="20" />
         </Wave>
         <Wave Path="default" IntervalSpawnTime="600" Description="Wave 4 Bosssss!" Boss="True">
             <Enemy Folder="cerberus" NumberOfEnemies="1" />
         </Wave>
-        <Wave Path="default" IntervalSpawnTime="600" Description="Wave 5!">
+        <Wave Path="default" IntervalSpawnTime="900" Description="Wave 5!">
             <Enemy Folder="minotaur" NumberOfEnemies="20" />
         </Wave>
         <Wave Path="default" IntervalSpawnTime="600" Description="Wave 6!">

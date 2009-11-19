@@ -4,7 +4,7 @@
 	<Description>Cyclops are called "The blacksmith of the gods" because they are the creatures responsible for forging the powerful rays used by Zeus</Description>
 	<Size>8</Size>
 	<Stats>
-		<Stat Health="100" GoldValue="10" PointValue="30" Speed="55" CanFly="False" HasImunity="False"/>
+		<Stat Health="30" GoldValue="2" PointValue="20" Speed="55" CanFly="False" HasImunity="False"/>
 	</Stats>
 	
 	<EnemyImg File="cyclops.png" Frames="4" Width="2" Height="2" />
