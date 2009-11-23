@@ -346,7 +346,7 @@ void GameScreen::update(u64 timePassed)
 				//Lose life
 				mPlayerLives--;
 				//Lose Gold
-				mPlayerMoney -= (*ei_iter)->GetGold();
+				mPlayerMoney -= ((*ei_iter)->GetGold());
 			break;
 
 			case ENEMY_FULLY_DEAD: //Dead and done

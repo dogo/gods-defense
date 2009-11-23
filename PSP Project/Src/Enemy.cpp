@@ -345,7 +345,7 @@ mEnemyPosition.X < 0 |---------------------------| mEnemyPosition.X >= 480
 					 |						     |
 mEnemyPosition.Y < 0 |---------------------------| mEnemyPosition.Y >= 480
 	*/
-	return !(mEnemyPosition.X < 0 || mEnemyPosition.X >= MAPSIZE || GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y < 0 || GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y >= MAPSIZE);
+	return !(mEnemyPosition.X < 0 || mEnemyPosition.X >= MAPSIZE || mEnemyPosition.Y < 0 || mEnemyPosition.Y >= MAPSIZE);
 }
 
 void EnemyInstance::EnemyReciveDamage(const int &damage, const float &slowAmount, const int &slowLength)
