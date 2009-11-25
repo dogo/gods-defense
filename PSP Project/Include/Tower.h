@@ -100,6 +100,7 @@ class TowerInstance
 {
 public:
 	Tower *mTower;
+	Coordinates2D mTowerPosition; //Tower Center
 
 	TowerInstance(Tower *tower, const Coordinates2D &position);	
 	void Update(unsigned timePassed, const list<EnemyInstance*> &enemies);
@@ -109,7 +110,6 @@ public:
 
 	unsigned int mCurrentMap;
 private:
-	Coordinates2D mTowerPosition; //Tower Center
 	int mProjectileInterval;
 
 	EnemyInstance *mTowerTarget;

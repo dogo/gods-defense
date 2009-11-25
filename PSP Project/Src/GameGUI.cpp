@@ -142,7 +142,9 @@ void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 
 		else if (osl_keys->pressed.cross)
 		{
-			if (currentGameState == GS_MAP_PLACE_TOWER)
+			if (currentGameState == GS_SCROLL_MAP)
+				mGame->TrySelectTower(Coordinates2D::Coordinates2D(mCursor->x, mCursor->y + fabsf(mGame->GetGameMap()->mScrollAmount)));
+			else if (currentGameState == GS_MAP_PLACE_TOWER)
 			{
 				if (mGame->TryBuildTower(mPuttingTower, Coordinates2D::Coordinates2D(mCursor->x, mCursor->y + fabsf(mGame->GetGameMap()->mScrollAmount))))
 				{

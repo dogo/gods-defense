@@ -33,6 +33,8 @@ GameScreen::GameScreen()
 
 	gWin = false;
 
+	mSelectedTower = NULL;
+
 	mAdhocReference = NULL;
 
 #ifndef JPCSP_EMULATOR
@@ -278,11 +280,12 @@ void GameScreen::update(u64 timePassed)
 		{
 			mWaveIsRunning = false;
 
-			if (mGameMap->mWaves[j]->EndOfOneWave())
+			//Dogo : We don't use this any more.
+			/*if (mGameMap->mWaves[j]->EndOfOneWave())
 			{
 				//Give Gold
 				mPlayerMoney += (mPlayerLives * (mGameMap->mWaves.size() - (mGameMap->mWaves.size() - j)));
-			}
+			}*/
 			
 			if (!mGameMap->mWaves[j]->EndOfWave())
 			{
@@ -515,6 +518,33 @@ bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)
 		return false;
 	}
 }
+
+//Try select the tower under the cursor (if there is one obv)
+bool GameScreen::TrySelectTower(const Coordinates2D &position)
+{
+	mSelectedTower = NULL;
+	//Test each tower for a collision
+
+	list<TowerInstance*>::const_iterator ti_iter;
+	for (ti_iter = mRealTowers.begin(); ti_iter != mRealTowers.end(); ti_iter++)
+	{
+		TowerInstance *t = (*ti_iter);
+		//If tower collides with cursor position 
+		//TODO : fix this
+		if (t->mTowerPosition.X-16 <= position.X &&  t->mTowerPosition.Y-16 <= position.Y &&
+				  t->mTowerPosition.X+16 > position.X && t->mTowerPosition.Y+16 > position.Y)
+		{
+			printf("TOWER SELECTED\n");
+			mSelectedTower = t;
+			//TODO : Set State to upgrade or sell tower
+			//SetGameState( \o/ -> upgrade or sell tower);
+			break;
+		}
+	}
+	
+	return (mSelectedTower != NULL);
+}
+
 
 Map *GameScreen::GetGameMap()
 {

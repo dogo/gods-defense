@@ -66,6 +66,7 @@ private:
 	bool mShowDesc;
 	PauseScreen *pauseScreenReference;
 	list<TowerInstance*> mRealTowers;  //Current builded towers
+	TowerInstance *mSelectedTower; //Tower we have selected for upgrading/selling (or null)
 	//ad hoc
 	Adhoc *mAdhocReference;
 	GameConnectionState mGameConnectionState;
@@ -80,6 +81,7 @@ public:
 	int const GetPlayerLives();
 	float const GetPlayerScore();
 	bool TryBuildTower(Tower *tower, Coordinates2D position);
+	bool TrySelectTower(const Coordinates2D &position);
 	Map *GetGameMap();
 	void TryRunNextWave();
 	bool mDeleteEnemy;
