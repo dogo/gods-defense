@@ -101,14 +101,14 @@ class TowerInstance
 public:
 	Tower *mTower;
 	Coordinates2D mTowerPosition; //Tower Center
+	unsigned int mTowerLevel; //Tower Level
 
 	TowerInstance(Tower *tower, const Coordinates2D &position);	
 	void Update(unsigned timePassed, const list<EnemyInstance*> &enemies);
 
 	void RenderTower();
-	void RenderRangeCircle();
+	void RenderRangeCircle(const OSL_COLOR color);
 
-	unsigned int mCurrentMap;
 private:
 	int mProjectileInterval;
 

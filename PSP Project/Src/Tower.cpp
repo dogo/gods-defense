@@ -218,16 +218,16 @@ void Tower::RenderTower(const Coordinates2D &position)
 	oslDrawImageXY(mTowerImg, position.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+position.Y);
 }
 
-void Tower::RenderRangeCircle(const Coordinates2D &position, const int &TowerInfo, const OSL_COLOR color)
+void Tower::RenderRangeCircle(const Coordinates2D &position, const int &TowerLevel, const OSL_COLOR color)
 {
-	GodLibrary::drawCircle(position.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+position.Y, mTowerVector[TowerInfo].mRange, color);
+	GodLibrary::drawCircle(position.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+position.Y, mTowerVector[TowerLevel].mRange, color);
 }
 
 TowerInstance::TowerInstance(Tower *tower, const Coordinates2D &position)
 {
 	int x = ((int)position.X / 32);
 	int y = ((int)position.Y / 32);
-	mCurrentMap = 0;
+	mTowerLevel = 0;
 	mTower = tower;
 	mTowerPosition = Coordinates2D::Coordinates2D(x*32, y*32);
 	mTowerTarget = NULL;
@@ -237,7 +237,7 @@ TowerInstance::TowerInstance(Tower *tower, const Coordinates2D &position)
 void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enemies)
 {
 	mProjectileInterval -= timePassed;
-	float mTowerSquareRange = mTower->mTowerVector[mCurrentMap].mRange * mTower->mTowerVector[mCurrentMap].mRange; //Range²
+	float mTowerSquareRange = mTower->mTowerVector[mTowerLevel].mRange * mTower->mTowerVector[mTowerLevel].mRange; //Range²
 
 	if (mTowerTarget && (mTowerTarget->EnemyIsDead() || mTowerPosition.SquareDistance(mTowerTarget->mEnemyPosition) > mTowerSquareRange || !mTowerTarget->EnemyStillOnMap()))
 	{
@@ -268,7 +268,7 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 		*/
 		if (mProjectileInterval <= 0)
 		{
-			mProjectileInterval = mTower->mTowerVector[mCurrentMap].mRateOfFire;
+			mProjectileInterval = mTower->mTowerVector[mTowerLevel].mRateOfFire;
 			ProjectileInstance::CreateProjectile(this, mTowerTarget);
 		}
 	}
@@ -279,11 +279,11 @@ void TowerInstance::RenderTower()
 	oslDrawImageXY(mTower->mTowerImg, mTowerPosition.X + (mTower->mTowerImg->sizeX/2), (mTower->mTowerImg->sizeY/2) + mTowerPosition.Y + GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount);
 }
 
-void TowerInstance::RenderRangeCircle()
+void TowerInstance::RenderRangeCircle(const OSL_COLOR color)
 {
 	Coordinates2D buildingPosition = Coordinates2D::Coordinates2D(mTowerPosition.X, mTowerPosition.Y);
 	//Snap :D \o/ workss
 	buildingPosition.X = (((int)(buildingPosition.X) / 32) * 32) + 16; // 32 == Width
 	buildingPosition.Y = (((int)(buildingPosition.Y) / 32) * 32) + 16; // 32 == Heigth
-	mTower->RenderRangeCircle(buildingPosition, 0, COLOR_RED);
+	mTower->RenderRangeCircle(buildingPosition, mTowerLevel, color);
 }

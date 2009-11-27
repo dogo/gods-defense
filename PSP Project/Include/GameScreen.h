@@ -30,7 +30,8 @@ enum GameState
 	GS_PAUSE_MENU,			//Pause menu in game
 	GS_TOWER_MENU,			//User is choosing a tower from the menu
 	GS_GAME_OVER,			//Player has won or loose the game
-	GS_GAME_LOADED
+	GS_GAME_LOADED,			//All game items are loaded
+	GS_TOWER_UPGRADE_SELL	//User has selected a tower to upgrade or sell
 };
 
 enum GameConnectionState
@@ -82,6 +83,7 @@ public:
 	float const GetPlayerScore();
 	bool TryBuildTower(Tower *tower, Coordinates2D position);
 	bool TrySelectTower(const Coordinates2D &position);
+	void drawUpgradeCircle();
 	Map *GetGameMap();
 	void TryRunNextWave();
 	bool mDeleteEnemy;

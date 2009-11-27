@@ -62,10 +62,10 @@ ProjectileInstance::ProjectileInstance(TowerInstance *shooter, EnemyInstance *ta
 	mHitSize = target->mEnemy->mSize;
 	mHitsFlyer = shooter->mTower->mHitsFlyer;
 	mHitsLand = shooter->mTower->mHitsLand;
-	mSlowAmount = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSlowAmount;
-	mSlowLength = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSlowLength;
-	mTowerDamage = shooter->mTower->mTowerVector[shooter->mCurrentMap].mDamage;
-	mSplashRangeSqrd = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSplashRange;
+	mSlowAmount = shooter->mTower->mTowerVector[shooter->mTowerLevel].mSlowAmount;
+	mSlowLength = shooter->mTower->mTowerVector[shooter->mTowerLevel].mSlowLength;
+	mTowerDamage = shooter->mTower->mTowerVector[shooter->mTowerLevel].mDamage;
+	mSplashRangeSqrd = shooter->mTower->mTowerVector[shooter->mTowerLevel].mSplashRange;
 	mSplashRangeSqrd *= mSplashRangeSqrd;
 
 	mTarget->AddReference();
@@ -113,7 +113,7 @@ void ProjectileInstance::DealDamage()
 //ArrowInstance
 ArrowInstance::ArrowInstance(TowerInstance *shooter, EnemyInstance *target)	: ProjectileInstance(shooter, target)
 {
-	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSpeed;
+	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mTowerLevel].mSpeed;
 	mAngle = mProjectilePosition.AimTo(mTarget->mEnemyPosition);
 
 	if (mFireSound != NULL)
@@ -160,7 +160,7 @@ void ArrowInstance::ProjectileRender()
 //IceInstance
 IceInstance::IceInstance(TowerInstance *shooter, EnemyInstance *target)	: ProjectileInstance(shooter, target)
 {
-	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSpeed;
+	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mTowerLevel].mSpeed;
 	mAngle = mProjectilePosition.AimTo(mTarget->mEnemyPosition);
 
 	if (mFireSound != NULL)
@@ -236,7 +236,7 @@ void LightningInstance::ProjectileRender()
 //FireInstance
 FireInstance::FireInstance(TowerInstance *shooter, EnemyInstance *target)	: ProjectileInstance(shooter, target)
 {
-	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mCurrentMap].mSpeed;
+	mMovementSpeed = shooter->mTower->mTowerVector[shooter->mTowerLevel].mSpeed;
 	mAngle = mProjectilePosition.AimTo(mTarget->mEnemyPosition);
 
 	if (mFireSound != NULL)

@@ -197,6 +197,12 @@ void GameScreen::draw()
 		drawGrid();
 	}
 
+	if(mGameState == GS_TOWER_UPGRADE_SELL)
+	{
+		drawUpgradeCircle();
+		//mGameGUI->drawSelectedTowerOptions();
+	}
+
 	//Draw the enemies
 	list<EnemyInstance*>::const_iterator realEnemies_iter;
 	for (realEnemies_iter = mRealEnemies.begin(); realEnemies_iter != mRealEnemies.end(); realEnemies_iter++)
@@ -279,14 +285,7 @@ void GameScreen::update(u64 timePassed)
 		for (unsigned int j = 0; j < mActiveWaves; j++)
 		{
 			mWaveIsRunning = false;
-
-			//Dogo : We don't use this any more.
-			/*if (mGameMap->mWaves[j]->EndOfOneWave())
-			{
-				//Give Gold
-				mPlayerMoney += (mPlayerLives * (mGameMap->mWaves.size() - (mGameMap->mWaves.size() - j)));
-			}*/
-			
+	
 			if (!mGameMap->mWaves[j]->EndOfWave())
 			{
 				mWaveIsRunning = true;
@@ -519,25 +518,27 @@ bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)
 	}
 }
 
-//Try select the tower under the cursor (if there is one obv)
+//Try select the tower under the cursor
 bool GameScreen::TrySelectTower(const Coordinates2D &position)
 {
 	mSelectedTower = NULL;
-	//Test each tower for a collision
+	int cursorX = ((int)position.X / 32);
+	int cursorY = ((int)position.Y / 32);
 
+	//Test each tower for a collision
 	list<TowerInstance*>::const_iterator ti_iter;
 	for (ti_iter = mRealTowers.begin(); ti_iter != mRealTowers.end(); ti_iter++)
 	{
 		TowerInstance *t = (*ti_iter);
-		//If tower collides with cursor position 
-		//TODO : fix this
-		if (t->mTowerPosition.X-16 <= position.X &&  t->mTowerPosition.Y-16 <= position.Y &&
-				  t->mTowerPosition.X+16 > position.X && t->mTowerPosition.Y+16 > position.Y)
+		int towerX = (int)((t->mTowerPosition.X) / 32);
+		int towerY = (int)((t->mTowerPosition.Y) / 32);
+		
+		//If tower collides with cursor position
+		if (towerX == cursorX && towerY == cursorY)
 		{
-			printf("TOWER SELECTED\n");
+			//printf("TOWER SELECTED\n");
 			mSelectedTower = t;
-			//TODO : Set State to upgrade or sell tower
-			//SetGameState( \o/ -> upgrade or sell tower);
+			SetGameState(GS_TOWER_UPGRADE_SELL);
 			break;
 		}
 	}
@@ -583,4 +584,17 @@ int GameScreen::GetNextWaveNumber() const
 int GameScreen::GetWaveCount() const
 {
 	return mGameMap->mWaves.size();
+}
+
+void GameScreen::drawUpgradeCircle()
+{
+	//Draw the current range for any selected tower
+	mSelectedTower->RenderRangeCircle(COLOR_RED);
+	if (mSelectedTower->mTowerLevel+1 < mSelectedTower->mTower->mTowerVector.size()) //If there is any upgrade to do
+	{
+		Coordinates2D buildingPosition = Coordinates2D::Coordinates2D(mSelectedTower->mTowerPosition.X, mSelectedTower->mTowerPosition.Y);
+		buildingPosition.X = (((int)(buildingPosition.X) / 32) * 32) + 16; // 32 == Width
+		buildingPosition.Y = (((int)(buildingPosition.Y) / 32) * 32) + 16; // 32 == Heigth
+		mSelectedTower->mTower->RenderRangeCircle(buildingPosition, mSelectedTower->mTowerLevel+1, COLOR_BLUE);
+	}
 }
