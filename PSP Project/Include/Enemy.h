@@ -63,14 +63,10 @@ public:
 	int mSize;
 	bool mCanFly;
 	OSL_IMAGE *mEnemyImg;
-	OSL_IMAGE *mEnemyImgDeath;
 	OSL_SOUND *mDeathSound;
 	int mEnemyWidth;
 	int mEnemyHeight;
 	int mAliveFrames;
-	int mEnemyDeathWidth;
-	int mEnemyDeathHeight;
-	int mDeathFrames;
 
 	vector<EnemyInfo> mEnemyVector;
 };

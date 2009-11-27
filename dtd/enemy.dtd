@@ -20,13 +20,7 @@
 <!ATTLIST EnemyImg Height NMTOKEN #REQUIRED >
 <!ATTLIST EnemyImg Width NMTOKEN #REQUIRED >
 
-<!ELEMENT EnemyDeath EMPTY >
-<!ATTLIST EnemyDeath File NMTOKEN #REQUIRED >
-<!ATTLIST EnemyDeath Frames NMTOKEN #REQUIRED >
-<!ATTLIST EnemyDeath Height NMTOKEN #REQUIRED >
-<!ATTLIST EnemyDeath Width NMTOKEN #REQUIRED >
-
 <!ELEMENT DeathSound EMPTY >
 <!ATTLIST DeathSound File NMTOKEN #IMPLIED >
 
-<!ELEMENT Enemy ( Name, Description, Size, Stats, EnemyImg?, EnemyDeath?, DeathSound? ) >
+<!ELEMENT Enemy ( Name, Description, Size, Stats, EnemyImg?, DeathSound? ) >

@@ -8,7 +8,6 @@
 	</Stats>
 	
 	<EnemyImg File="cerberus.png" Frames="4" Width="2" Height="2" />
-	<EnemyDeath File="DefaultEnemyDeath.png" Frames="4" Width="2" Height="2" />
 	
 	<DeathSound File="death.wav"/>
 </Enemy>
