@@ -48,6 +48,7 @@ public:
 	static char IMG_CURSOR[];
 	static char IMG_BACK[];
 	static char IMG_SIDEBAR[];
+	static char IMG_UPGRADEBAR[];
 	static char IMG_SELECTOR_SIDEBAR[];
 	static char IMG_CROSS[];
 	static char IMG_SQUARE[];

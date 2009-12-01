@@ -48,12 +48,15 @@ private:
 
 	OSL_IMAGE *mCursor;
 	OSL_IMAGE *mSidebar;
+	OSL_IMAGE *mUpgradebar;
 	OSL_IMAGE *mSelectorSidebar;
 	OSL_IMAGE *mHud;
 	static GameGUI *sGameGUIReference;
 	Tower *mPuttingTower;
 	bool mShowSidebar;
+	bool mShowUpgradebar;
 	int mSelectedItemY;
+	int mSelectedItemX;
 	SidebarItem *mTowerItems[4];
 };
 

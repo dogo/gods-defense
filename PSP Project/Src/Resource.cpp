@@ -14,6 +14,7 @@ char Resource::IMG_BACK[] = "/Res/circle.png";
 char Resource::IMG_CROSS[] = "/Res/x.png";
 char Resource::IMG_SQUARE[] = "/Res/square.png"; 
 char Resource::IMG_SIDEBAR[] = "/Res/sidebar.png";
+char Resource::IMG_UPGRADEBAR[] = "/Res/upgradebar.png";
 char Resource::IMG_SELECTOR_SIDEBAR[] = "/Res/selector.png";
 char Resource::IMG_HUD[] = "/Res/hud.png";
 

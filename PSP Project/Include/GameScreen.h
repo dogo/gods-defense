@@ -83,6 +83,7 @@ public:
 	float const GetPlayerScore();
 	bool TryBuildTower(Tower *tower, Coordinates2D position);
 	bool TrySelectTower(const Coordinates2D &position);
+	bool TryUpgradeSelectedTower();
 	void drawUpgradeCircle();
 	Map *GetGameMap();
 	void TryRunNextWave();

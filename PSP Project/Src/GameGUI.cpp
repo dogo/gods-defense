@@ -29,6 +29,8 @@ GameGUI::~GameGUI()
 		oslDeleteImage(mCursor);
 	if (mSidebar != NULL)
 		oslDeleteImage(mSidebar);
+	if (mUpgradebar != NULL)
+		oslDeleteImage(mUpgradebar);
 	if (mSelectorSidebar != NULL)
 		oslDeleteImage(mSelectorSidebar);
 	if (mHud != NULL)
@@ -44,6 +46,8 @@ void GameGUI::LoadStuffs()
 		oslDeleteImage(mCursor);
 	if (mSidebar != NULL)
 		oslDeleteImage(mSidebar);
+	if (mUpgradebar != NULL)
+		oslDeleteImage(mUpgradebar);
 	if (mSelectorSidebar != NULL)
 		oslDeleteImage(mSelectorSidebar);
 	if (mHud != NULL)
@@ -51,6 +55,7 @@ void GameGUI::LoadStuffs()
 	
 	mCursor = oslLoadImageFilePNG(Resource::IMG_CURSOR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	mSidebar = oslLoadImageFilePNG(Resource::IMG_SIDEBAR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	mUpgradebar = oslLoadImageFilePNG(Resource::IMG_UPGRADEBAR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	mSelectorSidebar = oslLoadImageFilePNG(Resource::IMG_SELECTOR_SIDEBAR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	mHud = oslLoadImageFilePNG(Resource::IMG_HUD, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
@@ -81,10 +86,13 @@ GameGUI::GameGUI(GameScreen *gameLogic)
 	mPuttingTower = NULL; //none tower is building
 	mCursor = NULL;
 	mSidebar = NULL;
+	mUpgradebar = NULL;
 	mHud = NULL;
 	mShowSidebar = false;
+	mShowUpgradebar = false;
 	mSelectorSidebar = NULL;
 	mSelectedItemY = 0;
+	mSelectedItemX = 0;
 }
 
 void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
@@ -143,7 +151,10 @@ void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 		else if (osl_keys->pressed.cross)
 		{
 			if (currentGameState == GS_SCROLL_MAP)
+			{
 				mGame->TrySelectTower(Coordinates2D::Coordinates2D(mCursor->x, mCursor->y + fabsf(mGame->GetGameMap()->mScrollAmount)));
+				mShowUpgradebar = !mShowUpgradebar;
+			}
 			else if (currentGameState == GS_MAP_PLACE_TOWER)
 			{
 				if (mGame->TryBuildTower(mPuttingTower, Coordinates2D::Coordinates2D(mCursor->x, mCursor->y + fabsf(mGame->GetGameMap()->mScrollAmount))))
@@ -176,6 +187,32 @@ void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 		{
 			mShowSidebar = !mShowSidebar;
 			mGame->SetGameState(GS_SCROLL_MAP);
+		}
+	}
+	if ((currentGameState == GS_TOWER_UPGRADE_SELL) && (mShowUpgradebar))
+	{
+		if (osl_keys->pressed.left)
+			mSelectedItemX = (mSelectedItemX-1+2)%2;
+		else if (osl_keys->pressed.right)
+			mSelectedItemX = (mSelectedItemX+1)%2;
+
+		else if ((osl_keys->pressed.circle) || (osl_keys->pressed.start))
+		{
+			mShowUpgradebar = !mShowUpgradebar;
+			mGame->SetGameState(GS_SCROLL_MAP);
+		}
+
+		else if (osl_keys->pressed.cross)
+		{
+			/*if (mGame->TryUpgradeSelectedTower())
+			{
+				mShowUpgradebar = !mShowUpgradebar;
+				mGame->SetGameState(GS_SCROLL_MAP);
+			}
+			else
+			{
+				//Can't upgrade
+			}*/
 		}
 	}
 }
@@ -229,6 +266,11 @@ void GameGUI::draw()
 		}
 		oslDrawImageXY(mSelectorSidebar, (480-43), 26 + (mSelectedItemY * 61)); //(PSP Screen - sidebar - 8 to align, Side bar spacing + (Selected Item * Image->Y));
 		mTowerItems[mSelectedItemY]->drawTowerInfo(mSelectedItemY);
+	}
+	else if (mShowUpgradebar && currentGameState == GS_TOWER_UPGRADE_SELL)
+	{
+		oslDrawImageXY(mUpgradebar, 0, (272-48));
+		oslDrawImageXY(mSelectorSidebar, 26 + (mSelectedItemX * 61), (272-42));
 	}
 	oslDrawImageXY(mHud, 0, 0);
 	oslDrawImage(mCursor);

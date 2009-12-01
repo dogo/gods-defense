@@ -598,3 +598,20 @@ void GameScreen::drawUpgradeCircle()
 		mSelectedTower->mTower->RenderRangeCircle(buildingPosition, mSelectedTower->mTowerLevel+1, COLOR_BLUE);
 	}
 }
+
+bool GameScreen::TryUpgradeSelectedTower()
+{
+	Tower *t = mSelectedTower->mTower;
+
+	//Tower not maxed can afford
+	if (mSelectedTower->mTowerLevel+1 < t->mTowerVector.size() && mPlayerMoney >= t->mTowerVector[mSelectedTower->mTowerLevel+1].mCost) 
+	{
+		mPlayerMoney -= t->mTowerVector[mSelectedTower->mTowerLevel+1].mCost;
+		mSelectedTower->mTowerLevel += 1;
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
