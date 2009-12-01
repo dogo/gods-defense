@@ -51,6 +51,8 @@ private:
 	OSL_IMAGE *mUpgradebar;
 	OSL_IMAGE *mSelectorSidebar;
 	OSL_IMAGE *mHud;
+	OSL_IMAGE *mSell;
+	OSL_IMAGE *mUpgrade;
 	static GameGUI *sGameGUIReference;
 	Tower *mPuttingTower;
 	bool mShowSidebar;

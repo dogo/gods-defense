@@ -35,6 +35,10 @@ GameGUI::~GameGUI()
 		oslDeleteImage(mSelectorSidebar);
 	if (mHud != NULL)
 		oslDeleteImage(mHud);
+	if (mSell != NULL)
+		oslDeleteImage(mSell);
+	if (mUpgrade != NULL)
+		oslDeleteImage(mUpgrade);
 	
 	sGameGUIReference = NULL;
 }
@@ -52,12 +56,18 @@ void GameGUI::LoadStuffs()
 		oslDeleteImage(mSelectorSidebar);
 	if (mHud != NULL)
 		oslDeleteImage(mHud);
+	if (mSell != NULL)
+		oslDeleteImage(mSell);
+	if (mUpgrade != NULL)
+		oslDeleteImage(mUpgrade);
 	
 	mCursor = oslLoadImageFilePNG(Resource::IMG_CURSOR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	mSidebar = oslLoadImageFilePNG(Resource::IMG_SIDEBAR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	mUpgradebar = oslLoadImageFilePNG(Resource::IMG_UPGRADEBAR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	mSelectorSidebar = oslLoadImageFilePNG(Resource::IMG_SELECTOR_SIDEBAR, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	mHud = oslLoadImageFilePNG(Resource::IMG_HUD, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	mSell = oslLoadImageFilePNG(Resource::IMG_SELL, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	mUpgrade = oslLoadImageFilePNG(Resource::IMG_UPGRADE, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
 	//Initialize variables
 	mCursor->x = 480/2;	//Place cursor at the center of the screen
@@ -88,9 +98,11 @@ GameGUI::GameGUI(GameScreen *gameLogic)
 	mSidebar = NULL;
 	mUpgradebar = NULL;
 	mHud = NULL;
+	mSell = NULL;
+	mUpgrade = NULL;
+	mSelectorSidebar = NULL;
 	mShowSidebar = false;
 	mShowUpgradebar = false;
-	mSelectorSidebar = NULL;
 	mSelectedItemY = 0;
 	mSelectedItemX = 0;
 }
@@ -270,6 +282,8 @@ void GameGUI::draw()
 	else if (mShowUpgradebar && currentGameState == GS_TOWER_UPGRADE_SELL)
 	{
 		oslDrawImageXY(mUpgradebar, 0, (272-48));
+		oslDrawImageXY(mUpgrade, 28, (272-40));
+		oslDrawImageXY(mSell, 89, (272-40));
 		oslDrawImageXY(mSelectorSidebar, 26 + (mSelectedItemX * 61), (272-42));
 	}
 	oslDrawImageXY(mHud, 0, 0);

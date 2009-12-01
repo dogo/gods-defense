@@ -53,6 +53,8 @@ public:
 	static char IMG_CROSS[];
 	static char IMG_SQUARE[];
 	static char IMG_HUD[];
+	static char IMG_SELL[];
+	static char IMG_UPGRADE[];
 };
 
 
