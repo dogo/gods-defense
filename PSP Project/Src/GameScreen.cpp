@@ -608,6 +608,7 @@ bool GameScreen::TryUpgradeSelectedTower()
 	{
 		mPlayerMoney -= t->mTowerVector[mSelectedTower->mTowerLevel+1].mCost;
 		mSelectedTower->mTowerLevel += 1;
+		printf("Upgraded to level %d\n",mSelectedTower->mTowerLevel);
 		return true;
 	}
 	else
