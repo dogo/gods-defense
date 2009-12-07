@@ -113,7 +113,7 @@ void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 	const GameConnectionState currentGameConnectionState = mGame->GetGameConnectionState();
 	int i;
 #ifdef _DEBUG
-	oslPrintf_xy(0,10,"currentGameState %d",currentGameState);
+	oslPrintf_xy(0,20,"currentGameState %d",currentGameState);
 #endif
 #ifndef JPCSP_EMULATOR
 	//Server must wait other player to start 
@@ -164,8 +164,10 @@ void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 		{
 			if (currentGameState == GS_SCROLL_MAP)
 			{
-				mGame->TrySelectTower(Coordinates2D::Coordinates2D(mCursor->x, mCursor->y + fabsf(mGame->GetGameMap()->mScrollAmount)));
-				mShowUpgradebar = !mShowUpgradebar;
+				if(mGame->TrySelectTower(Coordinates2D::Coordinates2D(mCursor->x, mCursor->y + fabsf(mGame->GetGameMap()->mScrollAmount))))
+				{
+					mShowUpgradebar = !mShowUpgradebar;
+				}
 			}
 			else if (currentGameState == GS_MAP_PLACE_TOWER)
 			{
