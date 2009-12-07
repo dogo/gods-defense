@@ -84,6 +84,7 @@ public:
 	bool TryBuildTower(Tower *tower, Coordinates2D position);
 	bool TrySelectTower(const Coordinates2D &position);
 	bool TryUpgradeSelectedTower();
+	bool TrySellSelectedTower();
 	void drawUpgradeCircle();
 	Map *GetGameMap();
 	void TryRunNextWave();

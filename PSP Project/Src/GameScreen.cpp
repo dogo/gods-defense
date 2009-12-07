@@ -616,3 +616,21 @@ bool GameScreen::TryUpgradeSelectedTower()
 		return false;
 	}
 }
+
+bool GameScreen::TrySellSelectedTower()
+{
+	Tower *t = mSelectedTower->mTower;
+
+	//Selling tower
+	mPlayerMoney += (t->mTowerVector[mSelectedTower->mTowerLevel].mSellAmount);
+	printf("Sell tower level %d\n",mSelectedTower->mTowerLevel);
+	
+	int x = ((int)mSelectedTower->mTowerPosition.X / 32);
+	int y = ((int)mSelectedTower->mTowerPosition.Y / 32);
+	
+	//Roll back Collision Map
+	mGameMap->mCollisionMap[x][y] = true;
+
+	mRealTowers.remove(mSelectedTower);
+	return true;
+}

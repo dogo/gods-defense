@@ -218,18 +218,19 @@ void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
 
 		else if (osl_keys->pressed.cross)
 		{
-			if ((mSelectedItemX == 0) && (mGame->TryUpgradeSelectedTower()))
+			if((mSelectedItemX == 0) && (mGame->TryUpgradeSelectedTower()))
 			{
 				mShowUpgradebar = !mShowUpgradebar;
 				mGame->SetGameState(GS_SCROLL_MAP);
 			}
 			else if((mSelectedItemX == 0) && (!mGame->TryUpgradeSelectedTower()))
 			{
-				printf("Can't upgrade\n");
+				oslMessageBox("Can't upgrade.", "Warning", oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
 			}
-			if(mSelectedItemX == 1)
+			if((mSelectedItemX == 1) && (mGame->TrySellSelectedTower()))
 			{
-				printf("Sell\n");
+				mShowUpgradebar = !mShowUpgradebar;
+				mGame->SetGameState(GS_SCROLL_MAP);
 			}
 		}
 	}
