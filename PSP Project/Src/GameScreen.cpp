@@ -634,3 +634,16 @@ bool GameScreen::TrySellSelectedTower()
 	mRealTowers.remove(mSelectedTower);
 	return true;
 }
+
+unsigned int GameScreen::GetSelectedTowerLevel() const
+{
+	if (mSelectedTower != NULL)
+		return mSelectedTower->mTowerLevel;
+	else
+		return 0;
+}
+
+Tower *GameScreen::GetSelectedTower() const
+{
+	return mSelectedTower->mTower;
+}

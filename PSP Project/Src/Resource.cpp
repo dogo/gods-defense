@@ -38,6 +38,7 @@ char const Resource::STR_MAPSELECTION_CAPTION[] = "Map Selection";
 char const Resource::STR_ACT_LIKE_SERVER[] = ": to act like a server";
 char const Resource::STR_ACT_LIKE_CLIENT[] = ": to act like a client";
 char const Resource::STR_MAP_DESC[] = "Map Description";
+char const Resource::STR_MAX_REACHED[] = "Maximum reached";
 
 char const Resource::STR_WARNING_TEXT[] =
 	"WLAN switch is off.\n\n"

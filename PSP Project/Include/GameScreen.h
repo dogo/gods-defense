@@ -67,7 +67,6 @@ private:
 	bool mShowDesc;
 	PauseScreen *pauseScreenReference;
 	list<TowerInstance*> mRealTowers;  //Current builded towers
-	TowerInstance *mSelectedTower; //Tower we have selected for upgrading/selling (or null)
 	//ad hoc
 	Adhoc *mAdhocReference;
 	GameConnectionState mGameConnectionState;
@@ -78,6 +77,7 @@ public:
 	void LoadFirstPartForMap();
 	string *GetMenuTowers() const;
 	Tower *GetTower(const string &towerName) const;
+	Tower *GetSelectedTower() const;
 	int const GetPlayerMoney();
 	int const GetPlayerLives();
 	float const GetPlayerScore();
@@ -88,11 +88,13 @@ public:
 	void drawUpgradeCircle();
 	Map *GetGameMap();
 	void TryRunNextWave();
+	unsigned int GetSelectedTowerLevel() const;
 	bool mDeleteEnemy;
 	static GameScreen *gGameReference;
 	static bool gPauseGame;
 	list<ProjectileInstance*> mRealProjectiles;   //Current shots
 	list<EnemyInstance*> mRealEnemies; //Current spawned enemies
+	TowerInstance *mSelectedTower; //Tower we have selected for upgrading/selling (or null)
 
 	virtual ~GameScreen();
 

@@ -9,11 +9,11 @@
 	
 	<Projectile Type="Ice" Sprite="ST_Ice.png" />
 	<TowersLevels>
-		<TowersLevel Cost="30" SellAmount="32"  Damage="18" ROF="1200" Range="100" Splash="5"  Speed="200" SlowAmount="0.5" SlowLength="1000"/>
-		<TowersLevel Cost="40" SellAmount="64"  Damage="25" ROF="1200" Range="110" Splash="5"  Speed="200" SlowAmount="0.5" SlowLength="1000"/>
-		<TowersLevel Cost="50" SellAmount="104" Damage="37" ROF="1200" Range="120" Splash="10" Speed="200" SlowAmount="0.5" SlowLength="1000"/>
-		<TowersLevel Cost="60" SellAmount="152" Damage="50" ROF="1200" Range="120" Splash="10" Speed="200" SlowAmount="0.5" SlowLength="1000"/>
-		<TowersLevel Cost="70" SellAmount="208" Damage="60" ROF="1200" Range="140" Splash="25" Speed="200" SlowAmount="0.5" SlowLength="1000"/>
+		<TowersLevel Cost="40" SellAmount="32"  Damage="18" ROF="1200" Range="100" Splash="7"  Speed="200" SlowAmount="0.5" SlowLength="1000"/>
+		<TowersLevel Cost="40" SellAmount="64"  Damage="25" ROF="1200" Range="110" Splash="7"  Speed="200" SlowAmount="0.5" SlowLength="1000"/>
+		<TowersLevel Cost="50" SellAmount="104" Damage="37" ROF="1200" Range="120" Splash="12" Speed="200" SlowAmount="0.5" SlowLength="1000"/>
+		<TowersLevel Cost="60" SellAmount="152" Damage="50" ROF="1200" Range="120" Splash="12" Speed="200" SlowAmount="0.5" SlowLength="1000"/>
+		<TowersLevel Cost="70" SellAmount="208" Damage="60" ROF="1200" Range="140" Splash="27" Speed="200" SlowAmount="0.5" SlowLength="1000"/>
 	</TowersLevels>
 	
 	<TowerImg File="tower.png" Width="2" Height="2" />

@@ -37,6 +37,7 @@ public:
 	Tower *getTowerReference();
 	void RenderPlacingTower();
 	void updateHud();
+	void drawUpgradeSellInfo(int x);
 
 	Tower *gTowerReference;
 	GameScreen *mGame;

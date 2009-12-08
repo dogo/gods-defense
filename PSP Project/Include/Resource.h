@@ -41,6 +41,7 @@ public:
 	static char const STR_ACT_LIKE_SERVER[];
 	static char const STR_ACT_LIKE_CLIENT[];
 	static char const STR_MAP_DESC[];
+	static char const STR_MAX_REACHED[];
 	
 	static char IMG_GAME_TITLE[];
 	static char IMG_ANYKEY_SPLASH[];

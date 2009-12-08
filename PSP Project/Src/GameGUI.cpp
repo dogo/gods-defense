@@ -292,6 +292,7 @@ void GameGUI::draw()
 		oslDrawImageXY(mUpgrade, 28, (272-40));
 		oslDrawImageXY(mSell, 89, (272-40));
 		oslDrawImageXY(mSelectorSidebar, 26 + (mSelectedItemX * 61), (272-42));
+		drawUpgradeSellInfo(mSelectedItemX);
 	}
 	oslDrawImageXY(mHud, 0, 0);
 	oslDrawImage(mCursor);
@@ -381,8 +382,33 @@ void SidebarItem::drawIcons()
 void SidebarItem::drawTowerInfo(int y)
 {
 	char costBuffer[256];
-	sprintf(costBuffer, "Cost: %i", mTower->mTowerVector[y].mCost);
+	sprintf(costBuffer, "Cost: %i", mTower->mTowerVector[0].mCost); //Building is always 0
 	oslIntraFontSetStyle(gFont, 0.85f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
 	oslDrawString((480 -48 - (oslGetStringWidth(mTower->mTowerName))), 29 + (y * 61), mTower->mTowerName);
 	oslDrawString((480 -48 - (oslGetStringWidth(mTower->mTowerName))), 39 + (y * 61), costBuffer);
+}
+
+void GameGUI::drawUpgradeSellInfo(int x)
+{
+	char costBuffer[256];
+	Tower *mTower = mGame->GetSelectedTower();
+	oslIntraFontSetStyle(gFont, 0.85f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+	
+	if(x == 0)
+	{	
+		if(mGame->mSelectedTower->mTowerLevel+1 < mTower->mTowerVector.size())
+		{
+			sprintf(costBuffer, "Upgrade Cost: %i", mTower->mTowerVector[mGame->GetSelectedTowerLevel()+1].mCost);
+			oslDrawString( 2, 272-60, costBuffer);
+		}
+		else
+		{
+			oslDrawString( 2, 272-60, Resource::STR_MAX_REACHED);
+		}
+	}
+	else
+	{
+		sprintf(costBuffer, "Sell Amount: %i", mTower->mTowerVector[mGame->GetSelectedTowerLevel()].mSellAmount);
+		oslDrawString( 89, 272-60, costBuffer);
+	}
 }
