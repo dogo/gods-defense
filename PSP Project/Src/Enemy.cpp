@@ -168,8 +168,9 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 	mSlowLength = 0;
 	mEnemyState = NOTHING_HAPPENING;
 	mCurrentCheckpoint = 1;
-	mAnimationTime = 0;
+	mAnimationController = 0;
 	mDistanceFromStart = 0;
+	mCurrentFrames = 0;
 }
 
 void EnemyInstance::Update(u64 timePassed)
@@ -177,7 +178,6 @@ void EnemyInstance::Update(u64 timePassed)
 	//Enemy is dead so we return
 	if (EnemyIsDead())
 	{
-		mAnimationTime += timePassed;
 		return;
 	}
 
@@ -214,13 +214,13 @@ void EnemyInstance::Update(u64 timePassed)
 	mSlowLength -= timePassed;
 
 	//Animate!
-	mAnimationTime = (mAnimationTime + timePassed);
+	mAnimationController++;
 
-	if(mAnimationTime >= 600)
+	if(mAnimationController == 35)
 	{
-		mEnemy->mAliveFrames++;
-		mEnemy->mAliveFrames %= 4;
-		mAnimationTime = 0;
+		mCurrentFrames++;
+		mCurrentFrames %= mEnemy->mAliveFrames;
+		mAnimationController = 0;
 	}
 
 	//If we are going slow then travel at reduced speed
@@ -301,7 +301,7 @@ void EnemyInstance::RenderEnemy()
 	}
 	mEnemy->mEnemyImg->centerX = 16; //Enemie / 2
 	mEnemy->mEnemyImg->angle = (mAngle * 180/M_PI);
-	DrawImageFrameXY(mEnemy->mEnemyImg, mEnemyPosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y, mEnemy->mAliveFrames);
+	DrawImageFrameXY(mEnemy->mEnemyImg, mEnemyPosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y, mCurrentFrames);
 	RenderLife();
 #ifdef _DEBUG
 	oslPrintf_xy(0,30, "Enemy X-> %f    Enemy Y %f  mAngle %d", mEnemyPosition.X, mEnemyPosition.Y, mEnemy->mEnemyImg->angle);

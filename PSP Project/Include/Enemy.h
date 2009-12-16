@@ -87,7 +87,7 @@ public:
 	int mSlowLength;
 	EnemyState mEnemyState;
 	float mAngle;
-	u64 mAnimationTime;
+	int mAnimationController;
 
 	EnemyState GetEnemyState();
 	void RenderLife();
@@ -99,6 +99,7 @@ public:
 	bool const EnemyStillOnMap(); //check if the enemy still on the map.
 	void EnemyReciveDamage(const int &damage, const float &slowAmount, const int &slowLength); // the enemy recive damage
 	float GetPointsWorth() const;
+	int mCurrentFrames;
 
 private:
 	unsigned int mCurrentCheckpoint;
