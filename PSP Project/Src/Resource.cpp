@@ -46,7 +46,7 @@ char const Resource::STR_WARNING_TEXT[] =
 
 char const Resource::STR_ABOUT_TEXT[] =
 	"Gods Defense\n"
-	"Version 0.1.1\n"
+	"Version 0.1.2\n"
 	"Licensed by the GNU Public License v3(GPL)\n"
 	"\n"
 	"Art & Design\n"
@@ -59,11 +59,8 @@ char const Resource::STR_ABOUT_TEXT[] =
 	"Executive Producer\n"
 	"Diogo Autilio\n"
 	"\n"
-	"Programmers\n"
-	"André Zibelli - A.k.A (Zibelli)\n"
-	"Diogo Autilio - A.K.A (Dogo)\n"
-	"Guilherme Pimentel - A.k.A (06)\n"
-	"Romulo Abrão - A.k.A (Guerreiro)\n";
+	"Programmer\n"
+	"Diogo Autilio (Dogo)\n";
 
 char const Resource::STR_HELP_TEXT[] =
 	"The idea of the game is to build towers to\n"
@@ -79,7 +76,10 @@ char const Resource::STR_HELP_TEXT[] =
 	"Circle - Cancel/Back.\n"
 	"Triangle - Next Wave.\n"
 	"Square - Build Menu(Show/Hide).\n"
-	"Start - Pause menu.\n";
+	"Start - Pause menu.\n"
+	"\n"
+	"Upgrade and Sell:\n"
+	"Select an tower to upgrade or sell.";
 
 char const Resource::STR_CONGRATS[] = 
 	"Congratulations!\n"

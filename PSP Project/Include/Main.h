@@ -12,6 +12,10 @@
 #include "../Include/GodLibrary.h"
 #endif
 
+#ifdef SHOW_FPS
+#include "../Include/Fps.h"
+#endif
+
 #include "../Include/ScreenManager.h"
 
 	int main();

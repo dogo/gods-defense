@@ -48,6 +48,9 @@ u64 GetTicks()
 
 int main()
 {
+#ifdef SHOW_FPS
+	Fps::initFps();
+#endif
 	int skip = 0;
     initOSLib();
     oslIntraFontInit(INTRAFONT_CACHE_ALL | INTRAFONT_STRING_CP1252);
@@ -94,6 +97,10 @@ int main()
 				oslPrintf_xy(0,10,"gScreen %d",gScreen);
 #endif
 			}
+#ifdef SHOW_FPS
+			Fps::updateFps();
+			Fps::renderInfo();
+#endif
 			oslEndDrawing();
 		}
 
