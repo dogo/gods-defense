@@ -79,6 +79,7 @@ char const Resource::STR_HELP_TEXT[] =
 	"Start - Pause menu.\n"
 	"\n"
 	"Upgrade and Sell:\n"
+	"\n"
 	"Select an tower to upgrade or sell.";
 
 char const Resource::STR_CONGRATS[] = 
