@@ -87,6 +87,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Src\Fps.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Src\GameGUI.cpp"
 				>
 			</File>
@@ -176,6 +180,10 @@
 			</File>
 			<File
 				RelativePath=".\Include\ExitScreen.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\Fps.h"
 				>
 			</File>
 			<File
