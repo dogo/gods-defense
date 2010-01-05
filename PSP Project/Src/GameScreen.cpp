@@ -200,7 +200,6 @@ void GameScreen::draw()
 	if(mGameState == GS_TOWER_UPGRADE_SELL)
 	{
 		drawUpgradeCircle();
-		//mGameGUI->drawSelectedTowerOptions();
 	}
 
 	//Draw the enemies
