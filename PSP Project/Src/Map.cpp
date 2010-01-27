@@ -68,7 +68,7 @@ void Wave::StartEnemySpawn()
 	mEnemySpawnTimer = mIntervalSpawnTime;
 }
 
-bool Wave::SpawnUpdate(u64 timePassed)
+bool Wave::SpawnUpdate(u32 timePassed)
 {
 	mEnemySpawnTimer += timePassed;
 

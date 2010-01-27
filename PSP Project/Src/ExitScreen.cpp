@@ -26,7 +26,7 @@ void ExitScreen::draw()
 	oslDrawString(240,180,Resource::STR_NO);
 }
 
-void ExitScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
+void ExitScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning
 {
 	if(osl_keys->pressed.up){
 		gMenu--;

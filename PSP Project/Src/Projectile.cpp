@@ -125,7 +125,7 @@ ArrowInstance::~ArrowInstance()
 {
 }
 
-void ArrowInstance::Update(u64 timePassed)
+void ArrowInstance::Update(u32 timePassed)
 {
 	//Calculate angle to target, move towards it
 	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //distance I'll move this tick
@@ -172,7 +172,7 @@ IceInstance::~IceInstance()
 {
 }
 
-void IceInstance::Update(u64 timePassed)
+void IceInstance::Update(u32 timePassed)
 {
 	//Calculate angle to target, move towards it
 	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //distance I'll move this tick
@@ -217,7 +217,7 @@ LightningInstance::~LightningInstance()
 {
 }
 
-void LightningInstance::Update(u64 timePassed)
+void LightningInstance::Update(u32 timePassed)
 {
 	mAnimationTime += timePassed;
 	if(mAnimationTime > 400)
@@ -247,7 +247,7 @@ FireInstance::~FireInstance()
 {
 }
 
-void FireInstance::Update(u64 timePassed)
+void FireInstance::Update(u32 timePassed)
 {
 	//Calculate angle to target, move towards it
 	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //distance I'll move this tick

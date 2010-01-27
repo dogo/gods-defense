@@ -107,7 +107,7 @@ GameGUI::GameGUI(GameScreen *gameLogic)
 	mSelectedItemX = 0;
 }
 
-void GameGUI::Update(u64 /*timePassed*/) //Parametro Formal, não dá warning
+void GameGUI::Update(u32 /*timePassed*/) //Parametro Formal, não dá warning
 {
 	const GameState currentGameState = mGame->GetGameState();
 	const GameConnectionState currentGameConnectionState = mGame->GetGameConnectionState();

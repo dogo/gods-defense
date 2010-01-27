@@ -173,7 +173,7 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 	mCurrentFrames = 0;
 }
 
-void EnemyInstance::Update(u64 timePassed)
+void EnemyInstance::Update(u32 timePassed)
 {
 	//Enemy is dead so we return
 	if (EnemyIsDead())

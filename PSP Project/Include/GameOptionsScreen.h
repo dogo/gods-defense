@@ -21,7 +21,7 @@ public:
 	GameOptionsScreen();
 	~GameOptionsScreen();
 	virtual void draw();
-	virtual void update(u64 timePassed);
+	virtual void update(u32 timePassed);
 
 	int mSelectedMap; //Index of current map
 	vector<string> mMap; // vector of map names

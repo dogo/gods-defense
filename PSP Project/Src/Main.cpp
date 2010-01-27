@@ -39,11 +39,9 @@ int endOSLib(){
 }
 
 //Return time in milliseconds
-u64 GetTicks()
+u32 GetTicks()
 {
-     u64 temp;
-     sceRtcGetCurrentTick(&temp);
-     return temp/1000;
+    return sceKernelGetSystemTimeLow()/1000;
 }
 
 int main()
@@ -67,14 +65,14 @@ int main()
 
 	ScreenManager *mScreenManager = new ScreenManager();
 	mNextScreen = ScreenManager::SCREEN_ANYKEY;
-	u64 lastLoopTime = GetTicks();
+	u32 lastLoopTime = GetTicks();
 
     while(!osl_quit){
         if (!skip){
             oslStartDrawing();
 			oslCls();
 
-			u64 timeDifference = GetTicks() - lastLoopTime;
+			u32 timeDifference = GetTicks() - lastLoopTime;
 			lastLoopTime += timeDifference;
 
 			if(mNextScreen != -1)

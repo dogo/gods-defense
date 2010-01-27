@@ -24,6 +24,6 @@
 
 	int endOSLib();
 
-	u64 GetTicks();
+	u32 GetTicks();
 
 #endif

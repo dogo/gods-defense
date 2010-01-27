@@ -29,7 +29,7 @@ public:
 	virtual ~ProjectileInstance();
 	static void CreateProjectile(TowerInstance *shooter, EnemyInstance *target);
 	bool DisappearProjectile();
-	virtual void Update(u64 timePassed) = 0;
+	virtual void Update(u32 timePassed) = 0;
 	virtual void ProjectileRender() = 0;
 	void DealDamage();
 	static OSL_IMAGE *LoadProjectileImage(const char &projectileType, char *filename);
@@ -60,7 +60,7 @@ public:
 	virtual ~ArrowInstance();
 
 	//ProjectileInstance
-	virtual void Update(u64 timePassed);
+	virtual void Update(u32 timePassed);
 	virtual void ProjectileRender();
 private:
 	int mMovementSpeed;
@@ -74,7 +74,7 @@ public:
 	virtual ~IceInstance();
 
 	//ProjectileInstance
-	virtual void Update(u64 timePassed);
+	virtual void Update(u32 timePassed);
 	virtual void ProjectileRender();
 private:
 	int mMovementSpeed;
@@ -88,7 +88,7 @@ public:
 	virtual ~LightningInstance();
 
 	//ProjectileInstance
-	virtual void Update(u64 timePassed);
+	virtual void Update(u32 timePassed);
 	virtual void ProjectileRender();
 private:
 	int mAnimationTime;
@@ -101,7 +101,7 @@ public:
 	virtual ~FireInstance();
 
 	//ProjectileInstance
-	virtual void Update(u64 timePassed);
+	virtual void Update(u32 timePassed);
 	virtual void ProjectileRender();
 private:
 	float mAngle; //Last calculated angle

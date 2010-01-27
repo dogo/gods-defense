@@ -26,7 +26,7 @@ void EndingScreen::draw()
 	oslDrawImageXY(mCross, (430) - (mCross->stretchX), (272) - (mCross->stretchY));
 }
 
-void EndingScreen::update(u64 /*timePassed*/) //Parametro Formal, não dá warning
+void EndingScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning
 {
 	if(osl_keys->pressed.cross)
 	{

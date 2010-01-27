@@ -30,7 +30,7 @@ public:
 	void LoadStuffs();
 	static GameGUI *Instance();
 	static void InitGUI(GameScreen *gameLogic);
-	void Update(u64 timePassed);
+	void Update(u32 timePassed);
 	void draw();
 	void PuttingTower(Tower *tower);
 	void setTowerReference(Tower *tower);

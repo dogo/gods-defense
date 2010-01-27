@@ -233,7 +233,7 @@ void GameScreen::draw()
 #endif
 }
 
-void GameScreen::update(u64 timePassed)
+void GameScreen::update(u32 timePassed)
 {
 	//Run Pause
 	if (mGameState == GS_PAUSE_MENU && gPauseGame)
