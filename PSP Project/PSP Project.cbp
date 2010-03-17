@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="[PSP]GodsDefense" />
+		<Option makefile_is_custom="1" />
+		<Option pch_mode="2" />
+		<Option compiler="pspsdk" />
+		<Build>
+			<Target title="PSP">
+				<Option output="PSP Project" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="" />
+				<Option object_output="/home/dogo/Documentos/gods-defense/PSP Project/.objs" />
+				<Option type="1" />
+				<Option compiler="pspsdk" />
+				<Option use_console_runner="0" />
+				<MakeCommands>
+					<Build command="$make -f $makefile" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile distclean" />
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add directory="/opt/pspsdk/include" />
+			<Add directory="/opt/pspsdk/psp/include" />
+			<Add directory="/opt/pspsdk/psp/sdk/include" />
+		</Compiler>
+		<Unit filename="ClassDiagram.cd" />
+		<Unit filename="Include/AboutScreen.h" />
+		<Unit filename="Include/Adhoc.h" />
+		<Unit filename="Include/AnykeyScreen.h" />
+		<Unit filename="Include/EndingScreen.h" />
+		<Unit filename="Include/Enemy.h" />
+		<Unit filename="Include/ExitScreen.h" />
+		<Unit filename="Include/Fps.h" />
+		<Unit filename="Include/GameGUI.h" />
+		<Unit filename="Include/GameOptionsScreen.h" />
+		<Unit filename="Include/GameScreen.h" />
+		<Unit filename="Include/GodLibrary.h" />
+		<Unit filename="Include/HelpScreen.h" />
+		<Unit filename="Include/ILib.h" />
+		<Unit filename="Include/IScreen.h" />
+		<Unit filename="Include/Main.h" />
+		<Unit filename="Include/MainMenuScreen.h" />
+		<Unit filename="Include/Map.h" />
+		<Unit filename="Include/MultiplayerScreen.h" />
+		<Unit filename="Include/PauseScreen.h" />
+		<Unit filename="Include/Projectile.h" />
+		<Unit filename="Include/Resource.h" />
+		<Unit filename="Include/ScreenManager.h" />
+		<Unit filename="Include/TitleScreen.h" />
+		<Unit filename="Include/Tower.h" />
+		<Unit filename="Include/WarningScreen.h" />
+		<Unit filename="Makefile" />
+		<Unit filename="Src/AboutScreen.cpp" />
+		<Unit filename="Src/Adhoc.cpp" />
+		<Unit filename="Src/AnykeyScreen.cpp" />
+		<Unit filename="Src/EndingScreen.cpp" />
+		<Unit filename="Src/Enemy.cpp" />
+		<Unit filename="Src/ExitScreen.cpp" />
+		<Unit filename="Src/Fps.cpp" />
+		<Unit filename="Src/GameGUI.cpp" />
+		<Unit filename="Src/GameOptionsScreen.cpp" />
+		<Unit filename="Src/GameScreen.cpp" />
+		<Unit filename="Src/GodLibrary.cpp" />
+		<Unit filename="Src/HelpScreen.cpp" />
+		<Unit filename="Src/Main.cpp" />
+		<Unit filename="Src/MainMenuScreen.cpp" />
+		<Unit filename="Src/Map.cpp" />
+		<Unit filename="Src/MultiplayerScreen.cpp" />
+		<Unit filename="Src/PauseScreen.cpp" />
+		<Unit filename="Src/Projectile.cpp" />
+		<Unit filename="Src/Resource.cpp" />
+		<Unit filename="Src/ScreenManager.cpp" />
+		<Unit filename="Src/TitleScreen.cpp" />
+		<Unit filename="Src/Tower.cpp" />
+		<Unit filename="Src/WarningScreen.cpp" />
+		<Unit filename="tinyxml/tinystr.cpp" />
+		<Unit filename="tinyxml/tinystr.h" />
+		<Unit filename="tinyxml/tinyxml.cpp" />
+		<Unit filename="tinyxml/tinyxml.h" />
+		<Unit filename="tinyxml/tinyxmlerror.cpp" />
+		<Unit filename="tinyxml/tinyxmlparser.cpp" />
+		<Unit filename="tinyxml/xmltest.cpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
