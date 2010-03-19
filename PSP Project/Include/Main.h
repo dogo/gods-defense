@@ -7,10 +7,7 @@
 
 #include <oslib/oslib.h>
 #include <psprtc.h>
-
-#ifdef MEMORY_DEBUG
 #include "../Include/GodLibrary.h"
-#endif
 
 #ifdef SHOW_FPS
 #include "../Include/Fps.h"

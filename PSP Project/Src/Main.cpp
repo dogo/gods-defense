@@ -63,6 +63,7 @@ int main()
 	if (!menuTheme || !gFont)
 		oslFatalError("At least one file is missing. Please copy all the file in the game directory.");
 
+	GodLibrary::Initialize(100,100,100,RGB(255,255,255));
 	ScreenManager *mScreenManager = new ScreenManager();
 	mNextScreen = ScreenManager::SCREEN_ANYKEY;
 	u32 lastLoopTime = GetTicks();
