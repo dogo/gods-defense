@@ -80,8 +80,8 @@ void GodLibrary::Initialize(int x, int y, int radius, OSL_COLOR color)
   // draw the circle on it, radius = 1/2 dimensions
   for(float i=0;i<360.0;i+=0.40)
   {
-		float tx = x + radius * sinf(i * M_PI/180.0);
-		float ty = y - radius * cosf(i * M_PI/180.0);
+		float tx = x + radius * oslSinf(i * M_PI/180.0);
+		float ty = y - radius * oslCosf(i * M_PI/180.0);
 		drawPixel(tx, ty, color);
   }
 
