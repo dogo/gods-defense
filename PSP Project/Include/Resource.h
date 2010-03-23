@@ -42,6 +42,9 @@ public:
 	static char const STR_ACT_LIKE_CLIENT[];
 	static char const STR_MAP_DESC[];
 	static char const STR_MAX_REACHED[];
+	static char const STR_TROPHIES_CAPTION[];
+	static char const STR_EARNED_TROPHIE[];
+
 	
 	static char IMG_GAME_TITLE[];
 	static char IMG_ANYKEY_SPLASH[];

@@ -15,6 +15,7 @@
 #include "../Include/ExitScreen.h"
 #include "../Include/WarningScreen.h"
 #include "../Include/EndingScreen.h"
+#include "../Include/TrophiesScreen.h"
 
 ScreenManager::ScreenManager()
 {
@@ -59,6 +60,7 @@ IScreen * ScreenManager::createScreen(int aIndex)
 	case SCREEN_MULTIPLAYER:		return new MultiplayerScreen();
 	case SCREEN_ABOUT: 				return new AboutScreen();
 	case SCREEN_CONFIRM_EXIT:		return new ExitScreen();
+	case SCREEN_TROPHIE:			return new TrophiesScreen();
 	default: 						return NULL;
 	}
 }

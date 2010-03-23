@@ -33,9 +33,11 @@ void MainMenuScreen::draw()
 	(gMenu == 2) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
 	oslDrawString(340, 140,Resource::STR_HELP_CAPTION);
 	(gMenu == 3) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(340, 160,Resource::STR_ABOUT_CAPTION);
-	(gMenu == 4) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(340, 180,Resource::STR_EXIT_CAPTION);
+	oslDrawString(340, 160,Resource::STR_TROPHIES_CAPTION);
+	(gMenu == 4) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
+	oslDrawString(340, 180,Resource::STR_ABOUT_CAPTION);
+	(gMenu == 5) ? oslIntraFontSetStyle(gFont, 1.8f,RGBA(255,255,255,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 1.2f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
+	oslDrawString(340, 200,Resource::STR_EXIT_CAPTION);
 }
 
 void MainMenuScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning
@@ -45,12 +47,12 @@ void MainMenuScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warni
 		gMenu--;
 		if (gMenu < 0)
 		{
-			gMenu = 4;
+			gMenu = 5;
 		}
 	}
 	if(osl_keys->pressed.down){
 		gMenu++;
-		gMenu%=5;
+		gMenu%=6;
 	}
 	if(osl_keys->pressed.cross){
 		if(gMenu == 0)
@@ -82,9 +84,14 @@ void MainMenuScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warni
 		if(gMenu == 3)
 		{
 			oslFlushKey();
-			mNextScreen = ScreenManager::SCREEN_ABOUT;
+			mNextScreen = ScreenManager::SCREEN_TROPHIE;
 		}
 		if(gMenu == 4)
+		{
+			oslFlushKey();
+			mNextScreen = ScreenManager::SCREEN_ABOUT;
+		}
+		if(gMenu == 5)
 		{
 			oslFlushKey();
 			mNextScreen = ScreenManager::SCREEN_CONFIRM_EXIT;

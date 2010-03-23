@@ -40,7 +40,8 @@ public:
 		SCREEN_WARNING = 8,
 		SCREEN_GAME_OPTIONS = 9,
 		SCREEN_CONFIRM_EXIT = 10,
-		NUM_SCREENS = 11
+		SCREEN_TROPHIE = 11,
+		NUM_SCREENS = 12
 	};
 
 	ScreenManager();
