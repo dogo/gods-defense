@@ -29,6 +29,7 @@ extern char gScoreBuffer[256];
 extern bool gIsMultiplayer;
 extern bool gIsServer;
 extern bool gIsClient;
+extern char nameList[][20];
 
 /*
 	Sound Channels

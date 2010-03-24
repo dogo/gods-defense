@@ -16,6 +16,7 @@
 #include "../Include/WarningScreen.h"
 #include "../Include/EndingScreen.h"
 #include "../Include/TrophiesScreen.h"
+#include "../Include/MemoryWarningScreen.h"
 
 ScreenManager::ScreenManager()
 {
@@ -61,6 +62,7 @@ IScreen * ScreenManager::createScreen(int aIndex)
 	case SCREEN_ABOUT: 				return new AboutScreen();
 	case SCREEN_CONFIRM_EXIT:		return new ExitScreen();
 	case SCREEN_TROPHIE:			return new TrophiesScreen();
+	case SCREEN_MEMORY_WARNING:		return new MemoryWarningScreen();
 	default: 						return NULL;
 	}
 }

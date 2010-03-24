@@ -65,7 +65,7 @@ int main()
 
 	GodLibrary::Initialize(100,100,100,RGB(255,255,255));
 	ScreenManager *mScreenManager = new ScreenManager();
-	mNextScreen = ScreenManager::SCREEN_ANYKEY;
+	mNextScreen = ScreenManager::SCREEN_MEMORY_WARNING;
 	u32 lastLoopTime = GetTicks();
 
     while(!osl_quit){

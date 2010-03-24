@@ -44,6 +44,9 @@ public:
 	static char const STR_MAX_REACHED[];
 	static char const STR_TROPHIES_CAPTION[];
 	static char const STR_EARNED_TROPHIE[];
+	static char const STR_AUTOSAVE_CAPTION[];
+	static char const STR_AUTOSAVE_TEXT[];
+	static char const STR_OK[];
 
 	
 	static char IMG_GAME_TITLE[];

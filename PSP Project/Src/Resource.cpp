@@ -41,7 +41,13 @@ char const Resource::STR_MAP_DESC[] = "Map Description";
 char const Resource::STR_MAX_REACHED[] = "Maximum reached";
 char const Resource::STR_TROPHIES_CAPTION[] = "Trophies";
 char const Resource::STR_EARNED_TROPHIE[] ="You've Earned A Trophy!";
+char const Resource::STR_OK[] = "OK";
 
+char const Resource::STR_AUTOSAVE_CAPTION[] = "Auto Save";
+char const Resource::STR_AUTOSAVE_TEXT[] = 
+	"This game uses the auto save feature.\n"
+	"Do not remove your Memory Stick Duo(TM), or\n"
+	"turn off yuor PSP(TM) system, when you earn a thophy";
 
 char const Resource::STR_WARNING_TEXT[] =
 	"WLAN switch is off.\n\n"

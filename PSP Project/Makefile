@@ -6,7 +6,7 @@ ASFLAGS = $(CFLAGS)
 GAMEOBJECTS=Src/Main.o Src/AnykeyScreen.o Src/ScreenManager.o Src/TitleScreen.o Src/MainMenuScreen.o Src/GameOptionsScreen.o \
 Src/GameScreen.o Src/HelpScreen.o Src/AboutScreen.o Src/MultiplayerScreen.o Src/PauseScreen.o Src/GameGUI.o \
 Src/Resource.o Src/ExitScreen.o Src/GodLibrary.o Src/WarningScreen.o Src/Tower.o Src/Projectile.o Src/Enemy.o Src/Map.o \
-Src/EndingScreen.o Src/Adhoc.o Src/TrophiesScreen.o
+Src/EndingScreen.o Src/Adhoc.o Src/TrophiesScreen.o Src/MemoryStick.o Src/MemoryWarningScreen.o
 TINYXML=tinyxml/tinystr.o tinyxml/tinyxml.o tinyxml/tinyxmlerror.o tinyxml/tinyxmlparser.o
 
 OBJS = $(TINYXML) $(GAMEOBJECTS)
