@@ -33,7 +33,7 @@ public:
 
 	void Load(int type);
 
-	void Status(int type);
+	bool Status(int type);
 };
 
 #endif

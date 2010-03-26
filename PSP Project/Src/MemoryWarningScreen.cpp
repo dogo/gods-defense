@@ -34,13 +34,13 @@ void MemoryWarningScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá 
 {
 	type = oslGetSaveLoadType();
 
-	myMemoryStick->Status(type);
+	if(myMemoryStick->Status(type))
+		mNextScreen = ScreenManager::SCREEN_ANYKEY;
 
 	if(osl_keys->pressed.cross)
 	{
 		oslFlushKey();
-		myMemoryStick->Save(type);
-		mNextScreen = ScreenManager::SCREEN_ANYKEY;
+		myMemoryStick->Load(type);
 	}
 }
 
