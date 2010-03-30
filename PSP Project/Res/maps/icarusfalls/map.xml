@@ -6,8 +6,8 @@
 
     <Menu>
         <BuildTowerMenu Y="0" Folder="arrow" />
-        <BuildTowerMenu Y="1" Folder="ice" />
-		<BuildTowerMenu Y="2" Folder="fire" />
+		<BuildTowerMenu Y="1" Folder="fire" />
+        <BuildTowerMenu Y="2" Folder="ice" />
 		<BuildTowerMenu Y="3" Folder="lightning" />
     </Menu>
     <MapImg File="icarusfalls.png" Width="15" Height="15" />

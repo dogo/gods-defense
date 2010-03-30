@@ -10,10 +10,10 @@
 	<Projectile Type="Fire" Sprite="ST_Fire.png" />
 	<TowersLevels>
 		<TowersLevel Cost="15" SellAmount="7"  Damage="7"  ROF="700" Range="80"  Splash="7"  Speed="150"/>
-		<TowersLevel Cost="10" SellAmount="16" Damage="5"  ROF="700" Range="80"  Splash="12" Speed="150"/>
-		<TowersLevel Cost="20" SellAmount="32" Damage="10" ROF="700" Range="90"  Splash="12" Speed="150"/>
-		<TowersLevel Cost="30" SellAmount="56" Damage="18" ROF="600" Range="100" Splash="17" Speed="150"/>
-		<TowersLevel Cost="40" SellAmount="88" Damage="32" ROF="600" Range="100" Splash="17" Speed="150"/>
+		<TowersLevel Cost="20" SellAmount="16" Damage="9"  ROF="700" Range="80"  Splash="12" Speed="150"/>
+		<TowersLevel Cost="25" SellAmount="28" Damage="13" ROF="700" Range="90"  Splash="12" Speed="150"/>
+		<TowersLevel Cost="30" SellAmount="32" Damage="18" ROF="600" Range="100" Splash="17" Speed="150"/>
+		<TowersLevel Cost="40" SellAmount="58" Damage="32" ROF="600" Range="100" Splash="17" Speed="150"/>
 	</TowersLevels>
 	
 	<TowerImg File="tower.png" Width="2" Height="2" />
