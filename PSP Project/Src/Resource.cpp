@@ -47,7 +47,7 @@ char const Resource::STR_AUTOSAVE_CAPTION[] = "Auto Save";
 char const Resource::STR_AUTOSAVE_TEXT[] = 
 	"This game uses the auto save feature.\n"
 	"Do not remove your Memory Stick Duo(TM), or\n"
-	"turn off yuor PSP(TM) system, when you earn a thophy";
+	"turn off your PSP(TM) system, when you earn a thophy";
 
 char const Resource::STR_WARNING_TEXT[] =
 	"WLAN switch is off.\n\n"

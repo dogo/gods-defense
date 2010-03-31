@@ -123,6 +123,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Src\MemoryStick.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\MemoryWarningScreen.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\Src\MultiplayerScreen.cpp"
 				>
 			</File>
@@ -148,6 +156,10 @@
 			</File>
 			<File
 				RelativePath=".\Src\Tower.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Src\TrophiesScreen.cpp"
 				>
 			</File>
 			<File
@@ -207,6 +219,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Include\icon.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Include\ILib.h"
 				>
 			</File>
@@ -224,6 +240,14 @@
 			</File>
 			<File
 				RelativePath=".\Include\Map.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\MemoryStick.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\MemoryWarningScreen.h"
 				>
 			</File>
 			<File
@@ -252,6 +276,10 @@
 			</File>
 			<File
 				RelativePath=".\Include\Tower.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include\TrophiesScreen.h"
 				>
 			</File>
 			<File
