@@ -9,7 +9,6 @@
 		<Build>
 			<Target title="PSP">
 				<Option output="PSP Project" prefix_auto="0" extension_auto="0" />
-				<Option working_dir="" />
 				<Option object_output="/home/dogo/Documentos/gods-defense/PSP Project/.objs" />
 				<Option type="1" />
 				<Option compiler="pspsdk" />
@@ -45,6 +44,8 @@
 		<Unit filename="Include/Main.h" />
 		<Unit filename="Include/MainMenuScreen.h" />
 		<Unit filename="Include/Map.h" />
+		<Unit filename="Include/MemoryStick.h" />
+		<Unit filename="Include/MemoryWarningScreen.h" />
 		<Unit filename="Include/MultiplayerScreen.h" />
 		<Unit filename="Include/PauseScreen.h" />
 		<Unit filename="Include/Projectile.h" />
@@ -52,7 +53,9 @@
 		<Unit filename="Include/ScreenManager.h" />
 		<Unit filename="Include/TitleScreen.h" />
 		<Unit filename="Include/Tower.h" />
+		<Unit filename="Include/TrophiesScreen.h" />
 		<Unit filename="Include/WarningScreen.h" />
+		<Unit filename="Include/icon.h" />
 		<Unit filename="Makefile" />
 		<Unit filename="Src/AboutScreen.cpp" />
 		<Unit filename="Src/Adhoc.cpp" />
@@ -69,6 +72,8 @@
 		<Unit filename="Src/Main.cpp" />
 		<Unit filename="Src/MainMenuScreen.cpp" />
 		<Unit filename="Src/Map.cpp" />
+		<Unit filename="Src/MemoryStick.cpp" />
+		<Unit filename="Src/MemoryWarningScreen.cpp" />
 		<Unit filename="Src/MultiplayerScreen.cpp" />
 		<Unit filename="Src/PauseScreen.cpp" />
 		<Unit filename="Src/Projectile.cpp" />
@@ -76,6 +81,7 @@
 		<Unit filename="Src/ScreenManager.cpp" />
 		<Unit filename="Src/TitleScreen.cpp" />
 		<Unit filename="Src/Tower.cpp" />
+		<Unit filename="Src/TrophiesScreen.cpp" />
 		<Unit filename="Src/WarningScreen.cpp" />
 		<Unit filename="tinyxml/tinystr.cpp" />
 		<Unit filename="tinyxml/tinystr.h" />
