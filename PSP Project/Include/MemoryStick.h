@@ -21,9 +21,9 @@ public:
 
 	struct oslSaveLoad MemoryStickData;
 
-    char *message;
-    char *loadedData;
-	char *data[100];
+    //char message[100];
+    char loadedData[100];
+	char data[100];
 
 	MemoryStick();
 

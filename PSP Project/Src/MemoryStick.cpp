@@ -13,10 +13,10 @@ MemoryStick::MemoryStick()
 	gameTitle = "Gods Defense";
 	gameID = "GOD01";
 	saveName = "0001";
-	message = "";
-    loadedData = "";
+	//sprintf(message, "");
+	sprintf(loadedData, "");	
 
-	data[100] = "someData: 50";
+	sprintf(data, "someData: 50");
 }
 
 MemoryStick::~MemoryStick()
@@ -27,7 +27,6 @@ void MemoryStick::Save(int type, char aData)
 {
 	if (type == OSL_DIALOG_NONE)
 	{
-		printf("data %s\n", data);
 		memset(&MemoryStickData, 0, sizeof(MemoryStickData));
 		strcpy(MemoryStickData.gameTitle, gameTitle);
 		strcpy(MemoryStickData.gameID, gameID);
@@ -39,25 +38,21 @@ void MemoryStick::Save(int type, char aData)
 		MemoryStickData.dataSize = 100;
 		oslInitAutoSaveDialog(&MemoryStickData);
 		//memset(&aData, 0, sizeof(aData));
-		printf("MemoryStick::Save\n");
+		printf("Saved data: %s\n", (char *)MemoryStickData.data);
 	}
 }
 
 void MemoryStick::Load(int type)
 {
-	//if (type == OSL_DIALOG_NONE)
-	{
-        memset(&MemoryStickData, 0, sizeof(MemoryStickData));
-        strcpy(MemoryStickData.gameID, gameID);
-        strcpy(MemoryStickData.saveName, saveName);
-        MemoryStickData.nameList = nameList;
-        MemoryStickData.data = &loadedData;
-        MemoryStickData.dataSize = 100;
-        oslInitAutoLoadDialog(&MemoryStickData);
-        memset(message, 0, sizeof(message));
-		sprintf(message, "Loaded data: %s", MemoryStickData.data);
-		printf("%s\n",message);
-	}
+	memset(&MemoryStickData, 0, sizeof(MemoryStickData));
+    strcpy(MemoryStickData.gameID, gameID);
+    strcpy(MemoryStickData.saveName, saveName);
+    MemoryStickData.nameList = nameList;
+    MemoryStickData.data = &loadedData;
+    MemoryStickData.dataSize = 100;
+    oslInitAutoLoadDialog(&MemoryStickData);
+    //memset(message, 0, sizeof(message));
+	printf("Loaded data: %s\n", (char *)MemoryStickData.data);
 }
 
 bool MemoryStick::Status(int type)
@@ -69,20 +64,12 @@ bool MemoryStick::Status(int type)
 		{
             if (oslSaveLoadGetResult() == OSL_SAVELOAD_CANCEL)
 			{
-                //sprintf(message, "Cancel");
 				printf("OSL_SAVELOAD_CANCEL\n");
 				return false;
 			}
-            else if (type == OSL_DIALOG_LOAD)
+            else if ((type == OSL_DIALOG_LOAD) || (type == OSL_DIALOG_SAVE))
 			{
-                //sprintf(message, "Loaded data: %s", (char *)MemoryStickData.data);
-				printf("OSL_DIALOG_LOAD\n");
-				return true;
-			}
-            else if (type == OSL_DIALOG_SAVE)
-			{
-                //sprintf(message, "Saved data: %s", (char *)MemoryStickData.data);
-				printf("OSL_DIALOG_SAVE\n");
+				printf("OSL_DIALOG_LOAD || OSL_DIALOG_SAVE\n");
 				return true;
 			}
             oslEndSaveLoadDialog();
