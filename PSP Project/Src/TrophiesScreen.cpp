@@ -36,6 +36,6 @@ void TrophiesScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warni
 	}
 	else if(osl_keys->pressed.cross)
 	{
-		myMemoryStick->Load(OSL_DIALOG_LOAD);
+		myMemoryStick->Load();
 	}
 }

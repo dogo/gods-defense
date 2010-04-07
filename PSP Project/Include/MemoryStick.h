@@ -29,9 +29,9 @@ public:
 
 	~MemoryStick();
 
-	void Save(int type, char aData);
+	void Save(int type, char *aData);
 
-	void Load(int type);
+	void Load();
 
 	bool Status(int type);
 };

@@ -23,7 +23,7 @@ MemoryStick::~MemoryStick()
 {
 }
 
-void MemoryStick::Save(int type, char aData)
+void MemoryStick::Save(int type, char *aData)
 {
 	if (type == OSL_DIALOG_NONE)
 	{
@@ -34,7 +34,7 @@ void MemoryStick::Save(int type, char aData)
 		MemoryStickData.nameList = nameList;
 		MemoryStickData.icon0 = icon0;
 		MemoryStickData.size_icon0 = size_icon0;
-		MemoryStickData.data = data;
+		MemoryStickData.data = aData;
 		MemoryStickData.dataSize = 100;
 		oslInitAutoSaveDialog(&MemoryStickData);
 		//memset(&aData, 0, sizeof(aData));
@@ -42,12 +42,13 @@ void MemoryStick::Save(int type, char aData)
 	}
 }
 
-void MemoryStick::Load(int type)
+void MemoryStick::Load()
 {
 	memset(&MemoryStickData, 0, sizeof(MemoryStickData));
     strcpy(MemoryStickData.gameID, gameID);
     strcpy(MemoryStickData.saveName, saveName);
     MemoryStickData.nameList = nameList;
+	printf("MemoryStickData: %s\n", (char *)MemoryStickData.data);
     MemoryStickData.data = &loadedData;
     MemoryStickData.dataSize = 100;
     oslInitAutoLoadDialog(&MemoryStickData);
