@@ -29,7 +29,7 @@ public:
 
 	~MemoryStick();
 
-	void Save(int type);
+	void Save(int type, char aData);
 
 	void Load(int type);
 

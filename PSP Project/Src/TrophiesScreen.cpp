@@ -10,11 +10,13 @@
 TrophiesScreen::TrophiesScreen()
 {
 	back = oslLoadImageFilePNG(Resource::IMG_BACK, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	myMemoryStick = new MemoryStick();
 }
 
 TrophiesScreen::~TrophiesScreen()
 {
 	oslDeleteImage(back);
+	delete(myMemoryStick);
 }
 
 void TrophiesScreen::draw()
@@ -31,5 +33,9 @@ void TrophiesScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warni
 	if(osl_keys->pressed.circle)
 	{
 		mNextScreen = ScreenManager::SCREEN_MAIN_MENU; //go back CLR
+	}
+	else if(osl_keys->pressed.cross)
+	{
+		myMemoryStick->Load(OSL_DIALOG_LOAD);
 	}
 }

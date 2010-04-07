@@ -40,7 +40,7 @@ void MemoryWarningScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá 
 	if(osl_keys->pressed.cross)
 	{
 		oslFlushKey();
-		myMemoryStick->Load(type);
+		myMemoryStick->Save(type, 'a');
 	}
 }
 

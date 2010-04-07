@@ -7,11 +7,13 @@
 #define TROPHIESSCREEN_H_INCLUDED
 
 #include "../Include/ILib.h"
+#include "../Include/MemoryStick.h"
 
 class TrophiesScreen : public IScreen
 {
 private:
 	OSL_IMAGE *back;
+	MemoryStick *myMemoryStick;
 
 public:
 	TrophiesScreen();
