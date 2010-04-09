@@ -13,7 +13,6 @@ class TrophiesScreen : public IScreen
 {
 private:
 	OSL_IMAGE *back;
-	MemoryStick *myMemoryStick;
 
 public:
 	TrophiesScreen();

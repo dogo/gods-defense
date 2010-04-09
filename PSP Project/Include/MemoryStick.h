@@ -21,9 +21,8 @@ public:
 
 	struct oslSaveLoad MemoryStickData;
 
-    //char message[100];
+    char message[100];
     char loadedData[100];
-	char data[100];
 
 	MemoryStick();
 
@@ -31,7 +30,7 @@ public:
 
 	void Save(int type, char *aData);
 
-	void Load();
+	void Load(int type);
 
 	bool Status(int type);
 };

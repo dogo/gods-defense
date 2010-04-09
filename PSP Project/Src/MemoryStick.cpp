@@ -12,11 +12,9 @@ MemoryStick::MemoryStick()
 {
 	gameTitle = "Gods Defense";
 	gameID = "GOD01";
-	saveName = "0001";
-	//sprintf(message, "");
+	saveName = "0000";
+	sprintf(message, "");
 	sprintf(loadedData, "");	
-
-	sprintf(data, "someData: 50");
 }
 
 MemoryStick::~MemoryStick()
@@ -37,23 +35,23 @@ void MemoryStick::Save(int type, char *aData)
 		MemoryStickData.data = aData;
 		MemoryStickData.dataSize = 100;
 		oslInitAutoSaveDialog(&MemoryStickData);
-		//memset(&aData, 0, sizeof(aData));
-		printf("Saved data: %s\n", (char *)MemoryStickData.data);
+		memset(message, 0, sizeof(message));
 	}
 }
 
-void MemoryStick::Load()
+void MemoryStick::Load(int type)
 {
-	memset(&MemoryStickData, 0, sizeof(MemoryStickData));
-    strcpy(MemoryStickData.gameID, gameID);
-    strcpy(MemoryStickData.saveName, saveName);
-    MemoryStickData.nameList = nameList;
-	printf("MemoryStickData: %s\n", (char *)MemoryStickData.data);
-    MemoryStickData.data = &loadedData;
-    MemoryStickData.dataSize = 100;
-    oslInitAutoLoadDialog(&MemoryStickData);
-    //memset(message, 0, sizeof(message));
-	printf("Loaded data: %s\n", (char *)MemoryStickData.data);
+	if (type == OSL_DIALOG_NONE)
+	{
+		memset(&MemoryStickData, 0, sizeof(MemoryStickData));
+		strcpy(MemoryStickData.gameID, gameID);
+		strcpy(MemoryStickData.saveName, saveName);
+		MemoryStickData.nameList = nameList;
+		MemoryStickData.data = &loadedData;
+		MemoryStickData.dataSize = 100;
+		oslInitAutoLoadDialog(&MemoryStickData);
+		memset(message, 0, sizeof(message));
+	}
 }
 
 bool MemoryStick::Status(int type)
@@ -64,13 +62,12 @@ bool MemoryStick::Status(int type)
         if (oslGetLoadSaveStatus() == PSP_UTILITY_DIALOG_NONE)
 		{
             if (oslSaveLoadGetResult() == OSL_SAVELOAD_CANCEL)
-			{
-				printf("OSL_SAVELOAD_CANCEL\n");
 				return false;
-			}
             else if ((type == OSL_DIALOG_LOAD) || (type == OSL_DIALOG_SAVE))
 			{
-				printf("OSL_DIALOG_LOAD || OSL_DIALOG_SAVE\n");
+				sprintf(message, "Data: %s", (char *)MemoryStickData.data);
+				printf("message %s\n",message);
+				oslEndSaveLoadDialog();
 				return true;
 			}
             oslEndSaveLoadDialog();
