@@ -392,7 +392,7 @@ void GameGUI::drawUpgradeSellInfo(int x)
 {
 	char costBuffer[256];
 	Tower *mTower = mGame->GetSelectedTower();
-	oslIntraFontSetStyle(gFont, 0.85f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+	oslIntraFontSetStyle(gFont, 0.45f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
 	
 	if(x == 0)
 	{	

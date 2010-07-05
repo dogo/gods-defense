@@ -47,8 +47,9 @@ char const Resource::STR_OK[] = "OK";
 char const Resource::STR_AUTOSAVE_CAPTION[] = "Auto Save";
 char const Resource::STR_AUTOSAVE_TEXT[] = 
 	"This game uses the auto save feature.\n"
-	"Do not remove your Memory Stick Duo(TM), or\n"
-	"turn off your PSP(TM) system, when you earn a thophy";
+	"Do not remove your Memory Stick Duo(TM),\n"
+	"or turn off your PSP(TM) system,\n"
+	"when you earn a thophy";
 
 char const Resource::STR_WARNING_TEXT[] =
 	"WLAN switch is off.\n\n"
@@ -101,4 +102,5 @@ char const Resource::STR_CONGRATS[] =
 char const Resource::STR_LOSE[] = 
 	"You have been defeated!\n"
 	"\n"
-	"Press Cross to go back to main menu.\n";
+	"Press Cross to go back\n"
+	"to main menu.\n";

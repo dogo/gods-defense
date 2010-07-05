@@ -23,7 +23,7 @@ void MemoryWarningScreen::draw()
 {
 	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,20,Resource::STR_AUTOSAVE_CAPTION);
-	oslIntraFontSetStyle(gFont, 0.5f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 0.65f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,100,Resource::STR_AUTOSAVE_TEXT);
 	oslDrawImageXY(cross, (430) - (cross->stretchX), (272) - (cross->stretchY));
 	oslIntraFontSetStyle(gFont, 1.0f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
