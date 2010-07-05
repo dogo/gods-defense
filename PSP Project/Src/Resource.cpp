@@ -19,6 +19,7 @@ char Resource::IMG_SELECTOR_SIDEBAR[] = "/Res/selector.png";
 char Resource::IMG_HUD[] = "/Res/hud.png";
 char Resource::IMG_SELL[] = "/Res/sell.png";
 char Resource::IMG_UPGRADE[] = "/Res/upgrade.png";
+char Resource::IMG_COVER[] = "/Res/cover.png";
 
 char const Resource::STR_BACK_SK[] = "Back";
 char const Resource::STR_MULTIPLAYER_CAPTION[] = "Multiplayer";

@@ -56,12 +56,12 @@ int main()
 	menuTheme = oslLoadSoundFileBGM("/Res/menuTheme.bgm", OSL_FMT_STREAM); //Loads the Main menu theme music
 
     // Load fonts
-	gFont = oslLoadFontFile("flash0:/font/ltn8.pgf");
-    oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT); //Tells the psp what font to use in intrafont
+	gFont = oslLoadFontFile("/Res/gods-defense.pgf");
+    oslIntraFontSetStyle(gFont, 1.0f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT); //Tells the psp what font to use in intrafont
 	oslSetFont(gFont);
 
 	if (!menuTheme || !gFont)
-		oslFatalError("At least one file is missing. Please copy all the file in the game directory.");
+		oslFatalError("At least one file is missing. Please copy all the files in the game directory.");
 
 	GodLibrary::Initialize(100,100,100,RGB(255,255,255));
 	ScreenManager *mScreenManager = new ScreenManager();

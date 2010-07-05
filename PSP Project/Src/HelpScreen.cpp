@@ -9,24 +9,26 @@
 
 HelpScreen::HelpScreen()
 {
-	back = oslLoadImageFilePNG(Resource::IMG_BACK, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	mBack = oslLoadImageFilePNG(Resource::IMG_BACK, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	mCover = oslLoadImageFilePNG(Resource::IMG_COVER, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 }
 
 HelpScreen::~HelpScreen()
 {
-	if(back != NULL)
-		oslDeleteImage(back);
+	oslDeleteImage(mBack);
+	oslDeleteImage(mCover);
 }
 
 void HelpScreen::draw()
 {
-	oslIntraFontSetStyle(gFont, 1.5f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslDrawImageXY(mCover,0,0);
+	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,20,Resource::STR_HELP_CAPTION);
-	oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 0.6f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,40,Resource::STR_HELP_TEXT);
-	oslDrawImageXY(back, (430) - (back->stretchX), (272) - (back->stretchY));
-	oslIntraFontSetStyle(gFont, 1.5f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
-	oslDrawString((510) - back->stretchX,(272) - (back->stretchY/2),Resource::STR_BACK_SK);
+	oslDrawImageXY(mBack, (430) - (mBack->stretchX), (272) - (mBack->stretchY));
+	oslIntraFontSetStyle(gFont, 0.7f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslDrawString((510) - mBack->stretchX,(272) - (mBack->stretchY/2),Resource::STR_BACK_SK);
 }
 
 void HelpScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning

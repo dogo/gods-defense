@@ -47,11 +47,11 @@ GameOptionsScreen::~GameOptionsScreen()
 
 void GameOptionsScreen::draw()
 {
-	oslIntraFontSetStyle(gFont, 2.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER); //Tells the PSP what size and shape the text is
+	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER); //Tells the PSP what size and shape the text is
 	oslDrawString(240,40,Resource::STR_MAPSELECTION_CAPTION);
 	oslDrawString(335,183,"X");
 
-	oslIntraFontSetStyle(gFont, 1.5f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 0.6f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,160,mMap[mSelectedMap].c_str());
 	oslDrawString(240- oslGetStringWidth(mMap[mSelectedMap].c_str()),160,"<-");
 	oslDrawString(240+ oslGetStringWidth(mMap[mSelectedMap].c_str()),160,"->");

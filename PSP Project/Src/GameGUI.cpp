@@ -333,13 +333,13 @@ void GameGUI::updateHud()
 	//Update gold
 	char goldBuffer[256];
 	sprintf(goldBuffer, "%i", mGame->GetPlayerMoney());
-	oslIntraFontSetStyle(gFont, 0.75f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+	oslIntraFontSetStyle(gFont, 0.55f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
 	oslDrawStringLimited(27, 7, 55, goldBuffer);
 
 	//Update Lives
 	char liveBuffer[256];
 	sprintf(liveBuffer, "%i", mGame->GetPlayerLives());
-	oslIntraFontSetStyle(gFont, 0.75f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+	oslIntraFontSetStyle(gFont, 0.55f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
 	oslDrawStringLimited(90, 7, 40, liveBuffer);
 }
 
@@ -383,16 +383,16 @@ void SidebarItem::drawTowerInfo(int y)
 {
 	char costBuffer[256];
 	sprintf(costBuffer, "Cost: %i", mTower->mTowerVector[0].mCost); //Building is always 0
-	oslIntraFontSetStyle(gFont, 0.85f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+	oslIntraFontSetStyle(gFont, 0.45f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
 	oslDrawString((480 -48 - (oslGetStringWidth(mTower->mTowerName))), 29 + (y * 61), mTower->mTowerName);
-	oslDrawString((480 -48 - (oslGetStringWidth(mTower->mTowerName))), 39 + (y * 61), costBuffer);
+	oslDrawString((480 -48 - (oslGetStringWidth(mTower->mTowerName))), 42 + (y * 61), costBuffer);
 }
 
 void GameGUI::drawUpgradeSellInfo(int x)
 {
 	char costBuffer[256];
 	Tower *mTower = mGame->GetSelectedTower();
-	oslIntraFontSetStyle(gFont, 0.85f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+	oslIntraFontSetStyle(gFont, 0.85f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
 	
 	if(x == 0)
 	{	

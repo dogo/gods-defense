@@ -62,6 +62,7 @@ public:
 	static char IMG_HUD[];
 	static char IMG_SELL[];
 	static char IMG_UPGRADE[];
+	static char IMG_COVER[];
 };
 
 
