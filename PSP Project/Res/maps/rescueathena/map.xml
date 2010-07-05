@@ -1,0 +1,73 @@
+<!DOCTYPE Map SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/map.dtd">
+<Map>
+  <Name>Rescue Athena</Name>
+  <Description><![CDATA[7 Waves of Tower.]]></Description>
+  <Initializers Gold="20" Lives="20"/>
+  <Menu>
+    <BuildTowerMenu Y="0" Folder="arrow"/>
+    <BuildTowerMenu Y="1" Folder="fire"/>
+    <BuildTowerMenu Y="2" Folder="ice"/>
+    <BuildTowerMenu Y="3" Folder="lightning"/>
+  </Menu>
+  <MapImg File="rescueathena.png" Width="15" Height="15"/>
+  <CollisionMap><![CDATA[
+######___##___#
+######_#_##_#_#
+######_#_##_#_#
+######_#_##_#_#
+____##_#____#_#
+###_##_######_#
+###_##_##_____#
+###_##_##_#####
+###_##_##_#####
+###___###_____#
+#############_#
+#_____________#
+#_#############
+#______________
+###############
+]]></CollisionMap>
+  <Path Name="default">
+    <Checkpoint X="-16" Y="144" Radius="1"/>
+    <Checkpoint X="112" Y="144" Radius="1"/>
+    <Checkpoint X="112" Y="304" Radius="1"/>
+    <Checkpoint X="208" Y="304" Radius="1"/>
+    <Checkpoint X="208" Y="16" Radius="1"/>
+    <Checkpoint X="272" Y="16" Radius="1"/>
+    <Checkpoint X="272" Y="144" Radius="1"/>
+    <Checkpoint X="368" Y="144" Radius="1"/>
+    <Checkpoint X="368" Y="16" Radius="1"/>
+    <Checkpoint X="432" Y="16" Radius="1"/>
+    <Checkpoint X="432" Y="208" Radius="1"/>
+    <Checkpoint X="304" Y="208" Radius="1"/>
+    <Checkpoint X="304" Y="304" Radius="1"/>
+    <Checkpoint X="432" Y="304" Radius="1"/>
+    <Checkpoint X="432" Y="368" Radius="1"/>
+    <Checkpoint X="48" Y="368" Radius="1"/>
+    <Checkpoint X="48" Y="432" Radius="1"/>
+    <Checkpoint X="496" Y="432" Radius="1"/>
+  </Path>
+  <Waves>
+	<Wave Path="default" IntervalSpawnTime="900" Description="Wave 1!">
+        <Enemy Folder="minions" NumberOfEnemies="20" />
+    </Wave>
+    <Wave Path="default" IntervalSpawnTime="900" Description="Wave 2!">
+        <Enemy Folder="cyclops" NumberOfEnemies="20" />
+    </Wave>
+    <Wave Path="default" IntervalSpawnTime="900" Description="Wave 3!">
+		<Enemy Folder="griffin" NumberOfEnemies="20" />
+    </Wave>
+    <Wave Path="default" IntervalSpawnTime="600" Description="Wave 4 Bosssss!" Boss="True">
+        <Enemy Folder="cerberus" NumberOfEnemies="1" />
+    </Wave>
+    <Wave Path="default" IntervalSpawnTime="900" Description="Wave 5!">
+        <Enemy Folder="minotaur" NumberOfEnemies="20" />
+    </Wave>
+    <Wave Path="default" IntervalSpawnTime="600" Description="Wave 6!">
+        <Enemy Folder="hydra" NumberOfEnemies="20" />
+    </Wave>
+	<Wave Path="default" IntervalSpawnTime="600" Description="Wave 7 Bosssss!" Boss="True">
+        <Enemy Folder="medusa" NumberOfEnemies="1" />
+    </Wave>
+  </Waves>
+</Map>
