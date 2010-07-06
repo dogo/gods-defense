@@ -26,9 +26,9 @@ void HelpScreen::draw()
 	oslDrawString(240,20,Resource::STR_HELP_CAPTION);
 	oslIntraFontSetStyle(gFont, 0.6f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,40,Resource::STR_HELP_TEXT);
-	oslDrawImageXY(mBack, (430) - (mBack->stretchX), (272) - (mBack->stretchY));
+	oslDrawImageXY(mBack, (430) - (mBack->stretchX), ((272) - (mBack->stretchY)+ 10));
 	oslIntraFontSetStyle(gFont, 0.7f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
-	oslDrawString((510) - mBack->stretchX,(272) - (mBack->stretchY/2),Resource::STR_BACK_SK);
+	oslDrawString((510) - mBack->stretchX, ((272) - (mBack->stretchY/2)+ 10),Resource::STR_BACK_SK);
 }
 
 void HelpScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning

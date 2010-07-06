@@ -14,6 +14,7 @@ private:
 	OSL_IMAGE *imgBack;
 	OSL_IMAGE *imgServer;
 	OSL_IMAGE *imgClient;
+	OSL_IMAGE *imgCover;
 
 public:
 	MultiplayerScreen();
