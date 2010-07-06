@@ -12,9 +12,10 @@
 class MemoryWarningScreen : public IScreen
 {
 private:
-	OSL_IMAGE *cross;
-	MemoryStick *myMemoryStick;
-	int type;
+	OSL_IMAGE *mCross;
+	OSL_IMAGE *mCover;
+	MemoryStick *mMemoryStick;
+	int mType;
 
 public:
 	MemoryWarningScreen();

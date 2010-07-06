@@ -11,7 +11,8 @@
 class WarningScreen : public IScreen
 {
 private:
-	OSL_IMAGE *back;
+	OSL_IMAGE *mBack;
+	OSL_IMAGE *mCover;
 
 public:
 	WarningScreen();

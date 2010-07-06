@@ -11,6 +11,7 @@
 class ExitScreen : public IScreen
 {
 private:
+	OSL_IMAGE *mCover;
 
 public:
 	ExitScreen();
