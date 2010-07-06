@@ -16,6 +16,7 @@ class GameOptionsScreen : public IScreen
 private:
 	void ChooseMap(); //Set selected map to load
 	OSL_IMAGE *imgBack;
+	OSL_IMAGE *mMiniMap;
 
 public:
 	GameOptionsScreen();
@@ -25,6 +26,7 @@ public:
 
 	int mSelectedMap; //Index of current map
 	vector<string> mMap; // vector of map names
+	vector<OSL_IMAGE*> mMapImages; // vector of map images
 
 };
 #endif

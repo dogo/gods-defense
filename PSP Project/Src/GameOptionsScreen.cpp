@@ -14,6 +14,8 @@ GameOptionsScreen::GameOptionsScreen()
 	gChoosedMap = "NULL";
 	mSelectedMap = 0;
 	int dfd = sceIoDopen("/Res/maps");
+	char buffer[255];
+	mMiniMap = NULL;
 
 	//get all the folders name in map directory to fill mMap vector 
 	if(dfd > 0)
@@ -28,6 +30,9 @@ GameOptionsScreen::GameOptionsScreen()
 				if(dir.d_name[0] != '.')
 				{
 					mMap.push_back(dir.d_name); //Add folder name to mMap vector
+					sprintf(buffer,"/Res/maps/%s/%s.png",dir.d_name,dir.d_name);
+					mMiniMap = oslScaleImageCreate(oslLoadImageFilePNG(buffer, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888), OSL_IN_RAM | OSL_SWIZZLED, 100, 100, OSL_PF_8888);
+					mMapImages.push_back(mMiniMap);
 				}
 			}
 			else
@@ -43,6 +48,8 @@ GameOptionsScreen::GameOptionsScreen()
 GameOptionsScreen::~GameOptionsScreen()
 {
 	oslDeleteImage(imgBack);
+	oslDeleteImage(mMiniMap);
+	mMapImages.clear();
 }
 
 void GameOptionsScreen::draw()
@@ -52,9 +59,12 @@ void GameOptionsScreen::draw()
 	oslDrawString(335,183,"X");
 
 	oslIntraFontSetStyle(gFont, 0.6f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(240,160,mMap[mSelectedMap].c_str());
-	oslDrawString(240- oslGetStringWidth(mMap[mSelectedMap].c_str()),160,"<-");
-	oslDrawString(240+ oslGetStringWidth(mMap[mSelectedMap].c_str()),160,"->");
+	
+	oslDrawImageXY(mMapImages[mSelectedMap],(480/2 - mMapImages[mSelectedMap]->sizeX/2),(272/2 - mMapImages[mSelectedMap]->sizeY/2));
+
+	oslDrawString(240,210,mMap[mSelectedMap].c_str());
+	oslDrawString(240- oslGetStringWidth(mMap[mSelectedMap].c_str()),210,"<-");
+	oslDrawString(240+ oslGetStringWidth(mMap[mSelectedMap].c_str()),210,"->");
 
 	oslDrawImageXY(imgBack, (430) - (imgBack->stretchX), (272) - (imgBack->stretchY));
 	oslDrawString((510) - imgBack->stretchX,(272) - (imgBack->stretchY/2),Resource::STR_BACK_SK);
