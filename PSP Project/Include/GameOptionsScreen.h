@@ -17,6 +17,7 @@ private:
 	void ChooseMap(); //Set selected map to load
 	OSL_IMAGE *imgBack;
 	OSL_IMAGE *mMiniMap;
+	OSL_IMAGE *imgSelect;
 
 public:
 	GameOptionsScreen();

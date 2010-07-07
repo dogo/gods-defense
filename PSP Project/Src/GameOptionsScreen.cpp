@@ -11,6 +11,7 @@ string gChoosedMap;
 GameOptionsScreen::GameOptionsScreen()
 {
 	imgBack = oslLoadImageFilePNG(Resource::IMG_BACK, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	imgSelect = oslLoadImageFilePNG(Resource::IMG_CROSS, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 	gChoosedMap = "NULL";
 	mSelectedMap = 0;
 	int dfd = sceIoDopen("/Res/maps");
@@ -48,6 +49,7 @@ GameOptionsScreen::GameOptionsScreen()
 GameOptionsScreen::~GameOptionsScreen()
 {
 	oslDeleteImage(imgBack);
+	oslDeleteImage(imgSelect);
 	oslDeleteImage(mMiniMap);
 	mMapImages.clear();
 }
@@ -56,7 +58,6 @@ void GameOptionsScreen::draw()
 {
 	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER); //Tells the PSP what size and shape the text is
 	oslDrawString(240,40,Resource::STR_MAPSELECTION_CAPTION);
-	oslDrawString(335,183,"X");
 
 	oslIntraFontSetStyle(gFont, 0.6f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
 	
@@ -68,6 +69,9 @@ void GameOptionsScreen::draw()
 
 	oslDrawImageXY(imgBack, (430) - (imgBack->stretchX), (272) - (imgBack->stretchY));
 	oslDrawString((510) - imgBack->stretchX,(272) - (imgBack->stretchY/2),Resource::STR_BACK_SK);
+
+	oslDrawImageXY(imgSelect, 10, (272) - (imgSelect->stretchY));
+	oslDrawString(28 + imgSelect->stretchX, (272) - (imgSelect->stretchY/2),Resource::STR_SELECT);
 }
 
 void GameOptionsScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning

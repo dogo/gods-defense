@@ -43,6 +43,7 @@ char const Resource::STR_MAX_REACHED[] = "Maximum reached";
 char const Resource::STR_TROPHIES_CAPTION[] = "Trophies";
 char const Resource::STR_EARNED_TROPHIE[] ="You've Earned A Trophy!";
 char const Resource::STR_OK[] = "OK";
+char const Resource::STR_SELECT[] = "Select";
 
 char const Resource::STR_AUTOSAVE_CAPTION[] = "Auto Save";
 char const Resource::STR_AUTOSAVE_TEXT[] = 

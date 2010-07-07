@@ -47,6 +47,7 @@ public:
 	static char const STR_AUTOSAVE_CAPTION[];
 	static char const STR_AUTOSAVE_TEXT[];
 	static char const STR_OK[];
+	static char const STR_SELECT[];
 
 	
 	static char IMG_GAME_TITLE[];
