@@ -44,6 +44,9 @@ char const Resource::STR_TROPHIES_CAPTION[] = "Trophies";
 char const Resource::STR_EARNED_TROPHIE[] ="You've Earned A Trophy!";
 char const Resource::STR_OK[] = "OK";
 char const Resource::STR_SELECT[] = "Select";
+char const Resource::STR_CANT_BUILD_HERE[] = "Can't build here.";
+char const Resource::STR_CANT_UPGRADE[] = "Can't upgrade.";
+char const Resource::STR_MORE_GOLD[] = "More gold is required.";
 
 char const Resource::STR_AUTOSAVE_CAPTION[] = "Auto Save";
 char const Resource::STR_AUTOSAVE_TEXT[] = 

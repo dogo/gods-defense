@@ -178,7 +178,7 @@ void GameGUI::Update(u32 /*timePassed*/) //Parametro Formal, não dá warning
 				}
 				else
 				{
-					oslMessageBox("Can't build here.", "Warning", oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
+					oslMessageBox(Resource::STR_CANT_BUILD_HERE, Resource::STR_WARNING_CAPTION, oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
 				}
 			}
 		}
@@ -225,7 +225,7 @@ void GameGUI::Update(u32 /*timePassed*/) //Parametro Formal, não dá warning
 			}
 			else if((mSelectedItemX == 0) && (!mGame->TryUpgradeSelectedTower()))
 			{
-				oslMessageBox("Can't upgrade.", "Warning", oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
+				oslMessageBox(Resource::STR_CANT_UPGRADE, Resource::STR_WARNING_CAPTION, oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
 			}
 			if((mSelectedItemX == 1) && (mGame->TrySellSelectedTower()))
 			{
@@ -356,7 +356,7 @@ void SidebarItem::Selected()
 		}
 		else
 		{
-			oslMessageBox("More gold is required.", "Warning", oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
+			oslMessageBox(Resource::STR_MORE_GOLD, Resource::STR_WARNING_CAPTION, oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
 			gamegui->mGame->SetGameState(GS_SCROLL_MAP);
 		}
 	}

@@ -399,7 +399,7 @@ void GameScreen::update(u32 timePassed)
 			{
 				/*
 				 *	TODO : Recive msg from server with win status if true send client score and compare with server
-				 *	if clientScore < serverScore -> Client loose else client win and set the new state
+				 *	if clientScore < serverScore -> Client lose else client win and set the new state
 				 */
 				mAdhocReference->clientSendScore(gScoreBuffer);
 			}
@@ -607,7 +607,6 @@ bool GameScreen::TryUpgradeSelectedTower()
 	{
 		mPlayerMoney -= t->mTowerVector[mSelectedTower->mTowerLevel+1].mCost;
 		mSelectedTower->mTowerLevel += 1;
-		printf("Upgraded to level %d\n",mSelectedTower->mTowerLevel);
 		return true;
 	}
 	else
@@ -622,7 +621,6 @@ bool GameScreen::TrySellSelectedTower()
 
 	//Selling tower
 	mPlayerMoney += (t->mTowerVector[mSelectedTower->mTowerLevel].mSellAmount);
-	printf("Sell tower level %d\n",mSelectedTower->mTowerLevel);
 	
 	int x = ((int)mSelectedTower->mTowerPosition.X / 32);
 	int y = ((int)mSelectedTower->mTowerPosition.Y / 32);

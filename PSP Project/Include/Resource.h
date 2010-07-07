@@ -48,6 +48,9 @@ public:
 	static char const STR_AUTOSAVE_TEXT[];
 	static char const STR_OK[];
 	static char const STR_SELECT[];
+	static char const STR_CANT_BUILD_HERE[];
+	static char const STR_CANT_UPGRADE[];
+	static char const STR_MORE_GOLD[];
 
 	
 	static char IMG_GAME_TITLE[];
