@@ -348,6 +348,10 @@ void GameScreen::update(u32 timePassed)
 				mPlayerLives--;
 				//Lose Gold
 				mPlayerMoney -= ((*ei_iter)->GetGold());
+
+				//Final Boss reached the end, so the player lose!
+				if (mWaveIsRunning && mActiveWaves >= mGameMap->mWaves.size())
+					mPlayerLives = 0;
 			break;
 
 			case ENEMY_FULLY_DEAD: //Dead and done
@@ -384,7 +388,7 @@ void GameScreen::update(u32 timePassed)
 
 		if (mPlayerLives <= 0)
 		{
-			//Loose, if ad hoc is on the other player can continue to play
+			//Lose, if ad hoc is on the other player can continue to play
 			sprintf(gScoreBuffer, "%d",(int) GetPlayerScore());
 			SetGameState(GS_GAME_OVER);
 			mNextScreen = ScreenManager::SCREEN_ENDING;
@@ -593,7 +597,7 @@ void GameScreen::drawUpgradeCircle()
 	{
 		Coordinates2D buildingPosition = Coordinates2D::Coordinates2D(mSelectedTower->mTowerPosition.X, mSelectedTower->mTowerPosition.Y);
 		buildingPosition.X = (((int)(buildingPosition.X) / 32) * 32) + 16; // 32 == Width
-		buildingPosition.Y = (((int)(buildingPosition.Y) / 32) * 32) + 16; // 32 == Heigth
+		buildingPosition.Y = (((int)(buildingPosition.Y) / 32) * 32) + 16; // 32 == Height
 		mSelectedTower->mTower->RenderRangeCircle(buildingPosition, mSelectedTower->mTowerLevel+1, COLOR_BLUE);
 	}
 }
