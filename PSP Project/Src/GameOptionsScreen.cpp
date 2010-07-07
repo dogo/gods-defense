@@ -64,8 +64,8 @@ void GameOptionsScreen::draw()
 	oslDrawImageXY(mMapImages[mSelectedMap],(480/2 - mMapImages[mSelectedMap]->sizeX/2),(272/2 - mMapImages[mSelectedMap]->sizeY/2));
 
 	oslDrawString(240,210,mMap[mSelectedMap].c_str());
-	oslDrawString(240- oslGetStringWidth(mMap[mSelectedMap].c_str()),210,"<-");
-	oslDrawString(240+ oslGetStringWidth(mMap[mSelectedMap].c_str()),210,"->");
+	oslDrawString(240- oslGetStringWidth(mMap[mSelectedMap].c_str()),272/2,"<-");
+	oslDrawString(240+ oslGetStringWidth(mMap[mSelectedMap].c_str()),272/2,"->");
 
 	oslDrawImageXY(imgBack, (430) - (imgBack->stretchX), (272) - (imgBack->stretchY));
 	oslDrawString((510) - imgBack->stretchX,(272) - (imgBack->stretchY/2),Resource::STR_BACK_SK);
