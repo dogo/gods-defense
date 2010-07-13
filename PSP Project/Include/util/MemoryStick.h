@@ -6,8 +6,8 @@
 #ifndef MEMORYSTICK_H_INCLUDED
 #define MEMORYSTICK_H_INCLUDED
 
-#include "../Include/ILib.h"
-#include "../Include/icon.h"
+#include "../../Include/ILib.h"
+#include "../../Include/util/Icon.h"
 
 class MemoryStick
 {

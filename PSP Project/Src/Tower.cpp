@@ -38,7 +38,7 @@ Tower::Tower(const string &towerName)
 {
 	//Default Initializers
 	mTowerDirName = towerName;
-	lowerCase(mTowerDirName);
+	PspIO::lowerCase(mTowerDirName);
 
 	mIsBuildable = true;
 	mTowerName = NULL;
@@ -220,7 +220,7 @@ void Tower::RenderTower(const Coordinates2D &position)
 
 void Tower::RenderRangeCircle(const Coordinates2D &position, const int &TowerLevel, const OSL_COLOR color)
 {
-	GodLibrary::drawCircle(position.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+position.Y, mTowerVector[TowerLevel].mRange, color);
+	Drawing::drawCircle(position.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+position.Y, mTowerVector[TowerLevel].mRange, color);
 }
 
 TowerInstance::TowerInstance(Tower *tower, const Coordinates2D &position)

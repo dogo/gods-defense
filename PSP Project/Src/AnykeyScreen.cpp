@@ -10,7 +10,7 @@ AnykeyScreen::AnykeyScreen()
 {
 	mWait = 0;
 	AnykeySplash = oslLoadImageFilePNG(Resource::IMG_ANYKEY_SPLASH, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
-	mySplash = new GodLibrary;
+	mySplash = new Drawing;
 }
 
 AnykeyScreen::~AnykeyScreen()

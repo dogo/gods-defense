@@ -11,7 +11,8 @@ class Tower;
 class TowerInstance;
 
 #include "tinyxml/tinyxml.h"
-#include "../Include/GodLibrary.h"
+#include "../Include/util/Drawing.h"
+#include "../Include/util/PspIO.h"
 #include "../Include/Projectile.h"
 #include "../Include/Enemy.h"
 #include "../Include/GameScreen.h"

@@ -5,8 +5,8 @@
 #include <pspkernel.h>
 #include <string.h>
 #include <oslib/oslib.h>
-#include "../Include/ILib.h"
-#include "../Include/Fps.h"
+#include "../../Include/ILib.h"
+#include "../../Include/util/Fps.h"
 
 static struct FpsInfo
 {

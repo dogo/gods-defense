@@ -12,7 +12,6 @@ class ProjectileInstance;
 #include "../Include/Tower.h"
 #include "../Include/Enemy.h"
 #include "../Include/GameScreen.h"
-#include "../Include/GodLibrary.h"
 
 enum ProjectileType
 {

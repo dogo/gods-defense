@@ -79,5 +79,5 @@ void MultiplayerScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá wa
 	{
 		mNextScreen = ScreenManager::SCREEN_WARNING;
 	}
-#endif
+#endif // JPCSP_EMULATOR
 }

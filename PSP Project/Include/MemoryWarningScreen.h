@@ -7,7 +7,7 @@
 #define MEMORYWARNINGSCREEN_H_INCLUDED
 
 #include "../Include/ILib.h"
-#include "../Include/MemoryStick.h"
+#include "../Include/util/MemoryStick.h"
 
 class MemoryWarningScreen : public IScreen
 {

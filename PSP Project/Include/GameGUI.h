@@ -6,7 +6,6 @@
 #ifndef INCLUDED_GAMEGUI_H
 #define INCLUDED_GAMEGUI_H
 
-#include "../Include/GodLibrary.h"
 #include "../Include/GameScreen.h"
 #include "../Include/Tower.h"
 #include "../Include/Map.h"

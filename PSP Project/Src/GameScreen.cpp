@@ -48,7 +48,7 @@ GameScreen::GameScreen()
 		mAdhocReference = new Adhoc();
 		mAdhocReference->AdhocServer();
 	}
-#endif
+#endif // JPCSP_EMULATOR
 	mShowDesc = true;
 }
 
@@ -230,7 +230,7 @@ void GameScreen::draw()
 #ifdef _DEBUG
 	if(gIsClient && oslIsWlanPowerOn())
 		mAdhocReference->printInfo();
-#endif
+#endif // _DEBUG
 }
 
 void GameScreen::update(u32 timePassed)
@@ -260,7 +260,7 @@ void GameScreen::update(u32 timePassed)
 			mAdhocReference->printInfo();
 		}
 	}
-#endif
+#endif // JPCSP_EMULATOR
 	mGameGUI->Update(timePassed);
 
 	//Run Waves
@@ -407,7 +407,7 @@ void GameScreen::update(u32 timePassed)
 				 */
 				mAdhocReference->clientSendScore(gScoreBuffer);
 			}
-#endif
+#endif // JPCSP_EMULATOR
 			gWin = true;
 			SetGameState(GS_GAME_OVER);
 			mNextScreen = ScreenManager::SCREEN_ENDING;

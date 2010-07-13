@@ -57,7 +57,7 @@ Enemy::Enemy(const string &enemyName)
 {
 	//Default Initializers
 	mEnemyDirName = enemyName;
-	lowerCase(mEnemyDirName);
+	PspIO::lowerCase(mEnemyDirName);
 
 	mEnemyName = "";
 	mSize = 0;
@@ -124,7 +124,7 @@ Enemy::Enemy(const string &enemyName)
 			node->QueryIntAttribute("Frames", &mAliveFrames);
 
 			sprintf(temp, "/Res/enemies/%s/%s", mEnemyDirName.c_str(), node->Attribute("File"));
-			mEnemyImg = GodLibrary::LoadSpriteFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888, 32, 32); //32 Width && 32 Height
+			mEnemyImg = Sprites::LoadSpriteFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888, 32, 32); //32 Width && 32 Height
 
 			mEnemyImg->centerX = (mEnemyImg->sizeX/2); //hotspot
 			mEnemyImg->centerY = (mEnemyImg->sizeY/2); //hotspot
@@ -305,7 +305,7 @@ void EnemyInstance::RenderEnemy()
 	RenderLife();
 #ifdef _DEBUG
 	oslPrintf_xy(0,30, "Enemy X-> %f    Enemy Y %f  mAngle %d", mEnemyPosition.X, mEnemyPosition.Y, mEnemy->mEnemyImg->angle);
-#endif
+#endif // _DEBUG
 }
 
 bool const EnemyInstance::EnemyIsDead()

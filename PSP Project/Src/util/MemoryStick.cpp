@@ -1,9 +1,9 @@
 //**************************************************************************
-//		PSP Project: 'Gods Defense' - MemoryStick.h
+//		PSP Project: 'Gods Defense' - MemoryStick.cpp
 //		@author Diogo Autilio <A.K.A Dogo - diautilio@gmail.com>
 //**************************************************************************
 
-#include "../Include/MemoryStick.h"
+#include "../../Include/util/MemoryStick.h"
 
 // End list with ""
 char nameList[][20] = { "0000", "0001", "0002", "0003", "0004", ""};

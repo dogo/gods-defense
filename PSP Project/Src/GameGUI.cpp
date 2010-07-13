@@ -114,12 +114,12 @@ void GameGUI::Update(u32 /*timePassed*/) //Parametro Formal, não dá warning
 	int i;
 #ifdef _DEBUG
 	oslPrintf_xy(0,20,"currentGameState %d",currentGameState);
-#endif
+#endif // _DEBUG
 #ifndef JPCSP_EMULATOR
 	//Server must wait other player to start 
 	if(gIsServer && oslIsWlanPowerOn() && currentGameConnectionState == GCS_WAITING_CONNECTION)
 		return;
-#endif
+#endif // JPCSP_EMULATOR
 
 	if(currentGameState == GS_GAME_LOADED)
 	{

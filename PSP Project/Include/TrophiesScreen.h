@@ -7,7 +7,7 @@
 #define TROPHIESSCREEN_H_INCLUDED
 
 #include "../Include/ILib.h"
-#include "../Include/MemoryStick.h"
+#include "../Include/util/MemoryStick.h"
 
 class TrophiesScreen : public IScreen
 {

@@ -74,7 +74,7 @@ void MainMenuScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warni
 #else
 			gIsMultiplayer = true;
 			mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
-#endif
+#endif // JPCSP_EMULATOR
 		}
 		if(gMenu == 2)
 		{

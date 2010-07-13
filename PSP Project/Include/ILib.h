@@ -11,6 +11,8 @@
 #include <oslib/oslib.h>
 #include "../Include/IScreen.h"
 #include "../Include/Resource.h"
+#include "../Include/util/Sprites.h"
+#include "../Include/util/Drawing.h"
 #include <string>
 
 using namespace std;

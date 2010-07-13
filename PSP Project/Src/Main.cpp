@@ -9,7 +9,7 @@ PSP_MODULE_INFO("Gods Defense", 0, 1, 1);
 PSP_MAIN_THREAD_ATTR(PSP_THREAD_ATTR_USER | PSP_THREAD_ATTR_VFPU);
 /*
 	Since malloc uses the heap defined at compile time, we should use a negative value such as PSP_HEAP_SIZE_KB(-1024)
-	instead of a hardcoded value. So you'll have 23MB on Phat and 55MB on the Slim with 1MB for stacks etc in either case.
+	instead of a hard coded value. So you'll have 23MB on Phat and 55MB on the Slim with 1MB for stacks etc in either case.
 */
 PSP_HEAP_SIZE_KB(-1024);
 
@@ -48,7 +48,7 @@ int main()
 {
 #ifdef SHOW_FPS
 	Fps::initFps();
-#endif
+#endif // SHOW_FPS
 	int skip = 0;
     initOSLib();
     oslIntraFontInit(INTRAFONT_CACHE_ALL | INTRAFONT_STRING_CP1252);
@@ -63,7 +63,7 @@ int main()
 	if (!menuTheme || !gFont)
 		oslFatalError("At least one file is missing. Please copy all the files in the game directory.");
 
-	GodLibrary::Initialize(100,100,100,RGB(255,255,255));
+	Drawing::Initialize(100,100,100,RGB(255,255,255));
 	ScreenManager *mScreenManager = new ScreenManager();
 	mNextScreen = ScreenManager::SCREEN_MEMORY_WARNING;
 	u32 lastLoopTime = GetTicks();
@@ -89,17 +89,17 @@ int main()
 				mScreenManager->mCurrentScreen->draw();
 				mScreenManager->mCurrentScreen->update(timeDifference);
 #ifdef MEMORY_DEBUG
-				GodLibrary::GetMemoryInfo();
-#endif
+				Debug::GetMemoryInfo();
+#endif // MEMORY_DEBUG
 #ifdef _DEBUG
 				oslPrintf_xy(0,0,"mNextScreen %d",mNextScreen);
 				oslPrintf_xy(0,10,"gScreen %d",gScreen);
-#endif
+#endif // _DEBUG
 			}
 #ifdef SHOW_FPS
 			Fps::updateFps();
 			Fps::renderInfo();
-#endif
+#endif // SHOW_FPS
 			oslEndDrawing();
 		}
 

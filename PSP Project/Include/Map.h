@@ -14,7 +14,7 @@ class Map;
 
 #include "../Include/GameScreen.h"
 #include "../Include/Tower.h"
-#include "../Include/GodLibrary.h"
+#include "../Include/util/Coordinates2D.h"
 #include "tinyxml/tinyxml.h"
 #include <string>
 #include <vector>

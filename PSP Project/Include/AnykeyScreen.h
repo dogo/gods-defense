@@ -7,12 +7,11 @@
 #define ANYKEYSCREEN_H_INCLUDED
 
 #include "../Include/ILib.h"
-#include "../Include/GodLibrary.h"
 
 class AnykeyScreen : public IScreen
 {
 private:
-	GodLibrary *mySplash;
+	Drawing *mySplash;
 	OSL_IMAGE *AnykeySplash;
 	int	mWait;
 

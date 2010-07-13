@@ -11,7 +11,9 @@ class Enemy;
 class EnemyInstance;
 
 #include "tinyxml/tinyxml.h"
-#include "../Include/GodLibrary.h"
+#include "../Include/util/Coordinates2D.h"
+#include "../Include/util/PspIO.h"
+#include "../Include/util/ReferenceCounted.h"
 #include "../Include/GameScreen.h"
 #include "../Include/Map.h"
 #include <vector>
@@ -31,11 +33,11 @@ enum EnemyState
 class EnemyInfo
 {
 /*
-*	Health - How much health de enemy has.
+*	Health - How much health the enemy has.
 *	GoldValue - Specifies the amount of gold is added into the player's Cash when this unit dies.
 *	PointValue - How much points is added into the player's Score when this unit dies.
-*	Speed - Specifies normal speed of the unit, when try to reach (without modificators).
-*	HasImunity - Specifies if the enemy is has imunity Against bad attributes (Poison,IceSlow).
+*	Speed - Specifies normal speed of the unit, when try to reach (without modification's).
+*	HasImunity - Specifies if the enemy is has immunity Against bad attributes (Poison,IceSlow).
 *	CanFly - Specifies if the enemy walks or fly.
 */
 
@@ -97,7 +99,7 @@ public:
 	bool const EnemyIsDead(); // check if the enemy is dead.
 	bool const EnemyCanFly(); // check if the enemy can fly.
 	bool const EnemyStillOnMap(); //check if the enemy still on the map.
-	void EnemyReciveDamage(const int &damage, const float &slowAmount, const int &slowLength); // the enemy recive damage
+	void EnemyReciveDamage(const int &damage, const float &slowAmount, const int &slowLength); // the enemy receive damage
 	float GetPointsWorth() const;
 	int mCurrentFrames;
 

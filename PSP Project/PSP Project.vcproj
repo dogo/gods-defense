@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="[PSP]GodsDefense"
 	ProjectGUID="{50CA69C5-8113-4F42-8C7C-167F9E54496F}"
 	Keyword="MakeFileProj"
@@ -87,10 +87,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Src\Fps.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\Src\GameGUI.cpp"
 				>
 			</File>
@@ -100,10 +96,6 @@
 			</File>
 			<File
 				RelativePath=".\Src\GameScreen.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Src\GodLibrary.cpp"
 				>
 			</File>
 			<File
@@ -120,10 +112,6 @@
 			</File>
 			<File
 				RelativePath=".\Src\Map.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\Src\MemoryStick.cpp"
 				>
 			</File>
 			<File
@@ -166,6 +154,42 @@
 				RelativePath=".\Src\WarningScreen.cpp"
 				>
 			</File>
+			<Filter
+				Name="util"
+				>
+				<File
+					RelativePath=".\Src\util\Coordinates2D.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Src\util\Debug.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Src\util\Drawing.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Src\util\Fps.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Src\util\MemoryStick.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Src\util\PspIO.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Src\util\ReferenceCounted.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\Src\util\Sprites.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header"
@@ -195,10 +219,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Include\Fps.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Include\GameGUI.h"
 				>
 			</File>
@@ -211,15 +231,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Include\GodLibrary.h"
-				>
-			</File>
-			<File
 				RelativePath=".\Include\HelpScreen.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Include\icon.h"
 				>
 			</File>
 			<File
@@ -240,10 +252,6 @@
 			</File>
 			<File
 				RelativePath=".\Include\Map.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Include\MemoryStick.h"
 				>
 			</File>
 			<File
@@ -286,6 +294,46 @@
 				RelativePath=".\Include\WarningScreen.h"
 				>
 			</File>
+			<Filter
+				Name="util"
+				>
+				<File
+					RelativePath=".\Include\util\Coordinates2D.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Include\util\Debug.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Include\util\Drawing.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Include\util\Fps.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Include\util\Icon.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Include\util\MemoryStick.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Include\util\PspIO.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Include\util\ReferenceCounted.h"
+					>
+				</File>
+				<File
+					RelativePath=".\Include\util\Sprites.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="tinyxml"

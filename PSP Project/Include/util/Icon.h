@@ -1,5 +1,5 @@
-#ifndef __icon0__
-#define __icon0__
+#ifndef __ICON0__
+#define __ICON0__
 
 //Data in icon.h are generated with this command:
 //  bin2c "ICON0.png" "icon.h" "icon0"
