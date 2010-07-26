@@ -18,6 +18,8 @@ private:
 	OSL_IMAGE *imgBack;
 	OSL_IMAGE *mMiniMap;
 	OSL_IMAGE *imgSelect;
+	OSL_IMAGE *imgLetArrow;
+	OSL_IMAGE *imgRightArrow;
 
 public:
 	GameOptionsScreen();
