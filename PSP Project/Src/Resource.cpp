@@ -61,7 +61,7 @@ char const Resource::STR_WARNING_TEXT[] =
 
 char const Resource::STR_ABOUT_TEXT[] =
 	"Gods Defense\n"
-	"Version 0.2\n"
+	"Version 0.4\n"
 	"Licensed by the GNU Public License v3(GPL)\n"
 	"\n"
 	"Art & Design\n"
