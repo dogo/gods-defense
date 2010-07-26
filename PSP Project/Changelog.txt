@@ -1,3 +1,13 @@
+Version 0.4 (July 26, 2010)
+- NEW: Added "Icy Manipulator" map. (Dogo)
+- NEW: Added "Rescue Athena" map. (Dogo)
+- NEW: Added "Olympus" map. (Dogo)
+- NEW: Partially implemented Trophy. (Dogo)
+- NEW: Added mini map preview on choose map screen. (Dogo)
+- CHG: New graphical inteface. (Dogo)
+- CHG: Render circle function boosted 40 fps. (Dogo)
+- BUG: Minor fixes. (Dogo)
+
 Version 0.2 (Jan 05, 2010)
 - CHG: Changed sinf and cosf to oslSinf and oslCosf. (2 Fps boosted). (Dogo)
 - CHG: Updated About and Help texts. (Dogo)
