@@ -4,7 +4,7 @@
 	<Description>Cerberus is the responsible for keeping the gates of hell.</Description>
 	<Size>8</Size>
 	<Stats>
-		<Stat Health="540" GoldValue="10" PointValue="70" Speed="55" CanFly="False" HasImunity="False"/>
+		<Stat Health="510" GoldValue="10" PointValue="70" Speed="55" CanFly="False" HasImunity="False"/>
 	</Stats>
 	
 	<EnemyImg File="cerberus.png" Frames="4" Width="2" Height="2" />
