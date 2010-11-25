@@ -53,7 +53,6 @@ private:
 	bool mPointOfInterest; //The enemy reached the point of interest, the player loses points for life
 	int mEnemiesLeftAlive; //how many enemies left in the current wave
 	int mIntervalSpawnTime; //Interval spawn time between enemies in the wave
-	string mCurrentPath;
 	vector<EnemyWave> mEnemySpawns;
 };
 

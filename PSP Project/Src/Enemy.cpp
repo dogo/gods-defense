@@ -159,7 +159,7 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 	mWave = wave;
 	mEnemy = enemy;
 	mStat = level;
-	mPath = &(Map::InitMap()->mPaths["default"]); //TODO :  Fix this path is empty why ?!
+	mPath = &(Map::InitMap()->mPaths[path]);
 	mEnemyPosition = mPath->mCheckpoint[0].mCoords; // mIndex == 0, to start
 	mNextCheckpoint = mPath->mCheckpoint[1].mCoords; // mIndex == 1, nextCheckpoint
 	mAngle = mEnemyPosition.AimTo(mNextCheckpoint);

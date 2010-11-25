@@ -29,7 +29,7 @@ Wave::Wave(TiXmlElement *waveNode)
 	else
 		mWaveDescription = strdup("No Description");
 
-	mCurrentPath = string(waveNode->Attribute("Path"));
+	mPath = string(waveNode->Attribute("Path"));
 
 	waveNode->QueryIntAttribute("IntervalSpawnTime", &mIntervalSpawnTime);
 
