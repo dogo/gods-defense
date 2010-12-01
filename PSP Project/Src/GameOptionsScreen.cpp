@@ -33,8 +33,8 @@ GameOptionsScreen::GameOptionsScreen()
 				if(dir.d_name[0] != '.')
 				{
 					mMap.push_back(dir.d_name); //Add folder name to mMap vector
-					sprintf(buffer,"/Res/maps/%s/%s.png",dir.d_name,dir.d_name);
-					mMiniMap = oslScaleImageCreate(oslLoadImageFilePNG(buffer, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888), OSL_IN_RAM | OSL_SWIZZLED, 100, 100, OSL_PF_8888);
+					sprintf(buffer,"/Res/maps/%s/mini.png",dir.d_name);
+					mMiniMap = oslLoadImageFilePNG(buffer, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 					mMapImages.push_back(mMiniMap);
 				}
 			}
