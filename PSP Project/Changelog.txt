@@ -1,3 +1,9 @@
+Version 0.4.1 (Jan 10, 2011)
+- BUG: Fixed hardcoded path. Multiple paths its working now! (Dogo)
+- BUG: Minor fixes. (Dogo)
+- CHG: Fast minimap load on GameOptionsScreen. (Dogo)
+- NEW: Added MiniMaps. (Dogo)
+
 Version 0.4 (July 26, 2010)
 - NEW: Added "Icy Manipulator" map. (Dogo)
 - NEW: Added "Rescue Athena" map. (Dogo)
