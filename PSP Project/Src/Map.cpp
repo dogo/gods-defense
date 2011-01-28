@@ -177,7 +177,7 @@ void Map::LoadMap(const string &MapDirName)
 	ResetMap();
 
 	char temp[256];
-	sprintf(temp, "ms0:/PSP/GAME/GodsDefense/Res/maps/%s/map.xml", MapDirName.c_str()); //we have to pass all path to XML
+	sprintf(temp, "%s/Res/maps/%s/map.xml", PspIO::getCurrentDirectory().c_str(), MapDirName.c_str()); //we have to pass all path to XML
 
 	TiXmlDocument MapXMLInput;
 	MapXMLInput.LoadFile(temp);

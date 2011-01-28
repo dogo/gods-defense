@@ -54,7 +54,7 @@ Tower::Tower(const string &towerName)
 	mHitSound = NULL;
 
 	char temp[256];
-	sprintf(temp, "ms0:/PSP/GAME/GodsDefense/Res/towers/%s/tower.xml", mTowerDirName.c_str());
+	sprintf(temp, "%s/Res/towers/%s/tower.xml", PspIO::getCurrentDirectory().c_str(), mTowerDirName.c_str());
 
 	TiXmlDocument TowerXMLInput;
 	TowerXMLInput.LoadFile(temp);

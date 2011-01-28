@@ -11,3 +11,11 @@ void PspIO::lowerCase(string &str)
 	for (unsigned int i = 0; i < str.length(); i++)
 		str[i] = tolower(str[i]);
 }
+
+string PspIO::getCurrentDirectory()
+{
+	char buffer[601];
+	getcwd(buffer, 600);
+
+	return buffer;
+}

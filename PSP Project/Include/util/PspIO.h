@@ -7,11 +7,14 @@
 #define PSPIO_H_INCLUDED
 
 #include "../../Include/ILib.h"
+#include <unistd.h>
 
 class PspIO
 {
 public:
 	void static lowerCase(string &str); //http://www.cplusplus.com/forum/beginner/613/
+
+	string static getCurrentDirectory();
 };
 
 #endif
