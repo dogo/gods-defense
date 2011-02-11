@@ -20,6 +20,7 @@ LIBS =  -losl -lpng -lz -lpsphprm -lpspaudiolib -lpspaudio -lpspsdk -lpspctrl -l
 		-lpspnet_adhocmatching -lpspnet_adhoc -lpspnet_adhocctl
 
 BUILD_PRX = 1
+SIGN_PRX = 1
 PSP_FW_VERSION=390
 PSP_LARGE_MEMORY = 1
 EXTRA_TARGETS = EBOOT.PBP
