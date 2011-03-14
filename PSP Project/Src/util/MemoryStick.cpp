@@ -21,58 +21,47 @@ MemoryStick::~MemoryStick()
 {
 }
 
-void MemoryStick::Save(int type, char *aData)
+void MemoryStick::Save(char *aData)
 {
-	if (type == OSL_DIALOG_NONE)
-	{
-		memset(&MemoryStickData, 0, sizeof(MemoryStickData));
-		strcpy(MemoryStickData.gameTitle, gameTitle);
-		strcpy(MemoryStickData.gameID, gameID);
-		strcpy(MemoryStickData.saveName, saveName);
-		MemoryStickData.nameList = nameList;
-		MemoryStickData.icon0 = icon0;
-		MemoryStickData.size_icon0 = size_icon0;
-		MemoryStickData.data = aData;
-		MemoryStickData.dataSize = 100;
-		oslInitAutoSaveDialog(&MemoryStickData);
-		memset(message, 0, sizeof(message));
-	}
+	printf("Saving... %s",aData);
+	memset(&MemoryStickData, 0, sizeof(MemoryStickData));
+	strcpy(MemoryStickData.gameTitle, gameTitle);
+	strcpy(MemoryStickData.gameID, gameID);
+	strcpy(MemoryStickData.saveName, saveName);
+	MemoryStickData.nameList = nameList;
+	MemoryStickData.icon0 = icon0;
+	MemoryStickData.size_icon0 = size_icon0;
+	MemoryStickData.data = aData;
+	MemoryStickData.dataSize = 100;
+	oslInitAutoSaveDialog(&MemoryStickData);
+	memset(message, 0, sizeof(message));
 }
 
-void MemoryStick::Load(int type)
+void MemoryStick::Load()
 {
-	if (type == OSL_DIALOG_NONE)
-	{
-		memset(&MemoryStickData, 0, sizeof(MemoryStickData));
-		strcpy(MemoryStickData.gameID, gameID);
-		strcpy(MemoryStickData.saveName, saveName);
-		MemoryStickData.nameList = nameList;
-		MemoryStickData.data = &loadedData;
-		MemoryStickData.dataSize = 100;
-		oslInitAutoLoadDialog(&MemoryStickData);
-		memset(message, 0, sizeof(message));
-	}
+	memset(&MemoryStickData, 0, sizeof(MemoryStickData));
+	strcpy(MemoryStickData.gameID, gameID);
+	strcpy(MemoryStickData.saveName, saveName);
+	MemoryStickData.nameList = nameList;
+	MemoryStickData.data = &loadedData;
+	MemoryStickData.dataSize = 100;
+	oslInitAutoLoadDialog(&MemoryStickData);
+	memset(message, 0, sizeof(message));
 }
 
 bool MemoryStick::Status(int type)
 {
-    if (type != OSL_DIALOG_NONE)
+	if (type != OSL_DIALOG_NONE)
 	{
-        oslDrawSaveLoad();
-        if (oslGetLoadSaveStatus() == PSP_UTILITY_DIALOG_NONE)
-		{
-            if (oslSaveLoadGetResult() == OSL_SAVELOAD_CANCEL)
-				return false;
-            else if ((type == OSL_DIALOG_LOAD) || (type == OSL_DIALOG_SAVE))
-			{
-				sprintf(message, "Data: %s", (char *)MemoryStickData.data);
-				printf("message %s\n",message);
-				oslEndSaveLoadDialog();
-				return true;
-			}
-            oslEndSaveLoadDialog();
-        }
+		oslDrawSaveLoad();
+		if (oslSaveLoadGetResult() == OSL_SAVELOAD_CANCEL)
+			sprintf(message, "Cancel");
+		else if (type == OSL_DIALOG_LOAD)
+			sprintf(message, "Loaded data: %s", (char *)MemoryStickData.data);
+		else if (type == OSL_DIALOG_SAVE)
+			sprintf(message, "Saved data: %s", (char *)MemoryStickData.data);
+		oslEndSaveLoadDialog();
+		return true;
 	}
 	return false;
 }
-          
