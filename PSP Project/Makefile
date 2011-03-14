@@ -15,12 +15,12 @@ OBJS = $(TINYXML) $(GAMEOBJECTS) $(UTIL)
 
 LIBDIR =
 LDFLAGS =
-LIBS =  -losl -lpng -lz -lpsphprm -lpspaudiolib -lpspaudio -lpspsdk -lpspctrl -lpspumd -lpsprtc \
-		-lpsppower -lpspgum -lpspgu -lm -lpspaudiolib -lpspaudiocodec -lstdc++ -lpspwlan -lpsphttp -lpspssl \
-		-lpspnet_adhocmatching -lpspnet_adhoc -lpspnet_adhocctl
+LIBS =  -losl -lpng -lz -lpsphprm -lstdc++ \
+		-lpspsdk -lpspctrl -lpspumd -lpsprtc -lpsppower -lpspgu -lpspaudiolib -lpspaudio -lm \
+		-lpspwlan -lpsphttp -lpspssl -lpspnet_adhocmatching -lpspnet_adhoc -lpspnet_adhocctl
 
 BUILD_PRX = 1
-SIGN_PRX = 1
+SIGN_PRX = 0
 PSP_FW_VERSION=390
 PSP_LARGE_MEMORY = 1
 EXTRA_TARGETS = EBOOT.PBP

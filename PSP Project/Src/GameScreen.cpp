@@ -53,18 +53,16 @@ GameScreen::GameScreen()
 }
 
 void GameScreen::LoadMap(const string &mapName)
+	:mGameState(GS_SCROLL_MAP),
+	 mGameConnectionState(GCS_DISCONNECTED),
+	 mActiveWaves(0),
+	 mWaveIsRunning(false),
+	 mPlayerPoints(0),
+	 mGameMap->ResetMap(),
+	 mGameMap->LoadMap(mapName),
+	 mPlayerLives(mGameMap->mInitialLives),
+	 mPlayerMoney(mGameMap->mInitialGold)
 {
-	mGameState = GS_SCROLL_MAP;
-	mGameConnectionState = GCS_DISCONNECTED;
-	mActiveWaves = 0;
-	mWaveIsRunning = false;
-
-	mPlayerPoints = 0;
-	mGameMap->ResetMap();
-	mGameMap->LoadMap(mapName);
-
-	mPlayerLives = mGameMap->mInitialLives;
-	mPlayerMoney = mGameMap->mInitialGold;
 }
 
 void GameScreen::LoadFirstPartForMap()
@@ -160,7 +158,8 @@ GameScreen::~GameScreen()
 	delete(mGameGUI);
 	delete(pauseScreenReference);
 
-	if(mAdhocReference != NULL){
+	if(mAdhocReference != NULL)
+	{
 		oslAdhocTerm();
 		delete(mAdhocReference);
 	}

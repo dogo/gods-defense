@@ -91,20 +91,20 @@ void GameGUI::LoadStuffs()
 }
 
 GameGUI::GameGUI(GameScreen *gameLogic)
+	:mGame(gameLogic),
+	 mPuttingTower(NULL), //none tower is building
+	 mCursor(NULL),
+	 mSidebar(NULL),
+	 mUpgradebar(NULL),
+	 mHud(NULL),
+	 mSell(NULL),
+	 mUpgrade(NULL),
+	 mSelectorSidebar(NULL),
+	 mShowSidebar(false),
+	 mShowUpgradebar(false),
+	 mSelectedItemY(0),
+	 mSelectedItemX(0)
 {
-	mGame = gameLogic;
-	mPuttingTower = NULL; //none tower is building
-	mCursor = NULL;
-	mSidebar = NULL;
-	mUpgradebar = NULL;
-	mHud = NULL;
-	mSell = NULL;
-	mUpgrade = NULL;
-	mSelectorSidebar = NULL;
-	mShowSidebar = false;
-	mShowUpgradebar = false;
-	mSelectedItemY = 0;
-	mSelectedItemX = 0;
 }
 
 void GameGUI::Update(u32 /*timePassed*/) //Parametro Formal, não dá warning
@@ -266,7 +266,6 @@ void GameGUI::CheckViewBounds()
 
 void GameGUI::draw()
 {
-
 	GameState currentGameState = mGame->GetGameState();
 
 	if(mShowSidebar && currentGameState == GS_TOWER_MENU)
@@ -317,9 +316,7 @@ void GameGUI::setTowerReference(Tower *tower)
 void GameGUI::SelectedTowerItem()
 {
 	if (mTowerItems[mSelectedItemY] == NULL)
-	{
 		return;
-	}
 	else
 	{
 		setTowerReference(mTowerItems[mSelectedItemY]->mTower);
@@ -351,9 +348,7 @@ void SidebarItem::Selected()
 	if (mTower->mIsBuildable)
 	{
 		if (gamegui->mGame->GetPlayerMoney() >= mTower->mTowerVector[0].mCost)
-		{
 			gamegui->PuttingTower(mTower);
-		}
 		else
 		{
 			oslMessageBox(Resource::STR_MORE_GOLD, Resource::STR_WARNING_CAPTION, oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
@@ -363,10 +358,10 @@ void SidebarItem::Selected()
 }
 
 SidebarItem::SidebarItem(Tower *tower, const int &y)
+	:mTower(tower),
+	 mY(y),
+	 mIcon(mTower->mMenuIcon)
 {
-	mTower = tower;
-	mY = y;
-	mIcon = mTower->mMenuIcon;
 }
 
 SidebarItem::~SidebarItem()

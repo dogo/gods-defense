@@ -6,22 +6,20 @@
 #include "../Include/Map.h"
 
 EnemyWave::EnemyWave(string folderName, int enemyLevel)
+	:mEnemyDirName(folderName),
+	 mEnemyLevel(enemyLevel)
 {
-	mEnemyDirName = folderName;
-	mEnemyLevel = enemyLevel;
 }
 
 Wave::Wave(TiXmlElement *waveNode)
+	:mWaveDescription(NULL), //Default Initializers
+	 mIntervalSpawnTime(1),
+	 mIsBoss(false),
+	 mCurrentEnemySpawn(0),
+	 mEnemySpawnTimer(0),
+	 mEnemiesLeftAlive(0),
+	 mWaveEndOnce(false)
 {
-	//Default Initializers
-	mWaveDescription = NULL;
-	mIntervalSpawnTime = 1;
-	mIsBoss = false;
-	mCurrentEnemySpawn = 0;
-	mEnemySpawnTimer = 0;
-	mEnemiesLeftAlive = 0;
-	mWaveEndOnce = false;
-
 	const char *description = waveNode->Attribute("Description");
 
 	if (description != NULL)
@@ -63,9 +61,9 @@ Wave::Wave(TiXmlElement *waveNode)
 }
 
 void Wave::StartEnemySpawn()
+	:mCurrentEnemySpawn(0),
+	 mEnemySpawnTimer(mIntervalSpawnTime)
 {
-	mCurrentEnemySpawn = 0;
-	mEnemySpawnTimer = mIntervalSpawnTime;
 }
 
 bool Wave::SpawnUpdate(u32 timePassed)
@@ -160,14 +158,13 @@ unsigned int Path::GetCheckpointCount() const
 }
 
 Map::Map()
+	:mMapImage(NULL),
+	 mCurrentMapName(NULL),
+	 mMapName(NULL),
+	 mImgMapName(NULL),
+	 mCollisionMap(NULL),
+	 mScrollAmount(0)
 {
-	mMapImage = NULL;
-	mCurrentMapName = NULL;
-	mMapName = NULL;
-	mImgMapName = NULL;
-	mCollisionMap = NULL;
-	mScrollAmount = 0;
-
 	mTowersMenu = new string[4];
 }
 
@@ -177,7 +174,7 @@ void Map::LoadMap(const string &MapDirName)
 	ResetMap();
 
 	char temp[256];
-	sprintf(temp, "%s/Res/maps/%s/map.xml", PspIO::getCurrentDirectory().c_str(), MapDirName.c_str()); //we have to pass all path to XML
+	sprintf(temp, "%s/Res/maps/%s/map.xml", PspIO::getCurrentDirectory().c_str(), MapDirName.c_str());
 
 	TiXmlDocument MapXMLInput;
 	MapXMLInput.LoadFile(temp);
