@@ -5,26 +5,28 @@
 
 #include "../Include/Enemy.h"
 
-//Default Initializers
 EnemyInfo::EnemyInfo()
-	:mHealth(0),
-	 mGoldValue(0),
-	 mPointValue(0),
-	 mSpeed(0),
-	 mHasImunity(true),
-	 mCanFly(true)
 {
+	//Default Initializers
+	mHealth = 0;
+	mGoldValue = 0;
+	mPointValue = 0;
+	mSpeed = 0;
+	mHasImunity = true;
+	mCanFly = true;
 }
 
 
 EnemyInfo::EnemyInfo(TiXmlElement* infoNode)
-	:mHealth(0), 	//Default Initializers
-	 mGoldValue(0),
-	 mPointValue(0),
-	 mSpeed(0),
-	 mHasImunity(true),
-	 mCanFly(true)
 {
+	//Default Initializers
+	mHealth = 0;
+	mGoldValue = 0;
+	mPointValue = 0;
+	mSpeed = 0;
+	mHasImunity = true;
+	mCanFly = true;
+
 	int temp = 0;
 
 	infoNode->QueryIntAttribute("Health", &temp);
@@ -137,7 +139,7 @@ Enemy::Enemy(const string &enemyName)
 		}
 		else
 		{
-			oslFatalError("Bad node, not donout for you: %s",mCurrentLine);
+			oslFatalError("Bad node, not donout for you: %s",mCurrentLine.c_str());
 			return;
 		}
 		node = node->NextSiblingElement();
@@ -153,22 +155,22 @@ Enemy::~Enemy()
 }
 
 EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const unsigned int &level)
-	:mWave(wave),
-	 mEnemy(enemy),
-	 mStat(level),
-	 mPath(&(Map::InitMap()->mPaths[path])),
-	 mEnemyPosition(mPath->mCheckpoint[0].mCoords), // mIndex == 0, to start
-	 mNextCheckpoint(mPath->mCheckpoint[1].mCoords), // mIndex == 1, nextCheckpoint
-	 mAngle(mEnemyPosition.AimTo(mNextCheckpoint)),
-	 mHealth(mEnemy->mEnemyVector[mStat].mHealth),
-	 mSlowAmount(0),
-	 mSlowLength(0),
-	 mEnemyState(NOTHING_HAPPENING),
-	 mCurrentCheckpoint(1),
-	 mAnimationController(0),
-	 mDistanceFromStart(0),
-	 mCurrentFrames(0)
 {
+	mWave = wave;
+	mEnemy = enemy;
+	mStat = level;
+	mPath = &(Map::InitMap()->mPaths[path]);
+	mEnemyPosition = mPath->mCheckpoint[0].mCoords; // mIndex == 0, to start
+	mNextCheckpoint = mPath->mCheckpoint[1].mCoords; // mIndex == 1, nextCheckpoint
+	mAngle = mEnemyPosition.AimTo(mNextCheckpoint);
+	mHealth = mEnemy->mEnemyVector[mStat].mHealth;
+	mSlowAmount = 0;
+	mSlowLength = 0;
+	mEnemyState = NOTHING_HAPPENING;
+	mCurrentCheckpoint = 1;
+	mAnimationController = 0;
+	mDistanceFromStart = 0;
+	mCurrentFrames = 0;
 }
 
 void EnemyInstance::Update(u32 timePassed)

@@ -91,20 +91,20 @@ void GameGUI::LoadStuffs()
 }
 
 GameGUI::GameGUI(GameScreen *gameLogic)
-	:mGame(gameLogic),
-	 mPuttingTower(NULL), //none tower is building
-	 mCursor(NULL),
-	 mSidebar(NULL),
-	 mUpgradebar(NULL),
-	 mHud(NULL),
-	 mSell(NULL),
-	 mUpgrade(NULL),
-	 mSelectorSidebar(NULL),
-	 mShowSidebar(false),
-	 mShowUpgradebar(false),
-	 mSelectedItemY(0),
-	 mSelectedItemX(0)
 {
+	mGame = gameLogic;
+	mPuttingTower = NULL; //none tower is building
+	mCursor = NULL;
+	mSidebar = NULL;
+	mUpgradebar = NULL;
+	mHud = NULL;
+	mSell = NULL;
+	mUpgrade = NULL;
+	mSelectorSidebar = NULL;
+	mShowSidebar = false;
+	mShowUpgradebar = false;
+	mSelectedItemY = 0;
+	mSelectedItemX = 0;
 }
 
 void GameGUI::Update(u32 /*timePassed*/) //Parametro Formal, não dá warning
@@ -358,10 +358,10 @@ void SidebarItem::Selected()
 }
 
 SidebarItem::SidebarItem(Tower *tower, const int &y)
-	:mTower(tower),
-	 mY(y),
-	 mIcon(mTower->mMenuIcon)
 {
+	mTower = tower;
+	mY = y;
+	mIcon = mTower->mMenuIcon;
 }
 
 SidebarItem::~SidebarItem()

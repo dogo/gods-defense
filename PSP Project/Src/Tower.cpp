@@ -188,7 +188,7 @@ Tower::Tower(const string &towerName)
 		}
 		else
 		{
-			oslFatalError("Bad node, not donout for you: %s",mCurrentLine);
+			oslFatalError("Bad node, not donout for you: %s",mCurrentLine.c_str());
 			return;
 		}
 		node = node->NextSiblingElement();
