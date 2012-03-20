@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Src">
+      <UniqueIdentifier>{7eddf0a9-7c9f-4ef2-8ce4-44d044893a11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Src\util">
+      <UniqueIdentifier>{3476733b-62fc-4b5e-aed5-4683f491b23b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header">
+      <UniqueIdentifier>{cc0cb5b0-bea8-4f91-a22d-2c2ed6fa221a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header\util">
+      <UniqueIdentifier>{dc80f79e-f5af-4f41-aa68-c196b49b6daa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tinyxml">
+      <UniqueIdentifier>{5b876045-0c6f-4971-938c-25f07bf5f4f7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\AboutScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Adhoc.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\AnykeyScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\EndingScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Enemy.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ExitScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameGUI.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameOptionsScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\GameScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\HelpScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Main.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MainMenuScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Map.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MemoryWarningScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MultiplayerScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PauseScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Projectile.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Resource.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ScreenManager.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\TitleScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Tower.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\TrophiesScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\WarningScreen.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\util\Coordinates2D.cpp">
+      <Filter>Src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\util\Debug.cpp">
+      <Filter>Src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\util\Drawing.cpp">
+      <Filter>Src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\util\Fps.cpp">
+      <Filter>Src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\util\MemoryStick.cpp">
+      <Filter>Src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\util\PspIO.cpp">
+      <Filter>Src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\util\ReferenceCounted.cpp">
+      <Filter>Src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\util\Sprites.cpp">
+      <Filter>Src\util</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinystr.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxml.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxmlerror.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\tinyxmlparser.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="tinyxml\xmltest.cpp">
+      <Filter>tinyxml</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\AboutScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Adhoc.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\AnykeyScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\EndingScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Enemy.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ExitScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GameGUI.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GameOptionsScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\GameScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\HelpScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ILib.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\IScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Main.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MainMenuScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Map.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MemoryWarningScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\MultiplayerScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\PauseScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Projectile.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Resource.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\ScreenManager.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TitleScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\Tower.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TrophiesScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\WarningScreen.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\util\Coordinates2D.h">
+      <Filter>Header\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\util\Debug.h">
+      <Filter>Header\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\util\Drawing.h">
+      <Filter>Header\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\util\Fps.h">
+      <Filter>Header\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\util\Icon.h">
+      <Filter>Header\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\util\MemoryStick.h">
+      <Filter>Header\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\util\PspIO.h">
+      <Filter>Header\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\util\ReferenceCounted.h">
+      <Filter>Header\util</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\util\Sprites.h">
+      <Filter>Header\util</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml\tinystr.h">
+      <Filter>tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="tinyxml\tinyxml.h">
+      <Filter>tinyxml</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+    <None Include="Makefile" />
+  </ItemGroup>
+</Project>
