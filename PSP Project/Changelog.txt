@@ -10,7 +10,7 @@ Version 0.4 (July 26, 2010)
 - NEW: Added "Olympus" map. (Dogo)
 - NEW: Partially implemented Trophy. (Dogo)
 - NEW: Added mini map preview on choose map screen. (Dogo)
-- CHG: New graphical inteface. (Dogo)
+- CHG: New graphical interface. (Dogo)
 - CHG: Render circle function boosted 40 fps. (Dogo)
 - BUG: Minor fixes. (Dogo)
 
