@@ -1,0 +1,314 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXFileReference section */
+		DD6256C41524293200631A53 /* AboutScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutScreen.h; sourceTree = "<group>"; };
+		DD6256C51524293200631A53 /* Adhoc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adhoc.h; sourceTree = "<group>"; };
+		DD6256C61524293200631A53 /* AnykeyScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnykeyScreen.h; sourceTree = "<group>"; };
+		DD6256C71524293200631A53 /* EndingScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndingScreen.h; sourceTree = "<group>"; };
+		DD6256C81524293200631A53 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		DD6256C91524293200631A53 /* ExitScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExitScreen.h; sourceTree = "<group>"; };
+		DD6256CA1524293200631A53 /* GameGUI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameGUI.h; sourceTree = "<group>"; };
+		DD6256CB1524293200631A53 /* GameOptionsScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameOptionsScreen.h; sourceTree = "<group>"; };
+		DD6256CC1524293200631A53 /* GameScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScreen.h; sourceTree = "<group>"; };
+		DD6256CD1524293200631A53 /* HelpScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpScreen.h; sourceTree = "<group>"; };
+		DD6256CE1524293200631A53 /* ILib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ILib.h; sourceTree = "<group>"; };
+		DD6256CF1524293200631A53 /* IScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IScreen.h; sourceTree = "<group>"; };
+		DD6256D01524293200631A53 /* Main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main.h; sourceTree = "<group>"; };
+		DD6256D11524293200631A53 /* MainMenuScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuScreen.h; sourceTree = "<group>"; };
+		DD6256D21524293200631A53 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
+		DD6256D31524293200631A53 /* MemoryWarningScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryWarningScreen.h; sourceTree = "<group>"; };
+		DD6256D41524293200631A53 /* MultiplayerScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiplayerScreen.h; sourceTree = "<group>"; };
+		DD6256D51524293200631A53 /* PauseScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PauseScreen.h; sourceTree = "<group>"; };
+		DD6256D61524293200631A53 /* Projectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Projectile.h; sourceTree = "<group>"; };
+		DD6256D71524293200631A53 /* Resource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Resource.h; sourceTree = "<group>"; };
+		DD6256D81524293200631A53 /* ScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenManager.h; sourceTree = "<group>"; };
+		DD6256D91524293200631A53 /* TitleScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScreen.h; sourceTree = "<group>"; };
+		DD6256DA1524293200631A53 /* Tower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tower.h; sourceTree = "<group>"; };
+		DD6256DB1524293200631A53 /* TrophiesScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrophiesScreen.h; sourceTree = "<group>"; };
+		DD6256DD1524293200631A53 /* Coordinates2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coordinates2D.h; sourceTree = "<group>"; };
+		DD6256DE1524293200631A53 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
+		DD6256DF1524293200631A53 /* Drawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drawing.h; sourceTree = "<group>"; };
+		DD6256E01524293200631A53 /* Fps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fps.h; sourceTree = "<group>"; };
+		DD6256E11524293200631A53 /* Icon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Icon.h; sourceTree = "<group>"; };
+		DD6256E21524293200631A53 /* MemoryStick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryStick.h; sourceTree = "<group>"; };
+		DD6256E31524293200631A53 /* PspIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PspIO.h; sourceTree = "<group>"; };
+		DD6256E41524293200631A53 /* ReferenceCounted.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferenceCounted.h; sourceTree = "<group>"; };
+		DD6256E51524293200631A53 /* Sprites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprites.h; sourceTree = "<group>"; };
+		DD6256E61524293200631A53 /* WarningScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WarningScreen.h; sourceTree = "<group>"; };
+		DD6256E81524294400631A53 /* AboutScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AboutScreen.cpp; sourceTree = "<group>"; };
+		DD6256E91524294400631A53 /* Adhoc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Adhoc.cpp; sourceTree = "<group>"; };
+		DD6256EA1524294400631A53 /* AnykeyScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnykeyScreen.cpp; sourceTree = "<group>"; };
+		DD6256EB1524294400631A53 /* EndingScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EndingScreen.cpp; sourceTree = "<group>"; };
+		DD6256EC1524294400631A53 /* Enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
+		DD6256ED1524294400631A53 /* ExitScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExitScreen.cpp; sourceTree = "<group>"; };
+		DD6256EE1524294400631A53 /* GameGUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameGUI.cpp; sourceTree = "<group>"; };
+		DD6256EF1524294400631A53 /* GameOptionsScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameOptionsScreen.cpp; sourceTree = "<group>"; };
+		DD6256F01524294400631A53 /* GameScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameScreen.cpp; sourceTree = "<group>"; };
+		DD6256F11524294400631A53 /* HelpScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelpScreen.cpp; sourceTree = "<group>"; };
+		DD6256F21524294400631A53 /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Main.cpp; sourceTree = "<group>"; };
+		DD6256F31524294400631A53 /* MainMenuScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuScreen.cpp; sourceTree = "<group>"; };
+		DD6256F41524294400631A53 /* Map.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Map.cpp; sourceTree = "<group>"; };
+		DD6256F51524294400631A53 /* MemoryWarningScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryWarningScreen.cpp; sourceTree = "<group>"; };
+		DD6256F61524294400631A53 /* MultiplayerScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MultiplayerScreen.cpp; sourceTree = "<group>"; };
+		DD6256F71524294400631A53 /* PauseScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PauseScreen.cpp; sourceTree = "<group>"; };
+		DD6256F81524294400631A53 /* Projectile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Projectile.cpp; sourceTree = "<group>"; };
+		DD6256F91524294400631A53 /* Resource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Resource.cpp; sourceTree = "<group>"; };
+		DD6256FA1524294400631A53 /* ScreenManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScreenManager.cpp; sourceTree = "<group>"; };
+		DD6256FB1524294400631A53 /* TitleScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TitleScreen.cpp; sourceTree = "<group>"; };
+		DD6256FC1524294400631A53 /* Tower.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tower.cpp; sourceTree = "<group>"; };
+		DD6256FD1524294400631A53 /* TrophiesScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrophiesScreen.cpp; sourceTree = "<group>"; };
+		DD6256FF1524294400631A53 /* Coordinates2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Coordinates2D.cpp; sourceTree = "<group>"; };
+		DD6257001524294400631A53 /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Debug.cpp; sourceTree = "<group>"; };
+		DD6257011524294400631A53 /* Drawing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Drawing.cpp; sourceTree = "<group>"; };
+		DD6257021524294400631A53 /* Fps.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fps.cpp; sourceTree = "<group>"; };
+		DD6257031524294400631A53 /* MemoryStick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MemoryStick.cpp; sourceTree = "<group>"; };
+		DD6257041524294400631A53 /* PspIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PspIO.cpp; sourceTree = "<group>"; };
+		DD6257051524294400631A53 /* ReferenceCounted.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReferenceCounted.cpp; sourceTree = "<group>"; };
+		DD6257061524294400631A53 /* Sprites.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprites.cpp; sourceTree = "<group>"; };
+		DD6257071524294400631A53 /* WarningScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WarningScreen.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		DD6256B6152428DE00631A53 = {
+			isa = PBXGroup;
+			children = (
+				DD6256E71524294400631A53 /* Src */,
+				DD6256C31524293200631A53 /* Include */,
+			);
+			sourceTree = "<group>";
+		};
+		DD6256C31524293200631A53 /* Include */ = {
+			isa = PBXGroup;
+			children = (
+				DD6256C41524293200631A53 /* AboutScreen.h */,
+				DD6256C51524293200631A53 /* Adhoc.h */,
+				DD6256C61524293200631A53 /* AnykeyScreen.h */,
+				DD6256C71524293200631A53 /* EndingScreen.h */,
+				DD6256C81524293200631A53 /* Enemy.h */,
+				DD6256C91524293200631A53 /* ExitScreen.h */,
+				DD6256CA1524293200631A53 /* GameGUI.h */,
+				DD6256CB1524293200631A53 /* GameOptionsScreen.h */,
+				DD6256CC1524293200631A53 /* GameScreen.h */,
+				DD6256CD1524293200631A53 /* HelpScreen.h */,
+				DD6256CE1524293200631A53 /* ILib.h */,
+				DD6256CF1524293200631A53 /* IScreen.h */,
+				DD6256D01524293200631A53 /* Main.h */,
+				DD6256D11524293200631A53 /* MainMenuScreen.h */,
+				DD6256D21524293200631A53 /* Map.h */,
+				DD6256D31524293200631A53 /* MemoryWarningScreen.h */,
+				DD6256D41524293200631A53 /* MultiplayerScreen.h */,
+				DD6256D51524293200631A53 /* PauseScreen.h */,
+				DD6256D61524293200631A53 /* Projectile.h */,
+				DD6256D71524293200631A53 /* Resource.h */,
+				DD6256D81524293200631A53 /* ScreenManager.h */,
+				DD6256D91524293200631A53 /* TitleScreen.h */,
+				DD6256DA1524293200631A53 /* Tower.h */,
+				DD6256DB1524293200631A53 /* TrophiesScreen.h */,
+				DD6256DC1524293200631A53 /* util */,
+				DD6256E61524293200631A53 /* WarningScreen.h */,
+			);
+			name = Include;
+			path = "../PSP Project/Include";
+			sourceTree = "<group>";
+		};
+		DD6256DC1524293200631A53 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				DD6256DD1524293200631A53 /* Coordinates2D.h */,
+				DD6256DE1524293200631A53 /* Debug.h */,
+				DD6256DF1524293200631A53 /* Drawing.h */,
+				DD6256E01524293200631A53 /* Fps.h */,
+				DD6256E11524293200631A53 /* Icon.h */,
+				DD6256E21524293200631A53 /* MemoryStick.h */,
+				DD6256E31524293200631A53 /* PspIO.h */,
+				DD6256E41524293200631A53 /* ReferenceCounted.h */,
+				DD6256E51524293200631A53 /* Sprites.h */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		DD6256E71524294400631A53 /* Src */ = {
+			isa = PBXGroup;
+			children = (
+				DD6256E81524294400631A53 /* AboutScreen.cpp */,
+				DD6256E91524294400631A53 /* Adhoc.cpp */,
+				DD6256EA1524294400631A53 /* AnykeyScreen.cpp */,
+				DD6256EB1524294400631A53 /* EndingScreen.cpp */,
+				DD6256EC1524294400631A53 /* Enemy.cpp */,
+				DD6256ED1524294400631A53 /* ExitScreen.cpp */,
+				DD6256EE1524294400631A53 /* GameGUI.cpp */,
+				DD6256EF1524294400631A53 /* GameOptionsScreen.cpp */,
+				DD6256F01524294400631A53 /* GameScreen.cpp */,
+				DD6256F11524294400631A53 /* HelpScreen.cpp */,
+				DD6256F21524294400631A53 /* Main.cpp */,
+				DD6256F31524294400631A53 /* MainMenuScreen.cpp */,
+				DD6256F41524294400631A53 /* Map.cpp */,
+				DD6256F51524294400631A53 /* MemoryWarningScreen.cpp */,
+				DD6256F61524294400631A53 /* MultiplayerScreen.cpp */,
+				DD6256F71524294400631A53 /* PauseScreen.cpp */,
+				DD6256F81524294400631A53 /* Projectile.cpp */,
+				DD6256F91524294400631A53 /* Resource.cpp */,
+				DD6256FA1524294400631A53 /* ScreenManager.cpp */,
+				DD6256FB1524294400631A53 /* TitleScreen.cpp */,
+				DD6256FC1524294400631A53 /* Tower.cpp */,
+				DD6256FD1524294400631A53 /* TrophiesScreen.cpp */,
+				DD6256FE1524294400631A53 /* util */,
+				DD6257071524294400631A53 /* WarningScreen.cpp */,
+			);
+			name = Src;
+			path = "../PSP Project/Src";
+			sourceTree = "<group>";
+		};
+		DD6256FE1524294400631A53 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				DD6256FF1524294400631A53 /* Coordinates2D.cpp */,
+				DD6257001524294400631A53 /* Debug.cpp */,
+				DD6257011524294400631A53 /* Drawing.cpp */,
+				DD6257021524294400631A53 /* Fps.cpp */,
+				DD6257031524294400631A53 /* MemoryStick.cpp */,
+				DD6257041524294400631A53 /* PspIO.cpp */,
+				DD6257051524294400631A53 /* ReferenceCounted.cpp */,
+				DD6257061524294400631A53 /* Sprites.cpp */,
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		DD6256BD152428DF00631A53 /* Gods-Defense */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = DD6256C0152428DF00631A53 /* Build configuration list for PBXLegacyTarget "Gods-Defense" */;
+			buildPhases = (
+			);
+			buildToolPath = /usr/bin/make;
+			buildWorkingDirectory = "/Users/dogo/Development/workspace/psp/gods-defense/PSP Project";
+			dependencies = (
+			);
+			name = "Gods-Defense";
+			passBuildSettingsInEnvironment = 1;
+			productName = "Gods-Defense";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		DD6256B8152428DE00631A53 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = DD6256BB152428DE00631A53 /* Build configuration list for PBXProject "Gods-Defense" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DD6256B6152428DE00631A53;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DD6256BD152428DF00631A53 /* Gods-Defense */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		DD6256BE152428DF00631A53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DD6256BF152428DF00631A53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DD6256C1152428DF00631A53 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUGGING_SYMBOLS = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DD6256C2152428DF00631A53 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DD6256BB152428DE00631A53 /* Build configuration list for PBXProject "Gods-Defense" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD6256BE152428DF00631A53 /* Debug */,
+				DD6256BF152428DF00631A53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DD6256C0152428DF00631A53 /* Build configuration list for PBXLegacyTarget "Gods-Defense" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD6256C1152428DF00631A53 /* Debug */,
+				DD6256C2152428DF00631A53 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DD6256B8152428DE00631A53 /* Project object */;
+}
