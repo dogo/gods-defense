@@ -229,7 +229,7 @@ TowerInstance::TowerInstance(Tower *tower, const Coordinates2D &position)
 	int y = ((int)position.Y / 32);
 	mTowerLevel = 0;
 	mTower = tower;
-	mTowerPosition = Coordinates2D::Coordinates2D(x*32, y*32);
+	mTowerPosition = Coordinates2D(x*32, y*32);
 	mTowerTarget = NULL;
 	mProjectileInterval = 0;
 }
@@ -281,7 +281,7 @@ void TowerInstance::RenderTower()
 
 void TowerInstance::RenderRangeCircle(const OSL_COLOR color)
 {
-	Coordinates2D buildingPosition = Coordinates2D::Coordinates2D(mTowerPosition.X, mTowerPosition.Y);
+	Coordinates2D buildingPosition = Coordinates2D(mTowerPosition.X, mTowerPosition.Y);
 	//Snap :D \o/ workss
 	buildingPosition.X = (((int)(buildingPosition.X) / 32) * 32) + 16; // 32 == Width
 	buildingPosition.Y = (((int)(buildingPosition.Y) / 32) * 32) + 16; // 32 == Heigth

@@ -594,7 +594,7 @@ void GameScreen::drawUpgradeCircle()
 	mSelectedTower->RenderRangeCircle(COLOR_RED);
 	if (mSelectedTower->mTowerLevel+1 < mSelectedTower->mTower->mTowerVector.size()) //If there is any upgrade to do
 	{
-		Coordinates2D buildingPosition = Coordinates2D::Coordinates2D(mSelectedTower->mTowerPosition.X, mSelectedTower->mTowerPosition.Y);
+		Coordinates2D buildingPosition = Coordinates2D(mSelectedTower->mTowerPosition.X, mSelectedTower->mTowerPosition.Y);
 		buildingPosition.X = (((int)(buildingPosition.X) / 32) * 32) + 16; // 32 == Width
 		buildingPosition.Y = (((int)(buildingPosition.Y) / 32) * 32) + 16; // 32 == Height
 		mSelectedTower->mTower->RenderRangeCircle(buildingPosition, mSelectedTower->mTowerLevel+1, COLOR_BLUE);

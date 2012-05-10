@@ -164,14 +164,14 @@ void GameGUI::Update(u32 /*timePassed*/) //Parametro Formal, não dá warning
 		{
 			if (currentGameState == GS_SCROLL_MAP)
 			{
-				if(mGame->TrySelectTower(Coordinates2D::Coordinates2D(mCursor->x, mCursor->y + fabsf(mGame->GetGameMap()->mScrollAmount))))
+				if(mGame->TrySelectTower(Coordinates2D(mCursor->x, mCursor->y + fabsf(mGame->GetGameMap()->mScrollAmount))))
 				{
 					mShowUpgradebar = !mShowUpgradebar;
 				}
 			}
 			else if (currentGameState == GS_MAP_PLACE_TOWER)
 			{
-				if (mGame->TryBuildTower(mPuttingTower, Coordinates2D::Coordinates2D(mCursor->x, mCursor->y + fabsf(mGame->GetGameMap()->mScrollAmount))))
+				if (mGame->TryBuildTower(mPuttingTower, Coordinates2D(mCursor->x, mCursor->y + fabsf(mGame->GetGameMap()->mScrollAmount))))
 				{
 					mPuttingTower = NULL;					
 					mGame->SetGameState(GS_SCROLL_MAP);
@@ -242,7 +242,7 @@ void GameGUI::RenderPlacingTower()
 
 	if (currentGameState == GS_MAP_PLACE_TOWER)
 	{
-		Coordinates2D buildingPosition = Coordinates2D::Coordinates2D(mCursor->x, mCursor->y+fabsf(mGame->GetGameMap()->mScrollAmount));
+		Coordinates2D buildingPosition = Coordinates2D(mCursor->x, mCursor->y+fabsf(mGame->GetGameMap()->mScrollAmount));
 		//Snap :D \o/ workss
 		buildingPosition.X = (((int)(buildingPosition.X) / 32) * 32) + 16; // 32 == Width
 		buildingPosition.Y = (((int)(buildingPosition.Y) / 32) * 32) + 16; // 32 == Heigth
