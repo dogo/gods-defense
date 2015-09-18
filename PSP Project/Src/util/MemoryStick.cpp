@@ -10,11 +10,11 @@ char nameList[][20] = { "0000", "0001", "0002", "0003", "0004", ""};
 
 MemoryStick::MemoryStick()
 {
-	gameTitle = "Gods Defense";
-	gameID = "GOD01";
-	saveName = "0000";
-	sprintf(message, "");
-	sprintf(loadedData, "");	
+	gameTitle = (char *)"Gods Defense";
+	gameID = (char *)"GOD01";
+	saveName = (char *)"0000";
+	sprintf(message, "%s", "");
+	sprintf(loadedData, "%s", "");	
 }
 
 MemoryStick::~MemoryStick()
