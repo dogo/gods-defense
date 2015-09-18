@@ -1,2 +1,9 @@
-
+# Mac
 .DS_Store
+
+# Game
+*.prx
+*.o
+*.elf
+*.PBP
+*.SFO
