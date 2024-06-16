@@ -14,7 +14,7 @@ GameScreen *GameScreen::gGameReference = NULL;
 GameScreen::GameScreen()
 {
 	GameGUI::InitGUI(this);
-	
+
 	mGameGUI = GameGUI::Instance();
 
 	mGameMap = Map::InitMap();
@@ -104,7 +104,7 @@ void GameScreen::LoadFirstPartForMap()
 
 	//Load all Towers
 	int roorDirTowers = sceIoDopen("/Res/towers");
-	
+
 	//get all the folders name in towers directory to load
 	if(roorDirTowers > 0)
 	{
@@ -251,7 +251,7 @@ void GameScreen::update(u32 timePassed)
 
 			if(!checkAdhoc)
 			{
-				SetGameConnectionState(GCS_CONNECTED);	
+				SetGameConnectionState(GCS_CONNECTED);
 			}
 		}
 		else
@@ -278,12 +278,12 @@ void GameScreen::update(u32 timePassed)
 				mRealEnemies.push_back(ei);
 			}
 		}
-		
+
 		//Check for waves ending
 		for (unsigned int j = 0; j < mActiveWaves; j++)
 		{
 			mWaveIsRunning = false;
-	
+
 			if (!mGameMap->mWaves[j]->EndOfWave())
 			{
 				mWaveIsRunning = true;
@@ -412,9 +412,9 @@ void GameScreen::update(u32 timePassed)
 			mNextScreen = ScreenManager::SCREEN_ENDING;
 		}
 	}
-	
+
 	if(osl_keys->pressed.start && !gPauseGame)
-	{	
+	{
 		oslFlushKey();
 		gPauseGame = !gPauseGame; //Pause game!
 		SetGameState(GS_PAUSE_MENU);
@@ -534,7 +534,7 @@ bool GameScreen::TrySelectTower(const Coordinates2D &position)
 		TowerInstance *t = (*ti_iter);
 		int towerX = (int)((t->mTowerPosition.X) / 32);
 		int towerY = (int)((t->mTowerPosition.Y) / 32);
-		
+
 		//If tower collides with cursor position
 		if (towerX == cursorX && towerY == cursorY)
 		{
@@ -544,7 +544,7 @@ bool GameScreen::TrySelectTower(const Coordinates2D &position)
 			break;
 		}
 	}
-	
+
 	return (mSelectedTower != NULL);
 }
 
@@ -567,7 +567,7 @@ void GameScreen::RunNextWave(const bool &forceRunNow)
 	}
 
 	mWaveIsRunning = true;
-	if(mActiveWaves < mGameMap->mWaves.size());
+	if(mActiveWaves < mGameMap->mWaves.size())
 	{
 		char title[256];
 		sprintf(title, "Wave %i of %i", GetNextWaveNumber(), GetWaveCount());
@@ -606,7 +606,7 @@ bool GameScreen::TryUpgradeSelectedTower()
 	Tower *t = mSelectedTower->mTower;
 
 	//Tower not maxed can afford
-	if (mSelectedTower->mTowerLevel+1 < t->mTowerVector.size() && mPlayerMoney >= t->mTowerVector[mSelectedTower->mTowerLevel+1].mCost) 
+	if (mSelectedTower->mTowerLevel+1 < t->mTowerVector.size() && mPlayerMoney >= t->mTowerVector[mSelectedTower->mTowerLevel+1].mCost)
 	{
 		mPlayerMoney -= t->mTowerVector[mSelectedTower->mTowerLevel+1].mCost;
 		mSelectedTower->mTowerLevel += 1;
@@ -624,10 +624,10 @@ bool GameScreen::TrySellSelectedTower()
 
 	//Selling tower
 	mPlayerMoney += (t->mTowerVector[mSelectedTower->mTowerLevel].mSellAmount);
-	
+
 	int x = ((int)mSelectedTower->mTowerPosition.X / 32);
 	int y = ((int)mSelectedTower->mTowerPosition.Y / 32);
-	
+
 	//Roll back Collision Map
 	mGameMap->mCollisionMap[x][y] = true;
 
