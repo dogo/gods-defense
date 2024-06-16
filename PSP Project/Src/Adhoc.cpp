@@ -5,6 +5,8 @@
 
 #include "../Include/Adhoc.h"
 
+char productID[] = "ULUS99999";
+
 Adhoc::Adhoc()
 {
 }
@@ -20,7 +22,7 @@ void Adhoc::AdhocClient()
 	int i = 0;
 	int current = 0;
 
-	int init = oslAdhocInit("ULUS99999");
+	int init = oslAdhocInit(productID);
 	if (init)
 	{
 		char message[100] = "";
@@ -73,14 +75,14 @@ void Adhoc::AdhocClient()
 		}
 	}
 }
-	
+
 void Adhoc::clientConnected(struct remotePsp *aPsp, char *finalScore)
 {
 	oslAdhocSendData(aPsp, finalScore, strlen(finalScore));
 }
 
 void Adhoc::clientSendScore(char *finalScore)
-{	
+{
 	if (oslAdhocGetRemotePspCount())
 	{
 		oslAdhocRequestConnection(oslAdhocGetPspByIndex(0), 30, NULL);
@@ -91,7 +93,7 @@ void Adhoc::clientSendScore(char *finalScore)
 
 void Adhoc::AdhocServer()
 {
-	int init = oslAdhocInit("ULUS99999");
+	int init = oslAdhocInit(productID);
 	if (init)
 	{
 		char message[100] = "";
@@ -103,45 +105,45 @@ void Adhoc::AdhocServer()
 
 bool Adhoc::serverWaitingConnection()
 {
-	struct remotePsp *reqPsp = oslAdhocGetConnectionRequest();
-	char message[100] = "";
-	int dialog = OSL_DIALOG_NONE;
+    struct remotePsp *reqPsp = oslAdhocGetConnectionRequest();
+    char message[512] = "";
+    int dialog = OSL_DIALOG_NONE;
 
-	if (reqPsp == NULL)
-	{
-		oslIntraFontSetStyle(gFont, 0.7, RGBA(255,255,255,255), RGBA(0,0,0,0), INTRAFONT_ALIGN_LEFT);
-		oslDrawStringf(10, 100, "Waiting for a connection request...");
-		return true;
-	}
-	else
-	{
-		snprintf(message, sizeof(message), "Accept request from psp : %s", reqPsp->name);
-		if (oslGetDialogType() == OSL_DIALOG_NONE)
-			oslInitMessageDialog(message, 1);
-	}
+    if (reqPsp == NULL)
+    {
+        oslIntraFontSetStyle(gFont, 0.7, RGBA(255,255,255,255), RGBA(0,0,0,0), INTRAFONT_ALIGN_LEFT);
+        oslDrawStringf(10, 100, "Waiting for a connection request...");
+        return true;
+    }
+    else
+    {
+        snprintf(message, sizeof(message), "Accept request from psp : %s", reqPsp->name);
+        if (oslGetDialogType() == OSL_DIALOG_NONE)
+            oslInitMessageDialog(message, 1);
+    }
 
-	dialog = oslGetDialogType();
-	if (dialog)
-	{
-		oslDrawDialog();
-		if (oslGetDialogStatus() == PSP_UTILITY_DIALOG_NONE)
-		{
-			if (dialog == OSL_DIALOG_MESSAGE)
-			{
-				int button = oslGetDialogButtonPressed();
-				if (button == PSP_UTILITY_MSGDIALOG_RESULT_YES)
-				{
-					oslAdhocAcceptConnection(reqPsp);
-				}
-				else if (button == PSP_UTILITY_MSGDIALOG_RESULT_NO)
-				{
-					oslAdhocRejectConnection(reqPsp);
-				}
-			}
-		oslEndDialog();
-		}
-	}
-	return false;
+    dialog = oslGetDialogType();
+    if (dialog)
+    {
+        oslDrawDialog();
+        if (oslGetDialogStatus() == PSP_UTILITY_DIALOG_NONE)
+        {
+            if (dialog == OSL_DIALOG_MESSAGE)
+            {
+                int button = oslGetDialogButtonPressed();
+                if (button == PSP_UTILITY_MSGDIALOG_RESULT_YES)
+                {
+                    oslAdhocAcceptConnection(reqPsp);
+                }
+                else if (button == PSP_UTILITY_MSGDIALOG_RESULT_NO)
+                {
+                    oslAdhocRejectConnection(reqPsp);
+                }
+            }
+            oslEndDialog();
+        }
+    }
+    return false;
 }
 
 void Adhoc::serverConnected(remotePsp *aPsp, char *remotePspScore, char *finalScore)

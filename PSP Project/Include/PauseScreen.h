@@ -15,7 +15,7 @@ private:
 
 public:
 	PauseScreen();
-	~PauseScreen();
+	virtual ~PauseScreen();
 
 	virtual void draw();
 
