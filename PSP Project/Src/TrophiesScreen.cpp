@@ -19,18 +19,18 @@ TrophiesScreen::~TrophiesScreen()
 
 void TrophiesScreen::draw()
 {
-	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,20,Resource::STR_TROPHIES_CAPTION);
 
-	oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 1.0f,RGBA(255,255,255,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,120,"Coming Soon!");
 
 	oslDrawImageXY(back, (430) - (back->stretchX), (272) - (back->stretchY));
-	oslIntraFontSetStyle(gFont, 0.7f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 0.7f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString((510) - back->stretchX,(272) - (back->stretchY/2),Resource::STR_BACK_SK);
 }
 
-void TrophiesScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning
+void TrophiesScreen::update(u32 /*timePassed*/) //Parametro Formal, nï¿½o dï¿½ warning
 {
 	if(osl_keys->pressed.circle)
 	{

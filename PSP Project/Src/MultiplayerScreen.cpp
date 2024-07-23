@@ -37,11 +37,11 @@ void MultiplayerScreen::draw()
 	oslDrawImageXY(imgCover,0,0);
 
 	//Title
-	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,20,Resource::STR_MULTIPLAYER_CAPTION);
 	
 	//Options
-	oslIntraFontSetStyle(gFont, 0.6f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 0.6f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	//Server
 	oslDrawString(240,100,Resource::STR_ACT_LIKE_SERVER);
 	oslDrawImageXY(imgServer, (145) - (imgServer->stretchX), (130) - (imgServer->stretchY));
@@ -52,11 +52,11 @@ void MultiplayerScreen::draw()
 	
 	//Back
 	oslDrawImageXY(imgBack, (430) - (imgBack->stretchX), (272) - (imgBack->stretchY));
-	oslIntraFontSetStyle(gFont, 0.7f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 0.7f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString((510) - imgBack->stretchX,(272) - (imgBack->stretchY/2),Resource::STR_BACK_SK);
 }
 
-void MultiplayerScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning
+void MultiplayerScreen::update(u32 /*timePassed*/) //Parametro Formal, nï¿½o dï¿½ warning
 {
 	if(osl_keys->pressed.circle)
 	{	

@@ -51,13 +51,13 @@ int main()
 #endif // SHOW_FPS
 	int skip = 0;
     initOSLib();
-    oslIntraFontInit(INTRAFONT_CACHE_ALL | INTRAFONT_STRING_CP1252);
+    oslIntraFontInit(INTRAFONT_CACHE_ALL | INTRAFONT_STRING_UTF8);
 
 	menuTheme = oslLoadSoundFileBGM("/Res/menuTheme.bgm", OSL_FMT_STREAM); //Loads the Main menu theme music
 
     // Load fonts
 	gFont = oslLoadFontFile("/Res/gods-defense.pgf");
-    oslIntraFontSetStyle(gFont, 1.0f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT); //Tells the psp what font to use in intrafont
+    oslIntraFontSetStyle(gFont, 1.0f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT); //Tells the psp what font to use in intrafont
 	oslSetFont(gFont);
 
 	if (!menuTheme || !gFont)

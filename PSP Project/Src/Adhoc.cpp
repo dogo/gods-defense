@@ -39,16 +39,16 @@ void Adhoc::AdhocClient()
 
 			if (oslAdhocGetRemotePspCount())
 			{
-				oslIntraFontSetStyle(gFont, 1.1f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+				oslIntraFontSetStyle(gFont, 1.1f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
 				oslDrawString(10, 40, "Press X to request a connection");
 			}
 
 			for (i=0; i < oslAdhocGetRemotePspCount(); i++)
 			{
 				if (i == current)
-					oslIntraFontSetStyle(gFont, 1.3, RGBA(100,100,100,255), RGBA(0,0,0,0), INTRAFONT_ALIGN_LEFT);
+					oslIntraFontSetStyle(gFont, 1.3, RGBA(100,100,100,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
 				else
-					oslIntraFontSetStyle(gFont, 1.3, RGBA(175,137,62,255), RGBA(0,0,0,0), INTRAFONT_ALIGN_LEFT);
+					oslIntraFontSetStyle(gFont, 1.3, RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
 				oslDrawString(10, 100 + 15 * i, oslAdhocGetPspByIndex(i)->name);
 			}
 			oslEndDrawing();
@@ -111,7 +111,7 @@ bool Adhoc::serverWaitingConnection()
 
     if (reqPsp == NULL)
     {
-        oslIntraFontSetStyle(gFont, 0.7, RGBA(255,255,255,255), RGBA(0,0,0,0), INTRAFONT_ALIGN_LEFT);
+        oslIntraFontSetStyle(gFont, 0.7, RGBA(255,255,255,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
         oslDrawStringf(10, 100, "Waiting for a connection request...");
         return true;
     }
@@ -157,7 +157,7 @@ void Adhoc::serverUpdate(char *remotePspScore)
 void Adhoc::printInfo() //Prints some info
 {
 	u8 *macAddress = oslAdhocGetMacAddress();
-	oslIntraFontSetStyle(gFont, 0.6, RGBA(255,255,255,255), RGBA(0,0,0,0), INTRAFONT_ALIGN_LEFT);
+	oslIntraFontSetStyle(gFont, 0.6, RGBA(255,255,255,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
 	oslDrawStringf(10, 25, "Current state: %s", oslAdhocGetState() == ADHOC_INIT ? "OK" : "KO");
 	oslDrawStringf(10, 40, "Your MAC address: %02X:%02X:%02X:%02X:%02X:%02X", macAddress[0], macAddress[1], macAddress[2], macAddress[3], macAddress[4], macAddress[5]);
 }

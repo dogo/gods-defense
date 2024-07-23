@@ -65,6 +65,6 @@ void Fps::renderInfo()
 	//dogo : oslPrintf_xy(0,25,"FPS : %0.1f %d\n", getFps(), getUpf());
 	char fps[256];
 	sprintf(fps, "FPS : %0.1f", getFps());
-	oslIntraFontSetStyle(gFont, 1.0f,RGBA(192,192,192,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_LEFT);
+	oslIntraFontSetStyle(gFont, 1.0f,RGBA(192,192,192,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
 	oslDrawString(0,23, fps);
 }

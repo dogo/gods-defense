@@ -21,15 +21,15 @@ ExitScreen::~ExitScreen()
 void ExitScreen::draw()
 {
 	oslDrawImageXY(mCover,0,0);
-	oslIntraFontSetStyle(gFont, 1.0f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 1.0f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,100,Resource::STR_CONFIRM_QUIT);
-	(gMenu == 0) ? oslIntraFontSetStyle(gFont, 0.8f,RGBA(175,137,62,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 0.6f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
+	(gMenu == 0) ? oslIntraFontSetStyle(gFont, 0.8f,RGBA(175,137,62,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 0.6f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,140,Resource::STR_YES);
-	(gMenu == 1) ? oslIntraFontSetStyle(gFont, 0.8f,RGBA(175,137,62,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 0.6f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
+	(gMenu == 1) ? oslIntraFontSetStyle(gFont, 0.8f,RGBA(175,137,62,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 0.6f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,160,Resource::STR_NO);
 }
 
-void ExitScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning
+void ExitScreen::update(u32 /*timePassed*/) //Parametro Formal, nï¿½o dï¿½ warning
 {
 	if(osl_keys->pressed.up){
 		gMenu--;

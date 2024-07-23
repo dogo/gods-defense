@@ -20,13 +20,13 @@ EndingScreen::~EndingScreen()
 
 void EndingScreen::draw()
 {
-	oslIntraFontSetStyle(gFont, 0.8f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 0.8f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	(gWin) ? oslDrawString(240,100,Resource::STR_CONGRATS) : oslDrawString(240,100,Resource::STR_LOSE);
 	oslDrawStringf(240,175,"Score : %s", gScoreBuffer); //=( TODO: Format this string
 	oslDrawImageXY(mCross, (430) - (mCross->stretchX), (272) - (mCross->stretchY));
 }
 
-void EndingScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning
+void EndingScreen::update(u32 /*timePassed*/) //Parametro Formal, nï¿½o dï¿½ warning
 {
 	if(osl_keys->pressed.cross)
 	{

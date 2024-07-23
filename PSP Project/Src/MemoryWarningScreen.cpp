@@ -24,16 +24,16 @@ MemoryWarningScreen::~MemoryWarningScreen()
 void MemoryWarningScreen::draw()
 {
 	oslDrawImageXY(mCover,0,0);
-	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,20,Resource::STR_AUTOSAVE_CAPTION);
-	oslIntraFontSetStyle(gFont, 0.65f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 0.65f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,100,Resource::STR_AUTOSAVE_TEXT);
 	oslDrawImageXY(mCross, (430) - (mCross->stretchX), (272) - (mCross->stretchY));
-	oslIntraFontSetStyle(gFont, 1.0f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 1.0f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString((510) - mCross->stretchX,(272) - (mCross->stretchY/2),Resource::STR_OK);
 }
 
-void MemoryWarningScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning
+void MemoryWarningScreen::update(u32 /*timePassed*/) //Parametro Formal, nï¿½o dï¿½ warning
 {
 	mType = oslGetSaveLoadType();
 

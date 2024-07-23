@@ -25,22 +25,38 @@ MainMenuScreen::~MainMenuScreen()
 
 void MainMenuScreen::draw()
 {
-	oslDrawImageXY(menubg, (480/2) - (menubg->stretchX/2), (272/2) - (menubg->stretchY/2));
-	(gMenu == 0) ? oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 0.6f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(340, 100,Resource::STR_START_GAME);
-	(gMenu == 1) ? oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 0.6f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(340, 120,Resource::STR_MULTIPLAYER_CAPTION);
-	(gMenu == 2) ? oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 0.6f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(340, 140,Resource::STR_HELP_CAPTION);
-	(gMenu == 3) ? oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 0.6f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(340, 160,Resource::STR_TROPHIES_CAPTION);
-	(gMenu == 4) ? oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,255),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 0.6f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(340, 180,Resource::STR_ABOUT_CAPTION);
-	(gMenu == 5) ? oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 0.6f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF),INTRAFONT_ALIGN_CENTER);
-	oslDrawString(340, 200,Resource::STR_EXIT_CAPTION);
+    oslDrawImageXY(menubg, (480/2) - (menubg->stretchX/2), (272/2) - (menubg->stretchY/2));
+    
+    struct MenuItem
+    {
+        const char* text;
+        int yPosition;
+    };
+    
+    MenuItem menuItems[] = {
+        {Resource::STR_START_GAME, 100},
+        {Resource::STR_MULTIPLAYER_CAPTION, 120},
+        {Resource::STR_HELP_CAPTION, 140},
+        {Resource::STR_TROPHIES_CAPTION, 160},
+        {Resource::STR_ABOUT_CAPTION, 180},
+        {Resource::STR_EXIT_CAPTION, 200}
+    };
+    
+    for (int i = 0; i < sizeof(menuItems)/sizeof(menuItems[0]); ++i)
+    {
+        if (gMenu == i)
+        {
+            oslIntraFontSetStyle(gFont, 1.2f, RGBA(175,137,62,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
+        }
+        else
+        {
+            oslIntraFontSetStyle(gFont, 0.6f, RGBA(120,120,120,255), RGBA(0,0,0,0xFF), 0.f, INTRAFONT_ALIGN_CENTER);
+        }
+        oslDrawString(340, menuItems[i].yPosition, menuItems[i].text);
+    }
 }
 
-void MainMenuScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning
+void MainMenuScreen::update(u32 /*timePassed*/) //Parametro Formal, nï¿½o dï¿½ warning
 {
 	//menu keys
 	if(osl_keys->pressed.up){

@@ -22,16 +22,16 @@ HelpScreen::~HelpScreen()
 void HelpScreen::draw()
 {
 	oslDrawImageXY(mCover,0,0);
-	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,20,Resource::STR_HELP_CAPTION);
-	oslIntraFontSetStyle(gFont, 0.6f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 0.6f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,40,Resource::STR_HELP_TEXT);
 	oslDrawImageXY(mBack, (430) - (mBack->stretchX), ((272) - (mBack->stretchY)+ 10));
-	oslIntraFontSetStyle(gFont, 0.7f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 0.7f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString((510) - mBack->stretchX, ((272) - (mBack->stretchY/2)+ 10),Resource::STR_BACK_SK);
 }
 
-void HelpScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning
+void HelpScreen::update(u32 /*timePassed*/) //Parametro Formal, nï¿½o dï¿½ warning
 {
 	if(osl_keys->pressed.circle)
 	{

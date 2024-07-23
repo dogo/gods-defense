@@ -60,10 +60,10 @@ GameOptionsScreen::~GameOptionsScreen()
 
 void GameOptionsScreen::draw()
 {
-	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER); //Tells the PSP what size and shape the text is
+	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER); //Tells the PSP what size and shape the text is
 	oslDrawString(240,40,Resource::STR_MAPSELECTION_CAPTION);
 
-	oslIntraFontSetStyle(gFont, 0.6f,RGBA(175,137,62,255), RGBA(0,0,0,0),INTRAFONT_ALIGN_CENTER);
+	oslIntraFontSetStyle(gFont, 0.6f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	
 	oslDrawImageXY(mMapImages[mSelectedMap],(480/2 - mMapImages[mSelectedMap]->sizeX/2),(272/2 - mMapImages[mSelectedMap]->sizeY/2));
 
@@ -78,7 +78,7 @@ void GameOptionsScreen::draw()
 	oslDrawString(28 + imgSelect->stretchX, (272) - (imgSelect->stretchY/2),Resource::STR_SELECT);
 }
 
-void GameOptionsScreen::update(u32 /*timePassed*/) //Parametro Formal, não dá warning
+void GameOptionsScreen::update(u32 /*timePassed*/) //Parametro Formal, nï¿½o dï¿½ warning
 {
 	if(osl_keys->pressed.cross)
 	{		
