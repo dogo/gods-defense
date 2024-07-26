@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug PSP Project",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "flatpak",
+            "args": [
+                "run",
+                "org.ppsspp.PPSSPP",
+                "${workspaceFolder}/PSP Project/EBOOT.PBP"
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "ignoreFailures": true,
+                    "text": "-enable-pretty-printing"
+                }
+            ],
+            "preLaunchTask": "Build PSP Project",
+            "miDebuggerPath": "${env:PSPDEV}/bin/psp-gdb",
+            "internalConsoleOptions": "openOnSessionStart"
+        }
+    ]
+}

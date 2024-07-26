@@ -8,7 +8,9 @@
                 "${workspaceFolder}/PSP Project/Include/**",
                 "${workspaceFolder}/PSP Project/tinyxml/**"
             ],
-            "defines": [],
+            "defines": [
+                "TIXML_USE_STL"
+            ],
             "compilerPath": "${PSPDEV}/bin/psp-gcc",
             "cStandard": "c11",
             "cppStandard": "c++17",
