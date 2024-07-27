@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug PSP Project",
+            "name": "[Run] Gods-Defense",
             "type": "cppdbg",
             "request": "launch",
             "program": "/usr/bin/flatpak",
@@ -14,17 +14,21 @@
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
-            "externalConsole": true,
+            "externalConsole": false
+        },
+        {
+            "name": "[Debug] Gods-Defense",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/PSP Project/GodsDefense.elf",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
             "MIMode": "gdb",
-            "setupCommands": [
-                {
-                    "description": "Enable pretty-printing for gdb",
-                    "ignoreFailures": true,
-                    "text": "-enable-pretty-printing"
-                }
-            ],
-            "preLaunchTask": "Build PSP Project",
             "miDebuggerPath": "${env:PSPDEV}/bin/psp-gdb",
+            "preLaunchTask": "[Build] Gods-Defense",
             "internalConsoleOptions": "openOnSessionStart"
         }
     ]
