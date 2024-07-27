@@ -5,7 +5,7 @@
             "name": "Debug PSP Project",
             "type": "cppdbg",
             "request": "launch",
-            "program": "flatpak",
+            "program": "/usr/bin/flatpak",
             "args": [
                 "run",
                 "org.ppsspp.PPSSPP",
