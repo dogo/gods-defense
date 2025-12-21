@@ -86,11 +86,11 @@ void ProjectileInstance::DealDamage()
 	mProjectilePosition = mTarget->mEnemyPosition;
 	mTarget->EnemyReciveDamage(mTowerDamage, mSlowAmount, mSlowLength);
 
-	//If we aren't splash, just hit the target.
+	//If this isn't a splash projectile, just hit the target.
 	if (mSplashRangeSqrd == 0)
 		return;
 	
-	//Else, we are splash. loop all enemies checking range.
+	//Otherwise, this is a splash projectile. Loop through all enemies checking range.
 	list<EnemyInstance*>::iterator end_iter = GameScreen::gGameReference->mRealEnemies.end();
 
 	list<EnemyInstance*>::iterator ei_iter;
@@ -101,7 +101,7 @@ void ProjectileInstance::DealDamage()
 		{
 			continue;
 		}
-		//We hit it && Isn't dead && In splash range
+		//We hit it && is not dead && in splash range
 		if (((mHitsFlyer && (*ei_iter)->EnemyCanFly()) || (mHitsLand && !(*ei_iter)->EnemyCanFly())) &&	
 			!(*ei_iter)->EnemyIsDead() && mProjectilePosition.SquareDistance((*ei_iter)->mEnemyPosition) <= mSplashRangeSqrd)
 		{
@@ -128,7 +128,7 @@ ArrowInstance::~ArrowInstance()
 void ArrowInstance::Update(u32 timePassed)
 {
 	//Calculate angle to target, move towards it
-	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //distance I'll move this tick
+	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //Distance to move this tick
 	movement *= movement;
 	float xdif = mProjectilePosition.X - mTarget->mEnemyPosition.X;
 	float ydif = mProjectilePosition.Y - mTarget->mEnemyPosition.Y;
@@ -175,7 +175,7 @@ IceInstance::~IceInstance()
 void IceInstance::Update(u32 timePassed)
 {
 	//Calculate angle to target, move towards it
-	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //distance I'll move this tick
+	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //Distance to move this tick
 	movement *= movement;
 	float xdif = mProjectilePosition.X - mTarget->mEnemyPosition.X;
 	float ydif = mProjectilePosition.Y - mTarget->mEnemyPosition.Y;
@@ -250,7 +250,7 @@ FireInstance::~FireInstance()
 void FireInstance::Update(u32 timePassed)
 {
 	//Calculate angle to target, move towards it
-	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //distance I'll move this tick
+	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //Distance to move this tick
 	movement *= movement;
 	float xdif = mProjectilePosition.X - mTarget->mEnemyPosition.X;
 	float ydif = mProjectilePosition.Y - mTarget->mEnemyPosition.Y;

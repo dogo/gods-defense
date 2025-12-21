@@ -34,11 +34,11 @@ class EnemyInfo
 {
 /*
 *	Health - How much health the enemy has.
-*	GoldValue - Specifies the amount of gold is added into the player's Cash when this unit dies.
-*	PointValue - How much points is added into the player's Score when this unit dies.
-*	Speed - Specifies normal speed of the unit, when try to reach (without modification's).
-*	HasImunity - Specifies if the enemy is has immunity Against bad attributes (Poison,IceSlow).
-*	CanFly - Specifies if the enemy walks or fly.
+*	GoldValue - Specifies the amount of gold added to the player's Cash when this unit dies.
+*	PointValue - How many points are added to the player's Score when this unit dies.
+*	Speed - Specifies the normal speed of the unit when trying to reach (without modifications).
+*	HasImunity - Specifies if the enemy has immunity against bad attributes (Poison,IceSlow).
+*	CanFly - Specifies if the enemy walks or flies.
 */
 
 public:

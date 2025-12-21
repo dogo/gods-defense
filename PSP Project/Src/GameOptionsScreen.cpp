@@ -20,7 +20,7 @@ GameOptionsScreen::GameOptionsScreen()
 	char buffer[255];
 	mMiniMap = NULL;
 
-	//get all the folders name in map directory to fill mMap vector 
+	//Get all the folder names in map directory to fill mMap vector 
 	if(dfd > 0)
 	{
 		struct SceIoDirent dir;
@@ -60,7 +60,7 @@ GameOptionsScreen::~GameOptionsScreen()
 
 void GameOptionsScreen::draw()
 {
-	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER); //Tells the PSP what size and shape the text is
+	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER); //Sets the text size and style for the PSP
 	oslDrawString(240,40,Resource::STR_MAPSELECTION_CAPTION);
 
 	oslIntraFontSetStyle(gFont, 0.6f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);

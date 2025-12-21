@@ -57,7 +57,7 @@ int main()
 
     // Load fonts
 	gFont = oslLoadFontFile("/Res/gods-defense.pgf");
-    oslIntraFontSetStyle(gFont, 1.0f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT); //Tells the psp what font to use in intrafont
+    oslIntraFontSetStyle(gFont, 1.0f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT); //Sets the font style for IntraFont
 	oslSetFont(gFont);
 
 	if (!menuTheme || !gFont)

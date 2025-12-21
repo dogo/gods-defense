@@ -60,7 +60,7 @@ void PauseScreen::update(u32 /*timePassed*/)
 		{
 			mNextScreen = ScreenManager::SCREEN_MAIN_MENU;
 			gMenu = 0;
-			oslPlaySound(menuTheme, CHANNEL_0); //Plays the sound in the menu
+			oslPlaySound(menuTheme, CHANNEL_0); //Plays the menu sound
 		}
 	}
 }

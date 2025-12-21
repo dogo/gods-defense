@@ -182,7 +182,7 @@ void EnemyInstance::Update(u32 timePassed)
 	float angle = mEnemyPosition.AimTo(mNextCheckpoint);
 	float changeX = mEnemy->mEnemyVector[mStat].mSpeed * cos(angle);
 	float changeY = mEnemy->mEnemyVector[mStat].mSpeed * sin(angle);
-	float movement = mEnemy->mEnemyVector[mStat].mSpeed * timePassed / 1000.0f; //distance I'll move this tick
+	float movement = mEnemy->mEnemyVector[mStat].mSpeed * timePassed / 1000.0f; //Distance to move this tick
 
 	//Update mAngle (render angle) to flow smoothly with the angle of travel
 	if (mAngle != angle)
@@ -268,7 +268,7 @@ EnemyState EnemyInstance::GetEnemyState()
 	if (mEnemyState == ENEMY_DIED)
 	{
 		if (mEnemy->mDeathSound != NULL)
-			oslPlaySound(mEnemy->mDeathSound, CHANNEL_0); //Plays the die sound on channel 0
+			oslPlaySound(mEnemy->mDeathSound, CHANNEL_0); //Plays the death sound on channel 0
 		
 		mEnemyState = ENEMY_FULLY_DEAD;
 		return ENEMY_DIED;

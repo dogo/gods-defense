@@ -79,7 +79,7 @@ void GameScreen::LoadFirstPartForMap()
 	//Load all Enemies
 	int roorDirEnemies = sceIoDopen("/Res/enemies");
 
-	//get all the folders name in enemies directory to load
+	//Get all the folder names in enemies directory to load
 	if(roorDirEnemies > 0)
 	{
 		struct SceIoDirent dir;
@@ -105,7 +105,7 @@ void GameScreen::LoadFirstPartForMap()
 	//Load all Towers
 	int roorDirTowers = sceIoDopen("/Res/towers");
 
-	//get all the folders name in towers directory to load
+	//Get all the folder names in towers directory to load
 	if(roorDirTowers > 0)
 	{
 		struct SceIoDirent dir;
@@ -342,13 +342,13 @@ void GameScreen::update(u32 timePassed)
 				mPlayerPoints += ((*ei_iter)->GetPointsWorth());
 			break;
 
-			case ENEMY_HIT_THE_END: //Got to the end of the path, make the player lose a life and gold
+			case ENEMY_HIT_THE_END: //Reached the end of the path, make the player lose a life and gold
 				//Lose life
 				mPlayerLives--;
 				//Lose Gold
 				mPlayerMoney -= ((*ei_iter)->GetGold());
 
-				//Final Boss reached the end, so the player lose!
+				//Final Boss reached the end, so the player loses!
 				if (mWaveIsRunning && mActiveWaves >= mGameMap->mWaves.size())
 					mPlayerLives = 0;
 			break;
@@ -605,7 +605,7 @@ bool GameScreen::TryUpgradeSelectedTower()
 {
 	Tower *t = mSelectedTower->mTower;
 
-	//Tower not maxed can afford
+	//Tower is not maxed and player can afford the upgrade
 	if (mSelectedTower->mTowerLevel+1 < t->mTowerVector.size() && mPlayerMoney >= t->mTowerVector[mSelectedTower->mTowerLevel+1].mCost)
 	{
 		mPlayerMoney -= t->mTowerVector[mSelectedTower->mTowerLevel+1].mCost;

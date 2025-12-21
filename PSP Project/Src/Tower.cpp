@@ -80,10 +80,10 @@ Tower::Tower(const string &towerName)
 	{
 		string mCurrentLine = node->ValueStr();
 		/*
-		A função strdup() é usada em situações onde temos que alocar um espaço na memória para copiar determinada string.
-		Sem utiliza-lá, teríamos que alocar o espaço antes com malloc(), para em seguida usar strncpy(), por exemplo, para copiar a string.
-		A função retorna um ponteiro com a string já alocada (podendo ser liberado com free() depois de seu uso) em caso de sucesso,
-		ou ENOMEM como erro caso a memória não tenha sida alocada por insuficiência.		
+		A funï¿½ï¿½o strdup() ï¿½ usada em situaï¿½ï¿½es onde temos que alocar um espaï¿½o na memï¿½ria para copiar determinada string.
+		Sem utiliza-lï¿½, terï¿½amos que alocar o espaï¿½o antes com malloc(), para em seguida usar strncpy(), por exemplo, para copiar a string.
+		A funï¿½ï¿½o retorna um ponteiro com a string jï¿½ alocada (podendo ser liberado com free() depois de seu uso) em caso de sucesso,
+		ou ENOMEM como erro caso a memï¿½ria nï¿½o tenha sida alocada por insuficiï¿½ncia.		
 		*/
 		if (mCurrentLine == "Name")
 		{
@@ -94,7 +94,7 @@ Tower::Tower(const string &towerName)
 			mTowerDescription = strdup(node->GetText());
 		}
 		/*
-		A função atoi() é usada para converter strings em números inteiros.
+		A funï¿½ï¿½o atoi() ï¿½ usada para converter strings em nï¿½meros inteiros.
 		*/
 		else if (mCurrentLine == "TowerLength")
 		{
@@ -237,17 +237,17 @@ TowerInstance::TowerInstance(Tower *tower, const Coordinates2D &position)
 void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enemies)
 {
 	mProjectileInterval -= timePassed;
-	float mTowerSquareRange = mTower->mTowerVector[mTowerLevel].mRange * mTower->mTowerVector[mTowerLevel].mRange; //Range²
+	float mTowerSquareRange = mTower->mTowerVector[mTowerLevel].mRange * mTower->mTowerVector[mTowerLevel].mRange; //Rangeï¿½
 
 	if (mTowerTarget && (mTowerTarget->EnemyIsDead() || mTowerPosition.SquareDistance(mTowerTarget->mEnemyPosition) > mTowerSquareRange || !mTowerTarget->EnemyStillOnMap()))
 	{
-		//The target its out of range or dead
+		//The target is out of range or dead
 		mTowerTarget = NULL;
 	}	
-	if (!mTowerTarget) //we don't have a target, seek for an enemy.
+	if (!mTowerTarget) //We don't have a target, seek for an enemy.
 	{
 		//Seek for an enemy.
-		//we use an iterator to walk on the enemy list.
+		//We use an iterator to walk through the enemy list.
 		list<EnemyInstance*>::const_iterator enemyIteratorList;
 		for (enemyIteratorList = enemies.begin(); enemyIteratorList != enemies.end(); enemyIteratorList++)
 		{  //Dogo says : evil IF no donut for you !!

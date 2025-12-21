@@ -31,6 +31,6 @@ void EndingScreen::update(u32 /*timePassed*/)
 	if(osl_keys->pressed.cross)
 	{
 		mNextScreen = ScreenManager::SCREEN_MAIN_MENU; //go to main menu
-		oslPlaySound(menuTheme, CHANNEL_0); //Plays the sound in the menu
+		oslPlaySound(menuTheme, CHANNEL_0); //Plays the menu sound
 	}
 }
