@@ -56,7 +56,7 @@ void MultiplayerScreen::draw()
 	oslDrawString((510) - imgBack->stretchX,(272) - (imgBack->stretchY/2),Resource::STR_BACK_SK);
 }
 
-void MultiplayerScreen::update(u32 /*timePassed*/) //Parametro Formal, n�o d� warning
+void MultiplayerScreen::update(u32 /*timePassed*/)
 {
 	if(osl_keys->pressed.circle)
 	{	

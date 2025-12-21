@@ -30,7 +30,7 @@ void TitleScreen::draw()
 	oslIntraFontSetStyle(gFont, 0.7f,RGBA(255,255,255,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 }
 
-void TitleScreen::update(u32 /*timePassed*/) //Parametro Formal, n�o d� warning
+void TitleScreen::update(u32 /*timePassed*/)
 {
 	if(osl_keys->pressed.start)
 	{

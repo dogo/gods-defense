@@ -30,7 +30,7 @@ void TrophiesScreen::draw()
 	oslDrawString((510) - back->stretchX,(272) - (back->stretchY/2),Resource::STR_BACK_SK);
 }
 
-void TrophiesScreen::update(u32 /*timePassed*/) //Parametro Formal, n�o d� warning
+void TrophiesScreen::update(u32 /*timePassed*/)
 {
 	if(osl_keys->pressed.circle)
 	{

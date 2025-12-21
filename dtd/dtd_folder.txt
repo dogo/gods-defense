@@ -1,2 +1,2 @@
-Aqui ficam os arquivos DTD, que são os validatores do XML das torres, mapas ou inimigos.
-Ele checa se a estrutura do XML que o desenvolvedor fez esta certa, baseada nas regras do DTD.
+Here are the DTD files, which are the validators for the XML of towers, maps or enemies.
+It checks if the XML structure that the developer made is correct, based on the DTD rules.

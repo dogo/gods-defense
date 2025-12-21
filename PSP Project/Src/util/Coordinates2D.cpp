@@ -21,12 +21,12 @@ float const Coordinates2D::AimTo(const Coordinates2D &enemy)
 {
 	float dy = enemy.Y - this->Y; //dy = enemy.Y - Tower->y
 	float dx = enemy.X - this->X; //dx = enemy.x - Tower->x
-	return atan2(dy,dx); // atan2 from math.h, arco tangente :D, owww trigonometria.
+	return atan2(dy,dx); // atan2 from math.h, arc tangent :D, oh trigonometry.
 }
 
 float const Coordinates2D::SquareDistance(const Coordinates2D &enemy)
 {   
 	float dx = enemy.X - this->X; //dy = enemy.Y - Tower->y 	
 	float dy = enemy.Y - this->Y; //dx = enemy.x - Tower->x
-	return (dy*dy)+(dx*dx); //Pythagoras distance is D(A,B) = sqrt( (xA-xB)² + (yA-yB)²), but we use without the sqrt
+	return (dy*dy)+(dx*dx); //Pythagoras distance is D(A,B) = sqrt((xA-xB)^2 + (yA-yB)^2), but we use without the sqrt
 }

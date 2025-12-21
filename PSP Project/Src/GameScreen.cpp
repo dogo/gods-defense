@@ -401,7 +401,7 @@ void GameScreen::update(u32 timePassed)
 			if(gIsClient && oslIsWlanPowerOn())
 			{
 				/*
-				 *	TODO : Recive msg from server with win status if true send client score and compare with server
+				 *	TODO : Receive msg from server with win status if true send client score and compare with server
 				 *	if clientScore < serverScore -> Client lose else client win and set the new state
 				 */
 				mAdhocReference->clientSendScore(gScoreBuffer);

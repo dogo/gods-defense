@@ -31,7 +31,7 @@ void AboutScreen::draw()
 	oslDrawString((510) - mBack->stretchX,(272) - (mBack->stretchY/2),Resource::STR_BACK_SK);
 }
 
-void AboutScreen::update(u32 /*timePassed*/) //Parametro Formal, n�o d� warning
+void AboutScreen::update(u32 /*timePassed*/)
 {
 	if(osl_keys->pressed.circle)
 	{

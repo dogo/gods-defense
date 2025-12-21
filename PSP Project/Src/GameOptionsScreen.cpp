@@ -78,7 +78,7 @@ void GameOptionsScreen::draw()
 	oslDrawString(28 + imgSelect->stretchX, (272) - (imgSelect->stretchY/2),Resource::STR_SELECT);
 }
 
-void GameOptionsScreen::update(u32 /*timePassed*/) //Parametro Formal, n�o d� warning
+void GameOptionsScreen::update(u32 /*timePassed*/)
 {
 	if(osl_keys->pressed.cross)
 	{		

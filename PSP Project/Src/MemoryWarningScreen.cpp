@@ -33,7 +33,7 @@ void MemoryWarningScreen::draw()
 	oslDrawString((510) - mCross->stretchX,(272) - (mCross->stretchY/2),Resource::STR_OK);
 }
 
-void MemoryWarningScreen::update(u32 /*timePassed*/) //Parametro Formal, n�o d� warning
+void MemoryWarningScreen::update(u32 /*timePassed*/)
 {
 	mType = oslGetSaveLoadType();
 
