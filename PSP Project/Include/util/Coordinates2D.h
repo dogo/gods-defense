@@ -18,7 +18,7 @@ public:
 	/** Calculates the distance between two coordinates
 
 	\code
-	http://pt.wikipedia.org/wiki/Teorema_de_Pit%C3%A1goras -> Distância entre dois pontos
+	http://en.wikipedia.org/wiki/Pythagorean_theorem -> Distance between two points
 	SquareDistance(const Coordinates2D &enemy);
 	\endcode */
 	float const SquareDistance(const Coordinates2D &enemy);

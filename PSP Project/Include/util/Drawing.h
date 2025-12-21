@@ -38,12 +38,5 @@ void static drawPixel(float x, float y, OSL_COLOR color);
 drawCircle(int x, int y, int radius, osl_color);
 \endcode */
 void static drawCircle(int x, int y, int radius, OSL_COLOR color);
-
-/** Initialize the drawCircle Buffer.
-
-\code
-Initialize(int x, int y, int radius, osl_color);
-\endcode */
-void static Initialize(int x, int y, int radius, OSL_COLOR color);
 };
 #endif
