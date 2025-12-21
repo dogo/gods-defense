@@ -19,7 +19,6 @@ using namespace std;
 
 extern OSL_FONT *gFont;
 extern OSL_SOUND *menuTheme;
-extern OSL_IMAGE *pEllipse;
 extern int gMenu;
 extern short gState;
 extern int gFade;
