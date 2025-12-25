@@ -58,7 +58,7 @@ Wave::Wave(TiXmlElement *waveNode)
 		}
 		WaveEnemyNode = WaveEnemyNode->NextSiblingElement();
 	}
-	
+
 	mEnemiesLeftAlive = mEnemySpawns.size();
 }
 
@@ -212,8 +212,8 @@ void Map::LoadMap(const string &MapDirName)
 		{
 			char *checkText = strdup(node->GetText());
 			/*
-				A função strtok busca dentro da string declarada um token definido, ou em tempo de compilação ou em tempo 
-				de execução. Se a função encontra o token determinado é devolvido NULL.
+				The strtok function searches within the declared string for a defined token, either at compile time or at
+				runtime. If the function finds the specified token, it returns NULL.
 			*/
 			char *tempDes = strtok(checkText, "\r\n"); // windows uses \r\n -> "\r" carrige return, "\n" break line
 			while (tempDes != NULL)
@@ -401,7 +401,7 @@ Map::~Map()
 		oslDeleteImage(mMapImage);
 
 	delete[] mTowersMenu;
-	
+
 	sMapReference = NULL;
 }
 
@@ -421,19 +421,19 @@ void Map::ScrollMap()
 	if(osl_keys->pressed.R) //UP
 	{
 		oslFlushKey();
-		
+
 		mMapImage->y -= 34.0;
-		
+
 		if (mMapImage->y <= -208) //New Hot Point
-			mMapImage->y = -208;			
+			mMapImage->y = -208;
 	}
-	
+
 	if(osl_keys->pressed.L) //Down
 	{
-		oslFlushKey();		
-		
+		oslFlushKey();
+
 		mMapImage->y += 34.0;
-		
+
 		if (mMapImage->y >= 0) //Old Hot Point
 			mMapImage->y = 0;
 	}

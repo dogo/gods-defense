@@ -80,10 +80,10 @@ Tower::Tower(const string &towerName)
 	{
 		string mCurrentLine = node->ValueStr();
 		/*
-		A fun��o strdup() � usada em situa��es onde temos que alocar um espa�o na mem�ria para copiar determinada string.
-		Sem utiliza-l�, ter�amos que alocar o espa�o antes com malloc(), para em seguida usar strncpy(), por exemplo, para copiar a string.
-		A fun��o retorna um ponteiro com a string j� alocada (podendo ser liberado com free() depois de seu uso) em caso de sucesso,
-		ou ENOMEM como erro caso a mem�ria n�o tenha sida alocada por insufici�ncia.		
+		The strdup() function is used in situations where we need to allocate space in memory to copy a specific string.
+		Without using it, we would have to allocate space first with malloc(), and then use strncpy(), for example, to copy the string.
+		The function returns a pointer with the string already allocated (which can be freed with free() after use) on success,
+		or ENOMEM as an error if memory was not allocated due to insufficiency.
 		*/
 		if (mCurrentLine == "Name")
 		{
@@ -94,7 +94,7 @@ Tower::Tower(const string &towerName)
 			mTowerDescription = strdup(node->GetText());
 		}
 		/*
-		A fun��o atoi() � usada para converter strings em n�meros inteiros.
+		The atoi() function is used to convert strings to integers.
 		*/
 		else if (mCurrentLine == "TowerLength")
 		{
@@ -209,7 +209,7 @@ Tower::~Tower()
 		oslDeleteImage(mProjectileImg);
 	if (mFireSound != NULL)
 		oslDeleteSound(mFireSound);
-	if (mHitSound != NULL)	
+	if (mHitSound != NULL)
 		oslDeleteSound(mHitSound);
 }
 
@@ -243,7 +243,7 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 	{
 		//The target is out of range or dead
 		mTowerTarget = NULL;
-	}	
+	}
 	if (!mTowerTarget) //We don't have a target, seek for an enemy.
 	{
 		//Seek for an enemy.
