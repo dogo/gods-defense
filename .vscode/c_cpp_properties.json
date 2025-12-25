@@ -6,7 +6,8 @@
                 "${PSPDEV}/psp/include",
                 "${PSPDEV}/psp/sdk/include",
                 "${workspaceFolder}/PSP Project/Include/**",
-                "${workspaceFolder}/PSP Project/tinyxml/**"
+                "${workspaceFolder}/PSP Project/tinyxml/**",
+                "${workspaceFolder}/PSP Project"
             ],
             "defines": [
                 "TIXML_USE_STL"
