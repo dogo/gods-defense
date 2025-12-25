@@ -10,7 +10,9 @@
                 "${workspaceFolder}/PSP Project"
             ],
             "defines": [
-                "TIXML_USE_STL"
+                "TIXML_USE_STL",
+                "_GNU_SOURCE",
+                "PSP"
             ],
             "compilerPath": "${PSPDEV}/bin/psp-gcc",
             "cStandard": "c11",
