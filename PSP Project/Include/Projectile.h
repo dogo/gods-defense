@@ -29,7 +29,7 @@ public:
 	static void CreateProjectile(TowerInstance *shooter, EnemyInstance *target);
 	bool DisappearProjectile();
 	virtual void Update(u32 timePassed) = 0;
-	virtual void ProjectileRender() = 0;
+	virtual void Render(float scrollOffset) = 0; // Virtual render method
 	void DealDamage();
 	static OSL_IMAGE *LoadProjectileImage(const char &projectileType, char *filename);
 
@@ -60,7 +60,8 @@ public:
 
 	//ProjectileInstance
 	virtual void Update(u32 timePassed);
-	virtual void ProjectileRender();
+	virtual void Render(float scrollOffset);
+	float GetAngle() const { return mAngle; }
 private:
 	int mMovementSpeed;
 	float mAngle; //Last calculated angle
@@ -74,7 +75,8 @@ public:
 
 	//ProjectileInstance
 	virtual void Update(u32 timePassed);
-	virtual void ProjectileRender();
+	virtual void Render(float scrollOffset);
+	float GetAngle() const { return mAngle; }
 private:
 	int mMovementSpeed;
 	float mAngle; //Last calculated angle
@@ -88,7 +90,7 @@ public:
 
 	//ProjectileInstance
 	virtual void Update(u32 timePassed);
-	virtual void ProjectileRender();
+	virtual void Render(float scrollOffset);
 private:
 	int mAnimationTime;
 };
@@ -101,7 +103,7 @@ public:
 
 	//ProjectileInstance
 	virtual void Update(u32 timePassed);
-	virtual void ProjectileRender();
+	virtual void Render(float scrollOffset);
 private:
 	float mAngle; //Last calculated angle
 	int mMovementSpeed;

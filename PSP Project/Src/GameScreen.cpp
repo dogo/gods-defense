@@ -5,6 +5,9 @@
 
 #include "../Include/GameScreen.h"
 #include "../Include/ScreenManager.h"
+#include "../Include/renderers/TowerRenderer.h"
+#include "../Include/renderers/EnemyRenderer.h"
+#include "../Include/renderers/MapRenderer.h"
 
 //Statics
 bool gWin;
@@ -167,15 +170,8 @@ GameScreen::~GameScreen()
 
 void GameScreen::drawGrid()
 {
-	for (int i=0; i<15 ; i++)
-		for (int j=0; j<15; j++)
-		{
-			if(mGameMap->mCollisionMap[i][j])
-			{
-				oslDrawFillRect(i*32,j*32+mGameMap->mScrollAmount,i*32+31,j*32+31+mGameMap->mScrollAmount,ALPHA_COLOR_BLACK);
-				oslDrawRect(i*32,j*32+mGameMap->mScrollAmount,i*32+32,j*32+32+mGameMap->mScrollAmount,COLOR_WHITE);
-			}
-		}
+	MapRenderer::RenderBuildGrid(mGameMap->mCollisionMap, mGameMap->mGridTilesWidth, 
+	                            mGameMap->mGridTilesHeight, mGameMap->mScrollAmount);
 }
 
 void GameScreen::draw()
@@ -188,7 +184,8 @@ void GameScreen::draw()
 	}
 
 	//Draw Map
-	mGameMap->draw();
+	mGameMap->ScrollMap(); // Update scroll position
+	MapRenderer::RenderMap(mGameMap->GetMapImage());
 
 	//Draw Grid
 	if(mGameState == GS_MAP_PLACE_TOWER)
@@ -205,21 +202,21 @@ void GameScreen::draw()
 	list<EnemyInstance*>::const_iterator realEnemies_iter;
 	for (realEnemies_iter = mRealEnemies.begin(); realEnemies_iter != mRealEnemies.end(); realEnemies_iter++)
 	{
-		(*realEnemies_iter)->RenderEnemy();
+		EnemyRenderer::RenderEnemy(*realEnemies_iter, mGameMap->mScrollAmount);
 	}
 
 	//Draw the towers
 	list<TowerInstance*>::const_iterator realTowers_iter;
 	for (realTowers_iter = mRealTowers.begin(); realTowers_iter != mRealTowers.end(); realTowers_iter++)
 	{
-		(*realTowers_iter)->RenderTower();
+		TowerRenderer::RenderTowerInstance(*realTowers_iter, mGameMap->mScrollAmount);
 	}
 
 	//Draw the Projectiles
 	list<ProjectileInstance*>::const_iterator si_iter;
 	for (si_iter = mRealProjectiles.begin(); si_iter != mRealProjectiles.end(); si_iter++)
 	{
-		(*si_iter)->ProjectileRender();
+		(*si_iter)->Render(mGameMap->mScrollAmount);
 	}
 
 	//Draw GUI
@@ -591,13 +588,14 @@ int GameScreen::GetWaveCount() const
 void GameScreen::drawUpgradeCircle()
 {
 	//Draw the current range for any selected tower
-	mSelectedTower->RenderRangeCircle(COLOR_RED);
+	TowerRenderer::RenderTowerInstanceRangeCircle(mSelectedTower, COLOR_RED, mGameMap->mScrollAmount);
 	if (mSelectedTower->mTowerLevel+1 < mSelectedTower->mTower->mTowerVector.size()) //If there is any upgrade to do
 	{
 		Coordinates2D buildingPosition = Coordinates2D(mSelectedTower->mTowerPosition.X, mSelectedTower->mTowerPosition.Y);
 		buildingPosition.X = (((int)(buildingPosition.X) / 32) * 32) + 16; // 32 == Width
 		buildingPosition.Y = (((int)(buildingPosition.Y) / 32) * 32) + 16; // 32 == Height
-		mSelectedTower->mTower->RenderRangeCircle(buildingPosition, mSelectedTower->mTowerLevel+1, COLOR_BLUE);
+		TowerRenderer::RenderRangeCircle(mSelectedTower->mTower, buildingPosition, 
+		                                mSelectedTower->mTowerLevel+1, COLOR_BLUE, mGameMap->mScrollAmount);
 	}
 }
 

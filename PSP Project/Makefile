@@ -38,13 +38,19 @@ UTIL = \
     Src/util/Debug.o \
     Src/util/PspIO.o
 
+RENDERERS = \
+    Src/renderers/TowerRenderer.o \
+    Src/renderers/EnemyRenderer.o \
+    Src/renderers/ProjectileRenderer.o \
+    Src/renderers/MapRenderer.o
+
 TINYXML = \
     tinyxml/tinystr.o \
     tinyxml/tinyxml.o \
     tinyxml/tinyxmlerror.o \
     tinyxml/tinyxmlparser.o
 
-OBJS = $(TINYXML) $(GAMEOBJECTS) $(UTIL)
+OBJS = $(TINYXML) $(GAMEOBJECTS) $(UTIL) $(RENDERERS)
 
 LIBDIR =
 LDFLAGS =

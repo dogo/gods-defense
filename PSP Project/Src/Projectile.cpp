@@ -4,6 +4,8 @@
 //**************************************************************************
 
 #include "../Include/Projectile.h"
+#include "../Include/renderers/ProjectileRenderer.h"
+#include "../Include/GameGUI.h"
 
 
 void ProjectileInstance::CreateProjectile(TowerInstance *shooter, EnemyInstance *target)
@@ -151,10 +153,9 @@ void ArrowInstance::Update(u32 timePassed)
 	mProjectilePosition.Y += changeY;
 }
 
-void ArrowInstance::ProjectileRender()
+void ArrowInstance::Render(float scrollOffset)
 {
-	mProjectileImg->angle = (mAngle * 180/M_PI);
-	oslDrawImageXY(mProjectileImg, mProjectilePosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mProjectilePosition.Y);
+	ProjectileRenderer::RenderArrow(this, mAngle, scrollOffset);
 }
 
 //IceInstance
@@ -198,10 +199,9 @@ void IceInstance::Update(u32 timePassed)
 	mProjectilePosition.Y += changeY;
 }
 
-void IceInstance::ProjectileRender()
+void IceInstance::Render(float scrollOffset)
 {
-	mProjectileImg->angle = (mAngle * 180/M_PI);
-	oslDrawImageXY(mProjectileImg, mProjectilePosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mProjectilePosition.Y);
+	ProjectileRenderer::RenderIce(this, mAngle, scrollOffset);
 }
 
 //LightningInstance
@@ -226,11 +226,9 @@ void LightningInstance::Update(u32 timePassed)
 	}
 }
 
-void LightningInstance::ProjectileRender()
+void LightningInstance::Render(float scrollOffset)
 {
-	mProjectileImg->centerX = mProjectileImg->sizeX/2;
-	mProjectileImg->centerY = mProjectileImg->sizeY/2;
-	oslDrawImageXY(mProjectileImg, mTarget->mEnemyPosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mTarget->mEnemyPosition.Y);
+	ProjectileRenderer::RenderLightning(this, mTarget->mEnemyPosition, scrollOffset);
 }
 
 //FireInstance
@@ -273,8 +271,7 @@ void FireInstance::Update(u32 timePassed)
 	mProjectilePosition.Y += changeY;
 }
 
-void FireInstance::ProjectileRender()
+void FireInstance::Render(float scrollOffset)
 {
-	mProjectileImg->angle = (mAngle * 180/M_PI);
-	oslDrawImageXY(mProjectileImg, mProjectilePosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mProjectilePosition.Y);
+	ProjectileRenderer::RenderFire(this, mAngle, scrollOffset);
 }

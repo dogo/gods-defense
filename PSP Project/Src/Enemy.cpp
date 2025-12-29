@@ -291,19 +291,6 @@ const int EnemyInstance::GetGold()
 	return mEnemy->mEnemyVector[mStat].mGoldValue;
 }
 
-void EnemyInstance::RenderEnemy()
-{
-	if (EnemyIsDead()) 
-		return;
-
-	mEnemy->mEnemyImg->centerX = 16; //Enemie / 2
-	mEnemy->mEnemyImg->angle = (mAngle * 180/M_PI);
-	DrawImageFrameXY(mEnemy->mEnemyImg, mEnemyPosition.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y, mCurrentFrames);
-	RenderLife();
-#ifdef _DEBUG
-	oslPrintf_xy(0,30, "Enemy X-> %f    Enemy Y %f  mAngle %d", mEnemyPosition.X, mEnemyPosition.Y, mEnemy->mEnemyImg->angle);
-#endif // _DEBUG
-}
 
 bool const EnemyInstance::EnemyIsDead()
 {
@@ -350,12 +337,6 @@ void EnemyInstance::EnemyReciveDamage(const int &damage, const float &slowAmount
 	}
 }
 
-void EnemyInstance::RenderLife()
-{
-	int w = 32 * mHealth / mEnemy->mEnemyVector[mStat].mHealth; 
-	oslDrawFillRect(mEnemyPosition.X - 16, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y - 20, mEnemyPosition.X + 16, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y - 16, COLOR_RED); //RED
-	oslDrawFillRect(mEnemyPosition.X - 16, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y - 20, (mEnemyPosition.X -16) + w, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+mEnemyPosition.Y - 16, COLOR_GREEN); //GREEN
-}
 
 float EnemyInstance::GetPointsWorth() const
 {

@@ -82,7 +82,6 @@ class Map
 public:
 	Map();
 	~Map();
-	void draw();
 	void LoadMap(const string &mapName);
 	void LoadMapImage();
 	void ResetMap();
@@ -92,6 +91,7 @@ public:
 	//Returns true if all blocks under the tower are available
 	bool TestBuildCollision(const Coordinates2D &position, Tower *tower);
 	static void setScrollAmount(float scrollValue);
+	OSL_IMAGE *GetMapImage() const { return mMapImage; }
 
 	char *mMapName;
 	char *mCurrentMapName;

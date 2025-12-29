@@ -213,16 +213,6 @@ Tower::~Tower()
 		oslDeleteSound(mHitSound);
 }
 
-void Tower::RenderTower(const Coordinates2D &position)
-{
-	oslDrawImageXY(mTowerImg, position.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+position.Y);
-}
-
-void Tower::RenderRangeCircle(const Coordinates2D &position, const int &TowerLevel, const OSL_COLOR color)
-{
-	Drawing::drawCircle(position.X, GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount+position.Y, mTowerVector[TowerLevel].mRange, color);
-}
-
 TowerInstance::TowerInstance(Tower *tower, const Coordinates2D &position)
 {
 	int x = ((int)position.X / 32);
@@ -272,18 +262,4 @@ void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enem
 			ProjectileInstance::CreateProjectile(this, mTowerTarget);
 		}
 	}
-}
-
-void TowerInstance::RenderTower()
-{
-	oslDrawImageXY(mTower->mTowerImg, mTowerPosition.X + (mTower->mTowerImg->sizeX/2), (mTower->mTowerImg->sizeY/2) + mTowerPosition.Y + GameGUI::Instance()->mGame->GetGameMap()->mScrollAmount);
-}
-
-void TowerInstance::RenderRangeCircle(const OSL_COLOR color)
-{
-	Coordinates2D buildingPosition = Coordinates2D(mTowerPosition.X, mTowerPosition.Y);
-	//Snap :D \o/ workss
-	buildingPosition.X = (((int)(buildingPosition.X) / 32) * 32) + 16; // 32 == Width
-	buildingPosition.Y = (((int)(buildingPosition.Y) / 32) * 32) + 16; // 32 == Heigth
-	mTower->RenderRangeCircle(buildingPosition, mTowerLevel, color);
 }

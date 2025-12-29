@@ -4,6 +4,7 @@
 //**************************************************************************
 
 #include "../Include/GameGUI.h"
+#include "../Include/renderers/TowerRenderer.h"
 
 GameGUI *GameGUI::sGameGUIReference = NULL;
 
@@ -246,8 +247,8 @@ void GameGUI::RenderPlacingTower()
 		//Snap :D \o/ workss
 		buildingPosition.X = (((int)(buildingPosition.X) / 32) * 32) + 16; // 32 == Width
 		buildingPosition.Y = (((int)(buildingPosition.Y) / 32) * 32) + 16; // 32 == Heigth
-		mPuttingTower->RenderRangeCircle(buildingPosition, 0, COLOR_RED);
-		mPuttingTower->RenderTower(buildingPosition);
+		TowerRenderer::RenderRangeCircle(mPuttingTower, buildingPosition, 0, COLOR_RED, mGame->GetGameMap()->mScrollAmount);
+		TowerRenderer::RenderTower(mPuttingTower, buildingPosition, mGame->GetGameMap()->mScrollAmount);
 	}
 }
 

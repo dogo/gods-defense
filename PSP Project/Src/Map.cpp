@@ -389,11 +389,6 @@ void Map::ResetMap()
 	mScrollAmount = 0;
 }
 
-void Map::draw()
-{
-	ScrollMap();
-	oslDrawImage(mMapImage);
-}
 
 Map::~Map()
 {

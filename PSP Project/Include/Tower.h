@@ -63,8 +63,6 @@ public:
 	Tower(const string &towerName);
 	~Tower();
 
-	void RenderTower(const Coordinates2D &position);
-	void RenderRangeCircle(const Coordinates2D &position, const int &TowerInfo, const OSL_COLOR color);
 /*
 *	mIsBuildable - Player can Build ?.
 *	mTowerDirName - Tower Directory name.
@@ -107,8 +105,6 @@ public:
 	TowerInstance(Tower *tower, const Coordinates2D &position);	
 	void Update(unsigned timePassed, const list<EnemyInstance*> &enemies);
 
-	void RenderTower();
-	void RenderRangeCircle(const OSL_COLOR color);
 
 private:
 	int mProjectileInterval;
