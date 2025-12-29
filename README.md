@@ -72,7 +72,7 @@ See [`PSP Project/Changelog.txt`](PSP%20Project/Changelog.txt) for full details.
 
 ## License
 
-*Specify your license here (e.g., MIT, GPL, or custom)*
+This project is licensed under the GNU General Public License v2.0. See the LICENSE file for details.
 
 ---
 
