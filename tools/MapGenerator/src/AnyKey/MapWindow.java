@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.w3c.dom.Document;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
@@ -37,7 +38,7 @@ extends JFrame
 implements ActionListener {
     private MapCanvas mC;
     private CreateXML mCreateXML;
-    public Vector<Waves> mWavesVector = new Vector();
+    public Vector<Waves> mWavesVector = new Vector<Waves>();
     public static MapWindow mMapWindowReference = null;
     private final String FULL_NAME = "Gods-Defense Map Generator ";
     private final String MAJOR_VERSION = "0";
@@ -52,8 +53,8 @@ implements ActionListener {
     private JCheckBox jCheckBoxEndPoint;
     private JCheckBox jCheckBoxIsBoss;
     private JCheckBox jCheckBoxStartPoint;
-    private JComboBox jComboBoxCheckpoint;
-    private JComboBox jComboBoxWaves;
+    private JComboBox<String> jComboBoxCheckpoint;
+    private JComboBox<String> jComboBoxWaves;
     private JLabel jLabelEnemyFolder;
     private JLabel jLabelEnemyPathArea;
     private JLabel jLabelGold;
@@ -116,14 +117,14 @@ implements ActionListener {
         this.jLabelEnemyFolder = new JLabel();
         this.jTextFieldNumerOfEnemies = new JTextField();
         this.jTextFieldEnemyFolder = new JTextField();
-        this.jComboBoxWaves = new JComboBox();
+        this.jComboBoxWaves = new JComboBox<String>();
         this.jLabelWavesAdded = new JLabel();
         this.jButtonAddWave = new JButton();
         this.jButtonRemove = new JButton();
         this.jCheckBoxIsBoss = new JCheckBox();
         this.jPanelCheckpoint = new JPanel();
         this.jToggleButtonCheckpoint = new JToggleButton();
-        this.jComboBoxCheckpoint = new JComboBox();
+        this.jComboBoxCheckpoint = new JComboBox<String>();
         this.jCheckBoxStartPoint = new JCheckBox();
         this.jCheckBoxEndPoint = new JCheckBox();
         this.jButtonLoadPNG = new JButton();

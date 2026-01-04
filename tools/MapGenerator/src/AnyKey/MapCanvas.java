@@ -246,6 +246,6 @@ implements MouseInputListener {
     }
 
     static {
-        mCheckpointsVector = new Vector();
+        mCheckpointsVector = new Vector<Checkpoints>();
     }
 }
