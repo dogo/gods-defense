@@ -1,0 +1,19 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.godsdefense'
+version = '0.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.dom4j:dom4j:2.1.4'
+}
+
+task run(type: JavaExec) {
+    mainClass = 'AnyKey.Main'
+    classpath = sourceSets.main.runtimeClasspath
+}

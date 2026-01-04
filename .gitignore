@@ -10,3 +10,12 @@
 
 # Java
 *.class
+
+# Gradle
+tools/MapGenerator/build/
+tools/MapGenerator/bin/
+tools/MapGenerator/.gradle/
+
+# IDEs
+/.idea/
+*.iml
