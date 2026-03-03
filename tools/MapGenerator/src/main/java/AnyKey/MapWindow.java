@@ -7,9 +7,14 @@ package AnyKey;
 import AnyKey.MapCanvas;
 import AnyKey.Waves;
 import AnyKey.util.CreateXML;
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.Vector;
@@ -66,6 +71,8 @@ implements ActionListener {
     private JLabel jLabelTowerArea;
     private JLabel jLabelWaveDescription;
     private JLabel jLabelWavesAdded;
+    private JLabel jLabelColorSwatchRed;
+    private JLabel jLabelColorSwatchGreen;
     private JPanel jPanelCheckpoint;
     private JPanel jPanelWaves;
     private JScrollPane jScrollPane1;
@@ -82,9 +89,8 @@ implements ActionListener {
 
     public MapWindow() {
         this.setTitleAndIcon();
-        this.initComponents();
         this.mC = new MapCanvas();
-        this.getContentPane().add(this.mC);
+        this.initComponents();
         mMapWindowReference = this;
         this.jBGenerate.addActionListener(this);
         this.jBClose.addActionListener(this);
@@ -94,6 +100,39 @@ implements ActionListener {
     private void initComponents() {
         this.jBGenerate = new JButton();
         this.jBClose = new JButton();
+
+        this.jLabelColorSwatchRed = new JLabel();
+        this.jLabelColorSwatchRed.setOpaque(true);
+        this.jLabelColorSwatchRed.setBackground(Color.RED);
+        this.jLabelColorSwatchRed.setPreferredSize(new Dimension(32, 32));
+        this.jLabelColorSwatchRed.setMinimumSize(new Dimension(32, 32));
+        this.jLabelColorSwatchRed.setMaximumSize(new Dimension(32, 32));
+        this.jLabelColorSwatchRed.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.jLabelColorSwatchRed.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+        this.jLabelColorSwatchRed.addMouseListener(new MouseAdapter() {
+            @Override public void mouseClicked(MouseEvent e) {
+                mC.setColor(Color.RED);
+                jLabelColorSwatchRed.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+                jLabelColorSwatchGreen.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+            }
+        });
+
+        this.jLabelColorSwatchGreen = new JLabel();
+        this.jLabelColorSwatchGreen.setOpaque(true);
+        this.jLabelColorSwatchGreen.setBackground(Color.GREEN);
+        this.jLabelColorSwatchGreen.setPreferredSize(new Dimension(32, 32));
+        this.jLabelColorSwatchGreen.setMinimumSize(new Dimension(32, 32));
+        this.jLabelColorSwatchGreen.setMaximumSize(new Dimension(32, 32));
+        this.jLabelColorSwatchGreen.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.jLabelColorSwatchGreen.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+        this.jLabelColorSwatchGreen.addMouseListener(new MouseAdapter() {
+            @Override public void mouseClicked(MouseEvent e) {
+                mC.setColor(Color.GREEN);
+                jLabelColorSwatchGreen.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
+                jLabelColorSwatchRed.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+            }
+        });
+
         this.jLabelTowerArea = new JLabel();
         this.jLabelEnemyPathArea = new JLabel();
         this.jLabelMapName = new JLabel();
@@ -128,21 +167,17 @@ implements ActionListener {
         this.jCheckBoxEndPoint = new JCheckBox();
         this.jButtonLoadPNG = new JButton();
         this.jButtonSave2PNG = new JButton();
+
         this.setDefaultCloseOperation(3);
         this.setResizable(false);
-        this.jBGenerate.setText("Generate");
-        this.jBGenerate.addActionListener(new ActionListener(){
 
-            public void actionPerformed(ActionEvent evt) {
-                MapWindow.this.jBGenerateActionPerformed(evt);
-            }
+        this.jBGenerate.setText("Generate");
+        this.jBGenerate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) { jBGenerateActionPerformed(evt); }
         });
         this.jBClose.setText("Close");
-        this.jBClose.addActionListener(new ActionListener(){
-
-            public void actionPerformed(ActionEvent evt) {
-                MapWindow.this.jBCloseActionPerformed(evt);
-            }
+        this.jBClose.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) { jBCloseActionPerformed(evt); }
         });
         this.jLabelTowerArea.setText("Tower Area");
         this.jLabelEnemyPathArea.setText("Enemy Path Area");
@@ -164,31 +199,24 @@ implements ActionListener {
         this.jLabelEnemyFolder.setText("Enemy Folder");
         this.jLabelWavesAdded.setText("Waves Added");
         this.jButtonAddWave.setText("Add");
-        this.jButtonAddWave.addActionListener(new ActionListener(){
-
-            public void actionPerformed(ActionEvent evt) {
-                MapWindow.this.jButtonAddWaveActionPerformed(evt);
-            }
+        this.jButtonAddWave.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) { jButtonAddWaveActionPerformed(evt); }
         });
         this.jButtonRemove.setText("Remove");
-        this.jButtonRemove.addActionListener(new ActionListener(){
-
-            public void actionPerformed(ActionEvent evt) {
-                MapWindow.this.jButtonRemoveActionPerformed(evt);
-            }
+        this.jButtonRemove.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) { jButtonRemoveActionPerformed(evt); }
         });
         this.jCheckBoxIsBoss.setText("Is Boss ?");
+
         GroupLayout jPanelWavesLayout = new GroupLayout(this.jPanelWaves);
         this.jPanelWaves.setLayout(jPanelWavesLayout);
         jPanelWavesLayout.setHorizontalGroup(jPanelWavesLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanelWavesLayout.createSequentialGroup().addGroup(jPanelWavesLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(this.jLabelWaveDescription).addGroup(jPanelWavesLayout.createSequentialGroup().addGroup(jPanelWavesLayout.createParallelGroup(GroupLayout.Alignment.TRAILING, false).addGroup(GroupLayout.Alignment.LEADING, jPanelWavesLayout.createSequentialGroup().addComponent(this.jLabelEnemyFolder).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jTextFieldEnemyFolder)).addGroup(GroupLayout.Alignment.LEADING, jPanelWavesLayout.createSequentialGroup().addComponent(this.jLabelNumberOfEnemies).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jTextFieldNumerOfEnemies)).addComponent(this.jScrollPane2, GroupLayout.Alignment.LEADING, -2, -1, -2)).addGroup(jPanelWavesLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanelWavesLayout.createSequentialGroup().addGap(48, 48, 48).addComponent(this.jButtonAddWave, -2, 65, -2).addGap(32, 32, 32).addComponent(this.jButtonRemove)).addGroup(jPanelWavesLayout.createSequentialGroup().addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(this.jCheckBoxIsBoss))).addGap(25, 25, 25)).addGroup(jPanelWavesLayout.createSequentialGroup().addComponent(this.jLabelIntervalSpawnTime).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jTextFieldIntervalSpawnTime, -2, 69, -2).addGroup(jPanelWavesLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanelWavesLayout.createSequentialGroup().addGap(62, 62, 62).addComponent(this.jComboBoxWaves, 0, 174, Short.MAX_VALUE)).addGroup(GroupLayout.Alignment.TRAILING, jPanelWavesLayout.createSequentialGroup().addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jLabelWavesAdded).addGap(64, 64, 64))))).addContainerGap()));
         jPanelWavesLayout.setVerticalGroup(jPanelWavesLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanelWavesLayout.createSequentialGroup().addGroup(jPanelWavesLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanelWavesLayout.createSequentialGroup().addGroup(jPanelWavesLayout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(this.jLabelIntervalSpawnTime).addComponent(this.jTextFieldIntervalSpawnTime, -2, -1, -2)).addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(this.jLabelWaveDescription).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jScrollPane2, -2, -1, -2)).addGroup(jPanelWavesLayout.createSequentialGroup().addContainerGap().addComponent(this.jLabelWavesAdded).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jComboBoxWaves, -2, -1, -2).addGap(18, 18, 18).addComponent(this.jCheckBoxIsBoss))).addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addGroup(jPanelWavesLayout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(this.jLabelNumberOfEnemies).addComponent(this.jTextFieldNumerOfEnemies, -2, -1, -2)).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addGroup(jPanelWavesLayout.createParallelGroup(GroupLayout.Alignment.TRAILING).addComponent(this.jLabelEnemyFolder).addGroup(jPanelWavesLayout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(this.jTextFieldEnemyFolder, -2, -1, -2).addComponent(this.jButtonRemove).addComponent(this.jButtonAddWave))).addContainerGap(21, Short.MAX_VALUE)));
+
         this.jPanelCheckpoint.setBorder(BorderFactory.createTitledBorder("Checkpoints"));
         this.jToggleButtonCheckpoint.setText("Add Checkpoint OFF");
-        this.jToggleButtonCheckpoint.addActionListener(new ActionListener(){
-
-            public void actionPerformed(ActionEvent evt) {
-                MapWindow.this.jToggleButtonCheckpointActionPerformed(evt);
-            }
+        this.jToggleButtonCheckpoint.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) { jToggleButtonCheckpointActionPerformed(evt); }
         });
         this.jCheckBoxStartPoint.setText("Start Point");
         this.jCheckBoxEndPoint.setText("End Point");
@@ -196,30 +224,103 @@ implements ActionListener {
         this.jPanelCheckpoint.setLayout(jPanelCheckpointLayout);
         jPanelCheckpointLayout.setHorizontalGroup(jPanelCheckpointLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(jPanelCheckpointLayout.createSequentialGroup().addContainerGap().addGroup(jPanelCheckpointLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(this.jComboBoxCheckpoint, 0, 192, Short.MAX_VALUE).addGroup(jPanelCheckpointLayout.createSequentialGroup().addComponent(this.jCheckBoxStartPoint).addGap(18, 18, 18).addComponent(this.jCheckBoxEndPoint)).addComponent(this.jToggleButtonCheckpoint)).addContainerGap()));
         jPanelCheckpointLayout.setVerticalGroup(jPanelCheckpointLayout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(GroupLayout.Alignment.TRAILING, jPanelCheckpointLayout.createSequentialGroup().addComponent(this.jToggleButtonCheckpoint).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE).addGroup(jPanelCheckpointLayout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(this.jCheckBoxStartPoint).addComponent(this.jCheckBoxEndPoint)).addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(this.jComboBoxCheckpoint, -2, -1, -2).addContainerGap()));
-        this.jButtonLoadPNG.setText("Load Png");
-        this.jButtonLoadPNG.addActionListener(new ActionListener(){
 
-            public void actionPerformed(ActionEvent evt) {
-                MapWindow.this.jButtonLoadPNGActionPerformed(evt);
-            }
+        this.jButtonLoadPNG.setText("Load Png");
+        this.jButtonLoadPNG.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) { jButtonLoadPNGActionPerformed(evt); }
         });
         this.jButtonSave2PNG.setText("Save 2 Png");
-        this.jButtonSave2PNG.addActionListener(new ActionListener(){
-
-            public void actionPerformed(ActionEvent evt) {
-                MapWindow.this.jButtonSave2PNGActionPerformed(evt);
-            }
+        this.jButtonSave2PNG.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) { jButtonSave2PNGActionPerformed(evt); }
         });
-        GroupLayout layout = new GroupLayout(this.getContentPane());
-        this.getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGap(491, 491, 491).addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false).addComponent(this.jLabelInitializers).addComponent(this.jScrollPane1).addComponent(this.jLabelMapDescription).addComponent(this.jLabelMapName, -2, 78, -2).addGroup(layout.createSequentialGroup().addGap(53, 53, 53).addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(this.jLabelTowerArea, -2, 95, -2).addComponent(this.jLabelEnemyPathArea, -2, 104, -2))).addComponent(this.jTextFieldMapName))).addGroup(layout.createSequentialGroup().addGap(31, 31, 31).addComponent(this.jBGenerate).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jButtonLoadPNG).addGap(6, 6, 6).addComponent(this.jButtonSave2PNG).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jBClose, -2, 80, -2).addGap(138, 138, 138).addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false).addComponent(this.jPanelWaves, -2, -1, -2).addGroup(layout.createSequentialGroup().addComponent(this.jLabelGold).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jTextFieldGold, -2, 46, -2).addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(this.jLabelLives).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jTextFieldLives, -2, 46, -2).addGap(50, 50, 50).addComponent(this.jPanelCheckpoint, -1, -1, Short.MAX_VALUE))))).addContainerGap(34, Short.MAX_VALUE)));
-        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup().addGap(20, 20, 20).addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup().addComponent(this.jLabelTowerArea).addGap(18, 18, 18).addComponent(this.jLabelEnemyPathArea).addGap(18, 18, 18).addComponent(this.jLabelMapName).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jTextFieldMapName, -2, -1, -2).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jLabelMapDescription).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addComponent(this.jScrollPane1, -2, -1, -2).addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED).addComponent(this.jLabelInitializers).addPreferredGap(LayoutStyle.ComponentPlacement.RELATED).addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(this.jTextFieldGold, -2, -1, -2).addComponent(this.jLabelGold).addComponent(this.jLabelLives).addComponent(this.jTextFieldLives, -2, -1, -2))).addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup().addComponent(this.jPanelCheckpoint, -2, -1, -2).addGap(17, 17, 17))).addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 280, Short.MAX_VALUE).addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(this.jBGenerate).addComponent(this.jButtonLoadPNG).addComponent(this.jBClose).addComponent(this.jButtonSave2PNG)).addGap(45, 45, 45)).addGroup(layout.createSequentialGroup().addGap(29, 29, 29).addComponent(this.jPanelWaves, -2, -1, -2).addContainerGap()))));
+
+        // ── Root layout: BorderLayout ──────────────────────────────────────
+        // LEFT:   BoxLayout panel — canvas on top, swatches directly below
+        // CENTER: right-side form (GroupLayout)
+        // SOUTH:  button bar
+        this.getContentPane().setLayout(new java.awt.BorderLayout(11, 0));
+
+        // ── Left panel: canvas + swatches ─────────────────────────────────
+        JPanel jPanelLeft = new JPanel();
+        jPanelLeft.setLayout(new javax.swing.BoxLayout(jPanelLeft, javax.swing.BoxLayout.Y_AXIS));
+        jPanelLeft.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 0));
+
+        this.mC.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+        jPanelLeft.add(this.mC);
+
+        jPanelLeft.add(javax.swing.Box.createVerticalStrut(10));
+
+        JPanel jPanelSwatches = new JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 6, 0));
+        jPanelSwatches.setAlignmentX(java.awt.Component.LEFT_ALIGNMENT);
+        jPanelSwatches.add(this.jLabelColorSwatchRed);
+        jPanelSwatches.add(this.jLabelTowerArea);
+        jPanelSwatches.add(javax.swing.Box.createHorizontalStrut(10));
+        jPanelSwatches.add(this.jLabelColorSwatchGreen);
+        jPanelSwatches.add(this.jLabelEnemyPathArea);
+        jPanelLeft.add(jPanelSwatches);
+
+        this.getContentPane().add(jPanelLeft, java.awt.BorderLayout.WEST);
+
+        // ── South panel: buttons ──────────────────────────────────────────
+        JPanel jPanelButtons = new JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 6, 10));
+        jPanelButtons.add(this.jBGenerate);
+        jPanelButtons.add(this.jButtonLoadPNG);
+        jPanelButtons.add(this.jButtonSave2PNG);
+        jPanelButtons.add(this.jBClose);
+        this.getContentPane().add(jPanelButtons, java.awt.BorderLayout.SOUTH);
+
+        // ── Center panel: right-side form (GroupLayout) ───────────────────
+        JPanel jPanelRight = new JPanel();
+        jPanelRight.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 10));
+        GroupLayout layout = new GroupLayout(jPanelRight);
+        jPanelRight.setLayout(layout);
+        this.getContentPane().add(jPanelRight, java.awt.BorderLayout.CENTER);
+
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(this.jLabelMapName)
+            .addComponent(this.jTextFieldMapName)
+            .addComponent(this.jLabelMapDescription)
+            .addComponent(this.jScrollPane1)
+            .addComponent(this.jLabelInitializers)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(this.jLabelGold)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(this.jTextFieldGold, -2, 46, -2)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(this.jLabelLives)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(this.jTextFieldLives, -2, 46, -2))
+            .addComponent(this.jPanelCheckpoint)
+            .addComponent(this.jPanelWaves));
+
+        layout.setVerticalGroup(
+            layout.createSequentialGroup()
+            .addComponent(this.jLabelMapName)
+            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(this.jTextFieldMapName, -2, -1, -2)
+            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(this.jLabelMapDescription)
+            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(this.jScrollPane1, -2, -1, -2)
+            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(this.jLabelInitializers)
+            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(this.jLabelGold)
+                .addComponent(this.jTextFieldGold, -2, -1, -2)
+                .addComponent(this.jLabelLives)
+                .addComponent(this.jTextFieldLives, -2, -1, -2))
+            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(this.jPanelCheckpoint, -2, -1, -2)
+            .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(this.jPanelWaves, -2, -1, -2)
+            .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+
         this.pack();
     }
 
-    private void jBCloseActionPerformed(ActionEvent evt) {
-        System.exit(0);
-    }
+    private void jBCloseActionPerformed(ActionEvent evt) { System.exit(0); }
 
     private void jBGenerateActionPerformed(ActionEvent evt) {
         try {
@@ -232,8 +333,7 @@ implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(null, "Please fill out all fields.", "Error", 0);
             }
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             Logger.getLogger(MapWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -242,9 +342,7 @@ implements ActionListener {
         if (this.canAddWave().booleanValue()) {
             String boss = "";
             this.mWavesVector.add(new Waves(this.getjCheckBoxIsBoss(), this.getjTextFieldNumerOfEnemies(), this.getjTextFieldEnemyFolder(), this.getjTextAreaWaveDescription(), this.getjTextFieldIntervalSpawnTime()));
-            if (this.getjCheckBoxIsBoss().booleanValue()) {
-                boss = " - Boss";
-            }
+            if (this.getjCheckBoxIsBoss().booleanValue()) boss = " - Boss";
             this.jComboBoxWaves.addItem("Wave " + this.mWavesVector.size() + " - " + this.getjTextFieldEnemyFolder() + boss);
             this.clearWaves();
         } else {
@@ -266,21 +364,19 @@ implements ActionListener {
         if (this.jToggleButtonCheckpoint.isSelected()) {
             this.jToggleButtonCheckpoint.setText("Add Checkpoint ON");
             this.mC.mCheckButtonIsOn = true;
-        } else if (!this.jToggleButtonCheckpoint.isSelected()) {
+        } else {
             this.jToggleButtonCheckpoint.setText("Add Checkpoint OFF");
             this.mC.mCheckButtonIsOn = false;
         }
     }
 
     private void jButtonLoadPNGActionPerformed(ActionEvent evt) {
-        String filename = File.separator + "tmp";
-        JFileChooser fc = new JFileChooser(new File(filename));
+        JFileChooser fc = new JFileChooser(new File(File.separator + "tmp"));
         fc.showOpenDialog(this);
         File selFile = fc.getSelectedFile();
         try {
-            this.mC.setMapAlpha(selFile.getCanonicalPath().toString());
-        }
-        catch (IOException ex) {
+            this.mC.setMapAlpha(selFile.getCanonicalPath());
+        } catch (IOException ex) {
             Logger.getLogger(MapWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.repaint();
@@ -297,83 +393,37 @@ implements ActionListener {
     private void updatedComboBox() {
         this.jComboBoxWaves.removeAllItems();
         for (int i = 0; i < this.mWavesVector.size(); ++i) {
-            String boss = "";
-            if (this.mWavesVector.elementAt(i).getIsBoss().booleanValue()) {
-                boss = " - Boss";
-            }
+            String boss = this.mWavesVector.elementAt(i).getIsBoss().booleanValue() ? " - Boss" : "";
             this.jComboBoxWaves.addItem("Wave " + (i + 1) + " - " + this.mWavesVector.elementAt(i).getEnemyFolder() + boss);
         }
     }
 
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable(){
-
-            public void run() {
-                new MapWindow().setVisible(true);
-            }
-        });
+        EventQueue.invokeLater(() -> new MapWindow().setVisible(true));
     }
 
     public void addCheckpointToCombo(String x, String y) {
-        this.jComboBoxCheckpoint.addItem("Checkpoint " + this.mC.click + " - (X: " + x + ", " + "Y: " + y + ")");
+        this.jComboBoxCheckpoint.addItem("Checkpoint " + this.mC.click + " - (X: " + x + ", Y: " + y + ")");
     }
 
-    public String getjTextFieldMapName() {
-        return this.jTextFieldMapName.getText();
-    }
-
-    public Boolean getjCheckBoxIsBoss() {
-        return this.jCheckBoxIsBoss.isSelected();
-    }
-
-    public String getjTextAreaMapDescription() {
-        return this.jTextAreaMapDescription.getText();
-    }
-
-    public String getjTextAreaWaveDescription() {
-        return this.jTextAreaWaveDescription.getText();
-    }
-
-    public String getjTextFieldEnemyFolder() {
-        return this.jTextFieldEnemyFolder.getText();
-    }
-
-    public String getjTextFieldGold() {
-        return this.jTextFieldGold.getText();
-    }
-
-    public String getjTextFieldIntervalSpawnTime() {
-        return this.jTextFieldIntervalSpawnTime.getText();
-    }
-
-    public String getjTextFieldLives() {
-        return this.jTextFieldLives.getText();
-    }
-
-    public String getjTextFieldNumerOfEnemies() {
-        return this.jTextFieldNumerOfEnemies.getText();
-    }
-
-    public JCheckBox getjCheckBoxEndPoint() {
-        return this.jCheckBoxEndPoint;
-    }
-
-    public JCheckBox getjCheckBoxStartPoint() {
-        return this.jCheckBoxStartPoint;
-    }
+    public String getjTextFieldMapName() { return this.jTextFieldMapName.getText(); }
+    public Boolean getjCheckBoxIsBoss() { return this.jCheckBoxIsBoss.isSelected(); }
+    public String getjTextAreaMapDescription() { return this.jTextAreaMapDescription.getText(); }
+    public String getjTextAreaWaveDescription() { return this.jTextAreaWaveDescription.getText(); }
+    public String getjTextFieldEnemyFolder() { return this.jTextFieldEnemyFolder.getText(); }
+    public String getjTextFieldGold() { return this.jTextFieldGold.getText(); }
+    public String getjTextFieldIntervalSpawnTime() { return this.jTextFieldIntervalSpawnTime.getText(); }
+    public String getjTextFieldLives() { return this.jTextFieldLives.getText(); }
+    public String getjTextFieldNumerOfEnemies() { return this.jTextFieldNumerOfEnemies.getText(); }
+    public JCheckBox getjCheckBoxEndPoint() { return this.jCheckBoxEndPoint; }
+    public JCheckBox getjCheckBoxStartPoint() { return this.jCheckBoxStartPoint; }
 
     private Boolean canGenerate() {
-        if (this.getjTextFieldMapName().trim().equals("") || this.getjTextAreaMapDescription().trim().equals("") || this.getjTextFieldGold().trim().equals("") || this.getjTextFieldLives().trim().equals("") || this.mCreateXML.genMapCollision().contains("null") || this.jComboBoxWaves.getItemCount() <= 0 || this.jComboBoxCheckpoint.getItemCount() <= 0) {
-            return false;
-        }
-        return true;
+        return !(this.getjTextFieldMapName().trim().isEmpty() || this.getjTextAreaMapDescription().trim().isEmpty() || this.getjTextFieldGold().trim().isEmpty() || this.getjTextFieldLives().trim().isEmpty() || this.mCreateXML.genMapCollision().contains("null") || this.jComboBoxWaves.getItemCount() <= 0 || this.jComboBoxCheckpoint.getItemCount() <= 0);
     }
 
     private Boolean canAddWave() {
-        if (this.getjTextFieldIntervalSpawnTime().trim().equals("") || this.getjTextFieldNumerOfEnemies().trim().equals("") || this.getjTextFieldEnemyFolder().trim().equals("") || this.getjTextAreaWaveDescription().trim().equals("")) {
-            return false;
-        }
-        return true;
+        return !(this.getjTextFieldIntervalSpawnTime().trim().isEmpty() || this.getjTextFieldNumerOfEnemies().trim().isEmpty() || this.getjTextFieldEnemyFolder().trim().isEmpty() || this.getjTextAreaWaveDescription().trim().isEmpty());
     }
 
     private void clearForm() {
@@ -407,6 +457,5 @@ implements ActionListener {
         this.setIconImage(new ImageIcon(this.getClass().getResource("/res/icon.png")).getImage());
     }
 
-    public void actionPerformed(ActionEvent e) {
-    }
+    public void actionPerformed(ActionEvent e) {}
 }
