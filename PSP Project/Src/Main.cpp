@@ -44,6 +44,8 @@ u32 GetTicks()
     return sceKernelGetSystemTimeLow()/1000;
 }
 
+static const u32 MAX_FRAME_TIME_DIFFERENCE = 100;
+
 int main()
 {
 #ifdef SHOW_FPS
@@ -72,8 +74,12 @@ int main()
             oslStartDrawing();
 			oslCls();
 
-			u32 timeDifference = GetTicks() - lastLoopTime;
-			lastLoopTime += timeDifference;
+			u32 currentLoopTime = GetTicks();
+			u32 timeDifference = currentLoopTime - lastLoopTime;
+			lastLoopTime = currentLoopTime;
+
+			if (timeDifference > MAX_FRAME_TIME_DIFFERENCE)
+				timeDifference = MAX_FRAME_TIME_DIFFERENCE;
 
 			if(mNextScreen != -1)
 			{
