@@ -81,6 +81,9 @@
     <ClCompile Include="Src\Tower.cpp">
       <Filter>Src</Filter>
     </ClCompile>
+    <ClCompile Include="Src\TrophyManager.cpp">
+      <Filter>Src</Filter>
+    </ClCompile>
     <ClCompile Include="Src\TrophiesScreen.cpp">
       <Filter>Src</Filter>
     </ClCompile>
@@ -195,6 +198,9 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Include\Tower.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\TrophyManager.h">
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="Include\TrophiesScreen.h">

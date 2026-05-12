@@ -19,3 +19,4 @@ tools/MapGenerator/.gradle/
 # IDEs
 /.idea/
 *.iml
+trophies.dat

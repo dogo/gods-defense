@@ -8,6 +8,7 @@
 #include "../Include/renderers/TowerRenderer.h"
 #include "../Include/renderers/EnemyRenderer.h"
 #include "../Include/renderers/MapRenderer.h"
+#include "../Include/TrophyManager.h"
 
 //Statics
 bool gWin;
@@ -337,6 +338,7 @@ void GameScreen::update(u32 timePassed)
 				mPlayerMoney += (*ei_iter)->GetGold();
 				//Award player points
 				mPlayerPoints += ((*ei_iter)->GetPointsWorth());
+				TrophyManager::NotifyEnemyKilled((int)mPlayerPoints);
 			break;
 
 			case ENEMY_HIT_THE_END: //Reached the end of the path, make the player lose a life and gold
@@ -386,6 +388,7 @@ void GameScreen::update(u32 timePassed)
 		{
 			//Lose, if ad hoc is on the other player can continue to play
 			sprintf(gScoreBuffer, "%d",(int) GetPlayerScore());
+			TrophyManager::NotifyGameFinished(false, (int)GetPlayerScore());
 			SetGameState(GS_GAME_OVER);
 			mNextScreen = ScreenManager::SCREEN_ENDING;
 		}
@@ -405,6 +408,7 @@ void GameScreen::update(u32 timePassed)
 			}
 #endif // JPCSP_EMULATOR
 			gWin = true;
+			TrophyManager::NotifyGameFinished(true, (int)GetPlayerScore());
 			SetGameState(GS_GAME_OVER);
 			mNextScreen = ScreenManager::SCREEN_ENDING;
 		}
@@ -508,6 +512,7 @@ bool GameScreen::TryBuildTower(Tower *tower, Coordinates2D position)
 		mGameMap->DeployTowerAt(position, tower);
 		mPlayerMoney -= tower->mTowerVector[0].mCost;
 		mRealTowers.push_back(new TowerInstance(tower, position));
+		TrophyManager::NotifyTowerBuilt();
 		return true;
 	}
 	else
@@ -608,6 +613,7 @@ bool GameScreen::TryUpgradeSelectedTower()
 	{
 		mPlayerMoney -= t->mTowerVector[mSelectedTower->mTowerLevel+1].mCost;
 		mSelectedTower->mTowerLevel += 1;
+		TrophyManager::NotifyTowerUpgraded();
 		return true;
 	}
 	else
@@ -630,6 +636,7 @@ bool GameScreen::TrySellSelectedTower()
 	mGameMap->mCollisionMap[x][y] = true;
 
 	mRealTowers.remove(mSelectedTower);
+	TrophyManager::NotifyTowerSold();
 	return true;
 }
 

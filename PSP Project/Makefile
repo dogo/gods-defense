@@ -25,6 +25,7 @@ GAMEOBJECTS = \
     Src/Map.o \
     Src/EndingScreen.o \
     Src/Adhoc.o \
+    Src/TrophyManager.o \
     Src/TrophiesScreen.o \
     Src/MemoryWarningScreen.o
 

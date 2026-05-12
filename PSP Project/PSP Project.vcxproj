@@ -81,6 +81,7 @@
     <ClCompile Include="Src\ScreenManager.cpp" />
     <ClCompile Include="Src\TitleScreen.cpp" />
     <ClCompile Include="Src\Tower.cpp" />
+    <ClCompile Include="Src\TrophyManager.cpp" />
     <ClCompile Include="Src\TrophiesScreen.cpp" />
     <ClCompile Include="Src\WarningScreen.cpp" />
     <ClCompile Include="Src\util\Coordinates2D.cpp" />
@@ -121,6 +122,7 @@
     <ClInclude Include="Include\ScreenManager.h" />
     <ClInclude Include="Include\TitleScreen.h" />
     <ClInclude Include="Include\Tower.h" />
+    <ClInclude Include="Include\TrophyManager.h" />
     <ClInclude Include="Include\TrophiesScreen.h" />
     <ClInclude Include="Include\WarningScreen.h" />
     <ClInclude Include="Include\util\Coordinates2D.h" />
