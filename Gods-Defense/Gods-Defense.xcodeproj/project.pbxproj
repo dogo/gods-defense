@@ -30,7 +30,6 @@
 		DD6256D81524293200631A53 /* ScreenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenManager.h; sourceTree = "<group>"; };
 		DD6256D91524293200631A53 /* TitleScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScreen.h; sourceTree = "<group>"; };
 		DD6256DA1524293200631A53 /* Tower.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tower.h; sourceTree = "<group>"; };
-		DD6257081524293200631A53 /* TrophyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrophyManager.h; sourceTree = "<group>"; };
 		DD6256DB1524293200631A53 /* TrophiesScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrophiesScreen.h; sourceTree = "<group>"; };
 		DD6256DD1524293200631A53 /* Coordinates2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coordinates2D.h; sourceTree = "<group>"; };
 		DD6256DE1524293200631A53 /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Debug.h; sourceTree = "<group>"; };
@@ -63,7 +62,6 @@
 		DD6256FA1524294400631A53 /* ScreenManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ScreenManager.cpp; sourceTree = "<group>"; };
 		DD6256FB1524294400631A53 /* TitleScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TitleScreen.cpp; sourceTree = "<group>"; };
 		DD6256FC1524294400631A53 /* Tower.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tower.cpp; sourceTree = "<group>"; };
-		DD6257091524294400631A53 /* TrophyManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrophyManager.cpp; sourceTree = "<group>"; };
 		DD6256FD1524294400631A53 /* TrophiesScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrophiesScreen.cpp; sourceTree = "<group>"; };
 		DD6256FF1524294400631A53 /* Coordinates2D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Coordinates2D.cpp; sourceTree = "<group>"; };
 		DD6257001524294400631A53 /* Debug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Debug.cpp; sourceTree = "<group>"; };
@@ -74,6 +72,8 @@
 		DD6257051524294400631A53 /* ReferenceCounted.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ReferenceCounted.cpp; sourceTree = "<group>"; };
 		DD6257061524294400631A53 /* Sprites.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprites.cpp; sourceTree = "<group>"; };
 		DD6257071524294400631A53 /* WarningScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WarningScreen.cpp; sourceTree = "<group>"; };
+		DD6257081524293200631A53 /* TrophyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrophyManager.h; sourceTree = "<group>"; };
+		DD6257091524294400631A53 /* TrophyManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrophyManager.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -111,10 +111,10 @@
 				DD6256D81524293200631A53 /* ScreenManager.h */,
 				DD6256D91524293200631A53 /* TitleScreen.h */,
 				DD6256DA1524293200631A53 /* Tower.h */,
-				DD6257081524293200631A53 /* TrophyManager.h */,
 				DD6256DB1524293200631A53 /* TrophiesScreen.h */,
-				DD6256DC1524293200631A53 /* util */,
+				DD6257081524293200631A53 /* TrophyManager.h */,
 				DD6256E61524293200631A53 /* WarningScreen.h */,
+				DD6256DC1524293200631A53 /* util */,
 			);
 			name = Include;
 			path = "../PSP Project/Include";
@@ -160,10 +160,10 @@
 				DD6256FA1524294400631A53 /* ScreenManager.cpp */,
 				DD6256FB1524294400631A53 /* TitleScreen.cpp */,
 				DD6256FC1524294400631A53 /* Tower.cpp */,
-				DD6257091524294400631A53 /* TrophyManager.cpp */,
 				DD6256FD1524294400631A53 /* TrophiesScreen.cpp */,
-				DD6256FE1524294400631A53 /* util */,
+				DD6257091524294400631A53 /* TrophyManager.cpp */,
 				DD6257071524294400631A53 /* WarningScreen.cpp */,
+				DD6256FE1524294400631A53 /* util */,
 			);
 			name = Src;
 			path = "../PSP Project/Src";
@@ -194,7 +194,7 @@
 			buildPhases = (
 			);
 			buildToolPath = /usr/bin/make;
-			buildWorkingDirectory = "/Users/dogo/Development/workspace/psp/gods-defense/PSP Project";
+			buildWorkingDirectory = "$(SRCROOT)/PSP Project";
 			dependencies = (
 			);
 			name = "Gods-Defense";
@@ -214,6 +214,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = DD6256B6152428DE00631A53;
@@ -311,6 +312,7 @@
 				DD6256C2152428DF00631A53 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
