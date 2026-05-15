@@ -13,6 +13,8 @@ void ProjectileRenderer::RenderArrow(const ProjectileInstance *projectile, float
 	if (!projectile || !projectile->mProjectileImg)
 		return;
 	
+	projectile->mProjectileImg->centerX = projectile->mProjectileImg->sizeX / 2;
+	projectile->mProjectileImg->centerY = projectile->mProjectileImg->sizeY / 2;
 	projectile->mProjectileImg->angle = (angle * 180/M_PI);
 	oslDrawImageXY(
 		projectile->mProjectileImg, 
@@ -26,6 +28,8 @@ void ProjectileRenderer::RenderIce(const ProjectileInstance *projectile, float a
 	if (!projectile || !projectile->mProjectileImg)
 		return;
 	
+	projectile->mProjectileImg->centerX = projectile->mProjectileImg->sizeX / 2;
+	projectile->mProjectileImg->centerY = projectile->mProjectileImg->sizeY / 2;
 	projectile->mProjectileImg->angle = (angle * 180/M_PI);
 	oslDrawImageXY(
 		projectile->mProjectileImg, 
@@ -39,6 +43,8 @@ void ProjectileRenderer::RenderFire(const ProjectileInstance *projectile, float 
 	if (!projectile || !projectile->mProjectileImg)
 		return;
 	
+	projectile->mProjectileImg->centerX = projectile->mProjectileImg->sizeX / 2;
+	projectile->mProjectileImg->centerY = projectile->mProjectileImg->sizeY / 2;
 	projectile->mProjectileImg->angle = (angle * 180/M_PI);
 	oslDrawImageXY(
 		projectile->mProjectileImg, 
