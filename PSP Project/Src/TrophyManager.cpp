@@ -83,7 +83,7 @@ bool TrophyManager::Unlock(const TrophyId &id)
 {
 	Init();
 
-	int trophyBit = 1 << id;
+	int trophyBit = 1u << id;
 	if ((gTrophySaveData.unlockedMask & trophyBit) != 0)
 		return false;
 
@@ -166,7 +166,7 @@ void TrophyManager::NotifyGameFinished(const bool &won, const int &score)
 bool TrophyManager::IsUnlocked(const TrophyId &id)
 {
 	Init();
-	return (gTrophySaveData.unlockedMask & (1 << id)) != 0;
+	return (gTrophySaveData.unlockedMask & (1u << id)) != 0;
 }
 
 const TrophyInfo *TrophyManager::GetTrophyInfo(const int &index)
@@ -189,7 +189,7 @@ int TrophyManager::GetUnlockedCount()
 	int count = 0;
 	for (int i = 0; i < TROPHY_COUNT; i++)
 	{
-		if ((gTrophySaveData.unlockedMask & (1 << i)) != 0)
+		if ((gTrophySaveData.unlockedMask & (1u << i)) != 0)
 			count++;
 	}
 	return count;

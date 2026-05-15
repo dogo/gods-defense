@@ -98,10 +98,6 @@ void GameScreen::LoadFirstPartForMap()
 					LoadEnemy(dir.d_name);
 				}
 			}
-			else
-			{
-				oslFatalError("Error reading enemies folder!");
-			}
 		}
 		sceIoDclose(roorDirEnemies);
 	}
@@ -123,10 +119,6 @@ void GameScreen::LoadFirstPartForMap()
 				{
 					LoadTower(dir.d_name);
 				}
-			}
-			else
-			{
-				oslFatalError("Error reading towers folder!");
 			}
 		}
 		sceIoDclose(roorDirTowers);
@@ -278,13 +270,13 @@ void GameScreen::update(u32 timePassed)
 		}
 
 		//Check for waves ending
+		mWaveIsRunning = false;
 		for (unsigned int j = 0; j < mActiveWaves; j++)
 		{
-			mWaveIsRunning = false;
-
 			if (!mGameMap->mWaves[j]->EndOfWave())
 			{
 				mWaveIsRunning = true;
+				break;
 			}
 		}
 	}
@@ -636,6 +628,8 @@ bool GameScreen::TrySellSelectedTower()
 	mGameMap->mCollisionMap[x][y] = true;
 
 	mRealTowers.remove(mSelectedTower);
+	delete mSelectedTower;
+	mSelectedTower = NULL;
 	TrophyManager::NotifyTowerSold();
 	return true;
 }
@@ -650,5 +644,7 @@ unsigned int GameScreen::GetSelectedTowerLevel() const
 
 Tower *GameScreen::GetSelectedTower() const
 {
+	if (mSelectedTower == NULL)
+		return NULL;
 	return mSelectedTower->mTower;
 }
