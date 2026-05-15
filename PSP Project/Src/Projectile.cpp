@@ -143,6 +143,7 @@ void ArrowInstance::Update(u32 timePassed)
 			oslPlaySound(mHitSound, CHANNEL_2);
 		
 		mDisappearProjectile = true;
+		return;
 	}
 
 	//Calculate new position
@@ -189,6 +190,7 @@ void IceInstance::Update(u32 timePassed)
 			oslPlaySound(mHitSound, CHANNEL_4);
 		
 		mDisappearProjectile = true;
+		return;
 	}
 
 	//Calculate new position
@@ -261,6 +263,7 @@ void FireInstance::Update(u32 timePassed)
 			oslPlaySound(mHitSound, CHANNEL_7);
 		
 		mDisappearProjectile = true;
+		return;
 	}
 
 	//Calculate new position
