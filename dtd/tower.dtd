@@ -11,6 +11,10 @@
 <!ELEMENT Projectile EMPTY >
 <!ATTLIST Projectile Sprite NMTOKEN #REQUIRED >
 <!ATTLIST Projectile Type NMTOKEN #REQUIRED >
+<!ATTLIST Projectile FrameWidth NMTOKEN #IMPLIED >
+<!ATTLIST Projectile FrameHeight NMTOKEN #IMPLIED >
+<!ATTLIST Projectile Frames NMTOKEN #IMPLIED >
+<!ATTLIST Projectile FrameTime NMTOKEN #IMPLIED >
 
 <!ELEMENT TowersLevel EMPTY >
 <!ATTLIST TowersLevel Cost NMTOKEN #REQUIRED >
@@ -30,6 +34,10 @@
 <!ATTLIST TowerImg File NMTOKEN #REQUIRED >
 <!ATTLIST TowerImg Height NMTOKEN #REQUIRED >
 <!ATTLIST TowerImg Width NMTOKEN #REQUIRED >
+<!ATTLIST TowerImg FrameWidth NMTOKEN #IMPLIED >
+<!ATTLIST TowerImg FrameHeight NMTOKEN #IMPLIED >
+<!ATTLIST TowerImg Frames NMTOKEN #IMPLIED >
+<!ATTLIST TowerImg FrameTime NMTOKEN #IMPLIED >
 
 <!ELEMENT MenuIcon EMPTY >
 <!ATTLIST MenuIcon File NMTOKEN #REQUIRED >

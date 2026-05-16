@@ -8,6 +8,7 @@
 
 #include "../Include/Tower.h"
 #include "../Include/GameGUI.h"
+#include "../Include/util/Sprites.h"
 
 TowerInfo::TowerInfo(TiXmlElement* infoNode)
 {
@@ -52,6 +53,14 @@ Tower::Tower(const string &towerName)
 	mProjectileImg = NULL;
 	mFireSound = NULL;
 	mHitSound = NULL;
+	mTowerFrameWidth = 0;
+	mTowerFrameHeight = 0;
+	mTowerFrameCount = 1;
+	mTowerFrameTime = 140;
+	mProjectileFrameWidth = 0;
+	mProjectileFrameHeight = 0;
+	mProjectileFrameCount = 1;
+	mProjectileFrameTime = 80;
 
 	char temp[256];
 	sprintf(temp, "%s/Res/towers/%s/tower.xml", PspIO::getCurrentDirectory().c_str(), mTowerDirName.c_str());
@@ -142,8 +151,14 @@ Tower::Tower(const string &towerName)
 				mProjectileType = PT_Lightning;
 			}
 
+			node->QueryIntAttribute("FrameWidth", &mProjectileFrameWidth);
+			node->QueryIntAttribute("FrameHeight", &mProjectileFrameHeight);
+			node->QueryIntAttribute("Frames", &mProjectileFrameCount);
+			node->QueryIntAttribute("FrameTime", &mProjectileFrameTime);
 			sprintf(temp, "/Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("Sprite"));
 			mProjectileImg = ProjectileInstance::LoadProjectileImage(mProjectileType, temp);
+			if (mProjectileImg && mProjectileFrameWidth > 0 && mProjectileFrameHeight > 0)
+				oslSetImageFrameSize(mProjectileImg, mProjectileFrameWidth, mProjectileFrameHeight);
 		}
 		else if (mCurrentLine == "TowersLevels")
 		{
@@ -162,11 +177,27 @@ Tower::Tower(const string &towerName)
 		}
 		else if (mCurrentLine == "TowerImg")
 		{
-			sprintf(temp, "/Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
-			mTowerImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+			node->QueryIntAttribute("FrameWidth", &mTowerFrameWidth);
+			node->QueryIntAttribute("FrameHeight", &mTowerFrameHeight);
+			node->QueryIntAttribute("Frames", &mTowerFrameCount);
+			node->QueryIntAttribute("FrameTime", &mTowerFrameTime);
 
-			mTowerImg->centerX = (mTowerImg->sizeX/2); //hotspot
-			mTowerImg->centerY = (mTowerImg->sizeY/2); //hotspot
+			sprintf(temp, "/Res/towers/%s/%s", mTowerDirName.c_str(), node->Attribute("File"));
+			if (mTowerFrameWidth > 0 && mTowerFrameHeight > 0)
+				mTowerImg = Sprites::LoadSpriteFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888, mTowerFrameWidth, mTowerFrameHeight);
+			else
+				mTowerImg = oslLoadImageFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+
+			if (mTowerFrameCount > 1)
+			{
+				mTowerImg->centerX = (mTowerFrameWidth/2); //hotspot
+				mTowerImg->centerY = (mTowerFrameHeight/2); //hotspot
+			}
+			else
+			{
+				mTowerImg->centerX = (mTowerImg->sizeX/2); //hotspot
+				mTowerImg->centerY = (mTowerImg->sizeY/2); //hotspot
+			}
 
 			node->QueryIntAttribute("Width", &mTowerWidth);
 			node->QueryIntAttribute("Height", &mTowerHeight);
@@ -222,11 +253,23 @@ TowerInstance::TowerInstance(Tower *tower, const Coordinates2D &position)
 	mTowerPosition = Coordinates2D(x*32, y*32);
 	mTowerTarget = NULL;
 	mProjectileInterval = 0;
+	mAnimationTime = 0;
+	mCurrentFrame = 0;
 }
 
 void TowerInstance::Update(unsigned timePassed, const list<EnemyInstance*> &enemies)
 {
 	mProjectileInterval -= timePassed;
+	if (mTower->mTowerFrameCount > 1 && mTower->mTowerFrameTime > 0)
+	{
+		mAnimationTime += timePassed;
+		while (mAnimationTime >= mTower->mTowerFrameTime)
+		{
+			mAnimationTime -= mTower->mTowerFrameTime;
+			mCurrentFrame++;
+			mCurrentFrame %= mTower->mTowerFrameCount;
+		}
+	}
 	float mTowerSquareRange = mTower->mTowerVector[mTowerLevel].mRange * mTower->mTowerVector[mTowerLevel].mRange; //Range�
 
 	if (mTowerTarget && (mTowerTarget->EnemyIsDead() || mTowerPosition.SquareDistance(mTowerTarget->mEnemyPosition) > mTowerSquareRange || !mTowerTarget->EnemyStillOnMap()))

@@ -5,13 +5,17 @@
 
 #include "../../Include/renderers/TowerRenderer.h"
 #include "../../Include/util/Drawing.h"
+#include "../../Include/util/Sprites.h"
 #include <math.h>
 
 void TowerRenderer::RenderTower(const Tower *tower, const Coordinates2D &position, float scrollOffset)
 {
 	if (tower && tower->mTowerImg)
 	{
-		oslDrawImageXY(tower->mTowerImg, position.X, scrollOffset + position.Y);
+		if (tower->mTowerFrameCount > 1)
+			DrawImageFrameXY(tower->mTowerImg, position.X, scrollOffset + position.Y, 0);
+		else
+			oslDrawImageXY(tower->mTowerImg, position.X, scrollOffset + position.Y);
 	}
 }
 
@@ -19,11 +23,21 @@ void TowerRenderer::RenderTowerInstance(const TowerInstance *towerInstance, floa
 {
 	if (towerInstance && towerInstance->mTower && towerInstance->mTower->mTowerImg)
 	{
-		oslDrawImageXY(
-			towerInstance->mTower->mTowerImg, 
-			towerInstance->mTowerPosition.X + (towerInstance->mTower->mTowerImg->sizeX/2), 
-			(towerInstance->mTower->mTowerImg->sizeY/2) + towerInstance->mTowerPosition.Y + scrollOffset
-		);
+		int drawWidth = towerInstance->mTower->mTowerImg->sizeX;
+		int drawHeight = towerInstance->mTower->mTowerImg->sizeY;
+		if (towerInstance->mTower->mTowerFrameCount > 1)
+		{
+			drawWidth = towerInstance->mTower->mTowerFrameWidth;
+			drawHeight = towerInstance->mTower->mTowerFrameHeight;
+		}
+
+		int x = towerInstance->mTowerPosition.X + (drawWidth / 2);
+		int y = (drawHeight / 2) + towerInstance->mTowerPosition.Y + scrollOffset;
+
+		if (towerInstance->mTower->mTowerFrameCount > 1)
+			DrawImageFrameXY(towerInstance->mTower->mTowerImg, x, y, towerInstance->GetCurrentFrame());
+		else
+			oslDrawImageXY(towerInstance->mTower->mTowerImg, x, y);
 	}
 }
 
@@ -52,4 +66,3 @@ void TowerRenderer::RenderTowerInstanceRangeCircle(const TowerInstance *towerIns
 	RenderRangeCircle(towerInstance->mTower, buildingPosition, 
 	                 towerInstance->mTowerLevel, color, scrollOffset);
 }
-

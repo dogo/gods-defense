@@ -40,14 +40,26 @@ public:
 	int mHitSize;
 	EnemyInstance *mTarget;
 	bool mDisappearProjectile;
+	int GetCurrentFrame() const { return mCurrentFrame; }
+	int GetFrameCount() const { return mFrameCount; }
+	int GetFrameWidth() const { return mFrameWidth; }
+	int GetFrameHeight() const { return mFrameHeight; }
 
 protected:
+	void AdvanceAnimation(u32 timePassed);
+
 	int mTowerDamage;
 	float mSlowAmount;
 	int mSlowLength;
 	bool mHitsFlyer;
 	bool mHitsLand;
 	int mSplashRangeSqrd;
+	int mFrameCount;
+	int mFrameTime;
+	int mFrameWidth;
+	int mFrameHeight;
+	int mAnimationTime;
+	int mCurrentFrame;
 
 };
 
@@ -93,6 +105,7 @@ public:
 	virtual void Render(float scrollOffset);
 private:
 	int mAnimationTime;
+	int mLifetime;
 };
 
 class FireInstance : public ProjectileInstance

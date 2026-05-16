@@ -91,6 +91,14 @@ public:
 	OSL_SOUND *mHitSound;
 	int mTowerWidth;
 	int mTowerHeight;
+	int mTowerFrameWidth;
+	int mTowerFrameHeight;
+	int mTowerFrameCount;
+	int mTowerFrameTime;
+	int mProjectileFrameWidth;
+	int mProjectileFrameHeight;
+	int mProjectileFrameCount;
+	int mProjectileFrameTime;
 
 	vector<TowerInfo> mTowerVector;
 };
@@ -102,12 +110,15 @@ public:
 	Coordinates2D mTowerPosition; //Tower Center
 	unsigned int mTowerLevel; //Tower Level
 
-	TowerInstance(Tower *tower, const Coordinates2D &position);	
+	TowerInstance(Tower *tower, const Coordinates2D &position);
 	void Update(unsigned timePassed, const list<EnemyInstance*> &enemies);
+	int GetCurrentFrame() const { return mCurrentFrame; }
 
 
 private:
 	int mProjectileInterval;
+	int mAnimationTime;
+	int mCurrentFrame;
 
 	EnemyInstance *mTowerTarget;
 

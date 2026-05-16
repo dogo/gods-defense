@@ -7,7 +7,7 @@
 	
 	<Capability HitsLand="True" HitsFlyers="False" />
 	
-	<Projectile Type="Fire" Sprite="ST_Fire.png" />
+	<Projectile Type="Fire" Sprite="ST_Fire.png" FrameWidth="32" FrameHeight="32" Frames="4" FrameTime="55" />
 	<TowersLevels>
 		<TowersLevel Cost="15" SellAmount="7"  Damage="7"  ROF="700" Range="80"  Splash="7"  Speed="150"/>
 		<TowersLevel Cost="20" SellAmount="16" Damage="9"  ROF="700" Range="80"  Splash="12" Speed="150"/>
@@ -16,7 +16,7 @@
 		<TowersLevel Cost="40" SellAmount="58" Damage="32" ROF="600" Range="100" Splash="17" Speed="150"/>
 	</TowersLevels>
 	
-	<TowerImg File="tower.png" Width="2" Height="2" />
+	<TowerImg File="tower.png" Width="2" Height="2" FrameWidth="32" FrameHeight="32" Frames="4" FrameTime="110" />
 
 	<MenuIcon File="icon.png" />
 	

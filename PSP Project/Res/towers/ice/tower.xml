@@ -7,7 +7,7 @@
 	
 	<Capability HitsLand="True" HitsFlyers="True" />
 	
-	<Projectile Type="Ice" Sprite="ST_Ice.png" />
+	<Projectile Type="Ice" Sprite="ST_Ice.png" FrameWidth="32" FrameHeight="32" Frames="4" FrameTime="70" />
 	<TowersLevels>
 		<TowersLevel Cost="40" SellAmount="32"  Damage="18" ROF="1200" Range="100" Splash="7"  Speed="200" SlowAmount="0.5" SlowLength="1000"/>
 		<TowersLevel Cost="40" SellAmount="44"  Damage="25" ROF="1200" Range="110" Splash="7"  Speed="200" SlowAmount="0.5" SlowLength="1000"/>
@@ -16,7 +16,7 @@
 		<TowersLevel Cost="70" SellAmount="138" Damage="60" ROF="1200" Range="140" Splash="27" Speed="200" SlowAmount="0.5" SlowLength="1000"/>
 	</TowersLevels>
 	
-	<TowerImg File="tower.png" Width="2" Height="2" />
+	<TowerImg File="tower.png" Width="2" Height="2" FrameWidth="32" FrameHeight="32" Frames="4" FrameTime="150" />
 
 	<MenuIcon File="icon.png" />
 	

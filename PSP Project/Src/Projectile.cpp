@@ -56,8 +56,15 @@ OSL_IMAGE *ProjectileInstance::LoadProjectileImage(const char &projectileType, c
 ProjectileInstance::ProjectileInstance(TowerInstance *shooter, EnemyInstance *target)
 {
 	mDisappearProjectile = false;
-	mProjectilePosition.X = shooter->mTowerPosition.X + shooter->mTower->mTowerImg->sizeX / 2.0f;
-	mProjectilePosition.Y = shooter->mTowerPosition.Y + shooter->mTower->mTowerImg->sizeY / 2.0f;
+	int towerDrawWidth = shooter->mTower->mTowerImg->sizeX;
+	int towerDrawHeight = shooter->mTower->mTowerImg->sizeY;
+	if (shooter->mTower->mTowerFrameCount > 1)
+	{
+		towerDrawWidth = shooter->mTower->mTowerFrameWidth;
+		towerDrawHeight = shooter->mTower->mTowerFrameHeight;
+	}
+	mProjectilePosition.X = shooter->mTowerPosition.X + towerDrawWidth / 2.0f;
+	mProjectilePosition.Y = shooter->mTowerPosition.Y + towerDrawHeight / 2.0f;
 	mProjectileImg = shooter->mTower->mProjectileImg;
 	mFireSound = shooter->mTower->mFireSound;
 	mHitSound = shooter->mTower->mHitSound;
@@ -68,6 +75,12 @@ ProjectileInstance::ProjectileInstance(TowerInstance *shooter, EnemyInstance *ta
 	mSlowAmount = shooter->mTower->mTowerVector[shooter->mTowerLevel].mSlowAmount;
 	mSlowLength = shooter->mTower->mTowerVector[shooter->mTowerLevel].mSlowLength;
 	mTowerDamage = shooter->mTower->mTowerVector[shooter->mTowerLevel].mDamage;
+	mFrameCount = shooter->mTower->mProjectileFrameCount;
+	mFrameTime = shooter->mTower->mProjectileFrameTime;
+	mFrameWidth = shooter->mTower->mProjectileFrameWidth;
+	mFrameHeight = shooter->mTower->mProjectileFrameHeight;
+	mAnimationTime = 0;
+	mCurrentFrame = 0;
 	mSplashRangeSqrd = shooter->mTower->mTowerVector[shooter->mTowerLevel].mSplashRange;
 	mSplashRangeSqrd *= mSplashRangeSqrd;
 
@@ -77,6 +90,20 @@ ProjectileInstance::ProjectileInstance(TowerInstance *shooter, EnemyInstance *ta
 ProjectileInstance::~ProjectileInstance()
 {
 	mTarget->RemoveReference();
+}
+
+void ProjectileInstance::AdvanceAnimation(u32 timePassed)
+{
+	if (mFrameCount <= 1 || mFrameTime <= 0)
+		return;
+
+	mAnimationTime += timePassed;
+	while (mAnimationTime >= mFrameTime)
+	{
+		mAnimationTime -= mFrameTime;
+		mCurrentFrame++;
+		mCurrentFrame %= mFrameCount;
+	}
 }
 
 bool ProjectileInstance::DisappearProjectile()
@@ -130,6 +157,8 @@ ArrowInstance::~ArrowInstance()
 
 void ArrowInstance::Update(u32 timePassed)
 {
+	AdvanceAnimation(timePassed);
+
 	//Calculate angle to target, move towards it
 	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //Distance to move this tick
 	movement *= movement;
@@ -177,6 +206,8 @@ IceInstance::~IceInstance()
 
 void IceInstance::Update(u32 timePassed)
 {
+	AdvanceAnimation(timePassed);
+
 	//Calculate angle to target, move towards it
 	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //Distance to move this tick
 	movement *= movement;
@@ -210,7 +241,7 @@ void IceInstance::Render(float scrollOffset)
 //LightningInstance
 LightningInstance::LightningInstance(TowerInstance *shooter, EnemyInstance *target)	: ProjectileInstance(shooter, target)
 {
-	mAnimationTime = 0;
+	mLifetime = 0;
 	DealDamage();
 	if (mHitSound != NULL)
 		oslPlaySound(mHitSound, CHANNEL_5);
@@ -222,8 +253,10 @@ LightningInstance::~LightningInstance()
 
 void LightningInstance::Update(u32 timePassed)
 {
-	mAnimationTime += timePassed;
-	if(mAnimationTime > 400)
+	AdvanceAnimation(timePassed);
+
+	mLifetime += timePassed;
+	if(mLifetime > 400)
 	{
 		mDisappearProjectile = true;
 	}
@@ -250,6 +283,8 @@ FireInstance::~FireInstance()
 
 void FireInstance::Update(u32 timePassed)
 {
+	AdvanceAnimation(timePassed);
+
 	//Calculate angle to target, move towards it
 	float movement = mHitSize + (mMovementSpeed * timePassed / 1000.0f); //Distance to move this tick
 	movement *= movement;

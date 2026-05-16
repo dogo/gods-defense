@@ -5,7 +5,7 @@
 	
 	<Capability HitsLand="True" HitsFlyers="True" />
 	
-	<Projectile Type="Lightning" Sprite="ST_Lightning.png" />
+	<Projectile Type="Lightning" Sprite="ST_Lightning.png" FrameWidth="32" FrameHeight="32" Frames="4" FrameTime="45" />
 	<TowersLevels>
 		<TowersLevel Cost="100" SellAmount="32"  Damage="80"  ROF="3000" Range="160" Splash="0" Speed="0"/>
 		<TowersLevel Cost="120" SellAmount="64"  Damage="120" ROF="3000" Range="160" Splash="0" Speed="0"/>
@@ -14,7 +14,7 @@
 		<TowersLevel Cost="170" SellAmount="208" Damage="300" ROF="3000" Range="220" Splash="0" Speed="0"/>
 	</TowersLevels>
 	
-	<TowerImg File="tower.png" Width="2" Height="2" />
+	<TowerImg File="tower.png" Width="2" Height="2" FrameWidth="32" FrameHeight="32" Frames="4" FrameTime="95" />
 
 	<MenuIcon File="icon.png" />
 	
