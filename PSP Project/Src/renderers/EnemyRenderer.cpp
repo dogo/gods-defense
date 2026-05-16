@@ -31,7 +31,10 @@ void EnemyRenderer::RenderEnemyHealthBar(EnemyInstance *enemyInstance, float scr
 	if (!enemyInstance || !enemyInstance->mEnemy)
 		return;
 	
-	int w = 32 * enemyInstance->mHealth / enemyInstance->mEnemy->mEnemyVector[enemyInstance->mStat].mHealth;
+	unsigned int maxHealth = enemyInstance->mEnemy->mEnemyVector[enemyInstance->mStat].mHealth;
+	if (maxHealth == 0)
+		return;
+	int w = 32 * enemyInstance->mHealth / (int)maxHealth;
 	
 	// Red background
 	oslDrawFillRect(

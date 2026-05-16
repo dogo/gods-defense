@@ -64,6 +64,7 @@ Enemy::Enemy(const string &enemyName)
 	mCanFly = false;
 	mEnemyImg = NULL;
 	mAliveFrames = 0;
+	mFrameTime = 90;
 	mDeathSound = NULL;
 
 	char temp[256];
@@ -122,11 +123,18 @@ Enemy::Enemy(const string &enemyName)
 		else if (mCurrentLine == "EnemyImg")
 		{
 			node->QueryIntAttribute("Frames", &mAliveFrames);
+			node->QueryIntAttribute("FrameTime", &mFrameTime);
 
 			sprintf(temp, "/Res/enemies/%s/%s", mEnemyDirName.c_str(), node->Attribute("File"));
 			mEnemyImg = Sprites::LoadSpriteFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888, 32, 32); //32 Width && 32 Height
 
-			mEnemyImg->centerX = (mEnemyImg->sizeX/2); //hotspot
+			if (!mEnemyImg)
+			{
+				oslFatalError("Cannot load enemy sprite: %s", temp);
+				return;
+			}
+
+			mEnemyImg->centerX = 16; //frame hotspot
 			mEnemyImg->centerY = (mEnemyImg->sizeY/2); //hotspot
 
 			node->QueryIntAttribute("Width", &mEnemyWidth);
@@ -169,6 +177,7 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 	mEnemyState = NOTHING_HAPPENING;
 	mCurrentCheckpoint = 1;
 	mAnimationController = 0;
+	mAnimationTime = 0;
 	mDistanceFromStart = 0;
 	mCurrentFrames = 0;
 }
@@ -212,13 +221,15 @@ void EnemyInstance::Update(u32 timePassed)
 	mSlowLength -= timePassed;
 
 	//Animate!
-	mAnimationController++;
-
-	if(mAnimationController == 35)
+	if (mEnemy->mAliveFrames > 1 && mEnemy->mFrameTime > 0)
 	{
-		mCurrentFrames++;
-		mCurrentFrames %= mEnemy->mAliveFrames;
-		mAnimationController = 0;
+		mAnimationTime += timePassed;
+		while (mAnimationTime >= mEnemy->mFrameTime)
+		{
+			mAnimationTime -= mEnemy->mFrameTime;
+			mCurrentFrames++;
+			mCurrentFrames %= mEnemy->mAliveFrames;
+		}
 	}
 
 	//If we are going slow then travel at reduced speed

@@ -7,7 +7,7 @@
 		<Stat Health="4500" GoldValue="100" PointValue="90" Speed="35" CanFly="False" HasImunity="False"/>
 	</Stats>
 	
-	<EnemyImg File="medusa.png" Frames="4" Width="2" Height="2" />
+	<EnemyImg File="medusa.png" Frames="12" FrameTime="90" Width="2" Height="2" />
 	
 	<DeathSound File="death.wav"/>
 </Enemy>

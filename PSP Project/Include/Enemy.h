@@ -69,6 +69,7 @@ public:
 	int mEnemyWidth;
 	int mEnemyHeight;
 	int mAliveFrames;
+	int mFrameTime;
 
 	vector<EnemyInfo> mEnemyVector;
 };
@@ -90,6 +91,7 @@ public:
 	EnemyState mEnemyState;
 	float mAngle;
 	int mAnimationController;
+	int mAnimationTime;
 
 	EnemyState GetEnemyState();
 	const int GetGold();

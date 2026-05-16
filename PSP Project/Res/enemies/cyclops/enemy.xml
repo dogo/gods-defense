@@ -7,7 +7,7 @@
 		<Stat Health="30" GoldValue="2" PointValue="20" Speed="55" CanFly="False" HasImunity="False"/>
 	</Stats>
 	
-	<EnemyImg File="cyclops.png" Frames="4" Width="2" Height="2" />
+	<EnemyImg File="cyclops.png" Frames="12" FrameTime="110" Width="2" Height="2" />
 	
 	<DeathSound File="death.wav"/>
 </Enemy>

@@ -7,7 +7,7 @@
 		<Stat Health="60" GoldValue="3" PointValue="30" Speed="45" CanFly="True" HasImunity="False"/>
 	</Stats>
 	
-	<EnemyImg File="griffin.png" Frames="4" Width="2" Height="2" />
+	<EnemyImg File="griffin.png" Frames="12" FrameTime="75" Width="2" Height="2" />
 	
 	<DeathSound File="death.wav"/>
 </Enemy>

@@ -7,7 +7,7 @@
 		<Stat Health="190" GoldValue="11" PointValue="50" Speed="55" CanFly="False" HasImunity="False"/>
 	</Stats>
 	
-	<EnemyImg File="hydra.png" Frames="4" Width="2" Height="2" />
+	<EnemyImg File="hydra.png" Frames="12" FrameTime="95" Width="2" Height="2" />
 	
 	<DeathSound File="death.wav"/>
 </Enemy>
