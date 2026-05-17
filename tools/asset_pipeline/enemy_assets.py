@@ -55,9 +55,10 @@ def build_enemy_sheet(
     action: str = "run",
     max_size: tuple[int, int] = (29, 29),
     offset: tuple[int, int] = (0, 0),
+    bottom_align: bool = True,
 ) -> None:
     frames = [
-        fit_on_canvas(Image.open(path), max_size=max_size, offset=offset)
+        fit_on_canvas(Image.open(path), max_size=max_size, offset=offset, bottom_align=bottom_align)
         for path in frame_paths(source_dir, action)
     ]
     sheet = Image.new("RGBA", (32 * len(frames), 32), (0, 0, 0, 0))
