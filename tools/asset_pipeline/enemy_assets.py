@@ -41,9 +41,11 @@ def frame_paths(source_dir: Path, action: str, count: int = 12) -> list[Path]:
     candidates = sorted(source_dir.glob(f"*_{action}_*.png"))
     if len(candidates) < count:
         candidates = sorted(source_dir.glob(f"*_{action.upper()}_*.png"))
-    if len(candidates) < count:
+    if not candidates:
         raise RuntimeError(f"Expected at least {count} {action} frames in {source_dir}")
-    return candidates[:count]
+    if len(candidates) >= count:
+        return candidates[:count]
+    return [candidates[round(index * (len(candidates) - 1) / (count - 1))] for index in range(count)]
 
 
 def build_enemy_sheet(
