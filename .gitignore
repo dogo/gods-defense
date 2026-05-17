@@ -19,4 +19,9 @@ tools/MapGenerator/.gradle/
 # IDEs
 /.idea/
 *.iml
+
+# Trophies
 trophies.dat
+
+# Tower Defense 2D Game Kit
+tower-defense-2d-game-kit-v1.1/
