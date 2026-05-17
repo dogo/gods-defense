@@ -331,14 +331,14 @@ void GameGUI::updateHud()
 	//Update gold
 	char goldBuffer[256];
 	sprintf(goldBuffer, "%i", mGame->GetPlayerMoney());
-	oslIntraFontSetStyle(gFont, 0.55f,RGBA(255,255,255,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
-	oslDrawStringLimited(27, 7, 55, goldBuffer);
+	oslIntraFontSetStyle(gFont, 0.50f,RGBA(255,255,255,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
+	oslDrawStringLimited(27, 5, 55, goldBuffer);
 
 	//Update Lives
 	char liveBuffer[256];
 	sprintf(liveBuffer, "%i", mGame->GetPlayerLives());
-	oslIntraFontSetStyle(gFont, 0.55f,RGBA(255,255,255,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
-	oslDrawStringLimited(90, 7, 40, liveBuffer);
+	oslIntraFontSetStyle(gFont, 0.50f,RGBA(255,255,255,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
+	oslDrawStringLimited(90, 5, 40, liveBuffer);
 }
 
 void SidebarItem::Selected()
@@ -395,16 +395,16 @@ void GameGUI::drawUpgradeSellInfo(int x)
 		if(mGame->mSelectedTower->mTowerLevel+1 < mTower->mTowerVector.size())
 		{
 			sprintf(costBuffer, "Upgrade Cost: %i", mTower->mTowerVector[mGame->GetSelectedTowerLevel()+1].mCost);
-			oslDrawString( 4, 272-58, costBuffer);
+			oslDrawString( 8, 272-58, costBuffer);
 		}
 		else
 		{
-			oslDrawString( 4, 272-58, Resource::STR_MAX_REACHED);
+			oslDrawString( 8, 272-58, Resource::STR_MAX_REACHED);
 		}
 	}
 	else
 	{
 		sprintf(costBuffer, "Sell Amount: %i", mTower->mTowerVector[mGame->GetSelectedTowerLevel()].mSellAmount);
-		oslDrawString( 4, 272-58, costBuffer);
+		oslDrawString( 8, 272-58, costBuffer);
 	}
 }
