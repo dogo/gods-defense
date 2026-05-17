@@ -337,10 +337,17 @@ UI:
 
 ### Fase 3 - Menus profissionais
 
-- Novo menu principal.
+- Novo menu principal. Manter o asset atual `PSP Project/Res/background.png`; **nao alterar esse arquivo**.
 - Nova tela de pausa.
-- Nova tela de vitoria/derrota.
+- Nova tela de vitoria/derrota. **Adiado / fora do escopo agora**. Nao continuar tentando refazer `ending_win.png`, `ending_failed.png` ou `EndingScreen` nesta fase; a direcao visual ainda precisa ser definida antes.
 - Nova tela de selecao de mapa.
+
+Status adicional:
+
+- Title Screen deve manter o asset atual `PSP Project/Res/GDSplash.png`; **nao alterar esse arquivo**.
+- Anykey Screen deve manter o asset atual `PSP Project/Res/anykeylogo.png`; **nao alterar esse arquivo**.
+- Nao usar `td-gui/PNG/win` ou `td-gui/PNG/failed` para as telas finais por enquanto; o resultado nao combina com a identidade atual do jogo.
+- Proximo passo recomendado: aplicar a mesma linguagem visual em `PauseScreen`, `GameOptionsScreen` e tela de selecao de mapa.
 
 ### Fase 4 - Polimento
 
