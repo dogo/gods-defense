@@ -319,6 +319,88 @@ Versão dos tilesets otimizada para o editor **Tiled Map Editor** (`.tmx`):
 - Tiles numerados (`1.png`, `2.png`, ...)
 - **Arquivos fonte:** `AI/tail_1.ai` a `AI/tail_8.ai`
 
+#### Mapa operacional dos tiles de caminho
+
+Os arquivos `tailed/tail_*.tmx` confirmam a ordem dos tiles, mas nao trazem nomes semanticos como `straight` ou `corner`. Para a pipeline do jogo, usar a convencao visual abaixo para os `PNG/tail_N/{id}.png`.
+
+Essa convencao vale para as familias `tail_1`, `tail_2`, `tail_4`, `tail_6`, `tail_7` e `tail_8`; elas repetem o mesmo bloco estrutural nos ids `1` a `12`, mudando apenas o tema visual.
+
+| Tile id | Uso operacional | Conectividade confirmada |
+|---:|---|---|
+| `1` | curva | `S + E` |
+| `2` | curva | `S + W` |
+| `3` | curva | `N + E` |
+| `4` | curva | `N + W` |
+| `5` | reta vertical | norte-sul |
+| `6` | reta horizontal | oeste-leste |
+| `7` | T sem norte | `S + W + E` |
+| `8` | cruzamento | `N + S + W + E` |
+| `9` | reta horizontal alternativa | oeste-leste |
+| `10` | curva alternativa | `S + W` |
+| `11` | T sem oeste | `N + S + E` |
+| `12` | T sem sul | `N + W + E` |
+
+Uso recomendado na pipeline:
+
+- Nao recortar `game_background_N.png` composto para mapas jogaveis com rota propria. Esses backgrounds ja contem estradas/decoracoes prontas e ficam incoerentes quando combinados com os `map.xml` existentes.
+- Para mapas de gameplay, montar um tilemap por celula `32x32` a partir do `CollisionMap`.
+- Usar os tiles `1` a `12` apenas para caminho, escolhidos por conectividade da celula (`N`, `S`, `E`, `W`).
+- Para o caso `N + S + W`, que nao tem tile dedicado nas familias verificadas, a pipeline pode reutilizar `11` rotacionado 180 graus.
+- Alternativa atualmente usada por `tools/asset_pipeline/build_maps.py`: gerar a estrada como um tracado continuo texturizado a partir dos checkpoints de `<Path>`. Isso evita curvas quebradas quando os PNGs `256x256` do Tiled nao fecham bem apos reducao para celulas `32x32`.
+- Ao usar esse tracado continuo, nao preencher a estrada com o tile de caminho inteiro: os tiles carregam bordas e cantos internos que viram padroes repetidos. A pipeline deve usar apenas o miolo do tile como textura de superficie e desenhar borda/sombra separadamente.
+- Usar tiles de base separados para areas construiveis e decoracoes, por tema:
+
+| Tema | Familia | Base sugerida | Decoracoes seguras |
+|---|---|---:|---|
+| grama/selva | `tail_1` ou `tail_5` | `42` ou `22` | `30`, `31`, `33`, `35`, `36`, `37`, `43`-`49` |
+| areia/ruinas | `tail_2` | `21` | `22`-`24`, `28`-`40`, `41`-`56` |
+| neve/gelo | `tail_4` | `35` ou `44` | `21`-`29`, `33`, `34`, `38`-`43` |
+| lava/pedra | `tail_6` | `24` | `20`-`32`, `37`-`45` |
+| pantano/pedra | `tail_7` | `26` | `23`-`25`, `27`-`40` |
+| pedra/musgo | `tail_8` | `34` | `19`-`27`, `29`-`47` |
+
+#### Referencia rapida de decoracao por familia
+
+Use esta tabela antes de mexer em `tools/asset_pipeline/build_maps.py`. Ela separa os tiles por funcao visual para evitar decoracao aleatoria sem sentido em areas construiveis.
+
+| Familia | Funcao | Tile ids |
+|---|---|---|
+| `tail_1` grama/vila | base limpa | `42` |
+| `tail_1` grama/vila | agua/ponte/trilha pronta | `13`-`18`, `25`-`27` |
+| `tail_1` grama/vila | props de vila | `20`, `21`, `28`, `29`, `38`, `39`, `40`, `41` |
+| `tail_1` grama/vila | pedras/flor/arbustos pequenos | `22`-`24`, `30`-`32`, `35`, `36`, `47`-`49` |
+| `tail_1` grama/vila | arvores/massa verde | `33`, `34`, `37`, `43`-`46` |
+| `tail_2` areia/ruinas | base limpa | `21` |
+| `tail_2` areia/ruinas | agua/ponte/trilha pronta | `13`-`20`, `25`, `27`, `55` |
+| `tail_2` areia/ruinas | ruinas/templo/vila | `43`-`49`, `56` |
+| `tail_2` areia/ruinas | cactos/ossos/arvores secas | `29`, `31`-`36`, `41`, `42`, `50`-`54` |
+| `tail_2` areia/ruinas | pedras/folhagem seca | `22`-`24`, `28`, `30`, `37`-`40` |
+| `tail_4` neve/gelo | base limpa | `35` |
+| `tail_4` neve/gelo | gelo/agua/ponte/trilha pronta | `13`-`20`, `30` |
+| `tail_4` neve/gelo | construcao/ruina | `21`-`23`, `31`, `32` |
+| `tail_4` neve/gelo | pinheiros | `24`-`29` |
+| `tail_4` neve/gelo | pedras/neve baixa | `33`, `34`, `38`-`43` |
+| `tail_7` pantano/pedra | base limpa | `26` |
+| `tail_7` pantano/pedra | agua/pantano/ponte | `13`-`24` |
+| `tail_7` pantano/pedra | arvores mortas/massa pantano | `35`-`40` |
+| `tail_7` pantano/pedra | pedras/ossos/nevoa baixa | `27`-`34` |
+
+Layouts de mapa recomendados:
+
+- `olympus`: areia/ruinas (`tail_2`) com clusters de templo, cactos, ossos e pedras. Evitar arvores verdes.
+- `icarusfalls`: pantano/pedra (`tail_7`) com arvores mortas nas bordas, pedras e ossos em pequenos grupos. Evitar props de vila.
+- `rescueathena`: grama/vila (`tail_1`) com bosques nas bordas, poucos props de vila e pedras/arbustos em grupos.
+- `icymanipulator`: neve/gelo (`tail_4`) com pinheiros, cabana/ruina e rochas de neve agrupadas.
+
+Regra de composicao para gameplay:
+
+- Nao colocar props opacos no miolo da area construivel. Eles parecem obstaculo e atrapalham a leitura de onde construir.
+- Props grandes devem ficar em bordas, cantos ou como camada de fundo parcialmente coberta pela estrada.
+- Para dar identidade ao interior do mapa, usar manchas suaves de terreno, variacao de cor e textura baixa, nao objetos soltos.
+- Se uma rota ocupa quase todas as bordas, como `icarusfalls`, priorizar backdrops nas extremidades e terreno tonal; nao forcar arvores/pedras dentro dos bolsões de construcao.
+
+Observacao importante: antes de trocar a arte final de mapa, validar uma folha de preview da combinacao `CollisionMap` + tiles escolhidos. Se os ids de curva ficarem visualmente invertidos para alguma familia, corrigir a tabela acima e a pipeline, nao compensar com recortes manuais.
+
 ---
 
 ## Formatos de Arquivo

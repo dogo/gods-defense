@@ -25,3 +25,6 @@ trophies.dat
 
 # Tower Defense 2D Game Kit
 tower-defense-2d-game-kit-v1.1/
+
+# Asset Debug
+tools/asset_pipeline/_debug/

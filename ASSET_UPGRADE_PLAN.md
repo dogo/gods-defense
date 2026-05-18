@@ -248,6 +248,52 @@ Os mapas precisam continuar legiveis para tower defense, mas podem ganhar acabam
 - `map.xml`
 - Possivel atualizacao no MapGenerator depois
 
+### Status
+
+- Pipeline criada em `tools/asset_pipeline/build_maps.py`.
+- Gera novamente os PNGs principais e `mini.png` de `olympus`, `icarusfalls`, `rescueathena` e `icymanipulator`.
+- Mantem os `map.xml` existentes como fonte de grid, colisao e checkpoints.
+- Usa assets de `td-tilesets` e desenha a rota por cima dos checkpoints atuais para preservar gameplay.
+- A rota usa textura gerada do miolo do tile, nao o tile completo, para evitar repeticao visual de cantos/bordas ao longo do path.
+- A decoracao de mapa deve ser composta por layout tematico manual, em clusters coerentes por bioma, e nao por objetos aleatorios espalhados em celulas construiveis.
+- Props opacos nao devem ficar no miolo da area construivel; o ambiente interno deve vir de terreno tonal/textura sutil, com props fortes em bordas ou backdrops.
+
+### Proxima direcao: Map Composer inteligente
+
+O estado atual ainda e tentativa visual. Para gerar mapas com criterio, a pipeline precisa virar um compositor semantico:
+
+1. **Analise de gameplay**
+   - Ler `map.xml`.
+   - Rasterizar o `<Path>` em grid.
+   - Classificar cada celula como `path`, `path_margin`, `buildable_core`, `edge`, `corner`, `pocket`, `dead_zone`.
+   - Calcular distancia ate o path e ate a borda.
+
+2. **Perfil de bioma por mapa**
+   - `olympus`: deserto/ruina, props nas bordas, terreno seco no interior.
+   - `icarusfalls`: pantano/queda, ambiente escuro, vegetacao morta somente em bordas/backdrop.
+   - `rescueathena`: campo/vila, bosques nas extremidades, interior limpo.
+   - `icymanipulator`: neve/gelo, pinheiros e ruinas nas bordas, interior limpo.
+
+3. **Regras de composicao**
+   - Area construivel central nao recebe props opacos.
+   - Props so entram em `edge`, `corner`, `dead_zone` ou camada `backdrop`.
+   - `pocket` grande pode receber terreno tonal, mas nao obstaculo visual.
+   - Cenario deve formar massa visual coerente: bosque, ruina, pantano, neve acumulada; nao objetos isolados.
+
+4. **Render em camadas**
+   - Base tileada.
+   - Terreno tonal por regioes semanticas.
+   - Backdrop de ambiente.
+   - Path.
+   - Landmarks de borda.
+   - Miniatura.
+
+5. **Validacao automatica**
+   - Gerar debug overlay com cores por classe de celula.
+   - Gerar folha preview dos 4 mapas.
+   - Falhar se props forem colocados em `buildable_core` ou perto demais do path.
+   - Salvar manifest com contagem de props por classe para revisar sem abrir PNG por PNG.
+
 ## 6. Animacoes Extras
 
 ### Objetivo
