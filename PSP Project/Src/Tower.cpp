@@ -10,7 +10,7 @@
 #include "../Include/GameGUI.h"
 #include "../Include/util/Sprites.h"
 
-TowerInfo::TowerInfo(TiXmlElement* infoNode)
+TowerInfo::TowerInfo(tinyxml2::XMLElement* infoNode)
 {
 	mCost = 0;
 	mSellAmount = 0;
@@ -65,16 +65,16 @@ Tower::Tower(const string &towerName)
 	char temp[256];
 	sprintf(temp, "%s/Res/towers/%s/tower.xml", PspIO::getCurrentDirectory().c_str(), mTowerDirName.c_str());
 
-	TiXmlDocument TowerXMLInput;
+	tinyxml2::XMLDocument TowerXMLInput;
 	TowerXMLInput.LoadFile(temp);
 
 	if (TowerXMLInput.Error())
 	{
-		oslFatalError("Cannot open: %s", TowerXMLInput.ErrorDesc());
+		oslFatalError("Cannot open: %s", TowerXMLInput.ErrorStr());
 		return;
 	}
 
-	TiXmlElement *node = NULL;
+	tinyxml2::XMLElement *node = NULL;
 	node = TowerXMLInput.FirstChildElement(); //head
 
 	if (!node)
@@ -87,7 +87,7 @@ Tower::Tower(const string &towerName)
 
 	while (node != NULL) //Read all XML file
 	{
-		string mCurrentLine = node->ValueStr();
+		string mCurrentLine = node->Value();
 		/*
 		The strdup() function is used in situations where we need to allocate space in memory to copy a specific string.
 		Without using it, we would have to allocate space first with malloc(), and then use strncpy(), for example, to copy the string.
@@ -162,10 +162,10 @@ Tower::Tower(const string &towerName)
 		}
 		else if (mCurrentLine == "TowersLevels")
 		{
-			TiXmlElement *TowerLevelNode = node->FirstChildElement();
+			tinyxml2::XMLElement *TowerLevelNode = node->FirstChildElement();
 			while (TowerLevelNode != NULL) //read all Towers Levels
 			{
-				if (TowerLevelNode->ValueStr() != "TowersLevel")
+				if (strcmp(TowerLevelNode->Value(), "TowersLevel") != 0)
 				{
 					oslFatalError("TowersLevel Error: %s",TowerLevelNode->Value());
 					return;

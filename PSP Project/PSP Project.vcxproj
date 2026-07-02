@@ -92,11 +92,6 @@
     <ClCompile Include="Src\util\PspIO.cpp" />
     <ClCompile Include="Src\util\ReferenceCounted.cpp" />
     <ClCompile Include="Src\util\Sprites.cpp" />
-    <ClCompile Include="tinyxml\tinystr.cpp" />
-    <ClCompile Include="tinyxml\tinyxml.cpp" />
-    <ClCompile Include="tinyxml\tinyxmlerror.cpp" />
-    <ClCompile Include="tinyxml\tinyxmlparser.cpp" />
-    <ClCompile Include="tinyxml\xmltest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\AboutScreen.h" />
@@ -134,8 +129,6 @@
     <ClInclude Include="Include\util\PspIO.h" />
     <ClInclude Include="Include\util\ReferenceCounted.h" />
     <ClInclude Include="Include\util\Sprites.h" />
-    <ClInclude Include="tinyxml\tinystr.h" />
-    <ClInclude Include="tinyxml\tinyxml.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

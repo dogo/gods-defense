@@ -17,7 +17,7 @@ EnemyInfo::EnemyInfo()
 }
 
 
-EnemyInfo::EnemyInfo(TiXmlElement* infoNode)
+EnemyInfo::EnemyInfo(tinyxml2::XMLElement* infoNode)
 {
 	//Default Initializers
 	mHealth = 0;
@@ -70,16 +70,16 @@ Enemy::Enemy(const string &enemyName)
 	char temp[256];
 	sprintf(temp, "%s/Res/enemies/%s/enemy.xml", PspIO::getCurrentDirectory().c_str(), mEnemyDirName.c_str());
 
-	TiXmlDocument EnemyXMLInput;
+	tinyxml2::XMLDocument EnemyXMLInput;
 	EnemyXMLInput.LoadFile(temp);
 
 	if (EnemyXMLInput.Error())
 	{
-		oslFatalError("Cannot open: %s", EnemyXMLInput.ErrorDesc());
+		oslFatalError("Cannot open: %s", EnemyXMLInput.ErrorStr());
 		return;
 	}
 
-	TiXmlElement *node = NULL;
+	tinyxml2::XMLElement *node = NULL;
 	node = EnemyXMLInput.FirstChildElement(); //head
 
 	if (!node)
@@ -92,7 +92,7 @@ Enemy::Enemy(const string &enemyName)
 
 	while (node != NULL) //Read all XML file
 	{
-		string mCurrentLine = node->ValueStr();
+		string mCurrentLine = node->Value();
 		if (mCurrentLine == "Name")
 		{
 			mEnemyName = string(node->GetText());
@@ -107,10 +107,10 @@ Enemy::Enemy(const string &enemyName)
 		}
 		else if (mCurrentLine == "Stats")
 		{
-			TiXmlElement *EnemylevelNode = node->FirstChildElement();
+			tinyxml2::XMLElement *EnemylevelNode = node->FirstChildElement();
 			while (EnemylevelNode != NULL) //read all enemy Stats
 			{
-				if (EnemylevelNode->ValueStr() != "Stat")
+				if (strcmp(EnemylevelNode->Value(), "Stat") != 0)
 				{
 					oslFatalError("EnemylevelNode Error: %s",EnemylevelNode->Value());
 					return;

@@ -1,6 +1,6 @@
 TARGET = GodsDefense
 CFLAGS = -O2 -g -G0 -Wall
-CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti -DTIXML_USE_STL
+CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
 GAMEOBJECTS = \
@@ -45,13 +45,7 @@ RENDERERS = \
     Src/renderers/ProjectileRenderer.o \
     Src/renderers/MapRenderer.o
 
-TINYXML = \
-    tinyxml/tinystr.o \
-    tinyxml/tinyxml.o \
-    tinyxml/tinyxmlerror.o \
-    tinyxml/tinyxmlparser.o
-
-OBJS = $(TINYXML) $(GAMEOBJECTS) $(UTIL) $(RENDERERS)
+OBJS = $(GAMEOBJECTS) $(UTIL) $(RENDERERS)
 
 LIBDIR =
 LDFLAGS =
@@ -60,6 +54,7 @@ LIBS = \
     -lpng \
     -lz \
     -lpsphprm \
+    -ltinyxml2 \
     -lstdc++ \
     -lpspsdk \
     -lpspctrl \
