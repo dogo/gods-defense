@@ -33,8 +33,7 @@ Wave::Wave(tinyxml2::XMLElement *waveNode)
 
 	waveNode->QueryIntAttribute("IntervalSpawnTime", &mIntervalSpawnTime);
 
-	const char *tempBoss = waveNode->Attribute("Boss");
-	if (tempBoss != NULL && !strcmp(tempBoss, "True")) //strcmp() return 0 if both string be the same.
+	if (waveNode->Attribute("Boss", "True"))
 		mIsBoss = true;
 
 	tinyxml2::XMLElement *WaveEnemyNode = waveNode->FirstChildElement();

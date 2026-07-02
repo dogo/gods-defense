@@ -111,16 +111,12 @@ Tower::Tower(const string &towerName)
 		}
 		else if (mCurrentLine == "Capability")
 		{
-			const char* mAttributeText;
-
-			mAttributeText = node->Attribute("HitsLand");
-			if (mAttributeText != NULL && !strcmp(mAttributeText,"True")) //strcmp() return 0 if both string be the same.
+			if (node->Attribute("HitsLand", "True"))
 			{
 				mHitsLand = true;
 			}
 
-			mAttributeText = node->Attribute("HitsFlyers");
-			if (mAttributeText != NULL && !strcmp(mAttributeText,"True")) //strcmp() return 0 if both string be the same.
+			if (node->Attribute("HitsFlyers", "True"))
 			{
 				mHitsFlyer = true;
 			}

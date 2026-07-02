@@ -41,13 +41,11 @@ EnemyInfo::EnemyInfo(tinyxml2::XMLElement* infoNode)
 	infoNode->QueryIntAttribute("Speed", &temp);
 	mSpeed = temp;
 
-	const char* HasImunity = infoNode->Attribute("HasImunity");
-	if (HasImunity != NULL && !strcmp(HasImunity,"False")) //strcmp() return 0 if both string be the same.
+	if (infoNode->Attribute("HasImunity", "False"))
 	{
 		mHasImunity = false;
 	}
-	const char* CanFly = infoNode->Attribute("CanFly");
-	if (CanFly != NULL && !strcmp(CanFly,"False")) //strcmp() return 0 if both string be the same.
+	if (infoNode->Attribute("CanFly", "False"))
 	{
 		mCanFly = false;
 	}
