@@ -10,7 +10,7 @@
 class Enemy;
 class EnemyInstance;
 
-#include "tinyxml/tinyxml.h"
+#include <tinyxml2.h>
 #include "../Include/util/Coordinates2D.h"
 #include "../Include/util/PspIO.h"
 #include "../Include/util/ReferenceCounted.h"
@@ -43,7 +43,7 @@ class EnemyInfo
 
 public:
 	EnemyInfo();
-	EnemyInfo(TiXmlElement* levelNode);
+	EnemyInfo(tinyxml2::XMLElement* levelNode);
 	unsigned int mHealth;
 	unsigned int mGoldValue;
 	unsigned int mPointValue;

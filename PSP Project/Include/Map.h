@@ -16,7 +16,7 @@ class Map;
 #include "../Include/Tower.h"
 #include "../Include/util/Coordinates2D.h"
 #include "../Include/util/PspIO.h"
-#include "tinyxml/tinyxml.h"
+#include <tinyxml2.h>
 #include <string>
 #include <vector>
 #include <map>
@@ -34,7 +34,7 @@ public:
 class Wave
 {
 public:
-	Wave(TiXmlElement *waveNode);
+	Wave(tinyxml2::XMLElement *waveNode);
 	void StartEnemySpawn();
 	bool EndOfWave(); //Check if is the end of wave
 	bool EndOfOneWave(); //Same as EndOfWave but only returns true once
@@ -60,7 +60,7 @@ private:
 class PathCoords
 {
 public:
-	PathCoords(TiXmlElement *checkPointNode);
+	PathCoords(tinyxml2::XMLElement *checkPointNode);
 
 	Coordinates2D mCoords;
 	int mRadius;
@@ -70,7 +70,7 @@ class Path
 {
 public:
 	Path();
-	Path(TiXmlElement *pathNode);
+	Path(tinyxml2::XMLElement *pathNode);
 	unsigned int GetCheckpointCount() const;
 
 	float mCheckpointLength; //Total length of path

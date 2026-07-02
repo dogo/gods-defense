@@ -11,7 +11,7 @@ EnemyWave::EnemyWave(string folderName, int enemyLevel)
 	mEnemyLevel = enemyLevel;
 }
 
-Wave::Wave(TiXmlElement *waveNode)
+Wave::Wave(tinyxml2::XMLElement *waveNode)
 {
 	//Default Initializers
 	mWaveDescription = NULL;
@@ -37,12 +37,12 @@ Wave::Wave(TiXmlElement *waveNode)
 	if (tempBoss != NULL && !strcmp(tempBoss, "True")) //strcmp() return 0 if both string be the same.
 		mIsBoss = true;
 
-	TiXmlElement *WaveEnemyNode = waveNode->FirstChildElement();
+	tinyxml2::XMLElement *WaveEnemyNode = waveNode->FirstChildElement();
 	while (WaveEnemyNode != NULL) //read all Enemies
 	{
-		if (WaveEnemyNode->ValueStr() != "Enemy")
+		if (strcmp(WaveEnemyNode->Value(), "Enemy") != 0)
 		{
-			oslFatalError("Bad node, not donout for you: %s",WaveEnemyNode->ValueStr().c_str());
+			oslFatalError("Bad node, not donout for you: %s",WaveEnemyNode->Value());
 			return;
 		}
 
@@ -114,7 +114,7 @@ Wave::~Wave()
 		free(mWaveDescription);
 }
 
-PathCoords::PathCoords(TiXmlElement *checkPointNode)
+PathCoords::PathCoords(tinyxml2::XMLElement *checkPointNode)
 {
 	int x=0, y=0;
 	checkPointNode->QueryIntAttribute("X", &x);
@@ -131,13 +131,13 @@ Path::Path()
 {
 }
 
-Path::Path(TiXmlElement *pathNode)
+Path::Path(tinyxml2::XMLElement *pathNode)
 {
 	mCheckpointLength = 0.0f;
-	TiXmlElement *node = pathNode->FirstChildElement();
+	tinyxml2::XMLElement *node = pathNode->FirstChildElement();
 	while (node != NULL) //process all the checkpoints
 	{
-		if (node->ValueStr() == "Checkpoint")
+		if (strcmp(node->Value(), "Checkpoint") == 0)
 		{
 			mCheckpoint.push_back(PathCoords(node));
 			if(mCheckpoint.size() >= 2)
@@ -179,18 +179,18 @@ void Map::LoadMap(const string &MapDirName)
 	char temp[256];
 	sprintf(temp, "%s/Res/maps/%s/map.xml", PspIO::getCurrentDirectory().c_str(), MapDirName.c_str());
 
-	TiXmlDocument MapXMLInput;
+	tinyxml2::XMLDocument MapXMLInput;
 	MapXMLInput.LoadFile(temp);
 
 	if (MapXMLInput.Error())
 	{
-		oslFatalError("Cannot open: %s", MapXMLInput.ErrorDesc());
+		oslFatalError("Cannot open: %s", MapXMLInput.ErrorStr());
 		return;
 	}
 
 	mMapName = strdup(MapDirName.c_str());
 
-	TiXmlElement *node = NULL;
+	tinyxml2::XMLElement *node = NULL;
 	node = MapXMLInput.FirstChildElement(); //head
 
 	if (!node)
@@ -203,7 +203,7 @@ void Map::LoadMap(const string &MapDirName)
 
 	while (node != NULL) //Read all XML file
 	{
-		string mCurrentLine = node->ValueStr();
+		string mCurrentLine = node->Value();
 		if (mCurrentLine == "Name")
 		{
 			mCurrentMapName = strdup(node->GetText());
@@ -230,10 +230,10 @@ void Map::LoadMap(const string &MapDirName)
 		}
 		else if (mCurrentLine == "Menu")
 		{
-			TiXmlElement *towerMenuNode = node->FirstChildElement();
+			tinyxml2::XMLElement *towerMenuNode = node->FirstChildElement();
 			while (towerMenuNode != NULL)
 			{
-				if (towerMenuNode->ValueStr() == "BuildTowerMenu")
+				if (strcmp(towerMenuNode->Value(), "BuildTowerMenu") == 0)
 				{
 					int y=0;
 
@@ -321,11 +321,11 @@ void Map::LoadMap(const string &MapDirName)
 		}
 		else if (mCurrentLine == "Waves")
 		{
-			TiXmlElement *waveNode = node->FirstChildElement();
+			tinyxml2::XMLElement *waveNode = node->FirstChildElement();
 
 			while (waveNode != NULL)
 			{
-				if (waveNode->ValueStr() != "Wave")
+				if (strcmp(waveNode->Value(), "Wave") != 0)
 				{
 					oslFatalError("Error at load waves in Map::LoadMap %s",waveNode->Value());
 					return;

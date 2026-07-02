@@ -10,7 +10,7 @@
 class Tower;
 class TowerInstance;
 
-#include "tinyxml/tinyxml.h"
+#include <tinyxml2.h>
 #include "../Include/util/Drawing.h"
 #include "../Include/util/PspIO.h"
 #include "../Include/Projectile.h"
@@ -32,7 +32,7 @@ using namespace std;
 class TowerInfo
 {
 public:
-	TowerInfo(TiXmlElement* infoNode);
+	TowerInfo(tinyxml2::XMLElement* infoNode);
 
 /*
 *	Cost - How much the tower cost.

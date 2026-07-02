@@ -13,9 +13,6 @@
     <Filter Include="Header\util">
       <UniqueIdentifier>{dc80f79e-f5af-4f41-aa68-c196b49b6daa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="tinyxml">
-      <UniqueIdentifier>{5b876045-0c6f-4971-938c-25f07bf5f4f7}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\AboutScreen.cpp">
@@ -113,21 +110,6 @@
     </ClCompile>
     <ClCompile Include="Src\util\Sprites.cpp">
       <Filter>Src\util</Filter>
-    </ClCompile>
-    <ClCompile Include="tinyxml\tinystr.cpp">
-      <Filter>tinyxml</Filter>
-    </ClCompile>
-    <ClCompile Include="tinyxml\tinyxml.cpp">
-      <Filter>tinyxml</Filter>
-    </ClCompile>
-    <ClCompile Include="tinyxml\tinyxmlerror.cpp">
-      <Filter>tinyxml</Filter>
-    </ClCompile>
-    <ClCompile Include="tinyxml\tinyxmlparser.cpp">
-      <Filter>tinyxml</Filter>
-    </ClCompile>
-    <ClCompile Include="tinyxml\xmltest.cpp">
-      <Filter>tinyxml</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -235,12 +217,6 @@
     </ClInclude>
     <ClInclude Include="Include\util\Sprites.h">
       <Filter>Header\util</Filter>
-    </ClInclude>
-    <ClInclude Include="tinyxml\tinystr.h">
-      <Filter>tinyxml</Filter>
-    </ClInclude>
-    <ClInclude Include="tinyxml\tinyxml.h">
-      <Filter>tinyxml</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
