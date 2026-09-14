@@ -1,0 +1,19 @@
+# Finais de linha: LF no repositorio e no working tree para todo arquivo de texto.
+* text=auto eol=lf
+
+# Scripts do Windows: cmd.exe exige CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Binarios: git nunca deve normalizar nem tentar fazer diff.
+*.png  binary
+*.psd  binary
+*.wav  binary
+*.bgm  binary
+*.pgf  binary
+*.jar  binary
+*.7z   binary
+*.xlsx binary
+*.exe  binary
+*.dat  binary
+*.xcuserstate binary
