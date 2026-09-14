@@ -83,3 +83,13 @@ PSP_EBOOT_PIC1 = PIC1.png
 
 PSPSDK = $(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
+
+PPSSPP = flatpak run --command=PPSSPPSDL org.ppsspp.PPSSPP
+
+run: EBOOT.PBP
+	$(PPSSPP) "$(CURDIR)/EBOOT.PBP"
+
+run-prx: $(TARGET).prx
+	$(PPSSPP) "$(CURDIR)/$(TARGET).prx"
+
+.PHONY: run run-prx
