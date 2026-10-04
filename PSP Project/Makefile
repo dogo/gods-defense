@@ -84,7 +84,11 @@ PSP_EBOOT_PIC1 = PIC1.png
 PSPSDK = $(shell psp-config --pspsdk-path)
 include $(PSPSDK)/lib/build.mak
 
-PPSSPP      = flatpak run --command=PPSSPPSDL org.ppsspp.PPSSPP
+ifeq ($(shell uname -s),Darwin)
+PPSSPP     ?= /Applications/PPSSPPSDL.app/Contents/MacOS/PPSSPPSDL
+else
+PPSSPP     ?= flatpak run --command=PPSSPPSDL org.ppsspp.PPSSPP
+endif
 PPSSPPFLAGS =
 RUNLOG      = ppsspp.log
 

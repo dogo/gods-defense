@@ -11,6 +11,10 @@
                 "org.ppsspp.PPSSPP",
                 "${workspaceFolder}/PSP Project/EBOOT.PBP"
             ],
+            "osx": {
+                "program": "/Applications/PPSSPPSDL.app/Contents/MacOS/PPSSPPSDL",
+                "args": ["${workspaceFolder}/PSP Project/EBOOT.PBP"]
+            },
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
