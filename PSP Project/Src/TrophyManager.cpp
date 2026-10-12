@@ -6,6 +6,7 @@
 #include "../Include/TrophyManager.h"
 #include <stdio.h>
 #include <string.h>
+#include <sys/stat.h>
 
 struct TrophySaveData
 {
@@ -20,7 +21,9 @@ struct TrophySaveData
 };
 
 static const int TROPHY_SAVE_VERSION = 1;
-static const char TROPHY_SAVE_FILE[] = "trophies.dat";
+// Game dir may be read-only (umd0: on emulators); keep it next to the savedata (GOD01 + 0000, see MemoryStick)
+static const char TROPHY_SAVE_DIR[] = "ms0:/PSP/SAVEDATA/GOD010000";
+static const char TROPHY_SAVE_FILE[] = "ms0:/PSP/SAVEDATA/GOD010000/trophies.dat";
 
 static TrophySaveData gTrophySaveData;
 static bool gTrophyManagerInitialized = false;
@@ -71,6 +74,9 @@ void TrophyManager::Load()
 
 void TrophyManager::Save()
 {
+	mkdir("ms0:/PSP/SAVEDATA", 0777);
+	mkdir(TROPHY_SAVE_DIR, 0777);
+
 	FILE *file = fopen(TROPHY_SAVE_FILE, "wb");
 	if (file == NULL)
 		return;
