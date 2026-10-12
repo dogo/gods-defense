@@ -5,6 +5,7 @@
 
 #include "../Include/GameOptionsScreen.h"
 #include "../Include/ScreenManager.h"
+#include "../Include/util/PspIO.h"
 
 string gChoosedMap;
 
@@ -32,8 +33,10 @@ GameOptionsScreen::GameOptionsScreen()
 			{
 				if(dir.d_name[0] != '.')
 				{
-					mMap.push_back(dir.d_name); //Add folder name to mMap vector
-					sprintf(buffer,"/Res/maps/%s/mini.png",dir.d_name);
+					string mapName = dir.d_name;
+					PspIO::lowerCase(mapName);
+					mMap.push_back(mapName); //Add folder name to mMap vector
+					sprintf(buffer,"/Res/maps/%s/mini.png",mapName.c_str());
 					mMiniMap = oslLoadImageFilePNG(buffer, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 					mMapImages.push_back(mMiniMap);
 				}
