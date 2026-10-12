@@ -4,6 +4,7 @@
 //**************************************************************************
 
 #include "../Include/Enemy.h"
+#include <stdlib.h>
 
 EnemyInfo::EnemyInfo()
 {
@@ -177,11 +178,25 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 	mAnimationController = 0;
 	mAnimationTime = 0;
 	mDistanceFromStart = 0;
-	mCurrentFrames = 0;
+	//Random phase so a wave doesn't march in lockstep
+	mCurrentFrames = mEnemy->mAliveFrames > 1 ? rand() % mEnemy->mAliveFrames : 0;
+	mHitFlashTime = 0;
+	mDeathTime = 0;
 }
 
 void EnemyInstance::Update(u32 timePassed)
 {
+	if (mHitFlashTime > 0)
+		mHitFlashTime -= timePassed;
+
+	if (mEnemyState == ENEMY_DYING)
+	{
+		mDeathTime += timePassed;
+		if (mDeathTime >= DEATH_FADE_TIME)
+			mEnemyState = ENEMY_FULLY_DEAD;
+		return;
+	}
+
 	//Enemy is dead so we return
 	if (EnemyIsDead())
 		return;
@@ -218,10 +233,10 @@ void EnemyInstance::Update(u32 timePassed)
 	//Decrement the slow counter
 	mSlowLength -= timePassed;
 
-	//Animate!
+	//Animate! Slowed enemies walk (and animate) slower
 	if (mEnemy->mAliveFrames > 1 && mEnemy->mFrameTime > 0)
 	{
-		mAnimationTime += timePassed;
+		mAnimationTime += (mSlowLength > 0) ? (int)(timePassed * mSlowAmount) : timePassed;
 		while (mAnimationTime >= mEnemy->mFrameTime)
 		{
 			mAnimationTime -= mEnemy->mFrameTime;
@@ -279,7 +294,7 @@ EnemyState EnemyInstance::GetEnemyState()
 		if (mEnemy->mDeathSound != NULL)
 			oslPlaySound(mEnemy->mDeathSound, CHANNEL_0); //Plays the death sound on channel 0
 		
-		mEnemyState = ENEMY_FULLY_DEAD;
+		mEnemyState = ENEMY_DYING;
 		return ENEMY_DIED;
 	}
 	else if (mEnemyState == ENEMY_HIT_THE_END)
@@ -303,7 +318,7 @@ const int EnemyInstance::GetGold()
 
 bool const EnemyInstance::EnemyIsDead()
 {
-	return (mHealth <= 0 || mEnemyState == ENEMY_FULLY_DEAD || mEnemyState == ENEMY_HIT_THE_END || mEnemyState == ENEMY_DIED);
+	return (mHealth <= 0 || mEnemyState == ENEMY_FULLY_DEAD || mEnemyState == ENEMY_HIT_THE_END || mEnemyState == ENEMY_DIED || mEnemyState == ENEMY_DYING);
 }
 
 bool const EnemyInstance::EnemyCanFly()
@@ -339,6 +354,8 @@ void EnemyInstance::EnemyReciveDamage(const int &damage, const float &slowAmount
 
 	bool enemyIsAlive = (!EnemyIsDead());
 	mHealth -= damage;
+	if (enemyIsAlive && damage > 0)
+		mHitFlashTime = HIT_FLASH_TIME;
 	if (enemyIsAlive && EnemyIsDead())
 	{
 		mEnemyState = ENEMY_DIED;

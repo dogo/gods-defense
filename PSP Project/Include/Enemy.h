@@ -27,6 +27,7 @@ enum EnemyState
 	NOTHING_HAPPENING, //Nothing is happening with the enemy
 	ENEMY_DIED, //Just died, give player gold
 	ENEMY_HIT_THE_END, //Enemy hit the end of the path
+	ENEMY_DYING, //Playing the death fade, still rendered
 	ENEMY_FULLY_DEAD //Enemy died
 };
 
@@ -102,6 +103,10 @@ public:
 	void EnemyReciveDamage(const int &damage, const float &slowAmount, const int &slowLength); // the enemy receive damage
 	float GetPointsWorth() const;
 	int mCurrentFrames;
+	int mHitFlashTime; //ms left of the damage flash
+	int mDeathTime; //ms elapsed in the death fade
+	const static int HIT_FLASH_TIME = 100;
+	const static int DEATH_FADE_TIME = 300;
 
 private:
 	unsigned int mCurrentCheckpoint;

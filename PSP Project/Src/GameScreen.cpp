@@ -344,6 +344,9 @@ void GameScreen::update(u32 timePassed)
 					mPlayerLives = 0;
 			break;
 
+			case ENEMY_DYING: //Death fade, removed once fully dead
+			break;
+
 			case ENEMY_FULLY_DEAD: //Dead and done
 				mDeleteEnemy = true;
 			break;

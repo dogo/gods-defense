@@ -10,20 +10,38 @@
 
 void EnemyRenderer::RenderEnemy(EnemyInstance *enemyInstance, float scrollOffset)
 {
-	if (!enemyInstance || enemyInstance->EnemyIsDead() || !enemyInstance->mEnemy || !enemyInstance->mEnemy->mEnemyImg)
+	if (!enemyInstance || !enemyInstance->mEnemy || !enemyInstance->mEnemy->mEnemyImg)
 		return;
 
-	enemyInstance->mEnemy->mEnemyImg->centerX = 16; // Enemy / 2
-	enemyInstance->mEnemy->mEnemyImg->angle = (enemyInstance->mAngle * 180/M_PI);
-	
-	DrawImageFrameXY(
-		enemyInstance->mEnemy->mEnemyImg, 
-		enemyInstance->mEnemyPosition.X, 
-		scrollOffset + enemyInstance->mEnemyPosition.Y, 
-		enemyInstance->mCurrentFrames
-	);
-	
-	RenderEnemyHealthBar(enemyInstance, scrollOffset);
+	bool dying = (enemyInstance->mEnemyState == ENEMY_DYING);
+	if (enemyInstance->EnemyIsDead() && !dying)
+		return;
+
+	OSL_IMAGE *img = enemyInstance->mEnemy->mEnemyImg;
+	float y = scrollOffset + enemyInstance->mEnemyPosition.Y;
+
+	// Flyers hover
+	if (enemyInstance->EnemyCanFly())
+		y += 2 * sinf(osl_vblCount * 0.15f + enemyInstance->mEnemyPosition.X);
+
+	// Sprites are drawn upright facing right: mirror instead of rotating
+	img->angle = 0;
+	oslSetImageFrame(img, enemyInstance->mCurrentFrames);
+	if (cosf(enemyInstance->mAngle) < 0)
+		oslMirrorImageH(img);
+
+	if (dying) // fade out
+		oslSetAlpha(OSL_FX_TINT, RGBA(255, 255, 255, 255 - 255 * enemyInstance->mDeathTime / EnemyInstance::DEATH_FADE_TIME));
+	else if (enemyInstance->mHitFlashTime > 0)
+		oslSetAlpha(OSL_FX_TINT, RGBA(255, 90, 90, 255));
+	else if (enemyInstance->mSlowLength > 0)
+		oslSetAlpha(OSL_FX_TINT, RGBA(140, 180, 255, 255));
+
+	oslDrawImageXY(img, enemyInstance->mEnemyPosition.X, y);
+	oslSetAlpha(OSL_FX_DEFAULT, 0);
+
+	if (!dying)
+		RenderEnemyHealthBar(enemyInstance, scrollOffset);
 }
 
 void EnemyRenderer::RenderEnemyHealthBar(EnemyInstance *enemyInstance, float scrollOffset)
