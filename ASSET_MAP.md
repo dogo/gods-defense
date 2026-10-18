@@ -1,24 +1,18 @@
 # Asset Map — Tower Defense 2D Game Kit v1.1
 
-> Fonte: `tower-defense-2d-game-kit-v1.1/`  
-> Licença: [craftpix.net/file-licenses](https://craftpix.net/file-licenses/)  
-> Total de arquivos PNG: ~5.800  
-> Gerado em: 2026-05-16
+> Fonte: `tower-defense-2d-game-kit-v1.1/` (todos os paths abaixo são relativos a essa pasta)
+> Licença: [craftpix.net/file-licenses](https://craftpix.net/file-licenses/) (cada pack tem `TXT/license.txt` + `TXT/readme.txt`)
+> Total: 5.887 arquivos, dos quais 5.476 PNG
+> Validado contra o disco em: 2026-10-18
+
+Este arquivo descreve **só o kit**. Decisões do jogo (qual asset vira o quê, regras de composição de mapa) ficam em `ASSET_UPGRADE_PLAN.md` e nos scripts de `tools/asset_pipeline/`.
 
 ---
 
 ## Índice
 
 1. [Monstros — 4 Packs](#monstros--4-packs)
-   - [2d-monster-sprites](#1-2d-monster-sprites)
-   - [monster-enemy-game-sprites](#2-monster-enemy-game-sprites)
-   - [monster-character-2d-sprites](#3-monster-character-2d-sprites)
-   - [tower-defense-monster-2d-sprites](#4-tower-defense-monster-2d-sprites)
 2. [Torres — 4 Tipos](#torres--4-tipos)
-   - [archer-tower-game-assets](#1-archer-tower-game-assets)
-   - [magic-tower-game-assets](#2-magic-tower-game-assets)
-   - [stone-tower-game-assets](#3-stone-tower-game-assets)
-   - [support-tower-game-assets](#4-support-tower-game-assets)
 3. [Efeitos Mágicos](#efeitos-mágicos--magic-effects-game-sprite)
 4. [GUI](#gui--td-gui)
 5. [Tilesets](#tilesets--td-tilesets)
@@ -29,158 +23,49 @@
 
 ## Monstros — 4 Packs
 
-O kit inclui **4 packs de inimigos** distintos, totalizando **40 variantes de monstros** (10 por pack). Cada pack tem estilo visual diferente mas convenção similar de animações.
+**4 packs × 10 monstros = 40 monstros.** Pastas `PNG/{1-10}/`, uma por monstro.
 
----
+| Pack | Animações | Frames/anim | IDLE? | Prefixo do arquivo | AI / EPS |
+|------|-----------|-------------|-------|--------------------|----------|
+| `2d-monster-sprites` | `attack die hurt idle jump run walk` | 20 (`000`–`019`) | ✅ | `{N}_enemies_1_` (bate com a pasta) | `AI/enemies_3.ai`, `EPS/enemies_3.eps` |
+| `monster-enemy-game-sprites` | `attack die hurt idle jump run walk` | 20 (`000`–`019`) | ✅ | `{N}_enemies_1_` (bate com a pasta) | `AI/enemies_4.ai`, `EPS/enemies_4.eps` |
+| `monster-character-2d-sprites` | `ATTACK DIE HURT JUMP RUN WALK` | 10 (`000`–`009`) | ❌ | **sempre `2_enemies_1_`** | `AI/enemies_2.ai`, 65 EPS em `EPS/{1-10}/` |
+| `tower-defense-monster-2d-sprites` | `ATTACK DIE HURT JUMP RUN WALK` | 10 (`000`–`009`) | ❌ | **sempre `1_enemies_1_`** | `AI/enemies_1.ai`, 67 EPS em `EPS/{1-10}/` |
 
-### 1. `2d-monster-sprites`
+Exceções:
 
-**Caminho:** `2d-monster-sprites/PNG/{1-10}/`
+- `monster-character-2d-sprites/PNG/8` não tem `JUMP`.
+- `tower-defense-monster-2d-sprites/PNG/10` não tem `JUMP`.
+- Nos packs 3 e 4 o prefixo do arquivo é fixo; identifique o monstro pelo número da **pasta**.
 
-- **10 monstros** numerados de 1 a 10
-- **7 estados de animação** por monstro: `attack`, `die`, `hurt`, `idle`, `jump`, `run`, `walk`
-- **20 frames** por animação (frames `000`–`019`)
-- **Naming:** `{N}_enemies_1_{animation}_{frame}.png`
-  - Exemplo: `1_enemies_1_attack_000.png`
+**SCML (Spriter):** todo pack tem `SCML/{N}/{N}.scml` mais os PNGs das peças do esqueleto em cada pasta. `2d-monster-sprites` também tem `SCML/7/7.autosave.scml`.
 
-| Animação | Frames | Uso típico |
-|----------|--------|------------|
-| `attack` | 20 | Monstro atacando |
-| `die`    | 20 | Morte |
-| `hurt`   | 20 | Tomando dano |
-| `idle`   | 20 | Parado/esperando |
-| `jump`   | 20 | Pulando |
-| `run`    | 20 | Correndo rápido |
-| `walk`   | 20 | Andando |
+### ⚠️ Frames duplicados (verificado por hash)
 
-**Arquivos fonte disponíveis:**
-- `AI/enemies_3.ai` — arquivo Adobe Illustrator
-- `EPS/enemies_3.eps` — arquivo vetorial EPS
-- `SCML/{1-10}/{N}.scml` — projeto Spriter (animação esqueletal)
-  - Obs: monster 7 tem `.autosave.scml` adicional
+Muitas animações repetem frames. Em uma sequência de 20, só 11 são únicos. Em uma de 10, só 6 são únicos. Ao amostrar frames, não espere que todos sejam diferentes.
 
----
+- `2d-monster-sprites` (11/20): 1/hurt, 1/idle, 1/jump, 2/idle, 2/walk, 3/idle, 3/walk, 4/idle, 4/run, 5/idle, 8/hurt, 8/idle, 8/jump, 8/run, 9/hurt, 9/jump, 9/walk, 10/jump
+- `monster-enemy-game-sprites` (11/20): 1/idle, 1/walk, 2/idle, 2/run, 5/idle, 6/idle, 8/idle, 9/idle
+- `monster-character-2d-sprites` (6/10): `HURT`, `JUMP` e `WALK` em todos os monstros que têm a animação. `RUN` só em 2, 5, 6, 8 e 10.
+- `tower-defense-monster-2d-sprites` (6/10): `HURT`, `JUMP`, `RUN` e `WALK` em quase todos. Exceções: 1/WALK tem 10 frames únicos, e o monstro 10 não tem `JUMP`.
+- `ATTACK` e `DIE` não têm duplicatas em nenhum pack.
 
-### 2. `monster-enemy-game-sprites`
+### ⚠️ Ciclos de 20 frames
 
-**Caminho:** `monster-enemy-game-sprites/PNG/{1-10}/`
-
-- **10 monstros** numerados de 1 a 10
-- **7 estados de animação** por monstro: `attack`, `die`, `hurt`, `idle`, `jump`, `run`, `walk`
-- **20 frames** por animação (frames `000`–`019`)
-- **Naming:** `{N}_enemies_1_{animation}_{frame}.png`
-  - Exemplo: `3_enemies_1_run_005.png`
-
-Estrutura idêntica ao `2d-monster-sprites` mas com visuais diferentes.
-
-**Arquivos fonte disponíveis:**
-- `AI/` — arquivo Adobe Illustrator
-- `EPS/` — 1 EPS consolidado
-- `SCML/{1-10}/{N}.scml` — projetos Spriter
-
----
-
-### 3. `monster-character-2d-sprites`
-
-**Caminho:** `monster-character-2d-sprites/PNG/{1-10}/`
-
-- **10 monstros** numerados de 1 a 10
-- **6 estados de animação** por monstro: `ATTACK`, `DIE`, `HURT`, `JUMP`, `RUN`, `WALK`
-  - ⚠️ **Sem `IDLE`** neste pack
-  - ⚠️ Monster **8** não tem animação `JUMP`
-- **10 frames** por animação (frames `000`–`009`)
-- **⚠️ Anomalia de naming:** todos os arquivos dentro de qualquer pasta `{N}/` têm o prefixo fixo `2_enemies_1_` no nome (não refletem o número da pasta)
-  - Exemplo dentro de `PNG/5/`: `2_enemies_1_ATTACK_000.png` (não `5_enemies_1_...`)
-
-**Arquivos fonte disponíveis:**
-- `AI/` — arquivo Adobe Illustrator
-- `EPS/` — **65 EPS** organizados por pasta `EPS/{1-10}/` (fontes por monstro)
-- `SCML/{1-10}/{N}.scml` — projetos Spriter
-
----
-
-### 4. `tower-defense-monster-2d-sprites`
-
-**Caminho:** `tower-defense-monster-2d-sprites/PNG/{1-10}/`
-
-- **10 monstros** numerados de 1 a 10
-- **6 estados de animação** por monstro: `ATTACK`, `DIE`, `HURT`, `JUMP`, `RUN`, `WALK`
-  - ⚠️ **Sem `IDLE`** neste pack
-  - ⚠️ Monster **10** não tem animação `JUMP`
-- **10 frames** por animação (frames `000`–`009`)
-- **⚠️ Anomalia de naming:** todos os arquivos têm prefixo fixo `1_enemies_1_` independente da pasta
-  - Exemplo dentro de `PNG/7/`: `1_enemies_1_RUN_000.png`
-
-**Arquivos fonte disponíveis:**
-- `AI/` — arquivo Adobe Illustrator
-- `EPS/` — **67 EPS** organizados em `EPS/{1-10}/`
-- `SCML/{1-10}/{N}.scml` — projetos Spriter
+O loop fecha em `019 → 000`. Pegar só um trecho (ex.: `000`–`011`) cria um salto visível na volta ao primeiro frame. Para reduzir o número de frames, amostre a sequência inteira em intervalos iguais.
 
 ---
 
 ## Torres — 4 Tipos
 
-Os assets de torre são sequências de frames numerados (`1.png`, `2.png`, ...) que representam a animação/construção da torre em seus vários estágios ou estados. Cada torre tem também arquivo Adobe Illustrator e EPS (vetorial editável).
+Os PNGs numerados (`1.png`, `2.png`, ...) são **peças avulsas**: variações de torre, níveis, arqueiros, projéteis etc. Não formam uma sequência de animação. Abra cada uma antes de usar.
 
----
-
-### 1. `archer-tower-game-assets`
-
-**Caminho:** `archer-tower-game-assets/PNG/`
-
-- **54 frames** numerados (`1.png` a `54.png`)
-- **4 folhas compostas:**
-  - `All.png` — todas as versões em uma imagem
-  - `All_v2.png` — versão 2 da folha composta
-  - `All_without_a_shadow.png` — sem sombra
-  - `All_without_a_shadow-v2.png` — versão 2 sem sombra
-
-**Arquivos fonte:**
-- `AI/` — Adobe Illustrator
-- `EPS/` — EPS vetorial
-- `FLA/` — Adobe Flash/Animate (animação)
-
----
-
-### 2. `magic-tower-game-assets`
-
-**Caminho:** `magic-tower-game-assets/PNG/`
-
-- **31 frames** numerados (`1.png` a `31.png`)
-- **1 folha especial:** `without_a_shadow.png`
-
-**Arquivos fonte:**
-- `AI/` — Adobe Illustrator
-- `EPS/` — EPS vetorial
-- `FLA/` — Adobe Flash/Animate
-
----
-
-### 3. `stone-tower-game-assets`
-
-**Caminho:** `stone-tower-game-assets/PNG/`
-
-- **61 frames** numerados (`1.png` a `61.png`)
-- Sem folhas compostas adicionais
-
-**Arquivos fonte:**
-- `AI/` — Adobe Illustrator
-- `EPS/` — EPS vetorial
-- `FLA/` — Adobe Flash/Animate
-
----
-
-### 4. `support-tower-game-assets`
-
-**Caminho:** `support-tower-game-assets/PNG/`
-
-- **17 frames** numerados (`1.png` a `17.png`)
-- **1 folha especial:** `without_a_shadow.png`
-
-**Arquivos fonte:**
-- `AI/` — Adobe Illustrator
-- `EPS/` — EPS vetorial
-- (sem FLA neste pack)
+| Pack | PNGs numerados | Folhas extras | AI / EPS | FLA |
+|------|---------------:|---------------|----------|-----|
+| `archer-tower-game-assets` | 54 (`1`–`54`) | `All.png`, `All_v2.png`, `All_without_a_shadow.png`, `All_without_a_shadow-v2.png` | `Archers_Tower_Game_assets` | `main_tower_5`–`8.fla` |
+| `magic-tower-game-assets` | 31 (`1`–`31`) | `without_a_shadow.png` | `Magic_Tower_Game_assets` | `main_tower_9`–`12.fla` |
+| `stone-tower-game-assets` | 61 (`1`–`61`) | — | `Stones_Tower_Game_assets` | `main_tower_1`–`4.fla` |
+| `support-tower-game-assets` | 17 (`1`–`17`) | `without_a_shadow.png` | `Support_Tower_Game_assets` | — |
 
 ---
 
@@ -188,218 +73,209 @@ Os assets de torre são sequências de frames numerados (`1.png`, `2.png`, ...) 
 
 **Caminho base:** `magic-effects-game-sprite/PNG/`
 
-9 efeitos animados + 1 pasta de ícones estáticos:
-
 | Pasta | Frames | Naming | Descrição |
-|-------|--------|--------|-----------|
-| `damage/` | 10 | `1_effect_damage_000.png` | Efeito de dano |
-| `def/` | 10 | `1_effect_def_000.png` | Efeito de defesa/escudo |
-| `fire/` | 19 | `1_effect_fire_000.png` | Fogo |
-| `freeze/` | 16 | `1_effect_freeze_000.png` | Gelo/congelamento |
-| `rain/` | 39 | `1_effect_rain_001.png` | Chuva (começa em `001`) |
-| `stone/` | 18 | `1_effect_stone_000.png` | Pedra/terra |
-| `time/` | 14 | `1_effect_time_000.png` | Efeito de tempo/slow |
-| `zip/` | 14 | `1_effect_zip_000.png` | Relâmpago/electricidade |
-| `icons/` | 8 | `1.png` a `8.png` | Ícones estáticos de efeito |
+|-------|-------:|--------|-----------|
+| `damage/` | 10 | `1_effect_damage_000`–`009` | Dano |
+| `def/` | 10 | `1_effect_def_000`–`009` | Defesa/escudo |
+| `fire/` | 19 | `1_effect_fire_000`–`018` | Fogo |
+| `freeze/` | 16 | `1_effect_freeze_000`–`015` | Gelo |
+| `rain/` | 39 | `1_effect_rain_001`–`039` | Chuva (**começa em `001`**) |
+| `stone/` | 18 | `1_effect_stone_000`–`017` | Pedra |
+| `time/` | 14 | `1_effect_time_000`–`013` | Tempo/slow |
+| `zip/` | 14 | `1_effect_zip_000`–`013` | Raio |
+| `icons/` | 8 | `1.png`–`8.png` | Ícones estáticos |
 
 **Arquivos fonte:**
-- `AI/` — Adobe Illustrator (1 arquivo)
-- `EPS/` — **82 EPS** em subpastas: `damage/`, `def/`, `fire/`, `fire_2/`, `freeze/`, `icons/`, `rain/`, `stone/`, `time/`, `zip/`
-  - ⚠️ Existe `fire_2/` nos EPS mas **não tem pasta correspondente nos PNGs** — variante extra de fogo apenas no EPS
-- `SCML/effect/` — **74 PNGs** de peças do sprite sheet Spriter + `freeze.scml` (projeto Spriter para o efeito de freeze)
+- `AI/`: **10 arquivos**, um por efeito: `damage`, `def`, `fire`, `fire_2`, `freeze`, `icons`, `rain`, `stone`, `time`, `zip`.
+- `EPS/`: **82 EPS** em subpastas: stone 16, fire_2 15, freeze 14, zip 13, fire 8, time 5, rain 4, damage 4, def 2, icons 1.
+- ⚠️ `fire_2` existe em AI/EPS mas **não tem PNG**.
+- `SCML/freeze.scml` (na raiz de `SCML/`) + `SCML/effect/` com **81 PNGs** de peças.
 
 ---
 
 ## GUI — `td-gui`
 
-**Caminho base:** `td-gui/PNG/`
+**Caminho base:** `td-gui/PNG/` · Fontes: `AI/{tela}.ai`, `EPS/{tela}.eps` (13 de cada) · Fonte tipográfica: **Dimbo** (`https://www.dafont.com/dimbo.font`)
 
-13 telas/componentes de interface completos:
+> Os demais packs usam **Chisel Mark** (`https://www.dafont.com/chisel-mark.font`), conforme os `TXT/readme.txt`.
 
-| Pasta | PNGs | Componentes principais |
-|-------|------|----------------------|
-| `achievement/` | 13 | bg, header, window, table, star, button_close, preview |
-| `difficulty/` | 10 | bg, window, table, buttons (easy/normal/hard), header, preview |
-| `empty_table/` | 6 | bg, table_1 a table_4, preview |
-| `failed/` | 8 | bg, window, table, header, button_restart, button_left, preview |
-| `interface_game/` | 27 | bg, bars (1-4), bg_bar, buttons (pause/quick/start), heart, ícones (ico_1-8), skull, star, table, zip, skull_arr/bg, je, preview |
-| `levels/` | 23 | bg, table, header, buttons (left/right/close/empty), stars (1-4), números (0-9 exceto 2), preview |
-| `load_bar/` | 6 | bg, dark, load_bar_1, load_bar_2, load_bar_bg, preview |
-| `menu/` | 16 | bg, logo, dark, rope_small, buttons: play, registration, settings, sound, sound_off, music, music_off, facebook, google, twitter, vk, preview |
-| `registration/` | 14 | bg, window, header, dark, rope_big, table_1, table_2, buttons (create/close/facebook/google/twitter/vk), preview |
-| `settings/` | 19 | bg, window_1, window_2, table, header, dark, rope_big, bar, bar_bg, buttons (close/plus/minus/on/off/facebook/google/twitter/vk), preview |
-| `shop/` | 24 | bg, window_1, window_2, table, header, dark, rope_big, button_close, button_empty, crystals (1-3), números, zip, preview |
-| `upgrade/` | 39 | bg, window, table, header, dark, rope_big, buttons (close/done/reset), line, star, undo, ícones ico_1 a ico_24, preview |
-| `win/` | 13 | bg, window, table, header, dark, stars (1-4), buttons (menu/right), zip, preview |
+Lista completa dos arquivos (sem `.png`). Os nomes estão **exatamente** como no kit, inclusive os typos:
 
-**Arquivos fonte:**
-- `AI/` — Adobe Illustrator
-- `EPS/` — EPS vetorial
-- **Fonte tipográfica usada:** Dimbo (`https://www.dafont.com/dimbo.font`)
-
-> Os demais packs usam a fonte **Chisel Mark** (`https://www.dafont.com/chisel-mark.font`)
+| Pasta | PNGs | Arquivos |
+|-------|-----:|----------|
+| `achievement/` | 13 | bg, button_close, dark, header_achievement, ico_j, normal_window, preview_achievement, rope_big, s_table, s_window, star, table, text_unlocked |
+| `difficulty/` | 10 | bg, button_easy, button_empty_2, button_hard, button_normal, dark, header_diff, preview_difficulty, table, window |
+| `empty_table/` | 6 | bg, preview_empty_table, table_1–4 |
+| `failed/` | 8 | bg, button_left, button_restart, dark, header_failed, preview_failed, table, **wondow** |
+| `interface_game/` | 27 | bar_1–4, bg, bg_bar, button_pause, button_quick, button_start, heart, ico_1–8, je, preview_interface_game, skull, skull_arr, skull_bg, star, table, table_down, zip |
+| `levels/` | 23 | bg, **btton_empty**, button_close, button_left, button_right, dark, header_levels, num_ (sem dígito), num_0, num_1, num_3–9 (**sem num_2**), preview_levels, star_1–4, table |
+| `load_bar/` | 6 | bg, dark, load_bar_1, load_bar_2, load_bar_bg, preview_load_bar |
+| `menu/` | 16 | bg, **button__facebook**, button_google, button_music, button_music_off, button_play, button_registration, button_settings, button_sound, button_sound_off, button_twitter, button_vk, dark, logo, preview_menu, rope_small |
+| `registration/` | 14 | bg, **button__facebook**, button_close, button_create, button_google, button_twitter, button_vk, dark, header_registration, preview_registration, rope_big, table_1, table_2, window |
+| `settings/` | 19 | bar, bar_bg, bg, **button__facebook**, button_close, button_google, button_minus, button_off, button_on, button_plus, button_twitter, button_vk, dark, header_settings, preview_settings, rope_big, table, window_1, window_2 |
+| `shop/` | 24 | bg, button_close, button_empty, crystal_1–3, dark, header_shop, num_ (sem dígito), num_0, num_1, num_3–9 (**sem num_2**), preview_shop, rope_big, table, window_1, window_2, zip |
+| `upgrade/` | 39 | bg, button_close, button_done, button_reset, dark, header_upgrade, ico_1–24, line, preview_upgrade, rope_big, star, table, undo, **window_**, window_1, window_3 |
+| `win/` | 13 | bg, button_menu, button_right, dark, header_win, preview_win, star_1–4, table, window, zip |
 
 ---
 
 ## Tilesets — `td-tilesets`
 
-3 variantes de tilesets com 4 temas de mapa cada:
-
----
+São 3 pastas: 2 packs de backgrounds prontos (4 cada) e 1 versão em tiles para o Tiled (8 tilesets).
 
 ### Tileset Pack 1 — `tower-defense-game-tilesets`
 
-**Caminho:** `td-tilesets/tower-defense-game-tilesets/PNG/`
+**Caminho:** `td-tilesets/tower-defense-game-tilesets/PNG/game_background_{N}/`. Cada pasta tem o composto `game_background_{N}.png` + `layers/{layer}.png`.
 
-4 mapas completos, cada um com imagem composta + layers separados:
+| N | Tema | Layers |
+|---|------|--------|
+| 1 | Floresta com rio | `main_bg`, `land`, `bridge`, `fence`, `bush`, `stone`, `tree`, `tree_2`, `river_1`–`6`, `road_1`–`10`, `decor_1`–`5`, `dot` |
+| 2 | Lago e pedras | `main_bg`, `land`, `lake`, `stone_1`–`3`, `road_1`–`10`, `decor_1`–`9`, `dot` |
+| 3 | Rio com ponte | `main_bg`, `land`, `bridge`, `stone`, `river_1`–`6`, `road_1`–`10`, `decor_1`–`8`, `dot` |
+| 4 | Montanhas | `main_bg`, `land`, `mountains`, `stone`, `tree`, `road_1`–`10`, `decor_1`–`3`, `dot` |
 
-#### `game_background_1/` — Floresta com rio
-- **Composto:** `game_background_1.png`
-- **Layers:** `main_bg`, `land`, `bridge`, `fence`, `bush`, `stone`, `tree`, `tree_2`, `river_1` a `river_6`, `road_1` a `road_10`, `decor_1` a `decor_5`, `dot`
-
-#### `game_background_2/` — Lago e pedras
-- **Composto:** `game_background_2.png`
-- **Layers:** `main_bg`, `land`, `lake`, `stone_1`, `stone_2`, `stone_3`, `road_1` a `road_10`, `decor_1` a `decor_9`, `dot`
-
-#### `game_background_3/` — Rio com ponte
-- **Composto:** `game_background_3.png`
-- **Layers:** `main_bg`, `land`, `bridge`, `stone`, `river_1` a `river_6`, `road_1` a `road_10`, `decor_1` a `decor_8`, `dot`
-
-#### `game_background_4/` — Montanhas
-- **Composto:** `game_background_4.png`
-- **Layers:** `main_bg`, `land`, `mountains`, `stone`, `tree`, `road_1` a `road_10`, `decor_1` a `decor_3`, `dot`
-
-**Arquivos fonte:** `AI/` + `EPS/`
-
----
+Fontes: `AI/` e `EPS/` com `game_background_1`–`4` e `tail_set_1`–`4`.
 
 ### Tileset Pack 2 — `tower-defense-game-tile-set-pack-2`
 
-**Caminho:** `td-tilesets/tower-defense-game-tile-set-pack-2/PNG/`
+Mesma estrutura, mas os `road_*` ficam em `layers/{N}/road_{1-10}.png`. Os outros layers ficam direto em `layers/`.
 
-4 mapas com layers organizados em subpasta numerada (`layers/{N}/road_*.png`):
+| N | Tema | Layers (fora `road_*`) |
+|---|------|------------------------|
+| 1 | Floresta com lago | `main_bg`, `land`, `lake`, `stone`, `tree_1`, `tree_2`, `bush_1`–`3`, `decor_1`–`5`, `dot` |
+| 2 | Lago com pedras | `main_bg`, `land`, `lake_1`–`3`, `stone_1`–`8`, `decor_1`–`7`, `dot` |
+| 3 | Rio, ponte e lago | `main_bg`, `land`, `lake`, `bridge`, `river_1`–`6`, `stone_1`, `stone_2`, `tree_1`, `tree_2`, `decor_1`–`6`, `dot` |
+| 4 | Árvores e lagos | `main_bg`, `land`, `lake_1`–`3`, `stone_1`–`4`, `tree_1`–`3`, `decor_1`–`3`, `dot` |
 
-#### `game_background_1/` — Floresta com lago
-- **Composto:** `game_background_1.png`
-- **Layers:** `main_bg`, `land`, `lake`, `stone`, `tree_1`, `tree_2`, `bush_1` a `bush_3`, `road_1` a `road_10` (em `layers/1/`), `decor_1` a `decor_5`, `dot`
-
-#### `game_background_2/` — Lago com pedras
-- **Composto:** `game_background_2.png`
-- **Layers:** `main_bg`, `land`, `lake_1` a `lake_3`, `stone_1` a `stone_8`, `road_1` a `road_10` (em `layers/2/`), `decor_1` a `decor_7`, `dot`
-
-#### `game_background_3/` — Rio e ponte com lago
-- **Composto:** `game_background_3.png`
-- **Layers:** `main_bg`, `land`, `lake`, `bridge`, `river_1` a `river_6`, `stone_1`, `stone_2`, `tree_1`, `tree_2`, `road_1` a `road_10` (em `layers/3/`), `decor_1` a `decor_6`, `dot`
-
-#### `game_background_4/` — Árvores e lagos
-- **Composto:** `game_background_4.png`
-- **Layers:** `main_bg`, `land`, `lake_1` a `lake_3`, `stone_1` a `stone_4`, `tree_1` a `tree_3`, `road_1` a `road_10` (em `layers/4/`), `decor_1` a `decor_3`, `dot`
-
-**Arquivos fonte:** `AI/` + `EPS/`
-
----
+Fontes: iguais às do Pack 1.
 
 ### Tiled Version — `version-for-the-program-Tiled`
 
 **Caminho:** `td-tilesets/version-for-the-program-Tiled/`
 
-Versão dos tilesets otimizada para o editor **Tiled Map Editor** (`.tmx`):
+- `PNG/tail_{1-8}/{id}.png`: **todos os tiles são 256×256**, numerados a partir de 1.
+- `tailed/tail_{1-8}.tmx`: tileset do Tiled (`tilewidth=256`, mapa de exemplo 100×100). Só confirma a ordem dos ids; não tem nomes semânticos.
+- `AI/tail_{1-8}.ai`.
 
-| Tileset | Tiles individuais | Arquivo Tiled |
-|---------|------------------|---------------|
-| `tail_1` | 49 PNGs | `tailed/tail_1.tmx` |
-| `tail_2` | 56 PNGs | `tailed/tail_2.tmx` |
-| `tail_3` | 49 PNGs | `tailed/tail_3.tmx` |
-| `tail_4` | 46 PNGs | `tailed/tail_4.tmx` |
-| `tail_5` | 42 PNGs | `tailed/tail_5.tmx` |
-| `tail_6` | 45 PNGs | `tailed/tail_6.tmx` |
-| `tail_7` | 40 PNGs | `tailed/tail_7.tmx` |
-| `tail_8` | 47 PNGs | `tailed/tail_8.tmx` |
+| Tileset | Tema | PNGs | Ids | Base opaca |
+|---------|------|-----:|-----|-----------:|
+| `tail_1` | grama / vila | 49 | 1–49 | `42` |
+| `tail_2` | areia / ruínas | 56 | 1–56 | `21` |
+| `tail_3` | pedra escura / runas / pântano ácido | 49 | 1–49 | `26` |
+| `tail_4` | neve / gelo | 46 | 1–46 | `35` (alt. `44`, rocha com neve) |
+| `tail_5` | selva tropical | 42 | 1–42 | `22` |
+| `tail_6` | lava / vulcão | 45 | 1–45 | `24` |
+| `tail_7` | pântano cinza / cemitério | 40 | 1–40 | `26` |
+| `tail_8` | pântano tóxico / cemitério | 47 | 1–48, **sem `28`** | `34` |
 
-- Tiles numerados (`1.png`, `2.png`, ...)
-- **Arquivos fonte:** `AI/tail_1.ai` a `AI/tail_8.ai`
+"Base opaca" é o único tile RGB sem alfa do tileset: terreno de preenchimento. A exceção é o `tail_4`, que tem 2 (`35` e `44`).
 
-#### Mapa operacional dos tiles de caminho
+#### Tiles de caminho `1`–`12`
 
-Os arquivos `tailed/tail_*.tmx` confirmam a ordem dos tiles, mas nao trazem nomes semanticos como `straight` ou `corner`. Para a pipeline do jogo, usar a convencao visual abaixo para os `PNG/tail_N/{id}.png`.
+Conectividade **medida** pelos pixels opacos nas bordas de cada tile. O caminho padrão ocupa a faixa de pixels `43`–`212` do lado.
 
-Essa convencao vale para as familias `tail_1`, `tail_2`, `tail_4`, `tail_6`, `tail_7` e `tail_8`; elas repetem o mesmo bloco estrutural nos ids `1` a `12`, mudando apenas o tema visual.
+**`1`–`4` são iguais em todas as famílias:**
 
-| Tile id | Uso operacional | Conectividade confirmada |
-|---:|---|---|
-| `1` | curva | `S + E` |
-| `2` | curva | `S + W` |
-| `3` | curva | `N + E` |
-| `4` | curva | `N + W` |
-| `5` | reta vertical | norte-sul |
-| `6` | reta horizontal | oeste-leste |
-| `7` | T sem norte | `S + W + E` |
-| `8` | cruzamento | `N + S + W + E` |
-| `9` | reta horizontal alternativa | oeste-leste |
-| `10` | curva alternativa | `S + W` |
-| `11` | T sem oeste | `N + S + E` |
-| `12` | T sem sul | `N + W + E` |
+| Id | Peça |
+|---:|------|
+| `1` | curva `S + E` |
+| `2` | curva `S + W` |
+| `3` | curva `N + E` |
+| `4` | curva `N + W` |
 
-Uso recomendado na pipeline:
+**`5`–`8` mudam de ordem conforme a família. Nunca assuma a ordem:**
 
-- Nao recortar `game_background_N.png` composto para mapas jogaveis com rota propria. Esses backgrounds ja contem estradas/decoracoes prontas e ficam incoerentes quando combinados com os `map.xml` existentes.
-- Para mapas de gameplay, montar um tilemap por celula `32x32` a partir do `CollisionMap`.
-- Usar os tiles `1` a `12` apenas para caminho, escolhidos por conectividade da celula (`N`, `S`, `E`, `W`).
-- Para o caso `N + S + W`, que nao tem tile dedicado nas familias verificadas, a pipeline pode reutilizar `11` rotacionado 180 graus.
-- Alternativa atualmente usada por `tools/asset_pipeline/build_maps.py`: gerar a estrada como um tracado continuo texturizado a partir dos checkpoints de `<Path>`. Isso evita curvas quebradas quando os PNGs `256x256` do Tiled nao fecham bem apos reducao para celulas `32x32`.
-- Ao usar esse tracado continuo, nao preencher a estrada com o tile de caminho inteiro: os tiles carregam bordas e cantos internos que viram padroes repetidos. A pipeline deve usar apenas o miolo do tile como textura de superficie e desenhar borda/sombra separadamente.
-- Usar tiles de base separados para areas construiveis e decoracoes, por tema:
+| Famílias | `5` | `6` | `7` | `8` |
+|----------|-----|-----|-----|-----|
+| `tail_2`, `tail_5`, `tail_6`, `tail_8` | vertical | horizontal | T `S+W+E` | cruzamento |
+| `tail_3` | vertical | horizontal | cruzamento | T `S+W+E` |
+| `tail_1` | T `S+W+E` | vertical | cruzamento | horizontal |
+| `tail_4`, `tail_7` | T `S+W+E` | cruzamento | vertical | horizontal |
 
-| Tema | Familia | Base sugerida | Decoracoes seguras |
-|---|---|---:|---|
-| grama/selva | `tail_1` ou `tail_5` | `42` ou `22` | `30`, `31`, `33`, `35`, `36`, `37`, `43`-`49` |
-| areia/ruinas | `tail_2` | `21` | `22`-`24`, `28`-`40`, `41`-`56` |
-| neve/gelo | `tail_4` | `35` ou `44` | `21`-`29`, `33`, `34`, `38`-`43` |
-| lava/pedra | `tail_6` | `24` | `20`-`32`, `37`-`45` |
-| pantano/pedra | `tail_7` | `26` | `23`-`25`, `27`-`40` |
-| pedra/musgo | `tail_8` | `34` | `19`-`27`, `29`-`47` |
+**`9`–`12` não são peças avulsas.** Formam uma **junção larga 2×2** (`9 10` em cima, `11 12` embaixo). As saídas externas ficam na faixa padrão: `W` do 9, `S` do 11 e `E` do 12. É igual em todas as famílias.
 
-#### Referencia rapida de decoracao por familia
+Os outros T (`N+S+W`, `N+S+E`, `N+W+E`) não existem como tile. Os `.tmx` de exemplo do autor os obtêm **girando o T** com as flags de flip do Tiled: `HV` = 180°, `HD`/`VD` = 90°. O T é o único tile girado nos 8 exemplos.
 
-Use esta tabela antes de mexer em `tools/asset_pipeline/build_maps.py`. Ela separa os tiles por funcao visual para evitar decoracao aleatoria sem sentido em areas construiveis.
+**Validação:** a tabela acima foi conferida contra os `.tmx` (layers `road` e `river`, com flips). Deu 0 inconsistências em 1.064 pares de tiles vizinhos nas 8 famílias. Os mapas de exemplo podem ser renderizados com `/Users/dogo/Downloads/Tiled.app/Contents/MacOS/tmxrasterizer -t 40 tailed/tail_N.tmx out.png`. O conteúdo fica num bloco de ~11×9 tiles perto do centro do mapa 100×100.
 
-| Familia | Funcao | Tile ids |
-|---|---|---|
-| `tail_1` grama/vila | base limpa | `42` |
-| `tail_1` grama/vila | agua/ponte/trilha pronta | `13`-`18`, `25`-`27` |
-| `tail_1` grama/vila | props de vila | `20`, `21`, `28`, `29`, `38`, `39`, `40`, `41` |
-| `tail_1` grama/vila | pedras/flor/arbustos pequenos | `22`-`24`, `30`-`32`, `35`, `36`, `47`-`49` |
-| `tail_1` grama/vila | arvores/massa verde | `33`, `34`, `37`, `43`-`46` |
-| `tail_2` areia/ruinas | base limpa | `21` |
-| `tail_2` areia/ruinas | agua/ponte/trilha pronta | `13`-`20`, `25`, `27`, `55` |
-| `tail_2` areia/ruinas | ruinas/templo/vila | `43`-`49`, `56` |
-| `tail_2` areia/ruinas | cactos/ossos/arvores secas | `29`, `31`-`36`, `41`, `42`, `50`-`54` |
-| `tail_2` areia/ruinas | pedras/folhagem seca | `22`-`24`, `28`, `30`, `37`-`40` |
-| `tail_4` neve/gelo | base limpa | `35` |
-| `tail_4` neve/gelo | gelo/agua/ponte/trilha pronta | `13`-`20`, `30` |
-| `tail_4` neve/gelo | construcao/ruina | `21`-`23`, `31`, `32` |
-| `tail_4` neve/gelo | pinheiros | `24`-`29` |
-| `tail_4` neve/gelo | pedras/neve baixa | `33`, `34`, `38`-`43` |
-| `tail_7` pantano/pedra | base limpa | `26` |
-| `tail_7` pantano/pedra | agua/pantano/ponte | `13`-`24` |
-| `tail_7` pantano/pedra | arvores mortas/massa pantano | `35`-`40` |
-| `tail_7` pantano/pedra | pedras/ossos/nevoa baixa | `27`-`34` |
+#### Peças compostas e decoração por família
 
-Layouts de mapa recomendados:
+Peças marcadas como **composta** só fazem sentido juntas. Usadas sozinhas, aparecem cortadas na borda do tile. Notação: `a b / c d` = 2×2 (linha de cima / linha de baixo); `a / b` = empilhado na vertical; `a b` = lado a lado. Todas as compostas abaixo foram confirmadas nos `.tmx` de exemplo: cada vez que um id aparece, os outros pedaços estão na posição indicada.
 
-- `olympus`: areia/ruinas (`tail_2`) com clusters de templo, cactos, ossos e pedras. Evitar arvores verdes.
-- `icarusfalls`: pantano/pedra (`tail_7`) com arvores mortas nas bordas, pedras e ossos em pequenos grupos. Evitar props de vila.
-- `rescueathena`: grama/vila (`tail_1`) com bosques nas bordas, poucos props de vila e pedras/arbustos em grupos.
-- `icymanipulator`: neve/gelo (`tail_4`) com pinheiros, cabana/ruina e rochas de neve agrupadas.
+Em todas as famílias os ids `13`–`18` são o "rio" do tema (água, lava, lodo etc.), com a mesma lógica dos tiles de estrada: `13` curva `S+E`, `14` curva `S+W`, `15` curva `N+E`, `16` curva `N+W`, `17` vertical, `18` horizontal. Exceção: no `tail_2` o rio é `15`–`20` na mesma ordem, e `13 14` é um lago.
 
-Regra de composicao para gameplay:
+**`tail_1` — grama / vila (base `42`)**
+| Função | Ids |
+|---|---|
+| ponte | `27` |
+| props isolados | `19` arbusto, `20` placa, `21` toco, `22` mancha de feno, `23` fogueira, `24` pedra, `25` toras, `26` cerca, `28` casa, `29` bandeira, `33` árvore |
+| grupos em 1 tile | `30` arbustos, `31` tocos, `32` cercas, `34` pilhas de toras, `35` fogueiras+pedra+arbusto, `36` pedras, `37` 2 árvores (preenche o tile), `47`–`49` pedras/arbustos/tocos |
+| composta | `38 39 / 40 41` moinho · `43 44 / 45 46` bosque |
 
-- Nao colocar props opacos no miolo da area construivel. Eles parecem obstaculo e atrapalham a leitura de onde construir.
-- Props grandes devem ficar em bordas, cantos ou como camada de fundo parcialmente coberta pela estrada.
-- Para dar identidade ao interior do mapa, usar manchas suaves de terreno, variacao de cor e textura baixa, nao objetos soltos.
-- Se uma rota ocupa quase todas as bordas, como `icarusfalls`, priorizar backdrops nas extremidades e terreno tonal; nao forcar arvores/pedras dentro dos bolsões de construcao.
+**`tail_2` — areia / ruínas (base `21`)**
+| Função | Ids |
+|---|---|
+| lago (composta) | `13 14` |
+| ponte | `54` |
+| props isolados | `23` toco, `24` palha seca, `25` fogueira, `26` placa, `27` toras, `28` mancha de terra, `29` cacto, `32` ossada, `33` crânio de boi, `41` e `42` árvores secas, `43` torre de vigia, `55` casa, `56` bandeira |
+| grupos em 1 tile | `22` pedras, `30` pedra+cactos, `31` pedras/tocos/cacto, `34` cactos+pedra, `35` cactos, `36` toras, `37` tocos, `38` fogueiras+pedra+cacto, `39` palha, `40` pedras |
+| composta | `44 / 45` torre ameiada com casa · `46 47 / 48 49` moinho · `50 51 / 52 53` bosque seco |
 
-Observacao importante: antes de trocar a arte final de mapa, validar uma folha de preview da combinacao `CollisionMap` + tiles escolhidos. Se os ids de curva ficarem visualmente invertidos para alguma familia, corrigir a tabela acima e a pipeline, nao compensar com recortes manuais.
+**`tail_3` — pedra escura / runas (base `26`)**
+| Função | Ids |
+|---|---|
+| lago ácido (composta) | `19 20` |
+| ponte | `21` |
+| props isolados | `22` casa, `23` bandeira, `24` toco, `27` placa, `28` fogueira, `29` galhos secos, `31` mancha de terra, `35`–`38` pedras com runa, `41` árvore morta, `47` torre de vigia |
+| grupos em 1 tile | `25` rochas, `30` rochas+tocos, `32` fogueiras+rochas, `33` rochas+tocos, `34` tocos, `39` rochas, `40` 2 árvores mortas, `42` galhos secos |
+| composta | `43 44 / 45 46` bosque morto · `48 / 49` torre ameiada com casa |
+
+**`tail_4` — neve / gelo (base `35`)**
+| Função | Ids |
+|---|---|
+| lago congelado (composta) | `19 20` |
+| ponte | `30` |
+| props isolados | `21` torre de vigia, `29` pinheiro, `31` cabana, `32` bandeira, `33` toco, `36` placa, `37` fogueira, `40` mancha de gelo |
+| grupos em 1 tile | `28` 2 pinheiros, `34` rochas com neve, `38` rochas com neve, `39` rochas+fogueira, `41` rocha+tocos, `42` tocos, `43` rochas+tocos |
+| composta | `22 / 23` torre ameiada com casa · `24 25 / 26 27` bosque de pinheiros · `44` (opaco) + `45`, `46` terreno de rocha com neve e suas bordas |
+
+**`tail_5` — selva tropical (base `22`)**
+| Função | Ids |
+|---|---|
+| lago (composta) | `35 36` |
+| ponte | `19` |
+| props isolados | `20` cabana de palha, `21` bandeira, `29` mancha de areia, `41` palmeira alta, `42` palmeira |
+| grupos em 1 tile | `23`–`28`, `30`–`32` pedras/folhagem/tocos/fogueira/placa |
+| composta | `33 34` mancha de lama · `37 38 / 39 40` bosque de palmeiras (as copas passam da borda) |
+
+**`tail_6` — lava / vulcão (base `24`)**
+| Função | Ids |
+|---|---|
+| ponte | `19` |
+| props isolados | `21` bandeira, `25` placa, `27` crânio de boi, `28` ossada, `29` mancha de cinza |
+| grupos em 1 tile | `20` poças de lava pequenas, `22`, `23` e `26` rochas pontiagudas, `30` rochas, `31` mini vulcões, `32` cascalho |
+| composta | `37 / 38` gárgula sobre pilar com runas · `39 40` fosso de lava · `33`–`36` e `41`–`45` bordas e penhascos de um lago de lava (só funcionam montados) |
+
+**`tail_7` — pântano cinza / cemitério (base `26`)**
+| Função | Ids |
+|---|---|
+| poça (composta) | `19 20 / 21 22` |
+| ponte | `23` |
+| props isolados | `24` cabana, `25` bandeira, `27` crânio de boi, `28` ossada, `30` mancha, `34` placa, `35` e `36` árvores mortas |
+| grupos em 1 tile | `29` buracos/pedras, `31` pedras, `32` lápides, `33` lápides+pedras |
+| composta | `37 38 / 39 40` bosque morto |
+
+**`tail_8` — pântano tóxico / cemitério (base `34`, sem tile `28`)**
+| Função | Ids |
+|---|---|
+| poças | `19`, `20` isoladas; `21 22` composta |
+| névoa (composta) | `23 24 25` faixa horizontal |
+| ponte | `26` |
+| props isolados | `27` obelisco, `29` bandeira, `35` crânio de boi, `36` ossada, `39` mancha, `42` placa, `43` e `44` árvores do pântano |
+| grupos em 1 tile | `37`, `38`, `40` e `41` rochas |
+| composta | `30 31 / 32 33` árvore retorcida com corvo e esqueleto · `45 46 / 47 48` bosque do pântano |
+
+Para conferir visualmente: `tools/asset_pipeline/preview_tiles.py` gera `tools/asset_pipeline/_debug/{tail}_sheet.png`, mas hoje só para `tail_1`, `tail_2`, `tail_4` e `tail_7` (constante `TAILS`). `_debug/` está no `.gitignore`.
 
 ---
 
@@ -407,48 +283,46 @@ Observacao importante: antes de trocar a arte final de mapa, validar uma folha d
 
 | Extensão | Descrição | Onde aparece |
 |----------|-----------|-------------|
-| `.png` | Sprites/frames prontos para uso | Todos os packs |
-| `.ai` | Adobe Illustrator (vetor editável) | Todos os packs |
-| `.eps` | Encapsulated PostScript (vetor) | Todos os packs |
-| `.fla` | Adobe Flash/Animate (animação timeline) | Torres (archer, magic, stone) |
-| `.scml` | Projeto Spriter (animação esqueletal) | Packs de monstros, magic-effects |
-| `.tmx` | Projeto Tiled Map Editor | td-tilesets/version-for-the-program-Tiled |
+| `.png` | Sprites/frames prontos | Todos os packs |
+| `.ai` | Adobe Illustrator | Todos os packs |
+| `.eps` | EPS vetorial | Todos os packs, exceto a versão Tiled |
+| `.fla` | Adobe Flash/Animate | Torres archer, magic e stone |
+| `.scml` | Spriter | Packs de monstros e magic-effects |
+| `.tmx` | Tiled Map Editor | `td-tilesets/version-for-the-program-Tiled/tailed/` |
+| `.txt` | `license.txt` + `readme.txt` (fonte usada) | `TXT/` de cada pack |
 
 ---
 
 ## Notas Importantes
 
-### Anomalias de Naming
+### Anomalias do kit
 
-1. **`monster-character-2d-sprites`:** todos os arquivos dentro de qualquer pasta `PNG/{N}/` têm prefixo `2_enemies_1_` no nome, independente do número do monstro. Para identificar qual monstro, use o número da **pasta**, não do arquivo.
+1. **Prefixo fixo:** `monster-character-2d-sprites` sempre usa `2_enemies_1_`, e `tower-defense-monster-2d-sprites` sempre usa `1_enemies_1_`. Identifique o monstro pela pasta.
+2. **Frames duplicados** na maioria das animações não-ATTACK/DIE (ver [Monstros](#️-frames-duplicados-verificado-por-hash)).
+3. **`fire_2`** existe em AI/EPS de magic-effects, sem PNG.
+4. **`rain`** começa no frame `001`; os outros efeitos começam em `000`.
+5. **Typos de nome no GUI:** `failed/wondow.png`, `levels/btton_empty.png`, `button__facebook.png` (2 underscores), `upgrade/window_.png`. Os numerais de `levels` e `shop` não têm `num_2`.
+6. **`tail_8` não tem o tile `28`** (nem o `.tmx` referencia).
+7. **Tiles de caminho `5`–`8` mudam de ordem** entre famílias, e `9`–`12` são um bloco 2×2 (ver [Tiled](#tiles-de-caminho-1-12)).
 
-2. **`tower-defense-monster-2d-sprites`:** mesmo problema — prefixo fixo `1_enemies_1_` em todos os arquivos. Identificar pelo número da **pasta**.
-
-3. **`magic-effects-game-sprite`:** existe subpasta `fire_2/` nos EPS (variante alternativa de fogo) sem correspondente na pasta PNG.
-
-### Convenções de Animação
-
-| Pack | Animações | Frames | Tem IDLE? |
-|------|-----------|--------|-----------|
-| `2d-monster-sprites` | attack, die, hurt, idle, jump, run, walk | 20 | ✅ |
-| `monster-enemy-game-sprites` | attack, die, hurt, idle, jump, run, walk | 20 | ✅ |
-| `monster-character-2d-sprites` | ATTACK, DIE, HURT, JUMP, RUN, WALK | 10 | ❌ |
-| `tower-defense-monster-2d-sprites` | ATTACK, DIE, HURT, JUMP, RUN, WALK | 10 | ❌ |
-
-### Rotas de Importação para o Jogo
-
-Para usar um monstro em código, o padrão de path é:
+### Padrões de path para importação
 
 ```
-# Pack 1 ou 2 (20 frames, tem idle)
-tower-defense-2d-game-kit-v1.1/{pack}/PNG/{monster_num}/{monster_num}_enemies_1_{animation}_{frame:03d}.png
+# Packs 1 e 2 (20 frames, minúsculo, tem idle)
+{pack}/PNG/{N}/{N}_enemies_1_{animation}_{frame:03d}.png
 
-# Pack 3 ou 4 (10 frames, sem idle — atenção ao naming bugado)
-tower-defense-2d-game-kit-v1.1/{pack}/PNG/{monster_num}/2_enemies_1_{ANIMATION}_{frame:03d}.png  # pack 3
-tower-defense-2d-game-kit-v1.1/{pack}/PNG/{monster_num}/1_enemies_1_{ANIMATION}_{frame:03d}.png  # pack 4
-```
+# Pack 3 (10 frames, MAIÚSCULO, sem idle)
+monster-character-2d-sprites/PNG/{N}/2_enemies_1_{ANIMATION}_{frame:03d}.png
 
-Para um tileset layer individual (pack 1):
-```
-tower-defense-2d-game-kit-v1.1/td-tilesets/tower-defense-game-tilesets/PNG/game_background_{N}/layers/{layer_name}.png
+# Pack 4 (10 frames, MAIÚSCULO, sem idle)
+tower-defense-monster-2d-sprites/PNG/{N}/1_enemies_1_{ANIMATION}_{frame:03d}.png
+
+# Layer de background (Pack 1)
+td-tilesets/tower-defense-game-tilesets/PNG/game_background_{N}/layers/{layer}.png
+
+# Estrada de background (Pack 2)
+td-tilesets/tower-defense-game-tile-set-pack-2/PNG/game_background_{N}/layers/{N}/road_{1-10}.png
+
+# Tile do Tiled (256x256)
+td-tilesets/version-for-the-program-Tiled/PNG/tail_{F}/{id}.png
 ```
