@@ -275,7 +275,7 @@ Em todas as famílias os ids `13`–`18` são o "rio" do tema (água, lava, lodo
 | grupos em 1 tile | `37`, `38`, `40` e `41` rochas |
 | composta | `30 31 / 32 33` árvore retorcida com corvo e esqueleto · `45 46 / 47 48` bosque do pântano |
 
-Para conferir visualmente: `tools/asset_pipeline/preview_tiles.py` gera `tools/asset_pipeline/_debug/{tail}_sheet.png`, mas hoje só para `tail_1`, `tail_2`, `tail_4` e `tail_7` (constante `TAILS`). `_debug/` está no `.gitignore`.
+Para conferir visualmente: `tools/asset_pipeline/preview_tiles.py` gera `tools/asset_pipeline/_debug/{tail}_sheet.png` para as 8 famílias. `_debug/` está no `.gitignore`.
 
 ---
 

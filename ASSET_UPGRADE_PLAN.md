@@ -35,9 +35,9 @@ Todo PNG de gameplay/HUD trocado ate agora e gerado por script. **Nao editar ess
 | `build_<inimigo>_enemy.py` (7) + `enemy_assets.py` | `enemies/*/*.png` | ver tabela da secao 2 |
 | `build_ingame_ui.py` | `hud`, `sidebar`, `upgradebar`, `selector`, `sell`, `upgrade` `.png` | `td-gui/PNG/*` (crystal_1 do `shop`, heart do `interface_game`) |
 | `build_maps.py` | `maps/*/{<mapa>.png, mini.png}` + `_debug/*` | `td-tilesets/version-for-the-program-Tiled` |
-| `preview_tiles.py` | `_debug/{tail}_sheet.png` (so tail_1, 2, 4, 7) | idem |
+| `preview_tiles.py` | `_debug/{tail}_sheet.png` (as 8 familias) | idem |
 
-⚠️ `tools/import_kit_enemies.py` (fora de `asset_pipeline/`) e **legado** (commit `468db2f`). Ele usa outro mapeamento de monstros e, se rodar, sobrescreve os inimigos atuais com sprites diferentes. Apagar ou nao usar.
+O antigo `tools/import_kit_enemies.py` (legado, com outro mapeamento de monstros) foi removido.
 
 ## 1. Torres — [parcial]
 
@@ -60,16 +60,16 @@ As torres precisam parecer mais fortes, distintas entre si e legiveis em `32x32`
 
 - [feito] `tower.png`, `icon.png` e `ST_*.png` novos para as 4 torres (sheets `128x32`, 4 frames de `32x32`).
 - [feito] Projeteis novos: flecha e cristal com tremida de ±1px, bola de fogo pulsando em tamanho (12→16px), raio alternando os frames 19/20.
-- [pendente] **Animacao idle das torres:** os 4 frames de cada `tower.png` sao identicos, porque o script copia o mesmo frame 4 vezes. O `FrameTime` do `tower.xml` hoje anima uma imagem parada. Ideias:
-  - chama pulsando na torre de fogo
-  - cristal brilhando na torre de gelo
-  - raio piscando na torre eletrica
-  - arqueiro/balista tensionando levemente
+- [feito] **Idle das torres magicas:** `accent_idle_frames()` (em `build_arrow_tower.py`) faz pulsar so os pixels de destaque saturados, com brilho 1.0 → 1.25 → 1.5 → 1.25 em ping-pong:
+  - fogo: gemas amarelas/vermelhas
+  - gelo: faixas turquesa
+  - eletrica: pontos vermelhos
+- [pendente] **Arrow Tower** continua estatica de proposito: a base de madeira/palha nao tem detalhe luminoso. Um idle real precisaria de arte nova (arqueiro/bandeira).
 
 ### Entregaveis restantes
 
-- Frames de idle reais nos `build_*_tower.py`.
-- Ajustar `FrameTime` nos `tower.xml` depois disso.
+- Idle da Arrow Tower (precisa de arte).
+- Revisar no emulador se o `FrameTime` atual (95–150 ms) deixa o pulso agradavel.
 
 ## 2. Inimigos — [parcial]
 
@@ -103,7 +103,8 @@ Minotaur e griffin tem so 6 frames unicos porque o proprio kit repete frames (ve
   - fade-out na morte (estado `ENEMY_DYING`)
   - frame inicial aleatorio
   - voadores flutuando
-- [pendente] **Loop com salto:** `enemy_assets.frame_paths()` pega os **primeiros 12** frames de animacoes de 20 (`000`–`011`). O ciclo nao fecha. Medido: o salto `011→000` e 2,5–4× maior que um passo normal em Cerberus, Medusa, Minions e Cyclops. Correcao: amostrar os 20 em intervalos iguais.
+- [feito] **Loop sem salto:** `enemy_assets.frame_paths()` agora amostra o ciclo inteiro de 20 frames em intervalos iguais. Antes pegava `000`–`011` e a emenda `011→000` era 2,5–4× um passo normal. Agora fica em 1,1–1,5× (a Medusa tem 1,55× porque o proprio kit ja salta entre `019` e `000`).
+- [verificar] Com o ciclo completo em 12 frames, as pernas de Cerberus, Medusa, Minions e Cyclops se movem ~1,67× mais rapido com o mesmo `FrameTime`. Conferir no emulador se o passo nao parece "patinando"; se parecer, aumentar o `FrameTime` no `enemy.xml`.
 - [pendente] Barra de vida: continua sendo dois retangulos (vermelho + verde) de `32x4` sem borda, em `EnemyRenderer::RenderEnemyHealthBar`. Proposta:
   - barra menor e mais polida
   - borda escura
@@ -233,24 +234,18 @@ Tiles que o planner realmente coloca hoje. Todos sao props isolados, conforme AS
 - **Nunca usar pedaco de peca composta como prop avulso** (ver ASSET_MAP > Pecas compostas).
 - Nao recortar os `game_background_N.png` compostos: eles ja trazem estrada propria, que nao bate com os `map.xml`.
 
-### Inconsistencias conhecidas em `build_maps.py`
+### Notas de `build_maps.py`
 
-Nenhuma afeta os mapas gerados hoje, porque estao em comentarios ou em pools que nenhuma regra usa.
-
-- `THEMES[*]["road"] = 6` em todos os mapas, mas o tile `6` e horizontal no `tail_2`, vertical no `tail_1` e cruzamento no `tail_4`/`tail_7`. Funciona porque `road_surface_fill()` so usa o miolo do tile.
-- `tail_4`: o comentario do topo diz "27,28 = single pines", mas `27` e um pedaco do bosque 2×2 `24 25 / 26 27` e `28` tem 2 pinheiros. O pool (`29`) esta certo. `snow_rock: (33, 34)`: `33` e um toco.
-- `tail_7`: "33 = single grave" — e um grupo de lapides.
-- `tail_1`: "38 = windmill atomic" — e um pedaco do moinho 2×2 `38 39 / 40 41`.
-- `olympus` `dry_tree: (42, 50, 51)`: `50`/`51` sao pedacos do bosque seco 2×2 `50 51 / 52 53`.
-- `icarusfalls` `dead_tree.filler: (37..40)` sao pedacos do bosque morto 2×2. Hoje nunca sao escolhidos, porque a regra tem `max: 1` e so o anchor (`35`/`36`) entra. Se `max` subir, vao aparecer arvores cortadas.
+- `THEMES[*]["road"]` aponta para a reta horizontal de cada familia (`tail_2`: `6`; `tail_1`/`tail_4`/`tail_7`: `8`), porque os ids `5`–`8` mudam de ordem. Antes era `6` em todos, o que funcionava so porque `road_surface_fill()` usa apenas o miolo do tile.
+- Os pools so contem props isolados, conferidos contra os `.tmx`. Pedacos de pecas compostas (moinhos, bosques 2x2, torre 22/23) ficam fora, e os comentarios dizem por que.
 
 ## 6. Animacoes Extras
 
 ### Prioridade alta
 
-- [pendente] Torres com idle animado (secao 1)
+- [parcial] Torres com idle animado: as 3 magicas sim, a Arrow nao (secao 1)
 - [feito] Projeteis melhores (secao 1)
-- [parcial] Inimigos com caminhada fluida: falta corrigir o loop (secao 2)
+- [feito] Inimigos com caminhada fluida: loop corrigido (secao 2)
 - [pendente] Selector animado no menu
 - [pendente] Botao/icone selecionado piscando
 
@@ -316,7 +311,8 @@ UI: imagens pequenas ou tela inteira `480x272`, carregadas pelos paths de `Resou
 - [feito] Os 7 inimigos (o plano pedia 3).
 - [feito] Menu lateral e upgrade bar.
 - [feito] Mapas re-renderizados (secao 5).
-- [pendente] Idle das torres, loop dos inimigos, barra de vida, range circle, cursor.
+- [feito] Idle das torres magicas, loop dos inimigos.
+- [pendente] Idle da Arrow Tower, barra de vida, range circle, cursor.
 
 ### Fase 3 - Menus profissionais — [pendente]
 

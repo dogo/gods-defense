@@ -44,7 +44,8 @@ def frame_paths(source_dir: Path, action: str, count: int = 12) -> list[Path]:
     if not candidates:
         raise RuntimeError(f"Expected at least {count} {action} frames in {source_dir}")
     if len(candidates) >= count:
-        return candidates[:count]
+        # Sample the whole cycle evenly: truncating to the first `count` frames breaks the loop seam.
+        return [candidates[index * len(candidates) // count] for index in range(count)]
     return [candidates[round(index * (len(candidates) - 1) / (count - 1))] for index in range(count)]
 
 

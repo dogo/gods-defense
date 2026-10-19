@@ -22,7 +22,7 @@ PAD = 8
 CELL_W = TILE_PX + PAD
 CELL_H = TILE_PX + LABEL_H + PAD
 
-TAILS = ("tail_1", "tail_2", "tail_4", "tail_7")
+TAILS = tuple(f"tail_{n}" for n in range(1, 9))
 
 
 def render_sheet(tail: str) -> None:

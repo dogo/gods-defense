@@ -61,10 +61,10 @@ BIOME_PROFILES = {
     "olympus": {
         # tail_2 — ATOMIC ONLY (audited at native 256px)
         # 43=white watchtower, 29=single cactus, 32=spine, 33=bull skull,
-        # 42,50,51=dry trees, 23=stump
+        # 41,42=single dry trees, 23=stump (50-53 is a 2x2 dry grove, never standalone)
         "category_pools": {
             "watchtower": (43,),
-            "dry_tree":   (42, 50, 51),
+            "dry_tree":   (41, 42),
         },
         "rules": {
             "corner": {"category": "watchtower", "density": 0.30, "scale": (0.95, 1.00), "max": 1},
@@ -76,10 +76,11 @@ BIOME_PROFILES = {
         },
     },
     "icarusfalls": {
-        # tail_7 — ATOMIC ONLY (already correct)
-        # 35-40=dead trees, 24=cabin, 33=single grave, 27=bull skull, 28=spine
+        # tail_7 — ATOMIC ONLY
+        # 35,36=single dead trees, 24=cabin, 33=grave cluster, 27=bull skull, 28=spine
+        # (37-40 is a 2x2 dead forest, never standalone)
         "category_pools": {
-            "dead_tree": {"anchor": (35, 36), "filler": (37, 38, 39, 40)},
+            "dead_tree": (35, 36),
             "cabin":     (24,),
             "grave":     (33,),
             "skull":     (27, 28),
@@ -99,11 +100,10 @@ BIOME_PROFILES = {
     },
     "rescueathena": {
         # tail_1 — ATOMIC ONLY (full rewrite after re-audit)
-        # 28=ONLY atomic house, 38=windmill atomic, 33=ONLY atomic single tree
-        # Tiles 39, 40 are tilemap pieces (gate, isolated roof) — NOT used standalone
+        # 28=ONLY atomic house, 33=ONLY atomic single tree
+        # 38-41 is a 2x2 windmill and 43-46 a 2x2 forest — NOT used standalone
         "category_pools": {
             "house":    (28,),
-            "windmill": (38,),
             "tree":     (33,),
         },
         "rules": {
@@ -118,27 +118,23 @@ BIOME_PROFILES = {
         },
     },
     "icymanipulator": {
-        # tail_4 — ATOMIC ONLY (tile 29 removed from pine — it's actually pair-composite)
-        # 21,23=stone towers atomic, 31=wooden cabin atomic,
-        # 27,28=ONLY atomic single pines, 33,34=snow rocks, 37=campfire
+        # tail_4 — ATOMIC ONLY
+        # 21=stone tower atomic (22/23 stack into one tall tower), 31=wooden cabin atomic,
+        # 29=ONLY single pine, 33=stump, 34=snow rocks, 37=campfire
         # Scales reduced and max=1 on dead_zone because pockets sit adjacent to
         # corners in this map; full-cell tower + full-cell cabin in neighbors
         # read as visual overlap. Single pine per dead_zone reads as landmark
         # rather than ambiguous cluster.
         "category_pools": {
-            # Tile 21 only — tile 23 has content_bbox top-loaded (y=0..176)
-            # with 80px transparent below, which lacks a shadow region so
-            # the tower base abuts the road abruptly. Tile 21 fills the
-            # frame (y=5..251) including a soft shadow base, grounding
-            # correctly when placed against path cells.
+            # Tile 21 only — tile 23 is the bottom half of the 22/23 tall
+            # tower (confirmed in tail_4.tmx), so it has no top and no
+            # standalone shadow base.
             "tower":     (21,),
             "cabin":     (31,),
-            # Tile 29 only — re-audit at native 256px showed tiles 27 and 28
-            # are NOT atomic singles: 27 packs 4 pines in a 2x2 cluster,
-            # 28 has 2 pines side by side. Tile 29 is the only true single
-            # pine (bbox width 120/256, ratio 0.64).
+            # Tile 29 only — 24-27 is a 2x2 pine forest and 28 has 2 pines
+            # side by side. Tile 29 is the only true single pine.
             "pine":      (29,),
-            "snow_rock": (33, 34),
+            "snow_rock": (34,),
         },
         "rules": {
             "corner":    {"category": "tower", "density": 0.30, "scale": (0.80, 0.90), "max": 1},
@@ -177,6 +173,7 @@ class Placement(NamedTuple):
     alpha: int = 255
 
 
+# "road" = the family's horizontal straight tile; ids 5-8 change order per family (see ASSET_MAP.md).
 THEMES = {
     "olympus": {
         "tail": "tail_2",
@@ -188,21 +185,21 @@ THEMES = {
     "icarusfalls": {
         "tail": "tail_7",
         "base": 26,
-        "road": 6,
+        "road": 8,
         "tint": (190, 205, 190, 0.92),
         "road_tint": (210, 218, 206, 0.97),
     },
     "rescueathena": {
         "tail": "tail_1",
         "base": 42,
-        "road": 6,
+        "road": 8,
         "tint": (230, 236, 170, 1.0),
         "road_tint": (230, 221, 128, 1.0),
     },
     "icymanipulator": {
         "tail": "tail_4",
         "base": 35,
-        "road": 6,
+        "road": 8,
         "tint": (218, 236, 255, 1.02),
         "road_tint": (230, 242, 255, 1.02),
     },

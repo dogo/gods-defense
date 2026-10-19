@@ -8,7 +8,7 @@ from PIL import Image
 
 sys.dont_write_bytecode = True
 
-from build_arrow_tower import fit_on_canvas, make_sheet, resize_gui_icon
+from build_arrow_tower import accent_idle_frames, fit_on_canvas, make_sheet, resize_gui_icon
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -20,7 +20,7 @@ DEST = ROOT / "PSP Project" / "Res" / "towers" / "fire"
 def build_tower() -> None:
     source = Image.open(SOURCE / "4.png")
     frame = fit_on_canvas(source, (32, 32), (31, 31), bottom_align=True)
-    frames = [frame.copy() for _ in range(4)]
+    frames = accent_idle_frames(frame, ((0, 45),), 140, 120)
     make_sheet(frames).save(DEST / "tower.png")
 
     resize_gui_icon(Image.open(GUI_INTERFACE / "ico_1.png")).save(DEST / "icon.png")

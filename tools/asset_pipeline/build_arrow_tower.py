@@ -51,6 +51,32 @@ def make_sheet(frames: list[Image.Image]) -> Image.Image:
     return sheet
 
 
+def accent_idle_frames(
+    frame: Image.Image,
+    hues: tuple[tuple[int, int], ...],
+    min_saturation: int,
+    min_value: int,
+    gains: tuple[float, ...] = (1.0, 1.25, 1.5, 1.25),
+) -> list[Image.Image]:
+    # Idle = pulse only the saturated accent pixels (gems, runes); hue/sat/value use PIL's 0-255 HSV.
+    hsv = frame.convert("RGB").convert("HSV").load()
+    alpha = frame.getchannel("A").load()
+    mask = Image.new("L", frame.size, 0)
+    mask_px = mask.load()
+    for y in range(frame.height):
+        for x in range(frame.width):
+            h, s, v = hsv[x, y]
+            if alpha[x, y] and s >= min_saturation and v >= min_value and any(lo <= h <= hi for lo, hi in hues):
+                mask_px[x, y] = 255
+
+    frames = []
+    for gain in gains:
+        bright = frame.point(lambda c: min(255, int(c * gain)))
+        bright.putalpha(frame.getchannel("A"))
+        frames.append(Image.composite(bright, frame, mask))
+    return frames
+
+
 def make_menu_icon(symbol: Image.Image) -> Image.Image:
     icon = Image.new("RGBA", (32, 32), (0, 0, 0, 255))
     draw = ImageDraw.Draw(icon)
@@ -82,6 +108,7 @@ def resize_gui_icon(image: Image.Image) -> Image.Image:
 def build_tower() -> None:
     source = Image.open(SOURCE / "6.png")
     frame = fit_on_canvas(source, (32, 32), (31, 31), bottom_align=True)
+    # Wood/thatch tower has no glowing accent to pulse; kept static on purpose.
     frames = [frame.copy() for _ in range(4)]
     make_sheet(frames).save(DEST / "tower.png")
 
