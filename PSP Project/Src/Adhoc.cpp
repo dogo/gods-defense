@@ -7,6 +7,7 @@
 #include <pspnet_adhoc.h>
 
 char productID[] = "ULUS99999";
+Adhoc *Adhoc::resultConnection = NULL;
 
 Adhoc::Adhoc()
 {
@@ -111,18 +112,6 @@ bool Adhoc::clientWaitingConnection(u32 now)
 	return true;
 }
 
-void Adhoc::clientConnected(struct remotePsp *aPsp, char *finalScore)
-{
-	oslAdhocSendData(aPsp, finalScore, strlen(finalScore));
-}
-
-void Adhoc::clientSendScore(char *finalScore)
-{
-	remotePsp *peer = getPeer();
-	if (peer && peer->connectionState == OSL_ADHOC_ESTABLISHED)
-		clientConnected(peer, finalScore);
-}
-
 void Adhoc::AdhocServer()
 {
 	mReady = oslAdhocInit(productID) == 0;
@@ -166,14 +155,6 @@ bool Adhoc::serverWaitingConnection()
 		oslFlushKey();
 	}
 	return true;
-}
-
-void Adhoc::serverConnected(remotePsp *aPsp, char *remotePspScore, char *finalScore)
-{
-}
-
-void Adhoc::serverUpdate(char *remotePspScore)
-{
 }
 
 void Adhoc::printInfo() //Prints some info

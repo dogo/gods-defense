@@ -22,6 +22,7 @@ private:
 	u32 mLastSend;
 	MultiplayerSession *mSession;
 public:
+	static Adhoc *resultConnection;
 	Adhoc();
 	~Adhoc();
 
@@ -35,13 +36,9 @@ public:
 	MultiplayerSession *session() { return mSession; }
 	bool beginSession(bool host, const char *map, u32 hash, u32 nonce);
 	void updateSession(u32 now);
-	void clientConnected(struct remotePsp *aPsp, char *finalScore);	//The client is connected and can send data.
-	void clientSendScore(char *finalScore);
 
 	//Ad-hoc Server
 	void AdhocServer();
-	void serverConnected(struct remotePsp *aPsp, char *remotePspScore, char *finalScore);
-	void serverUpdate(char *remotePspScore);
 	bool serverWaitingConnection();
 };
 #endif

@@ -171,7 +171,10 @@ GameScreen::~GameScreen()
 
 	if(mAdhocReference != NULL)
 	{
-		delete(mAdhocReference);
+		if (mNextScreen == ScreenManager::SCREEN_ENDING)
+			Adhoc::resultConnection = mAdhocReference;
+		else
+			delete mAdhocReference;
 	}
 }
 
@@ -302,6 +305,20 @@ void GameScreen::update(u32 timePassed)
 			oslDrawString(240, 110, "Agreeing on the host map and start...");
 			oslDrawString(240, 140, "Circle to cancel");
 			if (osl_keys->pressed.circle) mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
+			return;
+		}
+		if (session->localFinished())
+		{
+			oslDrawFillRect(20, 70, 460, 180, RGBA(20,12,8,255));
+			oslDrawString(240, 110, "Waiting for the other player's result...");
+			oslDrawString(240, 140, "Circle to leave");
+			if (session->result() != MultiplayerSession::Pending && session->peerAcknowledged())
+			{
+				gWin = session->result() == MultiplayerSession::Won;
+				TrophyManager::NotifyGameFinished(gWin, (int)GetPlayerScore());
+				mNextScreen = ScreenManager::SCREEN_ENDING;
+			}
+			else if (osl_keys->pressed.circle) mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
 			return;
 		}
 	}
@@ -435,6 +452,15 @@ void GameScreen::update(u32 timePassed)
 			mShowDesc = false;
 		}
 
+		if (mAdhocReference && mAdhocReference->session() &&
+			(mPlayerLives <= 0 || (!mWaveIsRunning && mActiveWaves >= mGameMap->mWaves.size())))
+		{
+			snprintf(gScoreBuffer, sizeof(gScoreBuffer), "%d", (int)GetPlayerScore());
+			mAdhocReference->session()->finish((u32)GetPlayerScore(), mPlayerLives > 0);
+			SetGameState(GS_GAME_OVER);
+			return;
+		}
+
 		if (mPlayerLives <= 0)
 		{
 			//Lose, if ad hoc is on the other player can continue to play
@@ -448,16 +474,7 @@ void GameScreen::update(u32 timePassed)
 		{
 			//Win
 			sprintf(gScoreBuffer, "%d",(int) GetPlayerScore());
-#ifndef JPCSP_EMULATOR
-			if(gIsClient && oslIsWlanPowerOn())
-			{
-				/*
-				 *	TODO : Receive msg from server with win status if true send client score and compare with server
-				 *	if clientScore < serverScore -> Client lose else client win and set the new state
-				 */
-				mAdhocReference->clientSendScore(gScoreBuffer);
-			}
-#endif // JPCSP_EMULATOR
+
 			gWin = true;
 			TrophyManager::NotifyGameFinished(true, (int)GetPlayerScore());
 			SetGameState(GS_GAME_OVER);
