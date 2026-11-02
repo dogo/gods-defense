@@ -69,6 +69,7 @@ GameScreen::GameScreen()
 	}
 #endif // JPCSP_EMULATOR
 	mShowDesc = true;
+	if (mAdhocReference) Drawing::messageUpdate = &GameScreen::PumpNetwork;
 }
 
 void GameScreen::LoadMap(const string &mapName)
@@ -143,6 +144,8 @@ void GameScreen::LoadFirstPartForMap()
 
 GameScreen::~GameScreen()
 {
+	Drawing::messageUpdate = NULL;
+	gGameReference = NULL;
 	gIsClient = false;
 	gIsServer = false;
 
@@ -239,14 +242,16 @@ void GameScreen::draw()
 #endif // _DEBUG
 }
 
+bool GameScreen::PumpNetwork()
+{
+	if (!gGameReference || !gGameReference->mAdhocReference) return true;
+	Adhoc *connection = gGameReference->mAdhocReference;
+	connection->updateSession((u32)(sceKernelGetSystemTimeWide() / 1000));
+	return !connection->disconnected();
+}
+
 void GameScreen::update(u32 timePassed)
 {
-	//Run Pause
-	if (mGameState == GS_PAUSE_MENU && gPauseGame)
-	{
-		pauseScreenReference->update(timePassed);
-		return;
-	}
 
 #ifndef JPCSP_EMULATOR
 	if (gIsServer || gIsClient)
@@ -264,7 +269,7 @@ void GameScreen::update(u32 timePassed)
 			SetGameConnectionState(GCS_WAITING_CONNECTION);
 			oslDrawFillRect(20, 70, 460, 180, RGBA(20,12,8,255));
 			oslDrawString(240, 85, "Multiplayer - Circle to cancel");
-			const bool waiting = gIsServer ? mAdhocReference->serverWaitingConnection() :
+			const bool waiting = gIsServer ? mAdhocReference->serverWaitingConnection(now) :
 				mAdhocReference->clientWaitingConnection(now);
 			if (osl_keys->pressed.circle)
 			{
@@ -282,6 +287,14 @@ void GameScreen::update(u32 timePassed)
 			return;
 		}
 		mAdhocReference->updateSession(now);
+		if (mAdhocReference->disconnected())
+		{
+			SetGameConnectionState(GCS_DISCONNECTED);
+			Drawing::messageUpdate = NULL;
+			Drawing::showMessage("The other player disconnected or stopped responding.", "Multiplayer");
+			mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
+			return;
+		}
 		MultiplayerSession *session = mAdhocReference->session();
 		if (session->phase() == MultiplayerSession::LoadingMap)
 		{
@@ -323,6 +336,13 @@ void GameScreen::update(u32 timePassed)
 		}
 	}
 #endif // JPCSP_EMULATOR
+	//Run Pause
+	if (mGameState == GS_PAUSE_MENU && gPauseGame)
+	{
+		pauseScreenReference->update(timePassed);
+		return;
+	}
+
 	mGameGUI->Update(timePassed);
 
 	//Run Waves

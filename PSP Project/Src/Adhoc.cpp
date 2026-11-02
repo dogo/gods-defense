@@ -19,6 +19,8 @@ Adhoc::Adhoc()
 	mSocket = -1;
 	mLastSend = 0;
 	mSession = NULL;
+	mLastReceive = 0;
+	mDisconnected = false;
 }
 
 Adhoc::~Adhoc()
@@ -35,19 +37,24 @@ bool Adhoc::beginSession(bool host, const char *map, u32 hash, u32 nonce)
 	mSocket = sceNetAdhocPdpCreate(oslAdhocGetMacAddress(), 778, 2048, 0);
 	if (mSocket < 0) return false;
 	mSession = new MultiplayerSession(host, map, hash, nonce);
+	mLastReceive = nonce;
 	return true;
 }
 
 void Adhoc::updateSession(u32 now)
 {
 	if (!mSession || mSocket < 0) return;
+	remotePsp *peer = getPeer();
+	if (!oslIsWlanPowerOn() || !peer || peer->connectionState != OSL_ADHOC_ESTABLISHED)
+		mDisconnected = true;
 	for (int i = 0; i < 8; ++i)
 	{
 		unsigned char buffer[sizeof(MultiplayerPacket) + 1], source[6];
 		unsigned short port = 0;
 		unsigned int size = sizeof(buffer);
 		if (sceNetAdhocPdpRecv(mSocket, source, &port, buffer, &size, 0, 1) < 0) break;
-		if (port == 778 && !memcmp(source, mServerPeerMac, 6)) mSession->receive(buffer, size);
+		if (port == 778 && !memcmp(source, mServerPeerMac, 6) && mSession->receive(buffer, size))
+			mLastReceive = now;
 	}
 	if (now - mLastSend >= 250)
 	{
@@ -56,6 +63,7 @@ void Adhoc::updateSession(u32 now)
 			sceNetAdhocPdpSend(mSocket, mServerPeerMac, 778, &packet, sizeof(packet), 0, 1);
 		mLastSend = now;
 	}
+	if (now - mLastReceive >= 15000) mDisconnected = true;
 }
 
 void Adhoc::AdhocClient()
@@ -117,7 +125,7 @@ void Adhoc::AdhocServer()
 	mReady = oslAdhocInit(productID) == 0;
 }
 
-bool Adhoc::serverWaitingConnection()
+bool Adhoc::serverWaitingConnection(u32 now)
 {
 	if (!mHasServerPeer)
 	{
@@ -127,6 +135,7 @@ bool Adhoc::serverWaitingConnection()
 			memcpy(mServerPeerMac, request->macAddress, 6);
 			mHasServerPeer = true;
 			mServerAccepted = false;
+			mRequestStarted = now;
 		}
 	}
 	// OSLib compacts its peer array when someone leaves; never retain its pointers.
@@ -137,8 +146,15 @@ bool Adhoc::serverWaitingConnection()
 		mServerAccepted = false;
 		return true;
 	}
-	if (mServerAccepted)
-		return peer->connectionState != OSL_ADHOC_ESTABLISHED;
+	if (mServerAccepted && peer->connectionState == OSL_ADHOC_ESTABLISHED) return false;
+	if (now - mRequestStarted >= 30000)
+	{
+		oslAdhocRejectConnection(peer);
+		mHasServerPeer = false;
+		mServerAccepted = false;
+		return true;
+	}
+	if (mServerAccepted) return true;
 	oslIntraFontSetStyle(gFont, 0.6f, RGBA(255,232,163,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawStringf(240, 110, "Accept %.24s?", peer->name);
 	oslDrawString(240, 135, "Cross: accept    Circle: reject");

@@ -72,6 +72,7 @@ private:
 	GameConnectionState mGameConnectionState;
 
 public:
+	static bool PumpNetwork();
 	GameScreen();
 	void LoadMap(const string &mapName);
 	void LoadFirstPartForMap();

@@ -18,6 +18,7 @@ int oslAdhocSendData(remotePsp *, void *, int) { return 0; }
 void oslAdhocAcceptConnection(remotePsp *) { ++accepts; }
 void oslAdhocRejectConnection(remotePsp *p) { ++rejects; p->connectionState = OSL_ADHOC_JOINED; }
 u8 *oslAdhocGetMacAddress() { return peer.macAddress; }
+bool oslIsWlanPowerOn() { return true; }
 int oslAdhocGetState() { return ADHOC_INIT; }
 void oslAdhocTerm() {}
 int sceNetAdhocPdpCreate(unsigned char *, unsigned short, unsigned int, int) { return 1; }
@@ -27,20 +28,20 @@ int sceNetAdhocPdpRecv(int, unsigned char *, unsigned short *, void *, void *, u
 int main()
 {
     Adhoc server;
-    assert(server.serverWaitingConnection()); // A request alone cannot start the game.
+    assert(server.serverWaitingConnection(100)); // A request alone cannot start the game.
     keys.pressed.cross = true;
-    assert(server.serverWaitingConnection() && accepts == 1);
+    assert(server.serverWaitingConnection(100) && accepts == 1);
     peer.connectionState = OSL_ADHOC_ACCEPTED;
-    assert(server.serverWaitingConnection()); // Wait for matching to finish too.
+    assert(server.serverWaitingConnection(100)); // Wait for matching to finish too.
     peer.connectionState = OSL_ADHOC_ESTABLISHED;
-    assert(!server.serverWaitingConnection());
+    assert(!server.serverWaitingConnection(100));
     present = false;
-    assert(server.serverWaitingConnection());
+    assert(server.serverWaitingConnection(100));
     present = true;
     peer.connectionState = OSL_ADHOC_SELECTED;
     keys.pressed.circle = true;
-    assert(server.serverWaitingConnection() && rejects == 1);
-    assert(server.serverWaitingConnection());
+    assert(server.serverWaitingConnection(100) && rejects == 1);
+    assert(server.serverWaitingConnection(100));
     Adhoc client;
     client.AdhocClient();
     assert(client.isReady());
@@ -57,4 +58,9 @@ int main()
     assert(client.clientWaitingConnection(30200));
     peer.connectionState = OSL_ADHOC_ESTABLISHED;
     assert(!client.clientWaitingConnection(30300));
+    assert(client.beginSession(false, "olympus", 123, 30300));
+    client.updateSession(45299);
+    assert(!client.disconnected());
+    client.updateSession(45300);
+    assert(client.disconnected()); // A silent peer cannot leave the game stuck forever.
 }

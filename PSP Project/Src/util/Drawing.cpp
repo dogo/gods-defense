@@ -10,6 +10,7 @@
 
 short gState = 0;
 int gFade = 255;
+bool (*Drawing::messageUpdate)() = NULL;
 
 void Drawing::drawControlHint(OSL_IMAGE *icon, int x, int centerY, const char *label)
 {
@@ -90,6 +91,7 @@ void Drawing::showMessage(const char *text, const char *title)
 	oslFlushKey();
 	while (!osl_quit)
 	{
+		if (messageUpdate && !messageUpdate()) break;
 		oslReadKeys();
 		if (osl_keys->pressed.cross)
 			break;

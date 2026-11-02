@@ -12,6 +12,7 @@ class Drawing
 {
 
 public:
+	static bool (*messageUpdate)();
 	static void showMessage(const char *text, const char *title);
 	static void drawControlHint(OSL_IMAGE *icon, int x, int centerY, const char *label);
 

@@ -21,6 +21,8 @@ private:
 	int mSocket;
 	u32 mLastSend;
 	MultiplayerSession *mSession;
+	u32 mLastReceive;
+	bool mDisconnected;
 public:
 	static Adhoc *resultConnection;
 	Adhoc();
@@ -36,9 +38,10 @@ public:
 	MultiplayerSession *session() { return mSession; }
 	bool beginSession(bool host, const char *map, u32 hash, u32 nonce);
 	void updateSession(u32 now);
+	bool disconnected() const { return mDisconnected; }
 
 	//Ad-hoc Server
 	void AdhocServer();
-	bool serverWaitingConnection();
+	bool serverWaitingConnection(u32 now);
 };
 #endif

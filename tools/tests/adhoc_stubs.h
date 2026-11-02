@@ -36,4 +36,5 @@ void oslAdhocRejectConnection(remotePsp *);
 u8 *oslAdhocGetMacAddress();
 int oslAdhocGetState();
 void oslAdhocTerm();
+bool oslIsWlanPowerOn();
 #endif
