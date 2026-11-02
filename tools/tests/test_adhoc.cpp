@@ -19,6 +19,7 @@ void oslAdhocAcceptConnection(remotePsp *) { ++accepts; }
 void oslAdhocRejectConnection(remotePsp *p) { ++rejects; p->connectionState = OSL_ADHOC_JOINED; }
 u8 *oslAdhocGetMacAddress() { return peer.macAddress; }
 int oslAdhocGetState() { return ADHOC_INIT; }
+void oslAdhocTerm() {}
 int main()
 {
     Adhoc server;
@@ -36,4 +37,20 @@ int main()
     keys.pressed.circle = true;
     assert(server.serverWaitingConnection() && rejects == 1);
     assert(server.serverWaitingConnection());
+    Adhoc client;
+    client.AdhocClient();
+    assert(client.isReady());
+    present = false;
+    keys.pressed.up = true;
+    assert(client.clientWaitingConnection(0)); // Empty discovery never indexes -1.
+    oslFlushKey();
+    present = true;
+    peer.connectionState = OSL_ADHOC_JOINED;
+    keys.pressed.cross = true;
+    assert(client.clientWaitingConnection(100));
+    assert(client.clientWaitingConnection(30100) && rejects == 2); // Request timeout.
+    keys.pressed.cross = true;
+    assert(client.clientWaitingConnection(30200));
+    peer.connectionState = OSL_ADHOC_ESTABLISHED;
+    assert(!client.clientWaitingConnection(30300));
 }

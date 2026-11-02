@@ -14,6 +14,9 @@ private:
 	u8 mServerPeerMac[6];
 	bool mHasServerPeer;
 	bool mServerAccepted;
+	bool mReady;
+	int mSelectedPeer;
+	u32 mRequestStarted;
 public:
 	Adhoc();
 	~Adhoc();
@@ -22,6 +25,9 @@ public:
 
 	//Ad-hoc Client
 	void AdhocClient();
+	bool clientWaitingConnection(u32 now);
+	bool isReady() const { return mReady; }
+	remotePsp *getPeer();
 	void clientConnected(struct remotePsp *aPsp, char *finalScore);	//The client is connected and can send data.
 	void clientSendScore(char *finalScore);
 

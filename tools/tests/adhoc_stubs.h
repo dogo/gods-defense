@@ -35,4 +35,5 @@ void oslAdhocAcceptConnection(remotePsp *);
 void oslAdhocRejectConnection(remotePsp *);
 u8 *oslAdhocGetMacAddress();
 int oslAdhocGetState();
+void oslAdhocTerm();
 #endif

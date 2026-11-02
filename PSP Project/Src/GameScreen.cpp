@@ -156,7 +156,6 @@ GameScreen::~GameScreen()
 
 	if(mAdhocReference != NULL)
 	{
-		oslAdhocTerm();
 		delete(mAdhocReference);
 	}
 }
@@ -232,21 +231,27 @@ void GameScreen::update(u32 timePassed)
 	}
 
 #ifndef JPCSP_EMULATOR
-	if (gIsServer && oslIsWlanPowerOn())
+	if (gIsServer || gIsClient)
 	{
-		if(mGameConnectionState == GCS_DISCONNECTED || mGameConnectionState == GCS_WAITING_CONNECTION)
+		if (!mAdhocReference || !mAdhocReference->isReady() || !oslIsWlanPowerOn())
+		{
+			Drawing::showMessage("Could not start the wireless session.", "Multiplayer");
+			mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
+			return;
+		}
+		if (mGameConnectionState != GCS_CONNECTED)
 		{
 			SetGameConnectionState(GCS_WAITING_CONNECTION);
-			bool checkAdhoc = mAdhocReference->serverWaitingConnection();
-
-			if(!checkAdhoc)
-			{
-				SetGameConnectionState(GCS_CONNECTED);
-			}
-		}
-		else
-		{
-			mAdhocReference->printInfo();
+			oslDrawFillRect(20, 70, 460, 180, RGBA(20,12,8,255));
+			oslIntraFontSetStyle(gFont, 0.55f, RGBA(255,232,163,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
+			oslDrawString(240, 85, "Multiplayer - Circle to cancel");
+			const bool waiting = gIsServer ? mAdhocReference->serverWaitingConnection() :
+				mAdhocReference->clientWaitingConnection(sceKernelGetSystemTimeLow() / 1000);
+			if (osl_keys->pressed.circle)
+				mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
+			if (waiting) return;
+			SetGameConnectionState(GCS_CONNECTED);
+			oslFlushKey();
 		}
 	}
 #endif // JPCSP_EMULATOR

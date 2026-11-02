@@ -11,71 +11,68 @@ Adhoc::Adhoc()
 {
 	mHasServerPeer = false;
 	mServerAccepted = false;
+	mReady = false;
+	mSelectedPeer = 0;
+	mRequestStarted = 0;
 }
 
 Adhoc::~Adhoc()
 {
+	if (mReady) oslAdhocTerm();
 }
 
 void Adhoc::AdhocClient()
 {
-	int skip = 0;
-	int quit = 0;
-	int i = 0;
-	int current = 0;
+	mReady = oslAdhocInit(productID) == 0;
+}
 
-	int init = oslAdhocInit(productID);
-	if (init)
+remotePsp *Adhoc::getPeer()
+{
+	return mHasServerPeer ? oslAdhocGetPspByMacAddress(mServerPeerMac) : NULL;
+}
+
+bool Adhoc::clientWaitingConnection(u32 now)
+{
+	remotePsp *peer = getPeer();
+	if (mHasServerPeer)
 	{
-		char message[100] = "";
-		sprintf(message, "adhocInit error: %i", init);
-		Drawing::showMessage(message, "Debug");
-		return;
-	}
-
-	while(!quit)
-	{
-		if (!skip)
+		if (peer && peer->connectionState == OSL_ADHOC_ESTABLISHED)
+			return false;
+		if (!peer || peer->connectionState == OSL_ADHOC_REJECTED ||
+			peer->connectionState == OSL_ADHOC_CANCELED || now - mRequestStarted >= 30000)
 		{
-			oslStartDrawing();
-
-			if (oslAdhocGetRemotePspCount())
-			{
-				oslIntraFontSetStyle(gFont, 1.1f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
-				oslDrawString(10, 40, "Press X to request a connection");
-			}
-
-			for (i=0; i < oslAdhocGetRemotePspCount(); i++)
-			{
-				if (i == current)
-					oslIntraFontSetStyle(gFont, 1.3, RGBA(100,100,100,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
-				else
-					oslIntraFontSetStyle(gFont, 1.3, RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
-				oslDrawString(10, 100 + 15 * i, oslAdhocGetPspByIndex(i)->name);
-			}
-			oslEndDrawing();
+			if (peer) oslAdhocRejectConnection(peer);
+			mHasServerPeer = false;
 		}
-		oslReadKeys();
-		oslEndFrame();
-		skip = oslSyncFrame();
-
-		if (osl_keys->pressed.down)
+		else
 		{
-			if (++current >= oslAdhocGetRemotePspCount())
-				current = 0;
-		}
-		else if (osl_keys->pressed.up)
-		{
-			if (--current < 0)
-				current = oslAdhocGetRemotePspCount() - 1;
-		}
-		else if (osl_keys->pressed.cross && oslAdhocGetRemotePspCount())
-		{
-			//Request a connection:
-			oslAdhocRequestConnection(oslAdhocGetPspByIndex(current), 30, NULL);
-			quit = 1;
+			oslDrawString(240, 120, "Waiting for host acceptance...");
+			return true;
 		}
 	}
+	const int count = oslAdhocGetRemotePspCount();
+	if (count <= 0)
+	{
+		mSelectedPeer = 0;
+		oslDrawString(240, 120, "Searching for a host...");
+		return true;
+	}
+	if (mSelectedPeer >= count) mSelectedPeer = 0;
+	if (osl_keys->pressed.down) mSelectedPeer = (mSelectedPeer + 1) % count;
+	if (osl_keys->pressed.up) mSelectedPeer = (mSelectedPeer + count - 1) % count;
+	peer = oslAdhocGetPspByIndex(mSelectedPeer);
+	if (!peer) return true;
+	oslDrawStringf(240, 120, "Cross: connect to %.24s", peer->name);
+	if (osl_keys->pressed.cross)
+	{
+		memcpy(mServerPeerMac, peer->macAddress, 6);
+		mHasServerPeer = true;
+		mRequestStarted = now;
+		// This OSLib call selects the matching target without its blocking wait loop.
+		oslAdhocAcceptConnection(peer);
+		oslFlushKey();
+	}
+	return true;
 }
 
 void Adhoc::clientConnected(struct remotePsp *aPsp, char *finalScore)
@@ -85,24 +82,14 @@ void Adhoc::clientConnected(struct remotePsp *aPsp, char *finalScore)
 
 void Adhoc::clientSendScore(char *finalScore)
 {
-	if (oslAdhocGetRemotePspCount())
-	{
-		oslAdhocRequestConnection(oslAdhocGetPspByIndex(0), 30, NULL);
-		clientConnected(oslAdhocGetPspByIndex(0), finalScore);
-	}
+	remotePsp *peer = getPeer();
+	if (peer && peer->connectionState == OSL_ADHOC_ESTABLISHED)
+		clientConnected(peer, finalScore);
 }
-
 
 void Adhoc::AdhocServer()
 {
-	int init = oslAdhocInit(productID);
-	if (init)
-	{
-		char message[100] = "";
-		snprintf(message, sizeof(message), "adhocInit error: %i", init);
-		Drawing::showMessage(message, "Debug");
-		return;
-	}
+	mReady = oslAdhocInit(productID) == 0;
 }
 
 bool Adhoc::serverWaitingConnection()
