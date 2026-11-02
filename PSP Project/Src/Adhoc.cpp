@@ -9,6 +9,8 @@ char productID[] = "ULUS99999";
 
 Adhoc::Adhoc()
 {
+	mHasServerPeer = false;
+	mServerAccepted = false;
 }
 
 Adhoc::~Adhoc()
@@ -105,45 +107,42 @@ void Adhoc::AdhocServer()
 
 bool Adhoc::serverWaitingConnection()
 {
-    struct remotePsp *reqPsp = oslAdhocGetConnectionRequest();
-    char message[512] = "";
-    int dialog = OSL_DIALOG_NONE;
-
-    if (reqPsp == NULL)
-    {
-        oslIntraFontSetStyle(gFont, 0.7, RGBA(255,255,255,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_LEFT);
-        oslDrawStringf(10, 100, "Waiting for a connection request...");
-        return true;
-    }
-    else
-    {
-        snprintf(message, sizeof(message), "Accept request from psp : %s", reqPsp->name);
-        if (oslGetDialogType() == OSL_DIALOG_NONE)
-            oslInitMessageDialog(message, 1);
-    }
-
-    dialog = oslGetDialogType();
-    if (dialog)
-    {
-        oslDrawDialog();
-        if (oslGetDialogStatus() == PSP_UTILITY_DIALOG_NONE)
-        {
-            if (dialog == OSL_DIALOG_MESSAGE)
-            {
-                int button = oslGetDialogButtonPressed();
-                if (button == PSP_UTILITY_MSGDIALOG_RESULT_YES)
-                {
-                    oslAdhocAcceptConnection(reqPsp);
-                }
-                else if (button == PSP_UTILITY_MSGDIALOG_RESULT_NO)
-                {
-                    oslAdhocRejectConnection(reqPsp);
-                }
-            }
-            oslEndDialog();
-        }
-    }
-    return false;
+	if (!mHasServerPeer)
+	{
+		remotePsp *request = oslAdhocGetConnectionRequest();
+		if (request)
+		{
+			memcpy(mServerPeerMac, request->macAddress, 6);
+			mHasServerPeer = true;
+			mServerAccepted = false;
+		}
+	}
+	// OSLib compacts its peer array when someone leaves; never retain its pointers.
+	remotePsp *peer = mHasServerPeer ? oslAdhocGetPspByMacAddress(mServerPeerMac) : NULL;
+	if (!peer || peer->connectionState == OSL_ADHOC_CANCELED || peer->connectionState == OSL_ADHOC_REJECTED)
+	{
+		mHasServerPeer = false;
+		mServerAccepted = false;
+		return true;
+	}
+	if (mServerAccepted)
+		return peer->connectionState != OSL_ADHOC_ESTABLISHED;
+	oslIntraFontSetStyle(gFont, 0.6f, RGBA(255,232,163,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
+	oslDrawStringf(240, 110, "Accept %.24s?", peer->name);
+	oslDrawString(240, 135, "Cross: accept    Circle: reject");
+	if (osl_keys->pressed.cross)
+	{
+		oslAdhocAcceptConnection(peer);
+		mServerAccepted = true;
+		oslFlushKey();
+	}
+	else if (osl_keys->pressed.circle)
+	{
+		oslAdhocRejectConnection(peer);
+		mHasServerPeer = false;
+		oslFlushKey();
+	}
+	return true;
 }
 
 void Adhoc::serverConnected(remotePsp *aPsp, char *remotePspScore, char *finalScore)

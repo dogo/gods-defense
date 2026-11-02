@@ -10,6 +10,10 @@
 
 class Adhoc
 {
+private:
+	u8 mServerPeerMac[6];
+	bool mHasServerPeer;
+	bool mServerAccepted;
 public:
 	Adhoc();
 	~Adhoc();

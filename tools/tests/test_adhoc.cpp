@@ -1,0 +1,39 @@
+#include "adhoc_stubs.h"
+#include "../../PSP Project/Include/Adhoc.h"
+#include <cassert>
+Keys keys = {};
+Keys *osl_keys = &keys;
+bool osl_quit = false;
+void *gFont = NULL;
+remotePsp peer = {{1,2,3,4,5,6}, "Player", OSL_ADHOC_SELECTED};
+bool present = true;
+int accepts = 0, rejects = 0;
+int oslAdhocInit(char *) { return 0; }
+int oslAdhocGetRemotePspCount() { return present ? 1 : 0; }
+remotePsp *oslAdhocGetPspByIndex(int i) { return present && i == 0 ? &peer : NULL; }
+remotePsp *oslAdhocGetPspByMacAddress(const u8 *mac) { return present && !memcmp(mac, peer.macAddress, 6) ? &peer : NULL; }
+remotePsp *oslAdhocGetConnectionRequest() { return present && peer.connectionState == OSL_ADHOC_SELECTED ? &peer : NULL; }
+int oslAdhocRequestConnection(remotePsp *, int, int (*)(int)) { return 0; }
+int oslAdhocSendData(remotePsp *, void *, int) { return 0; }
+void oslAdhocAcceptConnection(remotePsp *) { ++accepts; }
+void oslAdhocRejectConnection(remotePsp *p) { ++rejects; p->connectionState = OSL_ADHOC_JOINED; }
+u8 *oslAdhocGetMacAddress() { return peer.macAddress; }
+int oslAdhocGetState() { return ADHOC_INIT; }
+int main()
+{
+    Adhoc server;
+    assert(server.serverWaitingConnection()); // A request alone cannot start the game.
+    keys.pressed.cross = true;
+    assert(server.serverWaitingConnection() && accepts == 1);
+    peer.connectionState = OSL_ADHOC_ACCEPTED;
+    assert(server.serverWaitingConnection()); // Wait for matching to finish too.
+    peer.connectionState = OSL_ADHOC_ESTABLISHED;
+    assert(!server.serverWaitingConnection());
+    present = false;
+    assert(server.serverWaitingConnection());
+    present = true;
+    peer.connectionState = OSL_ADHOC_SELECTED;
+    keys.pressed.circle = true;
+    assert(server.serverWaitingConnection() && rejects == 1);
+    assert(server.serverWaitingConnection());
+}
