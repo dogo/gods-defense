@@ -380,6 +380,8 @@ void Map::ResetMap()
 			mTowersMenu[y] = "";
 	}
 
+	for (unsigned int i = 0; i < mWaves.size(); i++)
+		delete mWaves[i];
 	mWaves.clear();
 	mPaths.clear();
 
@@ -393,8 +395,7 @@ void Map::ResetMap()
 
 Map::~Map()
 {
-	if(mMapImage != NULL)
-		oslDeleteImage(mMapImage);
+	ResetMap();
 
 	delete[] mTowersMenu;
 
