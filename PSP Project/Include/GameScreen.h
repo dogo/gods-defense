@@ -76,6 +76,7 @@ public:
 	GameScreen();
 	void LoadMap(const string &mapName);
 	void LoadFirstPartForMap();
+	void StartAdhoc();
 	string *GetMenuTowers() const;
 	Tower *GetTower(const string &towerName) const;
 	Tower *GetSelectedTower() const;

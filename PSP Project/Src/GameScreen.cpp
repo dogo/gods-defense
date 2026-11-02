@@ -57,19 +57,20 @@ GameScreen::GameScreen()
 	mAdhocReference = NULL;
 
 #ifndef JPCSP_EMULATOR
-	if(gIsClient && oslIsWlanPowerOn())
-	{
-		mAdhocReference = new Adhoc();
-		mAdhocReference->AdhocClient();
-	}
-	else if (gIsServer && oslIsWlanPowerOn())
-	{
-		mAdhocReference = new Adhoc();
-		mAdhocReference->AdhocServer();
-	}
+	if (gIsClient || gIsServer) StartAdhoc();
 #endif // JPCSP_EMULATOR
 	mShowDesc = true;
-	if (mAdhocReference) Drawing::messageUpdate = &GameScreen::PumpNetwork;
+}
+
+void GameScreen::StartAdhoc()
+{
+	delete mAdhocReference;
+	mAdhocReference = NULL;
+	if (!oslIsWlanPowerOn()) return;
+	mAdhocReference = new Adhoc();
+	if (gIsServer) mAdhocReference->AdhocServer();
+	else mAdhocReference->AdhocClient();
+	Drawing::messageUpdate = &GameScreen::PumpNetwork;
 }
 
 void GameScreen::LoadMap(const string &mapName)
@@ -256,13 +257,24 @@ void GameScreen::update(u32 timePassed)
 #ifndef JPCSP_EMULATOR
 	if (gIsServer || gIsClient)
 	{
-		if (!mAdhocReference || !mAdhocReference->isReady() || !oslIsWlanPowerOn())
+		oslIntraFontSetStyle(gFont, 0.55f, RGBA(255,232,163,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
+		// Once connected, a lost WLAN is reported as a disconnect below.
+		if (mGameConnectionState != GCS_CONNECTED &&
+			(!mAdhocReference || !mAdhocReference->isReady() || !oslIsWlanPowerOn()))
 		{
-			Drawing::showMessage("Could not start the wireless session.", "Multiplayer");
-			mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
+			oslDrawFillRect(20, 70, 460, 180, RGBA(20,12,8,255));
+			oslDrawString(240, 85, "Multiplayer");
+			oslDrawString(240, 110, oslIsWlanPowerOn() ? "Could not start the wireless session." : "Turn on the WLAN switch.");
+			oslDrawString(240, 140, "Cross: try again    Circle: back");
+			if (osl_keys->pressed.cross)
+			{
+				oslFlushKey();
+				StartAdhoc();
+			}
+			else if (osl_keys->pressed.circle)
+				mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
 			return;
 		}
-		oslIntraFontSetStyle(gFont, 0.55f, RGBA(255,232,163,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
 		const u32 now = (u32)(sceKernelGetSystemTimeWide() / 1000);
 		if (mGameConnectionState != GCS_CONNECTED)
 		{
