@@ -4,6 +4,7 @@
 //**************************************************************************
 
 #include "../Include/Adhoc.h"
+#include <pspnet_adhoc.h>
 
 char productID[] = "ULUS99999";
 
@@ -14,11 +15,46 @@ Adhoc::Adhoc()
 	mReady = false;
 	mSelectedPeer = 0;
 	mRequestStarted = 0;
+	mSocket = -1;
+	mLastSend = 0;
+	mSession = NULL;
 }
 
 Adhoc::~Adhoc()
 {
+	if (mSocket >= 0) sceNetAdhocPdpDelete(mSocket, 0);
+	delete mSession;
 	if (mReady) oslAdhocTerm();
+}
+
+bool Adhoc::beginSession(bool host, const char *map, u32 hash, u32 nonce)
+{
+	if (mSession) return true;
+	// OSLib's receive wrapper returns queued bytes and overwrites the peer MAC.
+	mSocket = sceNetAdhocPdpCreate(oslAdhocGetMacAddress(), 778, 2048, 0);
+	if (mSocket < 0) return false;
+	mSession = new MultiplayerSession(host, map, hash, nonce);
+	return true;
+}
+
+void Adhoc::updateSession(u32 now)
+{
+	if (!mSession || mSocket < 0) return;
+	for (int i = 0; i < 8; ++i)
+	{
+		unsigned char buffer[sizeof(MultiplayerPacket) + 1], source[6];
+		unsigned short port = 0;
+		unsigned int size = sizeof(buffer);
+		if (sceNetAdhocPdpRecv(mSocket, source, &port, buffer, &size, 0, 1) < 0) break;
+		if (port == 778 && !memcmp(source, mServerPeerMac, 6)) mSession->receive(buffer, size);
+	}
+	if (now - mLastSend >= 250)
+	{
+		MultiplayerPacket packet = mSession->outgoing();
+		if (mSession->phase() != MultiplayerSession::WaitingMap && mSession->phase() != MultiplayerSession::LoadingMap)
+			sceNetAdhocPdpSend(mSocket, mServerPeerMac, 778, &packet, sizeof(packet), 0, 1);
+		mLastSend = now;
+	}
 }
 
 void Adhoc::AdhocClient()

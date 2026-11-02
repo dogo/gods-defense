@@ -9,6 +9,21 @@
 #include "../Include/renderers/EnemyRenderer.h"
 #include "../Include/renderers/MapRenderer.h"
 #include "../Include/TrophyManager.h"
+#include "../Include/util/PspIO.h"
+
+static u32 multiplayerMapHash(const char *map)
+{
+	char path[768];
+	snprintf(path, sizeof(path), "%s/Res/maps/%s/map.xml", PspIO::getCurrentDirectory().c_str(), map);
+	FILE *file = fopen(path, "rb");
+	if (!file) return 0;
+	u32 hash = 2166136261u;
+	int value;
+	while ((value = fgetc(file)) != EOF) hash = (hash ^ (unsigned char)value) * 16777619u;
+	const bool failed = ferror(file);
+	fclose(file);
+	return failed ? 0 : hash;
+}
 
 //Statics
 bool gWin;
@@ -239,19 +254,55 @@ void GameScreen::update(u32 timePassed)
 			mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
 			return;
 		}
+		oslIntraFontSetStyle(gFont, 0.55f, RGBA(255,232,163,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
+		const u32 now = (u32)(sceKernelGetSystemTimeWide() / 1000);
 		if (mGameConnectionState != GCS_CONNECTED)
 		{
 			SetGameConnectionState(GCS_WAITING_CONNECTION);
 			oslDrawFillRect(20, 70, 460, 180, RGBA(20,12,8,255));
-			oslIntraFontSetStyle(gFont, 0.55f, RGBA(255,232,163,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
 			oslDrawString(240, 85, "Multiplayer - Circle to cancel");
 			const bool waiting = gIsServer ? mAdhocReference->serverWaitingConnection() :
-				mAdhocReference->clientWaitingConnection(sceKernelGetSystemTimeLow() / 1000);
+				mAdhocReference->clientWaitingConnection(now);
 			if (osl_keys->pressed.circle)
+			{
 				mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
+				return;
+			}
 			if (waiting) return;
 			SetGameConnectionState(GCS_CONNECTED);
 			oslFlushKey();
+		}
+		if (!mAdhocReference->beginSession(gIsServer, gChoosedMap.c_str(), multiplayerMapHash(gChoosedMap.c_str()), now))
+		{
+			Drawing::showMessage("Could not open the game connection.", "Multiplayer");
+			mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
+			return;
+		}
+		mAdhocReference->updateSession(now);
+		MultiplayerSession *session = mAdhocReference->session();
+		if (session->phase() == MultiplayerSession::LoadingMap)
+		{
+			if (session->ready(multiplayerMapHash(session->map())))
+			{
+				gChoosedMap = session->map();
+				LoadMap(gChoosedMap);
+				LoadFirstPartForMap();
+				SetGameConnectionState(GCS_CONNECTED);
+			}
+		}
+		if (session->phase() == MultiplayerSession::Failed)
+		{
+			Drawing::showMessage("The host map is missing or has a different version.", "Multiplayer");
+			mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
+			return;
+		}
+		if (session->phase() != MultiplayerSession::Playing)
+		{
+			oslDrawFillRect(20, 70, 460, 180, RGBA(20,12,8,255));
+			oslDrawString(240, 110, "Agreeing on the host map and start...");
+			oslDrawString(240, 140, "Circle to cancel");
+			if (osl_keys->pressed.circle) mNextScreen = ScreenManager::SCREEN_MULTIPLAYER;
+			return;
 		}
 	}
 #endif // JPCSP_EMULATOR

@@ -20,6 +20,10 @@ void oslAdhocRejectConnection(remotePsp *p) { ++rejects; p->connectionState = OS
 u8 *oslAdhocGetMacAddress() { return peer.macAddress; }
 int oslAdhocGetState() { return ADHOC_INIT; }
 void oslAdhocTerm() {}
+int sceNetAdhocPdpCreate(unsigned char *, unsigned short, unsigned int, int) { return 1; }
+int sceNetAdhocPdpDelete(int, int) { return 0; }
+int sceNetAdhocPdpSend(int, unsigned char *, unsigned short, void *, unsigned int, unsigned int, int) { return 0; }
+int sceNetAdhocPdpRecv(int, unsigned char *, unsigned short *, void *, void *, unsigned int, int) { return -1; }
 int main()
 {
     Adhoc server;

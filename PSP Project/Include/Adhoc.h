@@ -7,6 +7,7 @@
 #define ADHOC_H_INCLUDED
 
 #include "../Include/ILib.h"
+#include "MultiplayerSession.h"
 
 class Adhoc
 {
@@ -17,6 +18,9 @@ private:
 	bool mReady;
 	int mSelectedPeer;
 	u32 mRequestStarted;
+	int mSocket;
+	u32 mLastSend;
+	MultiplayerSession *mSession;
 public:
 	Adhoc();
 	~Adhoc();
@@ -28,6 +32,9 @@ public:
 	bool clientWaitingConnection(u32 now);
 	bool isReady() const { return mReady; }
 	remotePsp *getPeer();
+	MultiplayerSession *session() { return mSession; }
+	bool beginSession(bool host, const char *map, u32 hash, u32 nonce);
+	void updateSession(u32 now);
 	void clientConnected(struct remotePsp *aPsp, char *finalScore);	//The client is connected and can send data.
 	void clientSendScore(char *finalScore);
 
