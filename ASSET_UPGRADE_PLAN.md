@@ -1,6 +1,6 @@
 # Plano de Evolucao Visual - Gods Defense
 
-> Status validado contra o codigo, o git e o kit em 2026-10-18.
+> Base validada contra o codigo, o git e o kit em 2026-10-18; menu principal atualizado em 2026-11-02.
 > Legenda: **[feito]** verificado no repo · **[parcial]** · **[pendente]** · **[fora do escopo]**
 > Referencia do kit: `ASSET_MAP.md`.
 
@@ -20,7 +20,7 @@ Os tres nao mudam desde `337b99b` (otimizacao pngout antiga).
 
 ## 0. Pipeline de assets (fonte da verdade)
 
-Todo PNG de gameplay/HUD trocado ate agora e gerado por script. **Nao editar esses PNGs a mao.** Altere o script e rode de novo.
+Todo PNG de gameplay/HUD/menu trocado ate agora e gerado por script. **Nao editar esses PNGs a mao.** Altere o script e rode de novo.
 
 - Rodar com `.venv/bin/python tools/asset_pipeline/<script>.py`. O script escreve direto em `PSP Project/Res/`.
 - O kit (`tower-defense-2d-game-kit-v1.1/`) esta no `.gitignore`, entao precisa existir localmente.
@@ -34,6 +34,7 @@ Todo PNG de gameplay/HUD trocado ate agora e gerado por script. **Nao editar ess
 | `build_lightning_tower.py` | `towers/lightning/{tower,icon,ST_Lightning}.png` | magic `18.png`, `19/20.png`; `td-gui/upgrade/ico_18` |
 | `build_<inimigo>_enemy.py` (7) + `enemy_assets.py` | `enemies/*/*.png` | ver tabela da secao 2 |
 | `build_ingame_ui.py` | `hud`, `sidebar`, `upgradebar`, `selector`, `sell`, `upgrade` `.png` | `td-gui/PNG/*` (crystal_1 do `shop`, heart do `interface_game`) |
+| `build_main_menu.py` | `menu/buttons.png` (2 estados de `192x28`) | `td-gui/difficulty/button_empty_2` |
 | `build_maps.py` | `maps/*/{<mapa>.png, mini.png}` + `_debug/*` | `td-tilesets/version-for-the-program-Tiled` |
 | `preview_tiles.py` | `_debug/{tail}_sheet.png` (as 8 familias) | idem |
 
@@ -131,13 +132,19 @@ A UI ingame deve parecer menos prototipo e mais jogo final, mas sem ocupar espac
   - botao de start wave animado
 - `Resource.h` nao precisou de mudanca: os nomes dos arquivos foram mantidos.
 
-## 4. Menus — [pendente]
+## 4. Menus — [parcial]
 
 ### Objetivo visual
 
 Os menus devem passar uma primeira impressao mais profissional, com um estilo visual unico entre as telas.
 
-**Nada foi feito ainda:** nenhum `*Screen.cpp` mudou fora de refactors (line endings em `ed8ef2b`, nomes de mapa em `7c74849`). Nenhum PNG de menu foi trocado. A pasta `PSP Project/Res/mapselect/` esta vazia, nao e versionada nem referenciada no codigo: e sobra local e pode ser apagada.
+**Main Menu implementado:** seis botoes de madeira com moldura metalica, selecao dourada pulsante e rotulos com tamanho uniforme. O fundo protegido e as seis acoes existentes foram mantidos. `build_main_menu.py` gera um sheet RGBA `384x28`, carregado e liberado pelo `MainMenuScreen`.
+
+Os botoes sao desenhados antes dos textos: intraFont altera a textura GU sem atualizar o cache de imagem da OSLib, causando artefatos quando se alterna o mesmo sheet com texto.
+
+As demais telas ainda nao receberam o upgrade visual. A pasta `PSP Project/Res/mapselect/` e sobra local sem referencia no codigo.
+
+Validado em 2026-11-02: build PSP, regeneracao deterministica do sheet, assets protegidos identicos ao HEAD e PPSSPP (layout, navegacao circular, entrada na selecao de mapa e retorno ao menu). PSP real e medicao de memoria ainda pendentes.
 
 ### Restricoes ja decididas
 
@@ -157,7 +164,7 @@ Os menus devem passar uma primeira impressao mais profissional, com um estilo vi
 | Anykey | `AnykeyScreen` | manter (`anykeylogo.png`) |
 | Warning | `WarningScreen` | pendente |
 | Memory Warning | `MemoryWarningScreen` | pendente |
-| Main Menu | `MainMenuScreen` | pendente — **proxima** (fundo `background.png` mantido) |
+| Main Menu | `MainMenuScreen` | feito — botoes e selecao pulsante (fundo `background.png` mantido) |
 | Selecao de mapa | `GameOptionsScreen` (carrega `maps/%s/mini.png`) | pendente |
 | Pause | `PauseScreen` | pendente |
 | Help | `HelpScreen` | pendente |
@@ -182,8 +189,9 @@ Os menus devem passar uma primeira impressao mais profissional, com um estilo vi
 
 ### Entregaveis
 
-- Script novo em `tools/asset_pipeline/` para os assets de menu (mesmo padrao das outras pipelines).
-- Ajustes nas classes de tela.
+- [feito] `tools/asset_pipeline/build_main_menu.py` e integracao no `MainMenuScreen`.
+- [pendente] Aplicar a linguagem visual em `PauseScreen` e `GameOptionsScreen`, depois nas demais telas.
+- [pendente] Transicoes de entrada/saida e validacao em PSP real.
 
 ## 5. Mapas e Ambiente — [parcial]
 
@@ -246,7 +254,7 @@ Tiles que o planner realmente coloca hoje. Todos sao props isolados, conforme AS
 - [parcial] Torres com idle animado: as 3 magicas sim, a Arrow nao (secao 1)
 - [feito] Projeteis melhores (secao 1)
 - [feito] Inimigos com caminhada fluida: loop corrigido (secao 2)
-- [pendente] Selector animado no menu
+- [parcial] Selecao pulsante no menu principal; demais menus pendentes
 - [pendente] Botao/icone selecionado piscando
 
 ### Prioridade media
@@ -314,9 +322,10 @@ UI: imagens pequenas ou tela inteira `480x272`, carregadas pelos paths de `Resou
 - [feito] Idle das torres magicas, loop dos inimigos.
 - [pendente] Idle da Arrow Tower, barra de vida, range circle, cursor.
 
-### Fase 3 - Menus profissionais — [pendente]
+### Fase 3 - Menus profissionais — [parcial]
 
-- Proximo passo: `MainMenuScreen`, para definir a linguagem visual. Depois `PauseScreen` e `GameOptionsScreen` (selecao de mapa).
+- [feito] `MainMenuScreen`: botoes de madeira/metal e selecao dourada pulsante.
+- Proximo passo: `PauseScreen`, depois `GameOptionsScreen` (selecao de mapa).
 - Respeitar os assets protegidos e as restricoes da secao 4.
 - Win/derrota: fora do escopo.
 

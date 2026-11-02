@@ -6,21 +6,26 @@
 #include "../Include/MainMenuScreen.h"
 #include "../Include/util/MenuItem.h"
 #include "../Include/ScreenManager.h"
+#include <math.h>
 
 bool gIsMultiplayer = false;
 
 MainMenuScreen::MainMenuScreen()
 {
     gIsMultiplayer = false;
+    menuButtons = Sprites::LoadSpriteFilePNG(Resource::IMG_MAIN_MENU_BUTTONS, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888, 192, 28);
     menubg = oslLoadImageFilePNG(Resource::IMG_MAIN_MENU_BG, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
 
-    if (!menubg) {
+    if (!menubg || !menuButtons) {
         oslFatalError("At least one file is missing. Please copy all the files in the game directory.");
     }
 }
 
 MainMenuScreen::~MainMenuScreen()
 {
+    if (menuButtons != NULL) {
+        oslDeleteImage(menuButtons);
+    }
     if (menubg != NULL) {
         oslDeleteImage(menubg);
     }
@@ -31,25 +36,35 @@ void MainMenuScreen::draw()
     oslDrawImageXY(menubg, (480/2) - (menubg->stretchX/2), (272/2) - (menubg->stretchY/2));
     
     MenuItem menuItems[] = {
-        {Resource::STR_START_GAME, 100},
-        {Resource::STR_MULTIPLAYER_CAPTION, 120},
-        {Resource::STR_HELP_CAPTION, 140},
-        {Resource::STR_TROPHIES_CAPTION, 160},
-        {Resource::STR_ABOUT_CAPTION, 180},
-        {Resource::STR_EXIT_CAPTION, 200}
+        {Resource::STR_START_GAME, 40},
+        {Resource::STR_MULTIPLAYER_CAPTION, 70},
+        {Resource::STR_HELP_CAPTION, 100},
+        {Resource::STR_TROPHIES_CAPTION, 130},
+        {Resource::STR_ABOUT_CAPTION, 160},
+        {Resource::STR_EXIT_CAPTION, 190}
     };
 
     for (int i = 0; i < (int)(sizeof(menuItems)/sizeof(menuItems[0])); ++i)
     {
-        if (gMenu == i)
+        const bool selected = gMenu == i;
+        oslSetImageFrame(menuButtons, selected ? 1 : 0);
+        if (selected)
         {
-            oslIntraFontSetStyle(gFont, 1.2f, RGBA(175,137,62,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
+            int brightness = 235 + (int)(20 * sinf(osl_vblCount * 0.06f));
+            oslSetAlpha(OSL_FX_TINT, RGBA(brightness, brightness, brightness, 255));
         }
-        else
-        {
-            oslIntraFontSetStyle(gFont, 0.6f, RGBA(120,120,120,255), RGBA(0,0,0,0xFF), 0.f, INTRAFONT_ALIGN_CENTER);
-        }
-        oslDrawString(340, menuItems[i].yPosition, menuItems[i].text);
+        oslDrawImageXY(menuButtons, 268, menuItems[i].yPosition);
+        oslSetAlpha(OSL_FX_DEFAULT, 0);
+    }
+
+    // intraFont changes the GU texture; draw labels after all button images.
+    for (int i = 0; i < (int)(sizeof(menuItems)/sizeof(menuItems[0])); ++i)
+    {
+        const bool selected = gMenu == i;
+        oslIntraFontSetStyle(gFont, 0.60f,
+            selected ? RGBA(255,232,163,255) : RGBA(225,214,192,255),
+            RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
+        oslDrawString(364, menuItems[i].yPosition + 10, menuItems[i].text);
     }
 }
 
