@@ -30,6 +30,7 @@ GAMEOBJECTS = \
     Src/MemoryWarningScreen.o
 
 UTIL = \
+    Src/util/AdhocCompatibility.o \
     Src/util/Fps.o \
     Src/util/Sprites.o \
     Src/util/Drawing.o \
@@ -48,7 +49,7 @@ RENDERERS = \
 OBJS = $(GAMEOBJECTS) $(UTIL) $(RENDERERS)
 
 LIBDIR =
-LDFLAGS =
+LDFLAGS = -Wl,--wrap=sceNetAdhocctlInit
 LIBS = \
     -losl \
     -lpng \
