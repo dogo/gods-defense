@@ -12,6 +12,7 @@
 class PauseScreen
 {
 private:
+	OSL_IMAGE *menuButtons;
 
 public:
 	PauseScreen();

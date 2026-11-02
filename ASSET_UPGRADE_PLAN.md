@@ -1,6 +1,6 @@
 # Plano de Evolucao Visual - Gods Defense
 
-> Base validada contra o codigo, o git e o kit em 2026-10-18; menu principal atualizado em 2026-11-02.
+> Base validada contra o codigo, o git e o kit em 2026-10-18; menus principal e de pausa atualizados em 2026-11-02.
 > Legenda: **[feito]** verificado no repo · **[parcial]** · **[pendente]** · **[fora do escopo]**
 > Referencia do kit: `ASSET_MAP.md`.
 
@@ -142,9 +142,13 @@ Os menus devem passar uma primeira impressao mais profissional, com um estilo vi
 
 Os botoes sao desenhados antes dos textos: intraFont altera a textura GU sem atualizar o cache de imagem da OSLib, causando artefatos quando se alterna o mesmo sheet com texto.
 
+`PauseScreen` reutiliza o mesmo sheet de botoes, com painel escuro de borda dourada e selecao pulsante. As acoes Resume, Main Menu e Circle/Back foram mantidas. O recurso e carregado com o jogo e liberado junto com a tela de pausa.
+
 As demais telas ainda nao receberam o upgrade visual. A pasta `PSP Project/Res/mapselect/` e sobra local sem referencia no codigo.
 
 Validado em 2026-11-02: build PSP, regeneracao deterministica do sheet, assets protegidos identicos ao HEAD e PPSSPP (layout, navegacao circular, entrada na selecao de mapa e retorno ao menu). PSP real e medicao de memoria ainda pendentes.
+
+Pausa validada no PPSSPP na mesma data: layout, selecao circular, Resume com Cross, retomada com Circle e retorno ao menu principal. Build completo com `make -B -j4`, incluindo `GameScreen` que aloca a tela de pausa.
 
 ### Restricoes ja decididas
 
@@ -166,7 +170,7 @@ Validado em 2026-11-02: build PSP, regeneracao deterministica do sheet, assets p
 | Memory Warning | `MemoryWarningScreen` | pendente |
 | Main Menu | `MainMenuScreen` | feito — botoes e selecao pulsante (fundo `background.png` mantido) |
 | Selecao de mapa | `GameOptionsScreen` (carrega `maps/%s/mini.png`) | pendente |
-| Pause | `PauseScreen` | pendente |
+| Pause | `PauseScreen` | feito — painel, botoes compartilhados e selecao pulsante |
 | Help | `HelpScreen` | pendente |
 | About | `AboutScreen` | pendente |
 | Trophies | `TrophiesScreen` | pendente |
@@ -190,7 +194,8 @@ Validado em 2026-11-02: build PSP, regeneracao deterministica do sheet, assets p
 ### Entregaveis
 
 - [feito] `tools/asset_pipeline/build_main_menu.py` e integracao no `MainMenuScreen`.
-- [pendente] Aplicar a linguagem visual em `PauseScreen` e `GameOptionsScreen`, depois nas demais telas.
+- [feito] `PauseScreen` reutiliza `menu/buttons.png`, sem assets adicionais.
+- [pendente] Aplicar a linguagem visual em `GameOptionsScreen`, depois nas demais telas.
 - [pendente] Transicoes de entrada/saida e validacao em PSP real.
 
 ## 5. Mapas e Ambiente — [parcial]
@@ -254,7 +259,7 @@ Tiles que o planner realmente coloca hoje. Todos sao props isolados, conforme AS
 - [parcial] Torres com idle animado: as 3 magicas sim, a Arrow nao (secao 1)
 - [feito] Projeteis melhores (secao 1)
 - [feito] Inimigos com caminhada fluida: loop corrigido (secao 2)
-- [parcial] Selecao pulsante no menu principal; demais menus pendentes
+- [parcial] Selecao pulsante nos menus principal e de pausa; demais menus pendentes
 - [pendente] Botao/icone selecionado piscando
 
 ### Prioridade media
@@ -325,7 +330,8 @@ UI: imagens pequenas ou tela inteira `480x272`, carregadas pelos paths de `Resou
 ### Fase 3 - Menus profissionais — [parcial]
 
 - [feito] `MainMenuScreen`: botoes de madeira/metal e selecao dourada pulsante.
-- Proximo passo: `PauseScreen`, depois `GameOptionsScreen` (selecao de mapa).
+- [feito] `PauseScreen`: painel escuro, botoes compartilhados e selecao dourada pulsante.
+- Proximo passo: `GameOptionsScreen` (selecao de mapa).
 - Respeitar os assets protegidos e as restricoes da secao 4.
 - Win/derrota: fora do escopo.
 

@@ -5,28 +5,60 @@
 
 #include "../Include/PauseScreen.h"
 #include "../Include/ScreenManager.h"
+#include "../Include/util/MenuItem.h"
+#include <math.h>
 
 
 PauseScreen::PauseScreen()
 {
 	gMenu = 0;
+	menuButtons = Sprites::LoadSpriteFilePNG(Resource::IMG_MAIN_MENU_BUTTONS, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888, 192, 28);
+	if (!menuButtons) {
+		oslFatalError("At least one file is missing. Please copy all the files in the game directory.");
+	}
 }
 
 PauseScreen::~PauseScreen()
 {
+	if (menuButtons != NULL) {
+		oslDeleteImage(menuButtons);
+	}
 }
 
 void PauseScreen::draw()
 {
-	//Screen Title
-	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
-	oslDrawString(240,40,Resource::STR_PAUSE_CAPTION);
+	oslDrawFillRect(0, 0, 480, 272, RGBA(9,7,5,255));
+	oslDrawFillRect(108, 48, 372, 224, RGBA(93,64,18,255));
+	oslDrawFillRect(110, 50, 370, 222, RGBA(189,149,36,255));
+	oslDrawFillRect(111, 51, 369, 221, RGBA(20,12,8,255));
+	oslDrawFillRect(136, 98, 344, 99, RGBA(93,64,18,255));
 
-	//Screen Options
-	(gMenu == 0) ? oslIntraFontSetStyle(gFont, 0.9f,RGBA(175,137,62,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 0.7f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF), 0.f, INTRAFONT_ALIGN_CENTER);
-	oslDrawString(240, 100,Resource::STR_PAUSE_RESUME);
-	(gMenu == 1) ? oslIntraFontSetStyle(gFont, 0.9f,RGBA(175,137,62,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER) : oslIntraFontSetStyle(gFont, 0.7f,RGBA(120,120,120,255), RGBA(0,0,0,0xFF), 0.f, INTRAFONT_ALIGN_CENTER);
-	oslDrawString(240, 120,Resource::STR_PAUSE_MENU);
+	MenuItem menuItems[] = {
+		{Resource::STR_PAUSE_RESUME, 116},
+		{Resource::STR_PAUSE_MENU, 156}
+	};
+	for (int i = 0; i < 2; ++i)
+	{
+		oslSetImageFrame(menuButtons, gMenu == i ? 1 : 0);
+		if (gMenu == i)
+		{
+			int brightness = 235 + (int)(20 * sinf(osl_vblCount * 0.06f));
+			oslSetAlpha(OSL_FX_TINT, RGBA(brightness, brightness, brightness, 255));
+		}
+		oslDrawImageXY(menuButtons, 144, menuItems[i].yPosition);
+		oslSetAlpha(OSL_FX_DEFAULT, 0);
+	}
+
+	// intraFont changes the GU texture; draw labels after all button images.
+	oslIntraFontSetStyle(gFont, 0.85f, RGBA(255,232,163,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
+	oslDrawString(240, 71, Resource::STR_PAUSE_CAPTION);
+	for (int i = 0; i < 2; ++i)
+	{
+		oslIntraFontSetStyle(gFont, 0.60f,
+			gMenu == i ? RGBA(255,232,163,255) : RGBA(225,214,192,255),
+			RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
+		oslDrawString(240, menuItems[i].yPosition + 10, menuItems[i].text);
+	}
 }
 
 void PauseScreen::update(u32 /*timePassed*/)
