@@ -350,14 +350,16 @@ void Map::LoadMapImage()
 
 void Map::ResetMap()
 {
+	// Clear each pointer: GameScreen::LoadMap resets before Map::LoadMap resets again.
 	if (mMapImage != NULL)
 		oslDeleteImage(mMapImage);
-	if (mMapName != NULL) //We have to be free :)
-		free(mMapName);
-	if (mCurrentMapName != NULL)
-		free(mCurrentMapName);
-	if (mImgMapName != NULL)
-		free(mImgMapName);
+	mMapImage = NULL;
+	free(mMapName);
+	mMapName = NULL;
+	free(mCurrentMapName);
+	mCurrentMapName = NULL;
+	free(mImgMapName);
+	mImgMapName = NULL;
 	if (mCollisionMap != NULL)
 	{
 		for (int i = 0; i < mGridTilesWidth; i++)
