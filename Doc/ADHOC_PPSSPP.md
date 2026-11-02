@@ -16,7 +16,7 @@ PPSSPP SDL 1.20.4 no macOS em 2026-11-02.
 
 | Sintoma | Causa | Solução |
 |---|---|---|
-| `oslAdhocInit` nunca retorna; estado de controle fica em 0 | A OSLib até 1.5.3 envia o product ID com 8 caracteres (`ULUS9999`) e o servidor recusa | Usar a OSLib com o fix (branch `fix/adhoc-hardening`) ou o `--wrap=sceNetAdhocctlInit` de `Src/util/AdhocCompatibility.cpp` |
+| `oslAdhocInit` nunca retorna; estado de controle fica em 0 | A OSLib até 1.5.3 envia o product ID com 8 caracteres (`ULUS9999`) e o servidor recusa | Instalar a OSLib com o fix (branch `fix/adhoc-hardening`); o jogo não tem mais workaround |
 | As duas instâncias ficam com o mesmo IP (127.0.0.1) e o mesmo MAC | Bug do contador de instâncias do PPSSPP no macOS (`ftruncate` em shm já existente dá `EINVAL`). Corrigido em hrydgard/ppsspp#22895, que não está no 1.20.4 | Abrir o cliente com `--appendconfig` com outro MAC e outro nickname |
 | `sceNetAdhocctlConnect` falha com `80410b10` depois de ~5 s e o relay não registra conexão | O PPSSPP não se conecta quando o IP do servidor é o mesmo da instância (127.0.0.1) e o servidor embutido está desligado | Rodar o relay no IP da rede local do Mac (seção 1) |
 | Conecta, mas usa P2P em vez do relay | Servidor fora de `RelayAdhocServerList` | Colocar o IP também em `RelayAdhocServerList` |
