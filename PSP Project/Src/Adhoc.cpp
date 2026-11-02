@@ -27,7 +27,7 @@ void Adhoc::AdhocClient()
 	{
 		char message[100] = "";
 		sprintf(message, "adhocInit error: %i", init);
-		oslMessageBox(message, "Debug",  oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK , 0, 0, 0, 0));
+		Drawing::showMessage(message, "Debug");
 		return;
 	}
 
@@ -98,7 +98,7 @@ void Adhoc::AdhocServer()
 	{
 		char message[100] = "";
 		snprintf(message, sizeof(message), "adhocInit error: %i", init);
-		oslMessageBox(message, "Debug",  oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK , 0, 0, 0, 0));
+		Drawing::showMessage(message, "Debug");
 		return;
 	}
 }

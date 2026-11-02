@@ -21,6 +21,7 @@ TrophiesScreen::~TrophiesScreen()
 
 void TrophiesScreen::draw()
 {
+	Drawing::drawControlHint(back, 366, 240, Resource::STR_BACK_SK);
 	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	oslDrawString(240,20,Resource::STR_TROPHIES_CAPTION);
 
@@ -40,9 +41,6 @@ void TrophiesScreen::draw()
 		DrawTrophyRow(firstVisibleTrophy + i, 70 + (i * 34));
 	}
 
-	oslDrawImageXY(back, (430) - (back->stretchX), (272) - (back->stretchY));
-	oslIntraFontSetStyle(gFont, 0.7f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
-	oslDrawString((510) - back->stretchX,(272) - (back->stretchY/2),Resource::STR_BACK_SK);
 }
 
 void TrophiesScreen::DrawTrophyRow(const int &index, const int &yPosition)

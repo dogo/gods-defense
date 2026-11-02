@@ -35,6 +35,7 @@ void MultiplayerScreen::draw()
 {
 	//Cover
 	oslDrawImageXY(imgCover,0,0);
+	Drawing::drawControlHint(imgBack, 366, 240, Resource::STR_BACK_SK);
 
 	//Title
 	oslIntraFontSetStyle(gFont, 1.2f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
@@ -43,17 +44,12 @@ void MultiplayerScreen::draw()
 	//Options
 	oslIntraFontSetStyle(gFont, 0.6f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
 	//Server
-	oslDrawString(240,100,Resource::STR_ACT_LIKE_SERVER);
-	oslDrawImageXY(imgServer, (145) - (imgServer->stretchX), (130) - (imgServer->stretchY));
+	Drawing::drawControlHint(imgServer, 81, 100, Resource::STR_ACT_LIKE_SERVER);
 	
 	//Client
-	oslDrawString(240,160,Resource::STR_ACT_LIKE_CLIENT);
-	oslDrawImageXY(imgClient, (145) - (imgClient->stretchX), (190) - (imgClient->stretchY));
+	Drawing::drawControlHint(imgClient, 81, 160, Resource::STR_ACT_LIKE_CLIENT);
 	
 	//Back
-	oslDrawImageXY(imgBack, (430) - (imgBack->stretchX), (272) - (imgBack->stretchY));
-	oslIntraFontSetStyle(gFont, 0.7f,RGBA(175,137,62,255), RGBA(0,0,0,0), 0.f, INTRAFONT_ALIGN_CENTER);
-	oslDrawString((510) - imgBack->stretchX,(272) - (imgBack->stretchY/2),Resource::STR_BACK_SK);
 }
 
 void MultiplayerScreen::update(u32 /*timePassed*/)

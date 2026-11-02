@@ -34,6 +34,7 @@ Todo PNG de gameplay/HUD/menu trocado ate agora e gerado por script. **Nao edita
 | `build_lightning_tower.py` | `towers/lightning/{tower,icon,ST_Lightning}.png` | magic `18.png`, `19/20.png`; `td-gui/upgrade/ico_18` |
 | `build_<inimigo>_enemy.py` (7) + `enemy_assets.py` | `enemies/*/*.png` | ver tabela da secao 2 |
 | `build_ingame_ui.py` | `hud`, `sidebar`, `upgradebar`, `selector`, `sell`, `upgrade` `.png` | `td-gui/PNG/*` (crystal_1 do `shop`, heart do `interface_game`) |
+| `build_control_icons.py` | `x.png`, `circle.png` (`64x64`, RGBA) | `td-gui/levels/btton_empty`, simbolos desenhados em dourado |
 | `build_main_menu.py` | `menu/buttons.png` (2 estados de `192x28`) | `td-gui/difficulty/button_empty_2` |
 | `build_maps.py` | `maps/*/{<mapa>.png, mini.png}` + `_debug/*` | `td-tilesets/version-for-the-program-Tiled` |
 | `preview_tiles.py` | `_debug/{tail}_sheet.png` (as 8 familias) | idem |
@@ -125,12 +126,13 @@ A UI ingame deve parecer menos prototipo e mais jogo final, mas sem ocupar espac
 - [feito] `GameGUI.cpp`: fonte do HUD reduzida para `0.50` e posicoes de texto/custo ajustadas.
 - [pendente] `cursor.png` nao mudou.
 - [pendente] Range circle: continua `Drawing::drawCircle` vermelho, igual para preview e torre selecionada.
-- [pendente] Nao ha feedback de "nao pode construir". O preview (`GameGUI::RenderPlacingTower`) e sempre o mesmo, e a falta de ouro abre um `oslMessageBox`.
+- [pendente] Nao ha feedback de "nao pode construir". O preview (`GameGUI::RenderPlacingTower`) e sempre o mesmo, e a falta de ouro abre o painel personalizado `Drawing::showMessage`.
 - [pendente] Animacoes:
   - selector piscando
   - icone de torre com destaque quando selecionado
   - botao de start wave animado
-- `Resource.h` nao precisou de mudanca: os nomes dos arquivos foram mantidos.
+- [feito] Alertas personalizados (`Drawing::showMessage`): descricao de mapa, inicio de wave, avisos de construcao/upgrade/ouro e trofeus usam painel escuro/dourado, fonte do jogo, fundo escurecido e botao com Cross. Reutiliza `menu/buttons.png` e o asset compartilhado `x.png`; largura e altura acompanham as linhas medidas na fonte do jogo. Confirma com Cross e mantem o gameplay bloqueado ate fechar. O alerta padrao fica como fallback se faltar memoria/asset.
+- `Resource.h` nao precisou de mudanca para o HUD: os nomes dos arquivos foram mantidos.
 
 ## 4. Menus — [parcial]
 
@@ -147,6 +149,10 @@ Os botoes sao desenhados antes dos textos: intraFont altera a textura GU sem atu
 As demais telas ainda nao receberam o upgrade visual. A pasta `PSP Project/Res/mapselect/` e sobra local sem referencia no codigo.
 
 Validado em 2026-11-02: build PSP, regeneracao deterministica do sheet, assets protegidos identicos ao HEAD e PPSSPP (layout, navegacao circular, entrada na selecao de mapa e retorno ao menu). PSP real e medicao de memoria ainda pendentes.
+
+Alertas validados no PPSSPP em 2026-11-02: descricao completa de Icarus Falls, inicio de wave e aviso de ouro insuficiente, com fechamento por Cross e retomada do gameplay. Build completo aprovado. Painel adaptavel conferido com a descricao longa e o aviso curto de wave; quebra de texto testada com `c++ -std=c++11 tools/tests/test_message_text.cpp -o /tmp/gods-defense-test-message-text && /tmp/gods-defense-test-message-text`. Disparo das notificacoes de trofeus/rede e fallback de falta de memoria ainda nao exercitados em execucao.
+
+Alinhamento de Cross/Circle revalidado visualmente no PPSSPP em 2026-11-02 nas nove telas: Auto Save, selecao de mapa, multiplayer, aviso WLAN, Help, About, Trophies, vitoria e derrota. Um build temporario de QA percorreu os renderizadores reais dessas telas sem alterar o fluxo de producao. `Drawing::drawControlHint` unifica centro vertical, espaco e fonte das legendas; os simbolos dos PNGs ficam centrados na moldura, sem contar a sombra. Help recebeu ajuste de fonte para separar o texto do rodape. A sincronizacao e o writeback do cache evitam desaparecimento parcial de imagens/texto ao alternar OSLib e intraFont. Alertas longo/curto foram reconferidos no EBOOT normal com o mesmo Cross compartilhado.
 
 Pausa validada no PPSSPP na mesma data: layout, selecao circular, Resume com Cross, retomada com Circle e retorno ao menu principal. Build completo com `make -B -j4`, incluindo `GameScreen` que aloca a tela de pausa.
 
@@ -195,6 +201,8 @@ Pausa validada no PPSSPP na mesma data: layout, selecao circular, Resume com Cro
 
 - [feito] `tools/asset_pipeline/build_main_menu.py` e integracao no `MainMenuScreen`.
 - [feito] `PauseScreen` reutiliza `menu/buttons.png`, sem assets adicionais.
+- [feito] Cross, Circle e Square globais em madeira/dourado (`build_control_icons.py`), mantendo nomes e dimensoes `64x64` para todas as telas consumidoras. O alerta usa o mesmo Cross, sem versao local desenhada. Square do multiplayer reconferido no PPSSPP junto de Cross/Circle, com moldura, escala e alinhamento iguais.
+- [feito] `triangle.png` atualizado pelo mesmo pipeline, em `64x64` RGBA. O asset nao e carregado pelo codigo atual (o comando Triangle inicia a proxima wave). Visual conferido no PPSSPP substituindo o Square somente em um build temporario de multiplayer; producao preserva o Square.
 - [pendente] Aplicar a linguagem visual em `GameOptionsScreen`, depois nas demais telas.
 - [pendente] Transicoes de entrada/saida e validacao em PSP real.
 

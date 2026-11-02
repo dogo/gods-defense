@@ -98,7 +98,7 @@ bool TrophyManager::Unlock(const TrophyId &id)
 
 	char message[128];
 	sprintf(message, "%s\n%s", Resource::STR_EARNED_TROPHIE, gTrophyInfos[id].name);
-	oslMessageBox(message, Resource::STR_TROPHIES_CAPTION, oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
+	Drawing::showMessage(message, Resource::STR_TROPHIES_CAPTION);
 	return true;
 }
 

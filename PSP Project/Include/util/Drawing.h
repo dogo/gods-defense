@@ -12,6 +12,8 @@ class Drawing
 {
 
 public:
+	static void showMessage(const char *text, const char *title);
+	static void drawControlHint(OSL_IMAGE *icon, int x, int centerY, const char *label);
 
 /** Draw splash with fade in and fade out.
 	Fade States

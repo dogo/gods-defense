@@ -124,7 +124,7 @@ void GameGUI::Update(u32 /*timePassed*/)
 
 	if(currentGameState == GS_GAME_LOADED)
 	{
-		oslMessageBox(mGame->GetGameMap()->mDescription[0], Resource::STR_MAP_DESC, oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
+		Drawing::showMessage(mGame->GetGameMap()->mDescription[0], Resource::STR_MAP_DESC);
 		mGame->SetGameState(GS_SCROLL_MAP);
 	}
 
@@ -179,7 +179,7 @@ void GameGUI::Update(u32 /*timePassed*/)
 				}
 				else
 				{
-					oslMessageBox(Resource::STR_CANT_BUILD_HERE, Resource::STR_WARNING_CAPTION, oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
+					Drawing::showMessage(Resource::STR_CANT_BUILD_HERE, Resource::STR_WARNING_CAPTION);
 				}
 			}
 		}
@@ -226,7 +226,7 @@ void GameGUI::Update(u32 /*timePassed*/)
 			}
 			else if((mSelectedItemX == 0) && (!mGame->TryUpgradeSelectedTower()))
 			{
-				oslMessageBox(Resource::STR_CANT_UPGRADE, Resource::STR_WARNING_CAPTION, oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
+				Drawing::showMessage(Resource::STR_CANT_UPGRADE, Resource::STR_WARNING_CAPTION);
 			}
 			if((mSelectedItemX == 1) && (mGame->TrySellSelectedTower()))
 			{
@@ -352,7 +352,7 @@ void SidebarItem::Selected()
 			gamegui->PuttingTower(mTower);
 		else
 		{
-			oslMessageBox(Resource::STR_MORE_GOLD, Resource::STR_WARNING_CAPTION, oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
+			Drawing::showMessage(Resource::STR_MORE_GOLD, Resource::STR_WARNING_CAPTION);
 			gamegui->mGame->SetGameState(GS_SCROLL_MAP);
 		}
 	}

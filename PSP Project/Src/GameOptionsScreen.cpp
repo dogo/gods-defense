@@ -74,11 +74,9 @@ void GameOptionsScreen::draw()
 	oslDrawImageXY(imgRightArrow,(233 + mMapImages[mSelectedMap]->sizeX),(272/2 -imgRightArrow->stretchY/2));
 	oslDrawImageXY(imgLetArrow,(210 - mMapImages[mSelectedMap]->sizeX),(272/2 -imgLetArrow->stretchY/2));
 
-	oslDrawImageXY(imgBack, (430) - (imgBack->stretchX), (272) - (imgBack->stretchY));
-	oslDrawString((510) - imgBack->stretchX,(272) - (imgBack->stretchY/2),Resource::STR_BACK_SK);
+	Drawing::drawControlHint(imgBack, 366, 240, Resource::STR_BACK_SK);
 
-	oslDrawImageXY(imgSelect, 10, (272) - (imgSelect->stretchY));
-	oslDrawString(28 + imgSelect->stretchX, (272) - (imgSelect->stretchY/2),Resource::STR_SELECT);
+	Drawing::drawControlHint(imgSelect, 10, 240, Resource::STR_SELECT);
 }
 
 void GameOptionsScreen::update(u32 /*timePassed*/)

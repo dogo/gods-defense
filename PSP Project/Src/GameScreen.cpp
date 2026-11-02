@@ -568,7 +568,7 @@ void GameScreen::RunNextWave(const bool &forceRunNow)
 	{
 		char title[256];
 		sprintf(title, "Wave %i of %i", GetNextWaveNumber(), GetWaveCount());
-		oslMessageBox(mGameMap->mWaves[mActiveWaves]->mWaveDescription, title, oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
+		Drawing::showMessage(mGameMap->mWaves[mActiveWaves]->mWaveDescription, title);
 		sceKernelDelayThread(1400);
 		mGameMap->mWaves[mActiveWaves]->StartEnemySpawn();
 		mActiveWaves++;

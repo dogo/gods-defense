@@ -4,10 +4,104 @@
 //**************************************************************************
 
 #include "../../Include/util/Drawing.h"
+#include "../../Include/util/MessageText.h"
+#include <algorithm>
 #include <math.h>
 
 short gState = 0;
 int gFade = 255;
+
+void Drawing::drawControlHint(OSL_IMAGE *icon, int x, int centerY, const char *label)
+{
+	sceKernelDcacheWritebackAll();
+	oslSyncDrawing(); // Finish earlier font/image commands before drawing the hint.
+	oslSetFont(gFont);
+	oslResetScreenClipping();
+	oslSetAlpha(OSL_FX_DEFAULT, 0);
+	sceGuDisable(GU_DEPTH_TEST);
+	osl_curTexture = NULL; // intraFont binds textures outside OSLib's cache.
+	oslDrawImageXY(icon, x, centerY - icon->stretchY / 2);
+	oslIntraFontSetStyle(gFont, 0.60f, RGBA(255,232,163,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_LEFT);
+	// The shared icons have transparent padding; align to the visible rim.
+	oslDrawString(x + icon->stretchX * 54 / 64 + 8, centerY - 3, label);
+	sceGuDisable(GU_DEPTH_TEST);
+	sceKernelDcacheWritebackAll();
+	oslSyncDrawing();
+}
+
+void Drawing::showMessage(const char *text, const char *title)
+{
+	OSL_IMAGE *button = Sprites::LoadSpriteFilePNG(Resource::IMG_MAIN_MENU_BUTTONS, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888, 192, 28);
+	OSL_IMAGE *cross = oslLoadImageFilePNG(Resource::IMG_CROSS, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888);
+	if (!button || !cross)
+	{
+		if (button) oslDeleteImage(button);
+		if (cross) oslDeleteImage(cross);
+		oslMessageBox(text, title, oslMake3Buttons(OSL_KEY_CROSS, OSL_MB_OK, 0, 0, 0, 0));
+		return;
+	}
+
+	OSL_IMAGE *previousBuffer = oslGetDrawBuffer();
+	OSL_FONT *previousFont = osl_curFont;
+	const float size = gFont->intra->size, angle = gFont->intra->angle;
+	const unsigned int color = gFont->intra->color, shadow = gFont->intra->shadowColor, options = gFont->intra->options;
+	oslSetFont(gFont);
+	oslIntraFontSetStyle(gFont, 0.55f, RGBA(225,214,192,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_LEFT);
+	const auto measure = [](const std::string &line) { return oslGetStringWidth(line.c_str()); };
+	const std::vector<std::string> lines = wrapMessageText(text, 344, measure);
+	int contentWidth = 192;
+	for (size_t i = 0; i < lines.size(); ++i)
+		contentWidth = std::max(contentWidth, measure(lines[i]));
+	oslIntraFontSetStyle(gFont, 0.72f, RGBA(255,232,163,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
+	contentWidth = std::min(344, std::max(contentWidth, oslGetStringWidth(title)));
+	const int left = (480 - contentWidth - 48) / 2;
+	const int right = 480 - left;
+	// shortcut: current alerts fit nine lines; add paging if longer messages are introduced.
+	const int height = std::min(244, 112 + (int)lines.size() * 14);
+	const int top = (272 - height) / 2;
+	const int bottom = top + height;
+	const int buttonY = bottom - 44;
+	oslStartDrawing();
+	// Like oslMessageBox, draw over the visible frame without advancing gameplay.
+	oslSetDrawBuffer(OSL_SECONDARY_BUFFER);
+	oslSetAlpha(OSL_FX_DEFAULT, 0);
+	oslDrawFillRect(0, 0, 480, 272, RGBA(0,0,0,150));
+	oslDrawFillRect(left, top, right, bottom, RGBA(93,64,18,255));
+	oslDrawFillRect(left + 2, top + 2, right - 2, bottom - 2, RGBA(189,149,36,255));
+	oslDrawFillRect(left + 3, top + 3, right - 3, bottom - 3, RGBA(20,12,8,255));
+	oslDrawFillRect(left + 24, top + 44, right - 24, top + 45, RGBA(93,64,18,255));
+	oslSetImageFrame(button, 1);
+	oslDrawImageXY(button, 144, buttonY);
+	cross->stretchX = cross->stretchY = 32;
+	oslIntraFontSetStyle(gFont, 0.60f, RGBA(255,232,163,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_LEFT);
+	const int hintWidth = 22 + 8 + oslGetStringWidth(Resource::STR_OK);
+	Drawing::drawControlHint(cross, (480 - hintWidth) / 2 - 5, buttonY + 14, Resource::STR_OK);
+
+	oslSetFont(gFont);
+	oslIntraFontSetStyle(gFont, 0.72f, RGBA(255,232,163,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_CENTER);
+	oslDrawString(240, top + 16, title);
+	oslIntraFontSetStyle(gFont, 0.55f, RGBA(225,214,192,255), RGBA(0,0,0,255), 0.f, INTRAFONT_ALIGN_LEFT);
+	oslSetScreenClipping(left + 24, top + 54, right - 24, buttonY - 10);
+	for (size_t i = 0; i < lines.size(); ++i)
+		oslDrawString(left + 24, top + 57 + (int)i * 14, lines[i].c_str());
+	oslResetScreenClipping();
+	oslSyncDrawing();
+
+	oslFlushKey();
+	while (!osl_quit)
+	{
+		oslReadKeys();
+		if (osl_keys->pressed.cross)
+			break;
+		sceDisplayWaitVblankStart();
+	}
+	oslFlushKey();
+	oslIntraFontSetStyle(gFont, size, color, shadow, angle, options);
+	oslSetFont(previousFont);
+	oslSetDrawBuffer(previousBuffer);
+	oslDeleteImage(cross);
+	oslDeleteImage(button);
+}
 
 void Drawing::drawSplash(int iTime, OSL_IMAGE *Splash) {
 	oslDrawImageXY(Splash, (480/2) - (Splash->stretchX/2), (272/2) - (Splash->stretchY/2));
