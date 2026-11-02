@@ -1,7 +1,7 @@
 <!DOCTYPE Map SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/map.dtd">
 <Map>
     <Name>Icarus Falls</Name>
-    <Description><![CDATA[7 Waves of Tower.]]></Description>
+    <Description><![CDATA[Where Icarus fell, shadows rise. Guard the road through dead trees and forgotten graves. Survive 7 waves, including 2 fearsome bosses.]]></Description>
     <Initializers Gold="20" Lives="20" />
 
     <Menu>

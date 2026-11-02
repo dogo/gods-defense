@@ -1,7 +1,7 @@
 <!DOCTYPE Map SYSTEM "http://code.google.com/p/gods-defense/source/browse/trunk/dtd/map.dtd">
 <Map>
   <Name>Rescue Athena</Name>
-  <Description><![CDATA[7 Waves of Tower.]]></Description>
+  <Description><![CDATA[Athena needs your aid. Hold the village road against the advancing monster horde. Survive 7 waves, including 2 fearsome bosses.]]></Description>
   <Initializers Gold="20" Lives="20"/>
   <Menu>
     <BuildTowerMenu Y="0" Folder="arrow"/>
