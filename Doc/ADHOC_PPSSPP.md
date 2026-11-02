@@ -22,7 +22,7 @@ PPSSPP SDL 1.20.4 no macOS em 2026-11-02.
 | Conecta, mas usa P2P em vez do relay | Servidor fora de `RelayAdhocServerList` | Colocar o IP também em `RelayAdhocServerList` |
 | Sessões de dados expiram | `strict_mode` do relay exige o mesmo IP de origem no controle e nos dados | `strict_mode: false` |
 | Ao reabrir, o host está com o MAC/nick do cliente | O cliente grava a config de `--appendconfig` no `ppsspp.ini` principal, mesmo quando é encerrado com `kill -9` | Restaurar `NickName`/`MacAddress` antes de abrir o host (o script abaixo já faz isso) |
-| O pedido do cliente nunca chega ao host | A OSLib ignora o pedido (`MATCHING_SELECTED`) de um PSP do qual o host ainda não recebeu HELLO, e em P2P o cliente para de mandar HELLO depois do pedido | No lobby, esperar alguns segundos (o HELLO sai a cada 3 s) antes de escolher o host |
+| O pedido do cliente nunca chega ao host | A OSLib ignora o pedido (`MATCHING_SELECTED`) de um PSP do qual o host ainda não recebeu HELLO, e em P2P o cliente para de mandar HELLO depois do pedido | O lobby só permite escolher o host 4 s depois de ele aparecer (o HELLO sai a cada 3 s) |
 | `oslAdhocRequestConnection` retorna -1 na hora | OSLib até 1.5.3: `time_t` de 64 bits contra o `sceKernelLibcTime` de 32 bits | OSLib com o fix (`fix/adhoc-hardening`). O jogo não usa essa função |
 
 ## 1. Compilar o relay (uma vez só)
@@ -117,7 +117,7 @@ vão para a pasta do `EBOOT.PBP`, porque o PPSSPP a monta como `umd0:/`.
 1. Nas duas janelas, entre em **Multiplayer**.
 2. No host, aperte **Cross** ("servidor"). No cliente, aperte **Square** ("cliente").
 3. Escolha o mapa nas opções de jogo. O mapa do host prevalece, e o cliente carrega o mapa do host se o hash do XML for igual.
-4. No lobby do cliente, espere o host aparecer e **mais uns 3 segundos** antes de selecioná-lo (veja a última linha da tabela acima).
+4. No lobby do cliente, o host aparece como "getting ready" por 4 segundos antes de poder ser selecionado (veja a tabela acima).
 5. Aceite o pedido no host com Cross.
 
 Com `PauseOnLostFocus = False` (já configurado), a janela que perde o foco

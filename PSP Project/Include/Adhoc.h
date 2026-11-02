@@ -13,6 +13,8 @@ class Adhoc
 {
 private:
 	u8 mServerPeerMac[6];
+	u8 mShownPeerMac[6];
+	u32 mPeerShownAt;
 	bool mHasServerPeer;
 	bool mServerAccepted;
 	bool mReady;

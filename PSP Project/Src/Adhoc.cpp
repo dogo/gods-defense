@@ -21,6 +21,8 @@ Adhoc::Adhoc()
 	mSession = NULL;
 	mLastReceive = 0;
 	mDisconnected = false;
+	memset(mShownPeerMac, 0, sizeof(mShownPeerMac));
+	mPeerShownAt = 0;
 }
 
 Adhoc::~Adhoc()
@@ -99,6 +101,7 @@ bool Adhoc::clientWaitingConnection(u32 now)
 	if (count <= 0)
 	{
 		mSelectedPeer = 0;
+		memset(mShownPeerMac, 0, sizeof(mShownPeerMac));
 		oslDrawString(240, 120, "Searching for a host...");
 		return true;
 	}
@@ -107,6 +110,17 @@ bool Adhoc::clientWaitingConnection(u32 now)
 	if (osl_keys->pressed.up) mSelectedPeer = (mSelectedPeer + count - 1) % count;
 	peer = oslAdhocGetPspByIndex(mSelectedPeer);
 	if (!peer) return true;
+	if (memcmp(mShownPeerMac, peer->macAddress, 6))
+	{
+		memcpy(mShownPeerMac, peer->macAddress, 6);
+		mPeerShownAt = now;
+	}
+	// OSLib drops a request from a PSP whose HELLO (sent every 3 s) the host hasn't received yet.
+	if (now - mPeerShownAt < 4000)
+	{
+		oslDrawStringf(240, 120, "Found %.24s, getting ready...", peer->name);
+		return true;
+	}
 	oslDrawStringf(240, 120, "Cross: connect to %.24s", peer->name);
 	if (osl_keys->pressed.cross)
 	{

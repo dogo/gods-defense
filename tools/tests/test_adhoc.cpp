@@ -52,15 +52,17 @@ int main()
     present = true;
     peer.connectionState = OSL_ADHOC_JOINED;
     keys.pressed.cross = true;
-    assert(client.clientWaitingConnection(100));
-    assert(client.clientWaitingConnection(30100) && rejects == 2); // Request timeout.
+    assert(client.clientWaitingConnection(100) && accepts == 1); // Too soon after the host appeared.
+    assert(client.clientWaitingConnection(4099) && accepts == 1);
+    assert(client.clientWaitingConnection(4100) && accepts == 2);
+    assert(client.clientWaitingConnection(34100) && rejects == 2); // Request timeout.
     keys.pressed.cross = true;
-    assert(client.clientWaitingConnection(30200));
+    assert(client.clientWaitingConnection(34200) && accepts == 3); // Same host, already waited.
     peer.connectionState = OSL_ADHOC_ESTABLISHED;
-    assert(!client.clientWaitingConnection(30300));
-    assert(client.beginSession(false, "olympus", 123, 30300));
-    client.updateSession(45299);
+    assert(!client.clientWaitingConnection(34300));
+    assert(client.beginSession(false, "olympus", 123, 34300));
+    client.updateSession(49299);
     assert(!client.disconnected());
-    client.updateSession(45300);
+    client.updateSession(49300);
     assert(client.disconnected()); // A silent peer cannot leave the game stuck forever.
 }
