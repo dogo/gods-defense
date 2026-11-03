@@ -24,11 +24,18 @@ void EnemyRenderer::RenderEnemy(EnemyInstance *enemyInstance, float scrollOffset
 	if (enemyInstance->EnemyCanFly())
 		y += 2 * sinf(osl_vblCount * 0.15f + enemyInstance->mEnemyPosition.X);
 
-	// Sprites are drawn upright facing right: mirror instead of rotating
-	img->angle = 0;
+	// Sprites face right: mirror for left; top-down ones also rotate to the travel angle
 	oslSetImageFrame(img, enemyInstance->mCurrentFrames);
-	if (cosf(enemyInstance->mAngle) < 0)
+	// Only flip on clear horizontal movement so vertical paths keep the last facing
+	float dirX = cosf(enemyInstance->mAngle);
+	if (fabsf(dirX) > 0.3f)
+		enemyInstance->mFacingLeft = dirX < 0;
+	if (enemyInstance->mFacingLeft)
 		oslMirrorImageH(img);
+	float angle = 0;
+	if (enemyInstance->mEnemy->mRotate) // mirrored sprite already faces PI, rotate by the remainder
+		angle = (enemyInstance->mAngle - (enemyInstance->mFacingLeft ? M_PI : 0)) * 180 / M_PI;
+	img->angle = angle;
 
 	if (dying) // fade out
 		oslSetAlpha(OSL_FX_TINT, RGBA(255, 255, 255, 255 - 255 * enemyInstance->mDeathTime / EnemyInstance::DEATH_FADE_TIME));

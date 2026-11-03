@@ -64,6 +64,7 @@ Enemy::Enemy(const string &enemyName)
 	mEnemyImg = NULL;
 	mAliveFrames = 0;
 	mFrameTime = 90;
+	mRotate = false;
 	mDeathSound = NULL;
 
 	char temp[256];
@@ -123,6 +124,7 @@ Enemy::Enemy(const string &enemyName)
 		{
 			node->QueryIntAttribute("Frames", &mAliveFrames);
 			node->QueryIntAttribute("FrameTime", &mFrameTime);
+			mRotate = node->Attribute("Rotate", "True") != NULL;
 
 			sprintf(temp, "/Res/enemies/%s/%s", mEnemyDirName.c_str(), node->Attribute("File"));
 			mEnemyImg = Sprites::LoadSpriteFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888, 32, 32); //32 Width && 32 Height
@@ -181,6 +183,7 @@ EnemyInstance::EnemyInstance(Wave *wave, Enemy *enemy, const string &path, const
 	//Random phase so a wave doesn't march in lockstep
 	mCurrentFrames = mEnemy->mAliveFrames > 1 ? rand() % mEnemy->mAliveFrames : 0;
 	mHitFlashTime = 0;
+	mFacingLeft = cosf(mAngle) < 0;
 	mDeathTime = 0;
 }
 
