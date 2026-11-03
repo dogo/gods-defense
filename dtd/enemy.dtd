@@ -20,6 +20,7 @@
 <!ATTLIST EnemyImg FrameTime NMTOKEN #IMPLIED >
 <!ATTLIST EnemyImg Height NMTOKEN #REQUIRED >
 <!ATTLIST EnemyImg Width NMTOKEN #REQUIRED >
+<!ATTLIST EnemyImg Rotate (True|False) "False" >
 
 <!ELEMENT DeathSound EMPTY >
 <!ATTLIST DeathSound File NMTOKEN #IMPLIED >

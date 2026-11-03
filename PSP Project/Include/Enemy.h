@@ -71,6 +71,7 @@ public:
 	int mEnemyHeight;
 	int mAliveFrames;
 	int mFrameTime;
+	bool mRotate; //Top-down sprite: rotate to the travel direction instead of only mirroring
 
 	vector<EnemyInfo> mEnemyVector;
 };
@@ -91,6 +92,7 @@ public:
 	int mSlowLength;
 	EnemyState mEnemyState;
 	float mAngle;
+	bool mFacingLeft; //Last horizontal facing, kept while walking vertically
 	int mAnimationController;
 	int mAnimationTime;
 
