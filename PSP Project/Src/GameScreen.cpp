@@ -149,6 +149,8 @@ GameScreen::~GameScreen()
 	gGameReference = NULL;
 	gIsClient = false;
 	gIsServer = false;
+	if (mNextScreen == ScreenManager::SCREEN_MULTIPLAYER)
+		oslPlaySound(menuTheme, CHANNEL_0);
 
 	//Clear all instance lists
 	while (!mRealEnemies.empty())
