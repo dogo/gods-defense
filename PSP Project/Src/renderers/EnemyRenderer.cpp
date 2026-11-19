@@ -60,22 +60,23 @@ void EnemyRenderer::RenderEnemyHealthBar(EnemyInstance *enemyInstance, float scr
 	if (maxHealth == 0)
 		return;
 	int w = 32 * enemyInstance->mHealth / (int)maxHealth;
+	int top = scrollOffset + enemyInstance->mEnemyPosition.Y - enemyInstance->mEnemy->GetFrameHeight() / 2; // just above the sprite
 	
 	// Red background
 	oslDrawFillRect(
 		enemyInstance->mEnemyPosition.X - 16, 
-		scrollOffset + enemyInstance->mEnemyPosition.Y - 20, 
+		top - 4,
 		enemyInstance->mEnemyPosition.X + 16, 
-		scrollOffset + enemyInstance->mEnemyPosition.Y - 16, 
+		top,
 		COLOR_RED
 	);
 	
 	// Green health bar
 	oslDrawFillRect(
 		enemyInstance->mEnemyPosition.X - 16, 
-		scrollOffset + enemyInstance->mEnemyPosition.Y - 20, 
+		top - 4,
 		(enemyInstance->mEnemyPosition.X - 16) + w, 
-		scrollOffset + enemyInstance->mEnemyPosition.Y - 16, 
+		top,
 		COLOR_GREEN
 	);
 }
