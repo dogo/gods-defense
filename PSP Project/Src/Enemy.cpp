@@ -64,6 +64,8 @@ Enemy::Enemy(const string &enemyName)
 	mEnemyImg = NULL;
 	mAliveFrames = 0;
 	mFrameTime = 90;
+	mEnemyWidth = 2;
+	mEnemyHeight = 2;
 	mRotate = false;
 	mDeathSound = NULL;
 
@@ -125,9 +127,11 @@ Enemy::Enemy(const string &enemyName)
 			node->QueryIntAttribute("Frames", &mAliveFrames);
 			node->QueryIntAttribute("FrameTime", &mFrameTime);
 			mRotate = node->Attribute("Rotate", "True") != NULL;
+			node->QueryIntAttribute("Width", &mEnemyWidth);
+			node->QueryIntAttribute("Height", &mEnemyHeight);
 
 			sprintf(temp, "/Res/enemies/%s/%s", mEnemyDirName.c_str(), node->Attribute("File"));
-			mEnemyImg = Sprites::LoadSpriteFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888, 32, 32); //32 Width && 32 Height
+			mEnemyImg = Sprites::LoadSpriteFilePNG(temp, OSL_IN_RAM | OSL_SWIZZLED, OSL_PF_8888, GetFrameWidth(), GetFrameHeight());
 
 			if (!mEnemyImg)
 			{
@@ -135,11 +139,8 @@ Enemy::Enemy(const string &enemyName)
 				return;
 			}
 
-			mEnemyImg->centerX = 16; //frame hotspot
-			mEnemyImg->centerY = (mEnemyImg->sizeY/2); //hotspot
-
-			node->QueryIntAttribute("Width", &mEnemyWidth);
-			node->QueryIntAttribute("Height", &mEnemyHeight);
+			mEnemyImg->centerX = GetFrameWidth() / 2; //frame hotspot
+			mEnemyImg->centerY = GetFrameHeight() / 2; //frame hotspot
 		}
 		else if (mCurrentLine == "DeathSound")
 		{

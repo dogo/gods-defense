@@ -67,8 +67,10 @@ public:
 	bool mCanFly;
 	OSL_IMAGE *mEnemyImg;
 	OSL_SOUND *mDeathSound;
-	int mEnemyWidth;
+	int mEnemyWidth; //Sprite frame size in 16px units: 2 = 32px
 	int mEnemyHeight;
+	int GetFrameWidth() const { return mEnemyWidth * 16; }
+	int GetFrameHeight() const { return mEnemyHeight * 16; }
 	int mAliveFrames;
 	int mFrameTime;
 	bool mRotate; //Top-down sprite: rotate to the travel direction instead of only mirroring
